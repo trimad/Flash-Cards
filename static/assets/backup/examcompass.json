@@ -1,0 +1,956 @@
+{
+   "1.1": [
+      {
+         "Q": "A type of cryptographic network protocol for secure data communication, remote command-line login, remote command execution, and other secure network services between two networked computers is known as:",
+         "A": [
+            "SSH"
+         ]
+      },
+      {
+         "Q": "Which of the answers listed below refers to a secure replacement for Telnet?",
+         "A": [
+            "SSH"
+         ]
+      },
+      {
+         "Q": "Which of the following answers refers to a system containing mappings of domain names to various types of data, such as numerical IP addresses?",
+         "A": "DNS"
+      },
+      {
+         "Q": "The SMTP protocol is used for: (Select 2 answers)",
+         "A": [
+            "Sending email from a client device",
+            "Sending email between mail servers"
+         ]
+      },
+      {
+         "Q": "A network protocol that allows for secure file transfer over Secure Shell (SSH) is called:",
+         "A": [
+            "SFTP"
+         ]
+      },
+      {
+         "Q": "What is the function of FTP?",
+         "A": [
+            "File exchange"
+         ]
+      },
+      {
+         "Q": " What are the characteristic features of TFTP? (Select 2 answers)",
+         "A": [
+            "Provides no security features",
+            "A very basic form of file sharing protocol"
+         ]
+      },
+      {
+         "Q": "Telnet: (Select 3 answers)",
+         "A": [
+            "Provides username & password authentication",
+            "Transmits data in an unencrypted form",
+            "Enables remote login and command execution"
+         ]
+      },
+      {
+         "Q": "A network protocol providing an alternative solution to the manual allocation of IP addresses is known as:",
+         "A": [
+            "DHCP"
+         ]
+      },
+      {
+         "Q": "What is the name of a network protocol that secures web traffic via SSL/TLS encryption?",
+         "A": [
+            "HTTPS"
+         ]
+      },
+      {
+         "Q": "A type of protocol used in network management systems for monitoring network-attached devices is called:",
+         "A": [
+            "SNMP"
+         ]
+      },
+      {
+         "Q": "A Microsoft-proprietary protocol providing a user with graphical interface for connecting to another networked host is known as:",
+         "A": [
+            "RDP"
+         ]
+      },
+      {
+         "Q": "Which of the answers listed below refers to a network protocol used for synchronizing clocks over a computer network?",
+         "A": [
+            "NTP"
+         ]
+      },
+      {
+         "Q": "Which of the following answers refers to a protocol used for managing real-time sessions that include voice, video, application sharing, or instant messaging services?",
+         "A": [
+            "SIP"
+         ]
+      },
+      {
+         "Q": " What are the characteristics of SMB/CIFS? (Select 2 answers)",
+         "A": [
+            "Provides shared access to files, directories, and devices",
+            "Used mainly by computers running Microsoft Windows operating systems"
+         ]
+      },
+      {
+         "Q": "POP3 is used for:",
+         "A": [
+            "Email retrieval"
+         ]
+      },
+      {
+         "Q": "Which of the answers listed below refer to IMAP4? (Select 2 answers)",
+         "A": [
+            "Offers improved functionality in comparison to POP3",
+            "Serves the same function as POP3"
+         ]
+      },
+      {
+         "Q": "LDAP is an example of:",
+         "A": [
+            "Directory access protocol"
+         ]
+      },
+      {
+         "Q": "Which of the following answers refers to an SSL/TLS-based directory access protocol?",
+         "A": [
+            "LDAPS"
+         ]
+      },
+      {
+         "Q": "Which of the answers listed below refers to a protocol used for managing VoIP and VTC services?",
+         "A": [
+            "H.323"
+         ]
+      },
+      {
+         "Q": "Which of the following answers refers to a protocol used by routers, hosts and network devices to generate error messages and troubleshoot problems with delivery of IP packets?",
+         "A": [
+            "ICMP"
+         ]
+      },
+      {
+         "Q": "True or False: User Datagram Protocol (UDP) is a connection-oriented protocol using a three-way handshake which is a set of initial steps required for establishing network connection. UDP supports retransmission of lost packets, flow control (managing the amount of data that is being sent), and sequencing (rearranging packets that arrived out of order).",
+         "A": [
+            "False"
+         ]
+      },
+      {
+         "Q": "True or False: Transmission Control Protocol (TCP) is an example of a connectionless protocol. Because TCP doesn't support three-way handshake while establishing a network connection, it is referred to as unreliable or best-effort protocol.",
+         "A": [
+            "False"
+         ]
+      },
+      {
+         "Q": "What is the name of a network layer protocol that specifies the format of packets and addressing scheme in network communications?",
+         "A": [
+            "IP"
+         ]
+      },
+      {
+         "Q": "Secure Shell (SSH) protocol runs on:",
+         "A": [
+            "TCP port 22"
+         ]
+      },
+      {
+         "Q": "Which of the following UDP ports is assigned to the Domain Name System (DNS)?",
+         "A": [
+            "53"
+         ]
+      },
+      {
+         "Q": "TCP port 25 is used by:",
+         "A": [
+            "SMTP"
+         ]
+      },
+      {
+         "Q": "True or False: Secure File Transfer Protocol (SFTP) is an extension to the Secure Shell protocol (SSH) and runs by default on TCP port 22.",
+         "A": [
+            "True"
+         ]
+      },
+      {
+         "Q": "Unblocking TCP port 22 enables what type of traffic? (Select 2 answers)",
+         "A": [
+            "SSH",
+            "SFTP"
+         ]
+      },
+      {
+         "Q": "The File Transfer Protocol (FTP) Control Connection for administering a session is established through:",
+         "A": [
+            "TCP port 21"
+         ]
+      },
+      {
+         "Q": "Which port enables the FTP's Data Connection for sending file data?",
+         "A": [
+            "TCP port 20"
+         ]
+      },
+      {
+         "Q": "UDP port 69 is assigned to:",
+         "A": [
+            "TFTP"
+         ]
+      },
+      {
+         "Q": "Which of the TCP ports listed below is used by Telnet?",
+         "A": [
+            "23"
+         ]
+      },
+      {
+         "Q": "Dynamic Host Configuration Protocol (DHCP) runs on: (Select 2 answers)",
+         "A": [
+            "UDP port 67",
+            "UDP port 68"
+         ]
+      },
+      {
+         "Q": "TCP port 80 is assigned to:",
+         "A": [
+            "Hypertext Transfer Protocol (HTTP)"
+         ]
+      },
+      {
+         "Q": "Which of the following ports is used by HTTPS?",
+         "A": [
+            "TCP port 443"
+         ]
+      },
+      {
+         "Q": "SNMP runs on UDP port:",
+         "A": [
+            "161"
+         ]
+      },
+      {
+         "Q": "A network technician uses Remote Desktop Protocol (RDP) client on their Windows OS to remotely troubleshoot a problem on another Windows machine. Which of the following ports needs to be opened for the built-in Windows RDP server to allow this type of network connection?",
+         "A": [
+            "TCP port 3389"
+         ]
+      },
+      {
+         "Q": "Network Time Protocol (NTP) runs on UDP port:",
+         "A": [
+            "123"
+         ]
+      },
+      {
+         "Q": "Which of the ports listed below are assigned to the Session Initiation Protocol (SIP)? (Select 2 answers)",
+         "A": [
+            " TCP port 5060",
+            "TCP port 5061"
+         ]
+      },
+      {
+         "Q": "Which of the following protocols runs on TCP port 445?",
+         "A": [
+            "SMB/CIFS"
+         ]
+      },
+      {
+         "Q": "Post Office Protocol v3 (POP3) uses:",
+         "A": [
+            "TCP port 110"
+         ]
+      },
+      {
+         "Q": "Which of the TCP port numbers listed below is assigned to the Internet Message Access Protocol (IMAP)?",
+         "A": [
+            "143"
+         ]
+      },
+      {
+         "Q": "TCP port 389 is the default network port for:",
+         "A": [
+            "LDAP"
+         ]
+      },
+      {
+         "Q": "A network administrator wants to secure the existing access to a directory service with SSL/TLS encryption. Which of the following TCP ports needs to be opened to implement this change?",
+         "A": [
+            "636"
+         ]
+      },
+      {
+         "Q": "TCP port 1720 is used by:",
+         "A": [
+            "H.323"
+         ]
+      },
+      {
+         "Q": "Which of the following reside at the physical layer of the OSI model? (Select 2 answers)",
+         "A": [
+            "Bit",
+            "Network cabling"
+         ]
+      }
+   ],
+   "1.2": [
+      {
+         "Q": "The application layer of the OSI model is also known as:",
+         "A": [
+            "Layer 7"
+         ]
+      },
+      {
+         "Q": "What are the characteristic components of the OSI data link layer? (Select 3 answers)",
+         "A": [
+            "MAC address",
+            "Switch",
+            "Frame"
+         ]
+      },
+      {
+         "Q": "Layer 5 of the OSI model is also referred to as:",
+         "A": [
+            "Session layer"
+         ]
+      },
+      {
+         "Q": "Which of the answers listed below refer to the components that can be found at the OSI network layer? (Select 3 answers)",
+         "A": [
+            "Router",
+            "IP address",
+            "Packet"
+         ]
+      },
+      {
+         "Q": "The term 'Presentation layer' refers to:",
+         "A": [
+            "Layer 6 of the OSI model"
+         ]
+      },
+      {
+         "Q": "Layer 2 of the OSI model is known as:",
+         "A": [
+            "Data link layer"
+         ]
+      },
+      {
+         "Q": "Which of the following terms refers to the OSI network layer?",
+         "A": [
+            "Layer 3"
+         ]
+      },
+      {
+         "Q": "Which of the protocols listed below reside at the OSI transport layer? (Select 2 answers)",
+         "A": [
+            "UDP",
+            "TCP"
+         ]
+      },
+      {
+         "Q": "Which OSI layer assumes the responsibility for managing network connections between applications?",
+         "A": [
+            "Session layer"
+         ]
+      },
+      {
+         "Q": "Physical layer of the OSI model is also known as:",
+         "A": [
+            "Layer 1"
+         ]
+      },
+      {
+         "Q": "Layer 4 of the OSI model is also referred to as:",
+         "A": [
+            "Transport layer"
+         ]
+      },
+      {
+         "Q": "Character encoding, data compression and encryption/decryption take place at the:",
+         "A": [
+            "Presentation layer of the OSI model"
+         ]
+      },
+      {
+         "Q": "Which of the following protocols reside at the application layer of the OSI model? (Select 3 answers)",
+         "A": [
+            "HTTP",
+            "FTP",
+            "SMTP"
+         ]
+      }
+   ],
+   "1.3": [
+      {
+         "Q": "True or False: In computer networking, the term 'Collision' refers to a situation in which two or more demands are made simultaneously on an equipment that can handle only one request at any given moment.",
+         "A": [
+            "True"
+         ]
+      },
+      {
+         "Q": "A network segment utilizing only this type of device is the most prone to network performance degradation due to large number of network collisions.",
+         "A": [
+            "Hub"
+         ]
+      },
+      {
+         "Q": "Which device improves network performance by dividing a given network segment into separate collision domains?",
+         "A": [
+            "Switch"
+         ]
+      },
+      {
+         "Q": "Which of the devices listed below is used for separating broadcast domains?",
+         "A": [
+            "Router"
+         ]
+      },
+      {
+         "Q": "True or False: The purpose of the Carrier Sense Multiple Access (CSMA) protocol is to verify the absence of other traffic on a shared medium before transmitting to prevent collisions and loss of data.",
+         "A": [
+            "True"
+         ]
+      },
+      {
+         "Q": "Which of the following allows for verifying the absence of traffic on a shared transmission medium in 802.3 networks?",
+         "A": [
+            "CSMA/CD"
+         ]
+      },
+      {
+         "Q": "A solution that allows to control access to a shared transmission medium in 802.11 networks is known as:",
+         "A": [
+            "CSMA/CA"
+         ]
+      },
+      {
+         "Q": "True or False: In telecommunications, Protocol Data Unit (PDU) is a term used for describing a specific unit of data passed across a network.",
+         "A": [
+            "True"
+         ]
+      },
+      {
+         "Q": "Which of the following metrics is used to describe the largest allowable data unit that can be transmitted across a network?",
+         "A": [
+            "MTU"
+         ]
+      },
+      {
+         "Q": "A networked host with unknown address can be reached via:",
+         "A": [
+            "Broadcast"
+         ]
+      },
+      {
+         "Q": "A type of network traffic intended for a particular group of hosts is called:",
+         "A": [
+            "Multicast"
+         ]
+      },
+      {
+         "Q": "A type of network traffic intended for a single host identified by a unique IP address is referred to as:",
+         "A": [
+            "Unicast"
+         ]
+      },
+      {
+         "Q": "Which of the terms listed below refers to a logical grouping of computers that allow computer hosts to act as if they were attached to the same broadcast domain regardless of their physical location?",
+         "A": [
+            "VLAN"
+         ]
+      },
+      {
+         "Q": "A type of port assigned to carry traffic from all the VLANs connected to a specific network switch is known as:",
+         "A": [
+            "Trunk port"
+         ]
+      },
+      {
+         "Q": "True or False: To allow traffic from multiple VLANs on a single communication link, frames from individual VLANs must be identified. The most common and preferred method, IEEE 802.1Q, adds a tag to the Ethernet frame header, labeling it as belonging to a certain VLAN.",
+         "A": [
+            "True"
+         ]
+      },
+      {
+         "Q": "Which of the following allows an administrator to inspect the traffic passing through a network switch?",
+         "A": [
+            "Port mirroring"
+         ]
+      },
+      {
+         "Q": "Which of the protocols listed below provide protection against switching loops? (Select 2 answers)",
+         "A": [
+            "STP",
+            "RSTP"
+         ]
+      },
+      {
+         "Q": "A solution that allows to supply electricity over standard Ethernet cables is known as: (Select 2 answers)",
+         "A": [
+            "PoE",
+            "IEEE 802.3af"
+         ]
+      },
+      {
+         "Q": "Which of the following standards implements PoE+?",
+         "A": [
+            "IEEE 802.3at"
+         ]
+      },
+      {
+         "Q": "A lightly protected subnet consisting of publicly available servers placed on the outside of the company's firewall is referred to as:",
+         "A": [
+            "DMZ"
+         ]
+      },
+      {
+         "Q": "An Ethernet switch forwards LAN traffic from connected devices based on the information stored in:",
+         "A": [
+            "MAC address table"
+         ]
+      },
+      {
+         "Q": "An Ethernet switch table containing IP-to-MAC address mappings is called:",
+         "A": [
+            "ARP table"
+         ]
+      },
+      {
+         "Q": "Which of the answers listed below refers to a type of routing protocol that determines the best route for data packets based on the lowest number of hops?",
+         "A": [
+            "Distance-vector"
+         ]
+      },
+      {
+         "Q": "A type of routing protocol that calculates the best path between source and destination nodes based on a map of network connectivity between nodes is called:",
+         "A": [
+            "Link-state"
+         ]
+      },
+      {
+         "Q": "True or False: A hybrid routing protocol combines the features of distance-vector and link-state routing protocols.",
+         "A": [
+            "True"
+         ]
+      },
+      {
+         "Q": "A manually-configured routing table entry is known as:",
+         "A": [
+            "Static route"
+         ]
+      },
+      {
+         "Q": "Automatic routing table update is a feature of:",
+         "A": [
+            "Dynamic routing"
+         ]
+      },
+      {
+         "Q": "True or False: The term 'Default route' refers to a 'last resort' network path used by a router for forwarding all packets with destination addresses not listed in its routing table.",
+         "A": [
+            "True"
+         ]
+      },
+      {
+         "Q": "Examples of distance-vector routing protocols include: (Select 2 answers)",
+         "A": [
+            "RIP",
+            "EIGRP"
+         ]
+      },
+      {
+         "Q": "Which of the following answers refers to a link-state routing protocol?",
+         "A": [
+            "OSPF"
+         ]
+      },
+      {
+         "Q": "Border Gateway Protocol (BGP) falls into the category of:",
+         "A": [
+            "Hybrid routing protocols"
+         ]
+      },
+      {
+         "Q": "An IPv4 address consists of:",
+         "A": [
+            "32 bits"
+         ]
+      },
+      {
+         "Q": "Which of the answers listed below refers to a binary representation of the decimal number 192?",
+         "A": [
+            "11000000"
+         ]
+      },
+      {
+         "Q": "IPv4 addresses are expressed with the use of:",
+         "A": [
+            "Decimal numbers"
+         ]
+      },
+      {
+         "Q": "Which of the following answers lists a decimal notation of the binary number 10101100?",
+         "A": [
+            "172"
+         ]
+      },
+      {
+         "Q": "Which of the answers listed below refer to an IPv4 loopback address?",
+         "A": [
+            "127.0.0.1 "
+         ]
+      },
+      {
+         "Q": "An IPv6 address consists of:",
+         "A": [
+            "128 bits"
+         ]
+      },
+      {
+         "Q": "IPv6 addresses are expressed with the use of:",
+         "A": [
+            "Hexadecimal numbers"
+         ]
+      },
+      {
+         "Q": "True or False: A double colon in an IPv6 address indicates that part of the address containing only zeros has been compressed to make the address shorter.",
+         "A": [
+            "True"
+         ]
+      },
+      {
+         "Q": "Which of the following answers refer to IPv6 loopback addresses? (Select 2 answers)",
+         "A": [
+            "0:0:0:0:0:0:0:1",
+            "::1"
+         ]
+      },
+      {
+         "Q": "An IPv6 link-local address is an equivalent of IPv4's:",
+         "A": [
+            "APIPA address"
+         ]
+      },
+      {
+         "Q": "Which of the answers listed below refers to an IPv6 link-local address?",
+         "A": [
+            "FE80::/10"
+         ]
+      },
+      {
+         "Q": "Which of the following answers lists a valid address of FE80:00A7:0000:0000:02AA:0000:4C00:FE9A after compression?",
+         "A": [
+            "FE80:A7::2AA:0:4C00:FE9A"
+         ]
+      },
+      {
+         "Q": "A limited IPv4-to-IPv6 transition mechanism that allows for encapsulation of IPv6 packets in IPv4 packets transmitted over IPv4 networks is referred to as:",
+         "A": [
+            "6to4"
+         ]
+      },
+      {
+         "Q": "An IPv4-to-IPv6 transition mechanism with native support for Network Address Translation (NAT) is known as:",
+         "A": [
+            "Teredo"
+         ]
+      },
+      {
+         "Q": "What does the term 'Miredo' refer to?",
+         "A": [
+            "Teredo tunneling software"
+         ]
+      },
+      {
+         "Q": "True or False: The term 'Dual-stack IP' refers to a solution that relies on implementing both IPv4 and IPv6 protocol stacks on various network devices to facilitate seamless migration from IPv4 to IPv6.",
+         "A": [
+            "True"
+         ]
+      },
+      {
+         "Q": "An IPv6 protocol performing the function of IPv4's Address Resolution Protocol (ARP) is called:",
+         "A": [
+            "NDP"
+         ]
+      },
+      {
+         "Q": "Which IPv6 protocol is used by networked hosts to determine the link layer address of adjacent nodes?",
+         "A": [
+            "NDP"
+         ]
+      },
+      {
+         "Q": "An IPv6 protocol used by routers to advertise their presence on a network is known as:",
+         "A": [
+            "NDP"
+         ]
+      },
+      {
+         "Q": "Which of the IPv6 protocols listed below is used by networked nodes for locating routers?",
+         "A": [
+            "NDP"
+         ]
+      },
+      {
+         "Q": "Which of the following terms refer to solutions used for controlling network resources and assigning priority to different types of traffic? (Select 2 answers)",
+         "A": [
+            "Packet shaping",
+            "Quality of Service (QoS)"
+         ]
+      },
+      {
+         "Q": "Which of the answers listed below describe the function of DiffServ architecture? (Select 2 answers)",
+         "A": [
+            "QoS",
+            "Traffic management"
+         ]
+      },
+      {
+         "Q": "What is the functionality provided by the Class of Service (CoS) parameter? (Select 2 answers)",
+         "A": [
+            "QoS",
+            "Traffic management"
+         ]
+      },
+      {
+         "Q": "Which optional field in an Ethernet frame header can be used to enable the Quality of Service (QoS) functionality?",
+         "A": [
+            "CoS"
+         ]
+      },
+      {
+         "Q": "Which of the following solutions alleviates the problem of the depleting IPv4 address space by allowing multiple hosts on the same private LAN to share a single public IP address?",
+         "A": [
+            "NAT"
+         ]
+      },
+      {
+         "Q": "Which of the solutions listed below hides the internal IP addresses by modifying IP address information in IP packet headers while in transit across a traffic routing device?",
+         "A": [
+            "NAT"
+         ]
+      },
+      {
+         "Q": "True or False: Network Address Translation (NAT) provides an IP proxy between a private LAN and a public network such as the Internet.",
+         "A": [
+            "True"
+         ]
+      },
+      {
+         "Q": "True or False: Dynamic Network Address Translation (DNAT) provides a permanent mapping between a private IP address and a public IP address on a one-to-one basis.",
+         "A": [
+            "False"
+         ]
+      },
+      {
+         "Q": "True or False: Static Network Address Translation (SNAT) provides a mapping between a private IP address and any of the IP addresses belonging to the available public IP address pool.",
+         "A": [
+            "False"
+         ]
+      },
+      {
+         "Q": "Which of the following answers refers to a Network Address Translation (NAT) method that binds a combination of private IP address and port number with a corresponding public IP address and port information?",
+         "A": [
+            "PAT"
+         ]
+      },
+      {
+         "Q": "A server with a private IP address has been set up to handle requests from an outside (public) network. Which of the solutions listed below would enable this function?",
+         "A": [
+            "Port forwarding"
+         ]
+      },
+      {
+         "Q": "Which of the acronyms listed below refers to a set of rules that specify which users or system processes are granted access to objects as well as what operations are allowed on a given object?",
+         "A": [
+            "ACL"
+         ]
+      },
+      {
+         "Q": "A rule-based access control mechanism implemented on routers, switches, and firewalls is referred to as:",
+         "A": [
+            "ACL"
+         ]
+      },
+      {
+         "Q": "Which of the following typically applies to a request that doesn't match the criteria defined in an ACL?",
+         "A": [
+            "Implicit deny rule"
+         ]
+      },
+      {
+         "Q": "Which type of switch simplifies virtual network configuration by enabling an option to configure switching for the entire network from a single interface?",
+         "A": [
+            "Distributed switch"
+         ]
+      },
+      {
+         "Q": "True or False: A dedicated communication channel used exclusively between two connected hosts is a characteristic feature of packet-switching networks.",
+         "A": [
+            "False"
+         ]
+      },
+      {
+         "Q": "True or False: Circuit-switching networks move data divided into small blocks over a shared connection.",
+         "A": [
+            "False"
+         ]
+      },
+      {
+         "Q": "Which of the answers listed below refers to a technology designed to simplify network infrastructure management?",
+         "A": [
+            "SDN"
+         ]
+      }
+   ],
+   "1.4": [
+      {
+         "Q": "Which of the following answers refer to the characteristic features of the 10.0.0.0 - 10.255.255.255 (10.0.0.0/8) IPv4 address space? (Select 2 answers)",
+         "A": [
+            "Class A range",
+            "Non-routable (private) IP address range"
+         ]
+      },
+      {
+         "Q": "Which of the answers listed below refer to the 172.16.0.0 - 172.31.255.255 (172.16.0.0/12) IPv4 address space? (Select 2 answers)",
+         "A": [
+            "Class B range",
+            "Non-routable (private) IP address range"
+         ]
+      },
+      {
+         "Q": "What are the characteristic features of the 192.168.0.0 - 192.168.255.255 (192.0.0.0/24) IPv4 address space? (Select 2 answers)",
+         "A": [
+            "Non-routable (private) IP address range",
+            "Class C range"
+         ]
+      },
+      {
+         "Q": "Which of the following answers refers to an IPv4 address range used for loopback addresses?",
+         "A": [
+            "127.0.0.0 – 127.255.255.255 (127.0.0.0/8)"
+         ]
+      },
+      {
+         "Q": "Which of the answers listed below refers to an IPv4 address range reserved for future use?",
+         "A": [
+            "240.0.0.0 – 255.255.255.254 (240.0.0.0/4)"
+         ]
+      },
+      {
+         "Q": "True or False: In a network using subnets, the term 'Default gateway' refers to a network device (e.g. router) that enables exchange of data between hosts residing in different subnets.",
+         "A": [
+            "True"
+         ]
+      },
+      {
+         "Q": "True or False: An IP address that doesn't correspond to any actual physical network interface is called a virtual IP address (VIP/VIPA).",
+         "A": [
+            "True"
+         ]
+      },
+      {
+         "Q": "Which of the following allows to determine which network segment an IP address belongs to?",
+         "A": [
+            "Subnet mask"
+         ]
+      },
+      {
+         "Q": "In IPv4 addressing, the leading octet of an IP address with a value of 1 through 126 denotes that the IP address within that range belongs to the:",
+         "A": [
+            "Class A address space"
+         ]
+      },
+      {
+         "Q": "Which of the answers listed below refers to an example of a valid subnet mask?",
+         "A": [
+            "None of the above is a valid subnet mask"
+         ]
+      },
+      {
+         "Q": "Which of the following answers lists the default (classful) subnet mask for a class A network?",
+         "A": [
+            "255.0.0.0"
+         ]
+      },
+      {
+         "Q": "What is the leading octet value range for an IPv4 address belonging to a class B network?",
+         "A": [
+            "128 - 191"
+         ]
+      },
+      {
+         "Q": "Which of the following answers lists the default (classful) subnet mask for a class B network?",
+         "A": [
+            "255.255.0.0"
+         ]
+      },
+      {
+         "Q": "In IPv4 addressing, the leading octet of an IP address with a value of 192 through 223 denotes that the IP address within that range belongs to the:",
+         "A": [
+            "Class C address space"
+         ]
+      },
+      {
+         "Q": "Which of the answers listed below refers to the default (classful) subnet mask for a class C network?",
+         "A": [
+            "255.255.255.0"
+         ]
+      },
+      {
+         "Q": "Which of the following answers refer to the IPv4 multicast address block? (Select 2 answers)",
+         "A": [
+            "224 - 239",
+            "Class D range"
+         ]
+      }
+   ],
+   "1.5": [
+      {
+         "Q": "What is the name of a solution that increases the efficiency of IP address space management by allowing network administrators to divide networks into subnets of different sizes?",
+         "A": [
+            "VLSM"
+         ]
+      },
+      {
+         "Q": "Which of the answers listed below refers to a solution that replaces the classful network design?",
+         "A": [
+            "CIDR"
+         ]
+      },
+      {
+         "Q": "Which of the following answers lists the CIDR notation of the 255.255.255.224 subnet mask?",
+         "A": [
+            "/27"
+         ]
+      },
+      {
+         "Q": "",
+         "A": [
+            ""
+         ]
+      },
+      {
+         "Q": "",
+         "A": [
+            ""
+         ]
+      },
+      {
+         "Q": "",
+         "A": [
+            ""
+         ]
+      },
+      {
+         "Q": "",
+         "A": [
+            ""
+         ]
+      },
+      {
+         "Q": "",
+         "A": [
+            ""
+         ]
+      }
+   ]
+}

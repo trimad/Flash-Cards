@@ -1,0 +1,16 @@
+{{ define "main" }}
+  <main class="home">
+    <section class="home-panel">
+      <p class="eyebrow">Study Decks</p>
+      <h1>Pick a practice test.</h1>
+      <div class="test-grid">
+        {{ range where site.RegularPages "Section" "tests" }}
+          <a class="test-card" href="{{ .RelPermalink }}" style="--accent: {{ .Params.accent | default "#6E298D" }}">
+            <span>{{ .Title }}</span>
+            <small>Open deck</small>
+          </a>
+        {{ end }}
+      </div>
+    </section>
+  </main>
+{{ end }}

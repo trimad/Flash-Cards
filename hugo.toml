@@ -1,0 +1,7 @@
+baseURL = "https://trimad.github.io/flash-cards/"
+languageCode = "en-us"
+title = "Flash Cards"
+disableKinds = ["taxonomy", "term"]
+
+[markup.goldmark.renderer]
+unsafe = true

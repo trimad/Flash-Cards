@@ -1,0 +1,1206 @@
+{
+    "1.1": [
+        {
+            "Q": "SSH",
+            "A": [
+                "Secure Shell",
+                "TCP Port 22",
+                "Encrypted communication link",
+                "A secure replacement to Telnet"
+            ]
+        },
+        {
+            "Q": "DNS",
+            "A": [
+                "Domain Name Service/Domain Name Server/Domain Name System",
+                "UDP Port 53",
+                "Maps domain names to various types of data, such as IP addresses."
+            ]
+        },
+        {
+            "Q": "SMTP",
+            "A": [
+                "Simple Mail Transfer Protocol",
+                "TCP Port 25",
+                "Server-to-server email transfer",
+                "Commonly configured on mobile devices and email clients"
+            ]
+        },
+        {
+            "Q": "SFTP",
+            "A": [
+                "Secure File Transfer Protocol",
+                "TCP Port 22",
+                "Uses SSH as the underlying protocol to make this happen"
+            ]
+        },
+        {
+            "Q": "FTP",
+            "A": [
+                "File Transfer Protocol",
+                "TCP Port 20 for \"active mode\" data transfer",
+                "TCP Port 21 for \"control\"",
+                "Authenticates with a username and password"
+            ]
+        },
+        {
+            "Q": "TFTP",
+            "A": [
+                "Trivial File Transfer Protocol",
+                "UDP Port 69",
+				"Provides no security features",
+                "No authentication, no encryption",
+                "A very basic form of file sharing protocol"
+            ]
+        },
+        {
+            "Q": "TELNET",
+            "A": [
+                "Telecommunication Network",
+                "TCP Port 23",
+                "Transmits data in an unencrypted form \"in-the-clear communication\"",
+                "Provides username and password authentication",
+				"Enables remote login and command execution"
+            ]
+        },
+        {
+            "Q": "DHCP",
+            "A": [
+                "Dynamic Host Configuration Protocol",
+                "UPD Port 67 and UDP Port 68",
+                "Requires a DHCP server on your network",
+                "IP addresses are assigned in real-time from a pool of available IP addresses"
+            ]
+        },
+        {
+            "Q": "HTTP",
+            "A": [
+                "Hypertext Transfer Protocol",
+                "TCP Port 80",
+                "Web server communication \"in the clear\""
+            ]
+        },
+        {
+            "Q": "HTTPS",
+            "A": [
+                "Hypertext Transfer Protocol Secure",
+                "TCP Port 443",
+                "Secures web traffic via SSL/TLS encryption"
+            ]
+        },
+        {
+            "Q": "SNMP",
+            "A": [
+                "Simple Network Management Protocol",
+                "UDP Port 161",
+                "Gathers statistics from network attached devices"
+            ]
+        },
+        {
+            "Q": "RDP",
+            "A": [
+                "Remote Desktop Protocol",
+                "TCP Port 3389",
+                "Can connect to an entire desktop or just an application"
+            ]
+        },
+        {
+            "Q": "NTP",
+            "A": [
+                "Network Time Protocol",
+                "UDP Port 123",
+                "Synchronizes clocks across all network devices",
+                "Very accurate, better than 1 millisecond on a local network"
+            ]
+        },
+        {
+            "Q": "SIP",
+            "A": [
+                "Session Initiation Protocol",
+                "TCP Port 5060 and TCP 5061",
+                "Call, ring and hang up for VoIP",
+                "Supports video conferencing, instant messaging and file transfer"
+            ]
+        },
+        {
+            "Q": "SMB/CIFS",
+            "A": [
+                "Server Message Block/Common Internet File System",
+                "TCP Port 445",
+				"Provides shared access to files, directories, and devices",
+                "Used mainly by computers running Microsoft Windows operating systems"
+            ]
+        },
+        {
+            "Q": "POP3",
+            "A": [
+                "Post Office Protocol 3",
+                "TCP Port 110",
+                "Basic mail transfer functionality",
+                "Email retrieval"
+            ]
+        },
+        {
+            "Q": "IMAP4",
+            "A": [
+                "Internet Message Access Protocol 4",
+                "TCP Port 143",
+                "Serves the same purpose of POP but provides improved functionality",
+                "Includes management of email inbox from multiple devices.",
+                "Typically used more often than POP3"
+            ]
+        },
+        {
+            "Q": "LDAP",
+            "A": [
+                "Lightweight Directory Access Protocol",
+                "TCP Port 389",
+                "Store and retrieve information in a network directory"
+            ]
+        },
+        {
+            "Q": "LDAPS",
+            "A": [
+                "Lightweight Directory Access Protocol Secure",
+                "TCP Port 636",
+                "SSL/TLS-based directory access protocol"
+            ]
+        },
+        {
+            "Q": "H.323",
+            "A": [
+                "VoIP signaling",
+                "TCP Port 1720",
+                "setup and manage VoIP sessions; call, ring, hang up"
+            ]
+        },
+        {
+            "Q": "ICMP",
+            "A": [
+                "Internet Control Message Protocol",
+                "A protocol used by routers, hosts and network devices to generate error messages and troubleshoot problems with delivery of IP packets."
+            ]
+        },
+        {
+            "Q": "UDP",
+            "A": [
+                "User Datagram Protocol",
+                "UDP is an example of a connectionless protocol. Because UDP doesn't support three-way handshake while establishing a network connection, it is referred to as unreliable or best-effort protocol."
+            ]
+        },
+        {
+            "Q": "TCP",
+            "A": [
+                "Transmission Control Protocol",
+                "TCP is an example of a connection-oriented protocol using a three-way handshake which is a set of initial steps required for establishing network connection. TCP supports retransmission of lost packets, flow control (managing the amount of data that is being sent), and sequencing (rearranging packets that arrived out of order)."
+            ]
+        },
+        {
+            "Q": "IP",
+            "A": [
+                "Internet Protocol",
+                "A network layer protocol that specifies the format of packets and addressing scheme in network communications."
+            ]
+        },
+        {
+            "Q": "\"Connection-oriented vs. connectionless\"",
+            "A": [
+                "UDP vs TCP"
+            ]
+        }
+    ],
+    "1.2": [
+        {
+            "Q": "OSI Model Layers",
+            "A": [
+                "7. Application Layer",
+                "6. Presentation Layer",
+                "5. Session Layer",
+                "4. Transport Layer",
+                "3. Network Layer",
+                "2. Data Link Layer",
+                "1. Physical Layer"
+            ]
+        },
+        {
+            "Q": "OSI model mnemonic device",
+            "A": [
+                "All",
+                "People",
+                "Seem",
+                "To",
+                "Need",
+                "Data",
+                "Processing"
+            ]
+        },
+        {
+            "Q": "OSI Layer 1",
+            "A": [
+                "Physical Layer",
+                "The signal that transports our traffic across the network",
+                "This layer isn't about protocols",
+                "A physical layer problem may entail fixing cabling, punch-downs, etc."
+            ]
+        },
+        {
+            "Q": "OSI Layer 2",
+            "A": [
+                "Data Link Layer",
+                "Is functionally the \"switching\" layer",
+                "Frames, MAC addresses, Switches, Bridges, etc."
+            ]
+        },
+        {
+            "Q": "OSI Layer 3",
+            "A": [
+                "Network Layer",
+                "Is functionally the \"routing\" layer",
+                "IP addresses, routers, packets, etc.",
+                "Frames are fragmented at the network layer"
+            ]
+        },
+        {
+            "Q": "OSI Layer 4",
+            "A": [
+                "Transport Layer",
+                "Is functionally the \"post office\" layer",
+                "UDP",
+                "TCP"
+            ]
+        },
+        {
+            "Q": "OSI Layer 5",
+            "A": [
+                "Session Layer",
+                "Assumes the responsibility for managing network connections between applications.",
+                "Start and stop communications"
+            ]
+        },
+        {
+            "Q": "OSI Layer 6",
+            "A": [
+                "Presentation Layer",
+                "Character encoding, data compression and encryption/decryption take place."
+            ]
+        },
+        {
+            "Q": "OSI Layer 7",
+            "A": [
+                "Application Layer",
+                "This is the layer we see.",
+                "HTTP",
+                "FTP",
+                "SMTP"
+            ]
+        }
+    ],
+    "1.3": [
+        {
+            "Q": "Broadcast domains",
+            "A": [
+                "ARP requests",
+                "Everyone that is on a switch network will be able to see broadcasts",
+                "Broadcasts will not travel through routers",
+                "Therefore routers are used for separating broadcast domains.",
+                "A networked host with unknown address can be reached via broadcast."
+            ]
+        },
+        {
+            "Q": "CSMA/CD",
+            "A": [
+                "Carrier Sense Multiple Access/Collision Detection",
+                ""
+            ]
+        },
+        {
+            "Q": "CSMA/CA",
+            "A": [
+                "Carrier Sense Multiple Access/Collision Avoidance",
+                ""
+            ]
+        },
+        {
+            "Q": "Collision domains",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Protocol data units",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "MTU",
+            "A": [
+                "Maximum Transmission Unit",
+                "Which of the following metrics is used to describe the largest allowable data unit that can be transmitted across a network?"
+            ]
+        },
+        {
+            "Q": "Broadcast",
+            "A": [
+                "A networked host with unknown address can be reached via ___."
+            ]
+        },
+        {
+            "Q": "Multicast",
+            "A": [
+                "A type of network traffic intended for a particular group of hosts is called ___."
+            ]
+        },
+        {
+            "Q": "Unicast",
+            "A": [
+                "A type of network traffic intended for a single host identified by a unique IP address is referred to as:"
+            ]
+        },
+        {
+            "Q": "VLANs",
+            "A": [
+                "Virtual Local Area Network",
+                "A logical grouping of computers that allow computer hosts to act as if they were attached to the same broadcast domain regardless of their physical location"
+            ]
+        },
+        {
+            "Q": "Trunking (802.1q)",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Tagging and untagging ports",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Port mirroring",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Switching loops/spanning tree",
+            "A": [
+                "If two switches have two cables running between them, a loop will be made and frames will be passed back and forth forever.",
+                "This is an easy way to bring down a network without STP."
+            ]
+        },
+        {
+            "Q": "STP",
+            "A": [
+                "Spanning Tree Protocol",
+                "IEEE 802.1D",
+                "Prevents loops in bridged (switched) networks"
+            ]
+        },
+        {
+            "Q": "STP port states",
+            "A": [
+                "Blocking: Not forwarding to prevent a loop",
+                "Listening: Not forwarding and cleaning the MAC table",
+                "Learning: Not forwarding and adding to the MAC table",
+                "Forwarding: Data passes through and is fully operational",
+                "Disabled: Administrator has turned off the port"
+            ]
+        },
+        {
+            "Q": "PoE and PoE+ (802.3af, 802.3at)",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "DMZ",
+            "A": [
+                "Demilitarized Zone",
+                ""
+            ]
+        },
+        {
+            "Q": "MAC address table",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Half-duplex",
+            "A": [
+                "A device cannot send and receive simultaneously",
+                "All LAN hubs are half-duplex devices"
+            ]
+        },
+        {
+            "Q": "Full-duplex",
+            "A": [
+                "Data can be sent and received at the same time",
+                "A properly configured switch interface will be full-duplex"
+            ]
+        },
+        {
+            "Q": "ARP",
+            "A": [
+                "Address Resolution Protocol",
+                "Determine a MAC address based on an IP address"
+            ]
+        },
+        {
+            "Q": "Routing protocols (IPv4 and IPv6)",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Distance-vector routing protocols",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "RIP",
+            "A": [
+                "Routing Internet Protocol",
+                "Distance-vector routing protocol"
+            ]
+        },
+        {
+            "Q": "EIGRP",
+            "A": [
+                "Enhanced Interior Gateway Routing Protocol",
+                "Distance-vector routing protocol"
+            ]
+        },
+        {
+            "Q": "OSPF",
+            "A": [
+                "Open Shortest Path First",
+                "Link-state routing protocol"
+            ]
+        },
+        {
+            "Q": "BGP",
+            "A": [
+                "Border Gateway Protocol",
+                "Hybrid routing protocol"
+            ]
+        },
+        {
+            "Q": "Static Routing",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Dynamic Routing",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Default Routing",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "IPv6 Addressing",
+            "A": [
+                "128-bit address",
+                "8 groups of hexadecimal values"
+            ]
+        },
+        {
+            "Q": "Compress this IPv6 address: 2600:DDDD:1111:0001:0000:0000:0001",
+            "A": [
+                "Remove leading zeroes: 2600:DDDD:1111:1:0:0:1",
+                "Replace consecutive groups of zeroes with a double colon: 2600:DDDD:1111:1::1"
+            ]
+        },
+        {
+            "Q": "IPv6 Tunneling",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "IPv6 Dual Stack",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "IPv6 Router advertisement",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "IPv6 Neighbor discovery",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Traffic shaping",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "QoS",
+            "A": [
+                "Quality of Service",
+                ""
+            ]
+        },
+        {
+            "Q": "Diffserv",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "CoS",
+            "A": [
+                "Class of Service",
+                ""
+            ]
+        },
+        {
+            "Q": "NAT",
+            "A": [
+                "Network Address Translation"
+            ]
+        },
+        {
+            "Q": "PAT",
+            "A": [
+                "Port Address Translation",
+                "Also known as NAT overloading"
+            ]
+        },
+        {
+            "Q": "Port forwarding",
+            "A": [
+                "provides 24x7 access to a service hosted internally",
+                "takes an external socket and associates it with an internal socket"
+            ]
+        },
+        {
+            "Q": "ACL",
+            "A": [
+                "Access Control List",
+                "An ACL is a packet filter.",
+                "Allow or disallow traffic based on \"tuples\"",
+                "A list of rules that cascade from top to bottom",
+                "Can be very general or very specific. Generally, the most specific rules will be at the very top of this list of tuples.",
+                "Most firewalls have an implicit deny at the bottom of the list by default"
+            ]
+        },
+        {
+            "Q": "Distributed switching",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Packet-switched vs. circuit-switched network",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Software-defined networking",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ],
+    "1.4": [
+        {
+            "Q": "\"Private vs. public\"",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "\"Loopback and reserved\"",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Default gateway",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Virtual IP",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "IPv4 Subnet mask",
+            "A": [
+                "e.g. 255.555.555.0",
+                "The subnet mask determines what part of an IP address is the network ID and what part is the host ID"
+            ]
+        },
+        {
+            "Q": "IPv6 Subnet mask",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Classfull Subnetting",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Class A Subnet",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Class B Subnet",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Class C Subnet",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Class D Subnet",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Class E Subnet",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "VLSM",
+            "A": [
+                "",
+                "Classless subnet"
+            ]
+        },
+        {
+            "Q": "CIDR notation (IPv4 vs. IPv6)",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "DHCPv6",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Static address",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "APIPA",
+            "A": [
+                "Automatic Private Internet Protocol Addressing",
+                ""
+            ]
+        },
+        {
+            "Q": "EUI64",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "IP reservations",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ],
+    "1.5": [
+        {
+            "Q": "\"Logical vs. Physical\"",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Wired Star Topology",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Wired Ring Topology",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Wired Mesh Topology",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Wired Bus Topology",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Wireless Mesh Topology",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Wireless Ad Hoc Topology",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Wireless Infrastructure Topology",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "LAN",
+            "A": [
+                "Local Area Network",
+                ""
+            ]
+        },
+        {
+            "Q": "WLAN",
+            "A": [
+                "Wireless Local Area Network",
+                ""
+            ]
+        },
+        {
+            "Q": "MAN",
+            "A": [
+                "Metropolitan Area Network",
+                ""
+            ]
+        },
+        {
+            "Q": "WAN",
+            "A": [
+                "Wide Area Network",
+                ""
+            ]
+        },
+        {
+            "Q": "CAN",
+            "A": [
+                "Campus Area Network",
+                ""
+            ]
+        },
+        {
+            "Q": "SAN",
+            "A": [
+                "Storage Area Network",
+                ""
+            ]
+        },
+        {
+            "Q": "PAN",
+            "A": [
+                "Personal Area Network",
+                ""
+            ]
+        },
+        {
+            "Q": "Z-Wave",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Ant+",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Bluetooth",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "NFC",
+            "A": [
+                "Near Field Communication",
+                ""
+            ]
+        },
+        {
+            "Q": "IR",
+            "A": [
+                "Infrared",
+                ""
+            ]
+        },
+        {
+            "Q": "RFID",
+            "A": [
+                "Radio-Frequency Identification",
+                ""
+            ]
+        },
+        {
+            "Q": "802.11",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ],
+    "1.6": [
+        {
+            "Q": "802.11a",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "802.11b",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "802.11g",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "802.11n",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "802.11ac",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "GSM",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "TDMA",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "CDMA",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "2.4GHz",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "5.0GHz",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "MIMO",
+            "A": [
+                "Multiple Input, Multiple Output",
+                ""
+            ]
+        },
+        {
+            "Q": "MU-MIMO",
+            "A": [
+                "Multiuser Multiple Input, Multiple Output",
+                ""
+            ]
+        }
+    ],
+    "1.7": [
+        {
+            "Q": "SaaS",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "PaaS",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "IaaS",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Private Cloud",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Public Cloud",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Hybrid Cloud",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ],
+    "1.8": [
+        {
+            "Q": "A, AAA Records",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "TXT (SPF, DKIM) Records",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "SRV Records",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "MX Records",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "CNAME Records",
+            "A": [
+                "Canonical Name",
+                ""
+            ]
+        },
+        {
+            "Q": "NS Records",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "PTR Records",
+            "A": [
+                "\"Pointer\"",
+                ""
+            ]
+        },
+        {
+            "Q": "Internal vs. external DNS",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Third-party/cloud-hosted DNS",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Hierarchy",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Forward vs. reverse zone",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "DHCP: MAC reservations",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "DHCP: Pools",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "DHCP: IP exclusions",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "DHCP: Scope options",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "DHCP: Lease time",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "DHCP: TTL",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "DHCP relay/IP helper",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "NTP",
+            "A": [
+                "Network Time Protocol",
+                ""
+            ]
+        },
+        {
+            "Q": "IPAM",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ]
+}

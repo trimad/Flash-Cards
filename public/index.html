@@ -1,73 +1,57 @@
-<!DOCTYPE html>
-<html lang="">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Network+ Flash Cards</title>
-  <script type="text/javascript" src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-  <script src="lib/p5.js"></script>
-  <script src="sketch.js"></script>
-  <link rel="stylesheet" href="style.css">
-
-  <link rel="stylesheet" href="menu.css">
-  <script src="menu.js"></script>
-
-
-</head>
-
-<body>
-
-  <div class="grid-container">
-    <!-- COLUMN ONE -->
-    <div style="grid-column: 1; grid-row: 1;" id="menu" class="menu"></div>
-    <!-- COLUMN TWO -->
-    <div style="grid-column: 2; grid-row: 1; background:black;">
-      <table>
-        <tr>
-          <td><input type="radio" name="session" onchange="updateSession()" checked>Session A</td>
-        </tr>
-        <tr>
-          <td><input type="radio" name="session" onchange="updateSession()">Session B</td>
-        </tr>
-      </table>
-    </div>
-    <!-- COLUMN THREE -->
-    <div style="grid-column: 3; grid-row: 1; background:black;" class="logo">
-      Network+ N10-007
-
-    </div>
-
-    <!--
-      <ul class="dropdown">
-        <li class="dropdown-content">
-          <a href="https://berkanan.azurewebsites.net/" target="_blank" class="info">Blog</a>
-          <a href="https://www.examcompass.com/comptia-network-plus-certification-practice-test-1-exam-n10-007"
-            target="_blank" class="info">Exam Compass</a>
-          <a href="Network-N10-007-Exam-Objectives.pdf" target="_blank" class="info">Exam Objectives</a>
-          <a href="https://www.youtube.com/playlist?list=PLG49S3nxzAnmpdmX7RoTOyuNJQAb-r-gd" target="_blank"
-            class="info">Professor Messer</a>
+<!doctype html>
+<html lang="en-us">
+  <head>
+	<meta name="generator" content="Hugo 0.123.7"><script src="/flash-cards/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=flash-cards/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flash Cards</title>
+    <link rel="stylesheet" href="/flash-cards/css/flashcards.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/flash-cards/">Flash Cards</a>
+      <nav class="test-nav" aria-label="Practice tests">
         
-        </li>
-        </ul>
--->
-
-    <div style="grid-column: 1 / 4; grid-row: 2 / 4; padding:3em;">
-      <div class=" flip-card">
-        <div id="flipX" class="flip-card-inner">
-          <div id="flipY" class="flip-card-inner">
-            <div class="flip-card-front">
-            </div>
-            <div class="flip-card-back">
-              <table id="answers-table">
-              </table>
-            </div>
-          </div>
-        </div>
+          <a href="/flash-cards/tests/a-plus-220-1001/" >CompTIA A&#43; 220-1001</a>
+        
+          <a href="/flash-cards/tests/a-plus-220-1002/" >CompTIA A&#43; 220-1002</a>
+        
+          <a href="/flash-cards/tests/network-plus/" >CompTIA Network&#43;</a>
+        
+          <a href="/flash-cards/tests/security-plus/" >CompTIA Security&#43;</a>
+        
+      </nav>
+    </header>
+    
+  <main class="home">
+    <section class="home-panel">
+      <p class="eyebrow">Study Decks</p>
+      <h1>Pick a practice test.</h1>
+      <div class="test-grid">
+        
+          <a class="test-card" href="/flash-cards/tests/a-plus-220-1001/" style="--accent: #7c8998">
+            <span>CompTIA A&#43; 220-1001</span>
+            <small>Open deck</small>
+          </a>
+        
+          <a class="test-card" href="/flash-cards/tests/a-plus-220-1002/" style="--accent: #7c8998">
+            <span>CompTIA A&#43; 220-1002</span>
+            <small>Open deck</small>
+          </a>
+        
+          <a class="test-card" href="/flash-cards/tests/network-plus/" style="--accent: #6E298D">
+            <span>CompTIA Network&#43;</span>
+            <small>Open deck</small>
+          </a>
+        
+          <a class="test-card" href="/flash-cards/tests/security-plus/" style="--accent: #c9476a">
+            <span>CompTIA Security&#43;</span>
+            <small>Open deck</small>
+          </a>
+        
       </div>
-    </div>
+    </section>
+  </main>
 
-  </div>
-</body>
-
+  </body>
 </html>

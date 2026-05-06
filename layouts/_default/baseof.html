@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="{{ site.LanguageCode }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
+    <link rel="stylesheet" href="{{ "css/flashcards.css" | relURL }}">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="{{ site.Home.RelPermalink }}">Flash Cards</a>
+      <nav class="test-nav" aria-label="Practice tests">
+        {{ range where site.RegularPages "Section" "tests" }}
+          <a href="{{ .RelPermalink }}" {{ if eq $.RelPermalink .RelPermalink }}aria-current="page"{{ end }}>{{ .Title }}</a>
+        {{ end }}
+      </nav>
+    </header>
+    {{ block "main" . }}{{ end }}
+  </body>
+</html>
