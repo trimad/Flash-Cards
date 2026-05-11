@@ -22,7 +22,20 @@ http://127.0.0.1:3000/
 hugo --minify
 ```
 
-Hugo writes the generated site to `public/`.
+Hugo writes the generated site to `docs/` for GitHub Pages branch-folder deployment.
+
+## GitHub Pages
+
+This repository deploys without a Node.js-based GitHub Actions workflow.
+
+GitHub Pages should be configured to deploy from the `master` branch and the `/docs` folder. Hugo writes there because `hugo.toml` sets `publishDir = "docs"`.
+
+Before pushing source changes, rebuild and commit the generated output:
+
+```bash
+hugo --minify
+```
+
 
 ## Requirements
 
@@ -41,6 +54,8 @@ The Network+ and Security+ routes currently have card decks. The A+ routes are i
 ## Progress
 
 The table of contents is segmented by chapter and section. Progress is stored in the browser with `localStorage`, keyed per practice test route.
+
+Cards with an `O` option list can also be answered as quiz questions. Select one or more choices, use **Check Answer**, and the app stores graded quiz results alongside study progress in `localStorage`.
 
 ## JSON Schema
 

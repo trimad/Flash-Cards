@@ -1,0 +1,584 @@
+{
+    "4.1": [
+        {
+            "Q": "Motion detection",
+            "A": [
+                "Detection",
+                ""
+            ]
+        },
+        {
+            "Q": "Video surveillance",
+            "A": [
+                "Detection",
+                ""
+            ]
+        },
+        {
+            "Q": "Asset tracking tags",
+            "A": [
+                "Detection",
+                ""
+            ]
+        },
+        {
+            "Q": "Tamper detection",
+            "A": [
+                "Detection",
+                ""
+            ]
+        },
+        {
+            "Q": "Badges",
+            "A": [
+                "Prevention",
+                ""
+            ]
+        },
+        {
+            "Q": "Biometrics",
+            "A": [
+                "Prevention",
+                ""
+            ]
+        },
+        {
+            "Q": "Smart cards",
+            "A": [
+                "Prevention",
+                ""
+            ]
+        },
+        {
+            "Q": "Key fob",
+            "A": [
+                "Prevention",
+                ""
+            ]
+        },
+        {
+            "Q": "Locks",
+            "A": [
+                "Prevention",
+                ""
+            ]
+        }
+    ],
+    "4.2": [
+        {
+            "Q": "RADIUS",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "TACAS+",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Kerberos",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Single sign-on",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Local authentication",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "LDAP",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Certificates",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Auditing and logging",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Multifactor authentication",
+            "A": [
+                " Something you know",
+                "Something you have",
+                "Something you are",
+                " Somewhere you are",
+                "Something you do"
+            ]
+        },
+        {
+            "Q": "802.1x",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "NAC",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Port security",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "MAC filtering",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Captive portal",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Access control lists",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ],
+    "4.3": [
+        {
+            "Q": "WPA",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "WPA2",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "TKIP-RC4",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "CCMP-AES",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "EAP",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "PEAP",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "EAP-FAST",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "EAP-TLS",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "\nShared or open\n",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Preshared key",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "MAC filtering",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Geofencing",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ],
+    "4.4": [
+        {
+            "Q": "Reflective attack",
+            "A": [
+                "DOS",
+                ""
+            ]
+        },
+        {
+            "Q": "Amplified attack",
+            "A": [
+                "DOS",
+                ""
+            ]
+        },
+        {
+            "Q": "Distributed attack",
+            "A": [
+                "DOS",
+                ""
+            ]
+        },
+        {
+            "Q": "Social engineering",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Insider threat",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Logic bomb",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Rogue access point",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Evil twin",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "War-driving",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Phishing",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Ransomware",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "DNS poisoning",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "ARP poisoning",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Spoofing",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Deauthentication",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Brute force",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "VLAN hopping",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Man-in-the-middle",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Exploits vs. vulnerabilities",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ],
+    "4.5": [
+        {
+            "Q": "Changing default credentials",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Avoiding common passwords",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Upgrading firmware",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Patching and updates",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "File hashing",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Disabling unnecessary services",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Using secure protocols",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Generating new keys",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Disabling IP ports",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Device ports",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ],
+    "4.6": [
+        {
+            "Q": "Signature management",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Device hardening",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Change native VLAN",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Spanning tree",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Flood guard",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "BPDU guard",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Root guard",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "DHCP",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "DMZ",
+            "A": [
+                "Network segmentation",
+                ""
+            ]
+        },
+        {
+            "Q": "VLAN",
+            "A": [
+                "Network segmentation",
+                ""
+            ]
+        },
+        {
+            "Q": "Privileged user account",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "File integrity monitoring",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Role separation",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Restricting access via ACLs",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Honeypot/honeynet",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Penetration testing",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ]
+}

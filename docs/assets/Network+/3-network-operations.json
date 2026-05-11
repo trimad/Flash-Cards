@@ -1,0 +1,558 @@
+{
+    "3.1": [
+        {
+            "Q": "Diagram symbols",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Standard operating procedures/work instructions",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Logical vs. physical diagrams",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Rack diagrams",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Change management documentation",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Wiring and port locations",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "IDF/MDF documentation",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Labeling",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Network configuration and performance baselines",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": " Inventory management",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ],
+    "3.2": [
+        {
+            "Q": "Fault tolerance",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "High availability",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Load balancing",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "NIC teaming",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Port aggregation",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Clustering",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Power management",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Battery backups/UPS",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Power generators",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Dual power supplies",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": " Redundant circuits",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Cold sites",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Warm sites",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Hot sites",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Full Backups",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Differential Backups",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Incremental Backups",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Snapshots",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "MTTR",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "MTBF",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "SLA requirements",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ],
+    "3.3": [
+        {
+            "Q": "Log reviewing",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Port scanning",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Vulnerability scanning",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Patch Management",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Rollback",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Reviewing baselines",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Packet/traffic analysis",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Notifications",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Alerts",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "SIEM",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "SNMP monitors",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "MIB",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Error rate",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Utilization",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Packet drops",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Bandwidth/throughput",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ],
+    "3.4": [
+        {
+            "Q": "VPN",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "IPSec",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "SSL/TLS/DTLS",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Site-to-site",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Client-to-site",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "RDP",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "SSH",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "VNC",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Telnet",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "HTTPS/management URL",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Remote file access",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "FTP/FTPS",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "SFTP",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "TFTP",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Out-of-band management",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": " Modem",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Console router",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ],
+    "3.5": [
+        {
+            "Q": "Privileged user agreement",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Password policy",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "On-boarding/off-boarding procedures",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Licensing restrictions",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "International export controls",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Data loss prevention",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Remote access policies",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Incident response policies",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "BYOD",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "AUP",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "NDA",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "System life cycle",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Asset disposal",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Safety procedures and policies",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ]
+}
