@@ -1,0 +1,606 @@
+{
+    "5.1": [
+        {
+            "Q": "1. Identify the problem",
+            "A": [
+                "Gather information",
+                "Duplicate the problem, if possible",
+                "Question users",
+                "Identify symptoms",
+                "Determine if anything has changed",
+                "Approach multiple problems individually"
+            ]
+        },
+        {
+            "Q": "2. Establish a theory of probable cause",
+            "A": [
+                "Question the obvious",
+                "Consider multiple approaches",
+                "Top-to-bottom/bottom-to-top OSI model",
+                "Divide and conquer"
+            ]
+        },
+        {
+            "Q": "3. Test the theory to determine the cause",
+            "A": [
+                "Once the theory is confirmed, determine the next steps to resolve the problem",
+                "If the theory is not confirmed, reestablish a new theory or escalate"
+            ]
+        },
+        {
+            "Q": "4. Establish a plan of action to resolve the problem and identify potential effects",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Implement the solution or escalate as necessary",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Verify full system functionality and, if applicable, implement preventive measures",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Document findings, actions, and outcomes",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ],
+    "5.2": [
+        {
+            "Q": "Crimper",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Cable testers",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Punchdown",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "OTDR",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Light meter",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Tone generator",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Loopback adapter",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Multimeter",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Spectrum analyzer",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Packet sniffer",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Port scanner",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Protocol analyzer",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "WiFi adapter",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Bandwidth speed tester",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "ping",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "tracert, traceroute",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "nslookup",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "ipconfig",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "ifconfig",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "iptables",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "netstat",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "tcpdump",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "pathping",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "nmap",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "route",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "arp",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "dig",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ],
+    "5.3": [
+        {
+            "Q": "Attenuation",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Latency",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Jitter",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Crosstalk",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "EMI",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Open/short",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Incorrect pin-out",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Incorrect cable type",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Bad port",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Transceiver mismatch",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "TX/RX reverse",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Duplex/speed mismatch",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Damaged cables",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Bent pins",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Bottlenecks",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "VLAN mismatch",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Network connection LED status indicators",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ],
+    "5.4": [
+        {
+            "Q": "Reflection",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Refraction",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Absorption",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Latency",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Jitter",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Attenuation",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Incorrect antenna type",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Interference",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Incorrect antenna placement",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Channel overlap",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Overcapacity",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Distance limitations",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Frequency mismatch",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Wrong SSID",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Wrong passphrase",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Security type mismatch",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Power levels",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Signal-to-noise ratio",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ],
+    "5.5": [
+        {
+            "Q": "Names not resolving",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Incorrect gateway",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Incorrect netmask",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Duplicate IP addresses",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Duplicate MAC addresses",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Expired IP addresses",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Rogue DHCP server",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Untrusted SSL certificate",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Incorrect time",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Exhausted DHCP scope",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Blocked TCP/UDP ports",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Incorrect host-based firewall settings",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Incorrect ACL settings",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Unresponsive service",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Hardware failure",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ]
+}

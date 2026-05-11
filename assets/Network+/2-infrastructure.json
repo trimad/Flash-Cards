@@ -1,0 +1,764 @@
+{
+    "2.1": [
+        {
+            "Q": "UTP",
+            "A": [
+                "Unshielded Twisted Pair"
+            ]
+        },
+        {
+            "Q": "STP",
+            "A": [
+                "Shielded Twister Pair"
+            ]
+        },
+        {
+            "Q": "Coaxial",
+            "A": [
+                "Wire conductor",
+                "Dielectric insulator around the wire conductor",
+                "Metal shielding around the dielectric insulator",
+                "Plastic jacket around the metal shielding"
+            ]
+        },
+        {
+            "Q": "Single-mode Fiber",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Multimode Fiber",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "\"Plenum vs. PVC\"",
+            "A": [
+                "Traditional cables are made of polyvinyl chloride (PVC)",
+                "Plenum cables are made of fluorinated etheylene polymer (FEP)"
+            ]
+        },
+        {
+            "Q": "RJ-45",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "RJ-11",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "BNC",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "DB-9",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "DB-25",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "F-Type",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Fiber LC",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Fiber ST",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Fiber SC",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "APC",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "UPC",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "MTRJ",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "SFP",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "GBIC",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "SFP+",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "QSFP",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Bidirectional Fiber Transceiver",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Duplex  Fiber Transceiver",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "66 Block",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "110 Block",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Patch panel",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Fiber distribution panel",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Category 3 Cable",
+            "A": [
+                "10BASE-T",
+                "100 meters max distance"
+            ]
+        },
+        {
+            "Q": "Category 5 Cable",
+            "A": [
+                "100BASE-TX",
+                "1000BASE-T",
+                "100 meters max distance"
+            ]
+        },
+        {
+            "Q": "Category 5e Cable",
+            "A": [
+                "100BASE-TX",
+                "1000BASE-T",
+                "100 meters max distance"
+            ]
+        },
+        {
+            "Q": "Category 6 Cable",
+            "A": [
+                "10GBASE-T",
+                "37 to 55 max distance"
+            ]
+        },
+        {
+            "Q": "Category 6a Cable",
+            "A": [
+                "10GBASE-T",
+                "100 meters max distance"
+            ]
+        },
+        {
+            "Q": "Category 7 Cable",
+            "A": [
+                "10GBASE-T",
+                "100 meters max distance"
+            ]
+        },
+        {
+            "Q": "RG-6",
+            "A": [
+                "Used in television/digital cable",
+                "Also suitable for high-speed internet over cable"
+            ]
+        },
+        {
+            "Q": "RG-59",
+            "A": [
+                "Not designed for long distances",
+                "Only suitable as a short patch cable"
+            ]
+        },
+        {
+            "Q": "EIA",
+            "A": [
+                "Electronic Industries Alliance",
+                "Alliance of trade associations, develops standards for the industry."
+            ]
+        },
+        {
+            "Q": "TIA",
+            "A": [
+                "Telecommunications Industry Alliance",
+                "Standards, market analysis, trade shows, government affairs, etc."
+            ]
+        },
+        {
+            "Q": "TIA/EIA 568a Colors",
+            "A": [
+                "White and green",
+                "Green",
+                "White and orange",
+                "Blue",
+                "White and blue",
+                "Orange",
+                "White and brown",
+                "Brown"
+            ]
+        },
+        {
+            "Q": "TIA/EIA 568b Colors",
+            "A": [
+                "White and orange",
+                "Orange",
+                "White and green",
+                "Blue",
+                "White and blue",
+                "Green",
+                "White and brown",
+                "Brown"
+            ]
+        },
+        {
+            "Q": "Crossover cable",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Straight-through cable",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "10BASE-T",
+            "A": [
+                "Category 3",
+                "maxiumum distance of 100 meters"
+            ]
+        },
+        {
+            "Q": "100BASE-TX, 1000BASE-T",
+            "A": [
+                "Category 5",
+                "Category 5e",
+                "maxiumum distance of 100 meters"
+            ]
+        },
+        {
+            "Q": "10GBASE-T",
+            "A": [
+                "Category 6",
+                "Category 6a",
+                "Category 7",
+                "maximum distance of 37-55 meters"
+            ]
+        },
+        {
+            "Q": " 10GBASE-T",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "1000BaseSX",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "10GBaseT",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ],
+    "2.2": [
+        {
+            "Q": "Firewall",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Router",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Switch",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Hub",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Bridge",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Modems",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Wireless access point",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Media converter",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Wireless range extender",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "VoIP endpoint",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ],
+    "2.3": [
+        {
+            "Q": "Multilayer switch",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Wireless controller",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": " Load balancer",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "IDS/IPS",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Proxy server",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "VPN concentrator",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "AAA/RADIUS server",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "UTM appliance",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "NGFW/Layer 7 firewall",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": " VoIP PBX",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "VoIP gateway",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Content filter",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ],
+    "2.4": [
+        {
+            "Q": "Virtual switch",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Virtual firewall",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Virtual NIC",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Virtual router",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Hypervisor",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "NAS",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "SAN",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": " FCoE",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Fibre Channel",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "iSCSI",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "InfiniBand",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Jumbo frame",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ],
+    "2.5": [
+        {
+            "Q": "ISDN",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "T1/T3",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "E1/E3",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "OC-3 – OC-192",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "DSL",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Metropolitan Ethernet",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Cable broadband",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Dial-up",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "PRI",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Satellite",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Copper",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Fiber",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Wireless",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "MPLS",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "ATM",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Frame relay",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "PPPoE",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "PPP",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "DMVPN",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "SIP trunk",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Demarcation point",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "CSU/DSU",
+            "A": [
+                "",
+                ""
+            ]
+        },
+        {
+            "Q": "Smart jack",
+            "A": [
+                "",
+                ""
+            ]
+        }
+    ]
+}
