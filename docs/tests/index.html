@@ -1,15 +1,16 @@
 <!doctype html>
 <html lang="en-us">
-  <head><script src="/Flash-Cards/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=Flash-Cards/livereload" data-no-instant defer></script>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tests | Flash Cards</title>
     <link rel="stylesheet" href="/Flash-Cards/css/flashcards.css">
+    <script src="/Flash-Cards/js/welcome-modal.js" defer></script>
   </head>
   <body>
     <header class="site-header">
       <a class="brand" href="/Flash-Cards/">Flash Cards</a>
-      <nav class="test-nav" aria-label="Practice tests">
+      <nav class="test-nav" aria-label="Flashcard decks">
         
           <a href="/Flash-Cards/tests/a-plus-220-1001/" >CompTIA A&#43; 220-1001</a>
         
@@ -26,38 +27,86 @@
     
   <main class="home">
     <section class="home-panel">
-      <p class="eyebrow">Tests</p>
-      <h1>Choose a route.</h1>
+      <p class="eyebrow">Deck Library</p>
+      <h1>Choose a deck.</h1>
+      <p class="home-intro">Pick any flashcard set and start reviewing. This app can hold certification prep, reading practice, personal notes, or whatever you want to learn next.</p>
       <div class="test-grid">
         
           <a class="test-card" href="/Flash-Cards/tests/a-plus-220-1001/" style="--accent: #7c8998">
+            <small>Deck</small>
             <span>CompTIA A&#43; 220-1001</span>
-            <small>Open deck</small>
+            <p>A&#43; Core 1 topics for hardware, networking, mobile devices, virtualization, and troubleshooting.</p>
+            <strong>Open deck</strong>
           </a>
         
           <a class="test-card" href="/Flash-Cards/tests/a-plus-220-1002/" style="--accent: #7c8998">
+            <small>Deck</small>
             <span>CompTIA A&#43; 220-1002</span>
-            <small>Open deck</small>
+            <p>A&#43; Core 2 topics for operating systems, security, software troubleshooting, and operational procedures.</p>
+            <strong>Open deck</strong>
           </a>
         
           <a class="test-card" href="/Flash-Cards/tests/network-plus/" style="--accent: #6E298D">
+            <small>Deck</small>
             <span>CompTIA Network&#43;</span>
-            <small>Open deck</small>
+            <p>Networking concepts, infrastructure, operations, security, and troubleshooting.</p>
+            <strong>Open deck</strong>
           </a>
         
           <a class="test-card" href="/Flash-Cards/tests/security-plus/" style="--accent: #c9476a">
+            <small>Deck</small>
             <span>CompTIA Security&#43;</span>
-            <small>Open deck</small>
+            <p>Security concepts, threats, controls, architecture, operations, and governance.</p>
+            <strong>Open deck</strong>
           </a>
         
           <a class="test-card" href="/Flash-Cards/tests/early-reading/" style="--accent: #ff7330">
+            <small>Deck</small>
             <span>Early Reading</span>
-            <small>Open deck</small>
+            <p>Simple word and sound practice for early readers.</p>
+            <strong>Open deck</strong>
           </a>
         
       </div>
     </section>
   </main>
+  
+    <div id="welcome-modal" class="welcome-modal" role="dialog" aria-modal="true" aria-labelledby="welcome-modal-title" hidden>
+  <div class="welcome-modal__scrim" data-welcome-close></div>
+  <section class="welcome-modal__panel" aria-describedby="welcome-modal-copy">
+    <button id="welcome-modal-close" class="welcome-modal__close" type="button" aria-label="Close welcome dialog" data-welcome-close>
+      <span aria-hidden="true">X</span>
+    </button>
+    <p class="eyebrow">Flash Card Studio</p>
+    <h2 id="welcome-modal-title">Study Anything</h2>
+    <p id="welcome-modal-copy" class="welcome-modal__lead">
+      This is a flexible flashcard app for whatever you want to learn. Choose a deck, flip each card to reveal the answer, and keep moving through your material at your own pace.
+    </p>
+    <div class="welcome-modal__steps" aria-label="How to use this flash card app">
+      <div>
+        <span aria-hidden="true">1</span>
+        <strong>Pick a deck</strong>
+        <p>Start from the deck library and choose the topic you want to review.</p>
+      </div>
+      <div>
+        <span aria-hidden="true">2</span>
+        <strong>Flip and review</strong>
+        <p>Click a card, press Space, or use X on a controller to see the answer.</p>
+      </div>
+      <div>
+        <span aria-hidden="true">3</span>
+        <strong>Mark your recall</strong>
+        <p>Choose Right or Wrong so your progress and score stay visible while you practice.</p>
+      </div>
+    </div>
+    <div class="welcome-modal__footer">
+      <p>Progress saves in this browser. Keyboard, speech, mouse, and gamepad controls are ready when you are.</p>
+      <button class="welcome-modal__start primary" type="button" data-welcome-close>Choose a Deck</button>
+    </div>
+  </section>
+</div>
+
+  
 
   </body>
 </html>

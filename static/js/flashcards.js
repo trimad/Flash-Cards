@@ -4,7 +4,10 @@
   var SOUND_EFFECTS = {
     correct: "audio/heart-piece-2.mp3",
     wrong: "audio/error.mp3",
-    flip: "audio/throw.mp3",
+    flipForward: "audio/SNES - The Legend of Zelda_ A Link to the Past - Miscellaneous - Sound Effects/fighter sword 1.wav",
+    flipBack: "audio/SNES - The Legend of Zelda_ A Link to the Past - Miscellaneous - Sound Effects/fighter sword 2.wav",
+    previous: "audio/SNES - The Legend of Zelda_ A Link to the Past - Miscellaneous - Sound Effects/arrow 1.wav",
+    next: "audio/SNES - The Legend of Zelda_ A Link to the Past - Miscellaneous - Sound Effects/arrow 2.wav",
     cursor: "audio/cursor.mp3"
   };
   var menu = [];
@@ -15,6 +18,7 @@
     sectionName: "",
     cardIndex: 0,
     flipped: false,
+    transitioning: false,
     gamepadCooldowns: {}
   };
 
@@ -191,7 +195,8 @@
       A: back.text ? [String(back.text)] : [],
       O: undefined,
       frontAudio: front.audio || "",
-      backAudio: back.audio || ""
+      backAudio: back.audio || "",
+      plainBack: true
     };
   }
 
@@ -409,7 +414,7 @@
     els.card.classList.toggle("is-flipped", state.flipped);
 
     renderQuestion(els.front, card);
-    renderAnswers(els.back, card.A);
+    renderAnswers(els.back, card.A, card);
 
     els.count.textContent = "Card " + (state.cardIndex + 1) + " of " + cards.length;
   }
@@ -419,12 +424,12 @@
     var hasCard = cards.length > 0;
     var selfGrade = hasCard ? getSelfGrade(currentSectionKey(), state.cardIndex) : null;
 
-    els.prev.disabled = !previousTarget();
-    els.next.disabled = !nextTarget();
-    els.flip.disabled = !hasCard;
-    els.speak.disabled = !hasCard;
-    els.right.disabled = !hasCard;
-    els.wrong.disabled = !hasCard;
+    els.prev.disabled = state.transitioning || !previousTarget();
+    els.next.disabled = state.transitioning || !nextTarget();
+    els.flip.disabled = state.transitioning || !hasCard;
+    els.speak.disabled = state.transitioning || !hasCard;
+    els.right.disabled = state.transitioning || !hasCard;
+    els.wrong.disabled = state.transitioning || !hasCard;
     els.right.classList.toggle("is-selected", Boolean(selfGrade && selfGrade.correct));
     els.wrong.classList.toggle("is-selected", Boolean(selfGrade && !selfGrade.correct));
   }
@@ -518,14 +523,23 @@
     element.appendChild(renderQuizControls(card, quiz));
   }
 
-  function renderAnswers(element, answers) {
+  function renderAnswers(element, answers, card) {
     var list = document.createElement("ul");
+    var normalizedAnswers = answers || [];
 
     element.innerHTML = "";
     element.classList.remove("has-options");
+
+    if (card && card.plainBack && normalizedAnswers.length <= 1) {
+      renderText(element, normalizedAnswers[0] || "");
+      element.classList.add("has-plain-back");
+      return;
+    }
+
+    element.classList.remove("has-plain-back");
     list.className = "answer-list";
 
-    (answers || []).forEach(function (answer) {
+    normalizedAnswers.forEach(function (answer) {
       var item = document.createElement("li");
       item.textContent = answer;
       list.appendChild(item);
@@ -543,47 +557,91 @@
     renderAll();
   }
 
-  function previousCard() {
+  async function previousCard() {
     var target = previousTarget();
 
-    if (!target) {
+    if (!target || state.transitioning) {
       return;
     }
 
-    state.chapterIndex = target.chapterIndex;
-    state.sectionName = target.sectionName;
-    state.cardIndex = target.cardIndex;
-    state.flipped = false;
-    stopPlayback();
-    clampCardIndex();
-    renderAll();
+    await navigateToTarget(target, "previous");
   }
 
-  function nextCard() {
+  async function nextCard() {
     var target = nextTarget();
 
-    if (!target) {
+    if (!target || state.transitioning) {
       return;
     }
+
+    await navigateToTarget(target, "next");
+  }
+
+  async function navigateToTarget(target, direction) {
+    state.transitioning = true;
+    renderControls();
+    stopPlayback();
+    playSoundEffect(direction);
+
+    await runCardTransition("slide-out-" + direction);
 
     state.chapterIndex = target.chapterIndex;
     state.sectionName = target.sectionName;
     state.cardIndex = target.cardIndex;
     state.flipped = false;
-    stopPlayback();
     clampCardIndex();
     renderAll();
+
+    await runCardTransition("slide-in-" + direction);
+
+    state.transitioning = false;
+    renderControls();
+  }
+
+  function runCardTransition(className) {
+    var prefersReducedMotion = window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReducedMotion) {
+      return Promise.resolve();
+    }
+
+    return new Promise(function (resolve) {
+      var done = false;
+      var timeout = window.setTimeout(finish, 520);
+
+      function finish() {
+        if (done) {
+          return;
+        }
+
+        done = true;
+        window.clearTimeout(timeout);
+        els.card.removeEventListener("animationend", onAnimationEnd);
+        els.card.classList.remove(className);
+        resolve();
+      }
+
+      function onAnimationEnd(event) {
+        if (event.target === els.card) {
+          finish();
+        }
+      }
+
+      els.card.addEventListener("animationend", onAnimationEnd);
+      els.card.classList.add(className);
+    });
   }
 
   function flipCard() {
-    if (!currentCards().length) {
+    if (state.transitioning || !currentCards().length) {
       return;
     }
 
     stopPlayback();
-    playSoundEffect("flip");
+    playSoundEffect(state.flipped ? "flipBack" : "flipForward");
     state.flipped = !state.flipped;
-    renderAll();
+    els.card.classList.toggle("is-flipped", state.flipped);
   }
 
   function speakVisibleCard() {

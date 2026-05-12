@@ -1,16 +1,22 @@
 {{ define "main" }}
   <main class="home">
     <section class="home-panel">
-      <p class="eyebrow">{{ .Title }}</p>
-      <h1>Choose a route.</h1>
+      <p class="eyebrow">Deck Library</p>
+      <h1>Choose a deck.</h1>
+      <p class="home-intro">Pick any flashcard set and start reviewing. This app can hold certification prep, reading practice, personal notes, or whatever you want to learn next.</p>
       <div class="test-grid">
         {{ range .Pages }}
           <a class="test-card" href="{{ .RelPermalink }}" style="--accent: {{ .Params.accent | default "#6E298D" }}">
+            <small>Deck</small>
             <span>{{ .Title }}</span>
-            <small>Open deck</small>
+            <p>{{ .Params.deckdescription | default "Open this flashcard deck and review at your own pace." }}</p>
+            <strong>Open deck</strong>
           </a>
         {{ end }}
       </div>
     </section>
   </main>
+  {{ if eq .Section "tests" }}
+    {{ partial "welcome-modal.html" . }}
+  {{ end }}
 {{ end }}

@@ -10,7 +10,7 @@
   <main class="app-shell" data-test="{{ .Params.testName }}">
     <aside class="toc-panel" aria-label="Table of contents">
       <div class="toc-header">
-        <p class="eyebrow">Practice Test</p>
+        <p class="eyebrow">Deck</p>
         <h1>{{ .Title }}</h1>
         <div class="overall-progress" aria-live="polite">
           <span id="overall-label">Loading</span>
@@ -54,8 +54,14 @@
       </article>
 
       <div class="card-actions">
-        <button id="prev-card" type="button">Previous</button>
-        <button id="next-card" type="button">Next</button>
+        <button id="prev-card" type="button" class="controller-action controller-action--lt">
+          <span class="controller-action__badge" aria-hidden="true">LT</span>
+          <span>Previous</span>
+        </button>
+        <button id="next-card" type="button" class="controller-action controller-action--rt">
+          <span class="controller-action__badge" aria-hidden="true">RT</span>
+          <span>Next</span>
+        </button>
         <button id="flip-card" type="button" class="primary controller-action controller-action--x">
           <span class="controller-action__badge" aria-hidden="true">X</span>
           <span>Flip</span>
@@ -74,11 +80,11 @@
         </button>
       </div>
       <div class="shortcut-legend" aria-label="Keyboard shortcuts">
-        <span><kbd>Left</kbd> Previous</span>
-        <span><kbd>Right</kbd> Next</span>
+        <span><kbd>←</kbd> Previous</span>
+        <span><kbd>→</kbd> Next</span>
         <span><kbd>LT</kbd> Previous</span>
         <span><kbd>RT</kbd> Next</span>
-        <span><kbd>Up</kbd><kbd>Down</kbd> Flip</span>
+        <span><kbd>↑</kbd><kbd>↓</kbd> Flip</span>
         <span><kbd>Space</kbd><kbd>Enter</kbd> Flip</span>
         <span><kbd>X</kbd> Flip</span>
         <span><kbd>Y</kbd> Speak</span>
