@@ -2,6 +2,8 @@
 
 A Hugo-powered static flash-card site for CompTIA study decks. The site builds routes for each practice test and loads card decks from JSON in `static/assets`.
 
+The card player supports keyboard, mouse, and Gamepad API controls. Xbox-style face buttons are mapped as X = flip, Y = speak the visible side, A = mark right, and B = mark wrong. Left and right triggers move to the previous and next card. Sound effects and speech synthesis run entirely in the browser.
+
 ## Run Locally
 
 From the project root:
@@ -48,8 +50,9 @@ hugo --minify
 - `/tests/a-plus-220-1002/`
 - `/tests/network-plus/`
 - `/tests/security-plus/`
+- `/tests/early-reading/`
 
-The Network+ and Security+ routes currently have card decks. The A+ routes are in place and show their objectives from the shared menu data, but they will remain empty until deck JSON files are added.
+The Network+, Security+, and Early Reading routes currently have card decks. The A+ routes are in place and show their objectives from the shared menu data, but they will remain empty until deck JSON files are added.
 
 ## Progress
 
@@ -130,6 +133,19 @@ Card fields:
 - `A` - Array of correct answers shown on the answer side.
 - `O` - Optional array of all answer options shown on the question side. Use this for multiple-choice scrape sources.
 
+The player also accepts imported browser-app decks with this static schema:
+
+```json
+{
+  "id": "oo-words",
+  "name": "\"OO\" Words",
+  "description": "20 simple words that contain the 'oo' sound.",
+  "cards": [
+    { "front": { "text": "zoo" }, "back": { "text": "We saw lions at the zoo." } }
+  ]
+}
+```
+
 When scraping a new source, prefer generating one deck object keyed by official objective IDs, such as `1.1` or `4.6`. If the source provides practice tests instead of objective IDs, create a normalized objective-grouped deck and point `menu.json` at that normalized file.
 
 ## Project Layout
@@ -142,4 +158,6 @@ When scraping a new source, prefer generating one deck object keyed by official 
 - `static/assets/menu.json` - exam/chapter/section menu data
 - `static/assets/Network+/` - Network+ deck JSON files
 - `static/assets/Security+/` - Security+ objective PDF and deck JSON files
+- `static/assets/Reading/` - early reading decks imported from the browser app
+- `static/audio/` - browser-served sound effects
 - `.github/workflows/deploy-pages.yml` - GitHub Pages deployment

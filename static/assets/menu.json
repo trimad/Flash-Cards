@@ -555,5 +555,44 @@
         ]
       }
     ]
+  },
+  {
+    "name": "Early Reading",
+    "assetPath": "Reading/",
+    "chapter": [
+      {
+        "color": "#ff7330",
+        "file": "top-20-sight-words.json",
+        "name": "Top 20 Sight Words",
+        "section": [
+          {
+            "name": "top-20-sight-words",
+            "label": "The 20 most common English words for early readers."
+          }
+        ]
+      },
+      {
+        "color": "#47da73",
+        "file": "oo-words.json",
+        "name": "\"OO\" Words",
+        "section": [
+          {
+            "name": "oo-words",
+            "label": "20 simple words that contain the 'oo' sound."
+          }
+        ]
+      },
+      {
+        "color": "#2f9dff",
+        "file": "ar-words.json",
+        "name": "\"AR\" Words",
+        "section": [
+          {
+            "name": "ar-words",
+            "label": "20 simple words that contain the 'ar' sound."
+          }
+        ]
+      }
+    ]
   }
 ]

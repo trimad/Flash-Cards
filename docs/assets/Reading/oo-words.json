@@ -1,0 +1,27 @@
+{
+  "id": "oo-words",
+  "name": "\"OO\" Words",
+  "description": "20 simple words that contain the 'oo' sound.",
+  "cards": [
+    { "front": { "text": "zoo" }, "back": { "text": "We saw lions at the zoo." } },
+    { "front": { "text": "boo" }, "back": { "text": "I say boo to Dad." } },
+    { "front": { "text": "moo" }, "back": { "text": "The cow says moo." } },
+    { "front": { "text": "too" }, "back": { "text": "I want one too." } },
+    { "front": { "text": "food" }, "back": { "text": "The food is hot." } },
+    { "front": { "text": "moon" }, "back": { "text": "The moon is bright." } },
+    { "front": { "text": "spoon" }, "back": { "text": "I eat with a spoon." } },
+    { "front": { "text": "roof" }, "back": { "text": "Rain hits the roof." } },
+    { "front": { "text": "room" }, "back": { "text": "My toys are in my room." } },
+    { "front": { "text": "broom" }, "back": { "text": "I sweep with a broom." } },
+    { "front": { "text": "goose" }, "back": { "text": "The goose is by the pond." } },
+    { "front": { "text": "noodle" }, "back": { "text": "I slurp one noodle." } },
+    { "front": { "text": "tooth" }, "back": { "text": "I brush each tooth." } },
+    { "front": { "text": "smooth" }, "back": { "text": "The rock feels smooth." } },
+    { "front": { "text": "school" }, "back": { "text": "I go to school today." } },
+    { "front": { "text": "pool" }, "back": { "text": "We splash in the pool." } },
+    { "front": { "text": "cool" }, "back": { "text": "Your robot is cool." } },
+    { "front": { "text": "boot" }, "back": { "text": "My boot is muddy." } },
+    { "front": { "text": "loop" }, "back": { "text": "The train goes in a loop." } },
+    { "front": { "text": "drool" }, "back": { "text": "Babies can drool." } }
+  ]
+}

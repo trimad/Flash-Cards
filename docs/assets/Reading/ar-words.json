@@ -1,0 +1,27 @@
+{
+  "id": "ar-words",
+  "name": "\"AR Words\"",
+  "description": "20 simple words that contain the 'ar' sound.",
+  "cards": [
+    { "front": { "text": "car" }, "back": { "text": "The car is red." } },
+    { "front": { "text": "bar" }, "back": { "text": "I jump over the bar." } },
+    { "front": { "text": "jar" }, "back": { "text": "The jar has jam." } },
+    { "front": { "text": "star" }, "back": { "text": "I see a star." } },
+    { "front": { "text": "far" }, "back": { "text": "The bus is far away." } },
+    { "front": { "text": "farm" }, "back": { "text": "The pig lives on a farm." } },
+    { "front": { "text": "park" }, "back": { "text": "We play at the park." } },
+    { "front": { "text": "dark" }, "back": { "text": "The sky is dark." } },
+    { "front": { "text": "bark" }, "back": { "text": "I hear the dog bark." } },
+    { "front": { "text": "hard" }, "back": { "text": "This rock is hard." } },
+    { "front": { "text": "card" }, "back": { "text": "I made a card for Mom." } },
+    { "front": { "text": "yard" }, "back": { "text": "We run in the yard." } },
+    { "front": { "text": "shark" }, "back": { "text": "The shark swims fast." } },
+    { "front": { "text": "march" }, "back": { "text": "We march in a line." } },
+    { "front": { "text": "chart" }, "back": { "text": "The chart has stars." } },
+    { "front": { "text": "start" }, "back": { "text": "We start the game now." } },
+    { "front": { "text": "smart" }, "back": { "text": "You are so smart." } },
+    { "front": { "text": "garden" }, "back": { "text": "The flower grows in the garden." } },
+    { "front": { "text": "artist" }, "back": { "text": "The artist paints a cat." } },
+    { "front": { "text": "arm" }, "back": { "text": "I wave my arm." } }
+  ]
+}

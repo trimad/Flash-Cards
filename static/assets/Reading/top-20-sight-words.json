@@ -1,0 +1,27 @@
+{
+  "id": "top-20-sight-words",
+  "name": "Top 20 Sight Words",
+  "description": "The 20 most common English words for early readers.",
+  "cards": [
+    { "front": { "text": "the" }, "back": { "text": "the cat" } },
+    { "front": { "text": "be" }, "back": { "text": "I will be here." } },
+    { "front": { "text": "to" }, "back": { "text": "go to bed" } },
+    { "front": { "text": "of" }, "back": { "text": "a cup of milk" } },
+    { "front": { "text": "and" }, "back": { "text": "mom and dad" } },
+    { "front": { "text": "a" }, "back": { "text": "a big dog" } },
+    { "front": { "text": "in" }, "back": { "text": "in the box" } },
+    { "front": { "text": "that" }, "back": { "text": "I want that." } },
+    { "front": { "text": "have" }, "back": { "text": "I have a toy." } },
+    { "front": { "text": "I" }, "back": { "text": "I can run." } },
+    { "front": { "text": "it" }, "back": { "text": "It is red." } },
+    { "front": { "text": "for" }, "back": { "text": "This is for you." } },
+    { "front": { "text": "not" }, "back": { "text": "Do not go." } },
+    { "front": { "text": "on" }, "back": { "text": "on the bed" } },
+    { "front": { "text": "with" }, "back": { "text": "with my mom" } },
+    { "front": { "text": "he" }, "back": { "text": "He is fast." } },
+    { "front": { "text": "as" }, "back": { "text": "as big as me" } },
+    { "front": { "text": "you" }, "back": { "text": "I see you." } },
+    { "front": { "text": "do" }, "back": { "text": "Do you run?" } },
+    { "front": { "text": "at" }, "back": { "text": "at the park" } }
+  ]
+}
