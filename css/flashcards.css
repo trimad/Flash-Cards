@@ -4,6 +4,18 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "FOT-Matisse Pro EB";
+  src:
+    local("FOT-Matisse Pro EB"),
+    local("Matisse EB"),
+    local("FOT-Matisse EB"),
+    url("../fonts/FOT-Matisse Pro EB.otf") format("opentype");
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+}
+
 :root {
   --bg: #111317;
   --panel: #191d23;
@@ -12,11 +24,14 @@
   --text: #f4f6f8;
   --muted: #aeb7c4;
   --accent: #6e298d;
-  --known: #4fb06d;
+  --accent-soft: rgba(110, 41, 141, 0.24);
+  --complete: #4fb06d;
   --correct: #54c878;
   --wrong: #e05c5c;
   --notice: #d7b85c;
+  --font-display: "FOT-Matisse Pro EB", "InconsolataLocal", ui-monospace, monospace;
   --shadow: 0 16px 42px rgba(0, 0, 0, 0.28);
+  --shadow-focus: 0 0 0 3px rgba(255, 255, 255, 0.12), 0 0 0 6px var(--accent-soft);
 }
 
 * {
@@ -84,6 +99,14 @@ button:disabled {
 .brand {
   font-size: 1.2rem;
   font-weight: 800;
+}
+
+.brand,
+.home h1,
+.toc-header h1,
+.deck-toolbar h2,
+.controller-action__badge {
+  font-family: var(--font-display);
 }
 
 .test-nav {
@@ -315,7 +338,7 @@ button:disabled {
 }
 
 .section-button.is-complete {
-  border-color: var(--known);
+  border-color: var(--complete);
 }
 
 .study-panel {
@@ -340,32 +363,75 @@ button:disabled {
   font-size: clamp(1.35rem, 3vw, 2.4rem);
 }
 
-.mode-control {
-  display: inline-grid;
-  grid-template-columns: repeat(2, 44px);
-  gap: 4px;
-  padding: 4px;
+.toolbar-tools {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.controller-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  max-width: 280px;
+  padding: 8px 13px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 999px;
+  color: var(--text);
   background: #151920;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-.mode-control button {
-  width: 44px;
-  height: 38px;
-  padding: 0;
-  border-color: transparent;
-  background: transparent;
+.controller-status__pulse {
+  width: 11px;
+  min-width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #7c8998;
+  box-shadow: 0 0 0 0 rgba(124, 137, 152, 0.28);
+  animation: controllerPulseIdle 2.6s ease-out infinite;
 }
 
-.mode-control button.is-active {
-  background: var(--accent);
+.controller-status__copy {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.controller-status__copy strong {
+  font-size: 0.86rem;
+  line-height: 1.1;
+}
+
+.controller-status__copy span {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.controller-status[data-controller-state="connected"] {
+  border-color: color-mix(in srgb, var(--correct), white 14%);
+  background: color-mix(in srgb, var(--correct), #151920 86%);
+}
+
+.controller-status[data-controller-state="connected"] .controller-status__pulse {
+  background: var(--correct);
+  box-shadow: 0 0 0 0 rgba(84, 200, 120, 0.34);
+  animation-name: controllerPulseConnected;
 }
 
 .flash-card {
   width: 100%;
   height: 100%;
   min-height: 0;
+  perspective: 1800px;
+  cursor: pointer;
 }
 
 .flash-card-inner {
@@ -373,6 +439,13 @@ button:disabled {
   width: 100%;
   height: 100%;
   min-height: inherit;
+  transform-style: preserve-3d;
+  transition: transform 700ms cubic-bezier(0.22, 0.74, 0.18, 1);
+  will-change: transform;
+}
+
+.flash-card.is-flipped .flash-card-inner {
+  transform: rotateY(180deg);
 }
 
 .card-face {
@@ -389,14 +462,31 @@ button:disabled {
   background: #08090b;
   box-shadow: var(--shadow);
   overflow: auto;
-  opacity: 1;
-  transition: opacity 0.2s ease;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card-face::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(132deg, transparent 0 66%, rgba(255, 255, 255, 0.08) 66% 70%, transparent 70% 100%);
+}
+
+.card-face > * {
+  position: relative;
+  z-index: 1;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .card-front {
   font-size: clamp(1.8rem, 5vw, 4.6rem);
   line-height: 1.05;
   text-align: center;
+  transform: rotateY(0deg);
 }
 
 .card-question {
@@ -416,18 +506,7 @@ button:disabled {
 .card-back {
   font-size: clamp(1.05rem, 2.2vw, 1.8rem);
   line-height: 1.35;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.flash-card.is-flipped .card-front {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.flash-card.is-flipped .card-back {
-  opacity: 1;
-  pointer-events: auto;
+  transform: rotateY(180deg);
 }
 
 .answer-list,
@@ -547,18 +626,95 @@ button:disabled {
 
 .card-actions {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
   gap: 10px;
 }
 
 .card-actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
   min-height: 48px;
   padding: 10px 12px;
+  transition:
+    transform 0.16s ease,
+    border-color 0.16s ease,
+    box-shadow 0.16s ease,
+    background 0.16s ease;
 }
 
 .card-actions .primary {
   border-color: var(--accent);
   background: var(--accent);
+}
+
+.card-actions button:hover:not(:disabled),
+.card-actions button:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-focus);
+}
+
+.controller-action {
+  min-height: 56px;
+  font-weight: 800;
+}
+
+.controller-action__badge {
+  width: 30px;
+  min-width: 30px;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: #fffdf8;
+  font-size: 0.96rem;
+  letter-spacing: 0;
+  box-shadow:
+    inset 0 2px 8px rgba(255, 255, 255, 0.16),
+    0 8px 18px rgba(0, 0, 0, 0.24);
+}
+
+.controller-action--x {
+  border-color: rgba(76, 181, 255, 0.45);
+  background: linear-gradient(160deg, rgba(21, 91, 164, 0.78), #172536);
+}
+
+.controller-action--x .controller-action__badge {
+  background: radial-gradient(circle at 30% 28%, #84d9ff 0, #2f9dff 58%, #11478f 100%);
+}
+
+.controller-action--y {
+  border-color: rgba(255, 214, 93, 0.45);
+  background: linear-gradient(160deg, rgba(124, 90, 7, 0.72), #2d260f);
+}
+
+.controller-action--y .controller-action__badge {
+  color: #2f2200;
+  background: radial-gradient(circle at 30% 28%, #fff4af 0, #ffd447 58%, #b88900 100%);
+}
+
+.controller-action--a {
+  border-color: rgba(117, 255, 166, 0.45);
+  background: linear-gradient(160deg, rgba(9, 88, 42, 0.72), #142d1e);
+}
+
+.controller-action--a .controller-action__badge {
+  background: radial-gradient(circle at 30% 28%, #afffcc 0, #47da73 58%, #14883a 100%);
+}
+
+.controller-action--b {
+  border-color: rgba(255, 116, 116, 0.45);
+  background: linear-gradient(160deg, rgba(122, 15, 24, 0.74), #32181c);
+}
+
+.controller-action--b .controller-action__badge {
+  background: radial-gradient(circle at 30% 28%, #ffb5b5 0, #ff5d5d 58%, #a61b24 100%);
+}
+
+.controller-action.is-selected {
+  box-shadow: var(--shadow-focus);
 }
 
 .shortcut-legend {
@@ -592,16 +748,34 @@ kbd {
   box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.08);
 }
 
-#known-card.is-known {
-  border-color: var(--known);
-  background: var(--known);
-  color: #06110b;
-}
-
 .card-count {
   min-height: 24px;
   color: var(--muted);
   text-align: center;
+}
+
+@keyframes controllerPulseIdle {
+  0% {
+    box-shadow: 0 0 0 0 rgba(124, 137, 152, 0.28);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(124, 137, 152, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(124, 137, 152, 0);
+  }
+}
+
+@keyframes controllerPulseConnected {
+  0% {
+    box-shadow: 0 0 0 0 rgba(84, 200, 120, 0.34);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(84, 200, 120, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(84, 200, 120, 0);
+  }
 }
 
 @media (max-width: 880px) {
@@ -613,6 +787,14 @@ kbd {
 
   .test-nav {
     justify-content: flex-start;
+  }
+
+  .toolbar-tools {
+    justify-content: flex-start;
+  }
+
+  .controller-status {
+    max-width: none;
   }
 
   .app-shell {
@@ -646,5 +828,15 @@ kbd {
 
   .flash-card {
     min-height: 260px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flash-card-inner,
+  .controller-status__pulse,
+  .card-actions button {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }

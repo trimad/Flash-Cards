@@ -1,6 +1,12 @@
 (function () {
   var config = window.FlashCardsConfig || {};
   var baseURL = normalizeBase(config.baseURL || "/");
+  var SOUND_EFFECTS = {
+    correct: "audio/heart-piece-2.mp3",
+    wrong: "audio/error.mp3",
+    flip: "audio/throw.mp3",
+    cursor: "audio/cursor.mp3"
+  };
   var menu = [];
   var chapters = [];
   var progress = { sections: {} };
@@ -9,7 +15,7 @@
     sectionName: "",
     cardIndex: 0,
     flipped: false,
-    answerFirst: false
+    gamepadCooldowns: {}
   };
 
   var els = {
@@ -24,11 +30,16 @@
     back: document.getElementById("card-back"),
     prev: document.getElementById("prev-card"),
     flip: document.getElementById("flip-card"),
-    known: document.getElementById("known-card"),
+    speak: document.getElementById("speak-card"),
+    right: document.getElementById("right-card"),
+    wrong: document.getElementById("wrong-card"),
     next: document.getElementById("next-card"),
     count: document.getElementById("card-count"),
-    questionFirst: document.getElementById("question-first"),
-    answerFirst: document.getElementById("answer-first")
+    audioPlayer: document.getElementById("audio-player"),
+    sfxPlayer: document.getElementById("sfx-player"),
+    controllerStatus: document.getElementById("controller-status"),
+    controllerStatusLabel: document.getElementById("controller-status-label"),
+    controllerStatusDetail: document.getElementById("controller-status-detail")
   };
 
   boot();
@@ -105,7 +116,8 @@
         color: chapter.color || "#6E298D",
         file: chapter.file,
         sections: chapter.section || [],
-        deck: deck
+        deck: normalizeDeck(deck),
+        deckMeta: getDeckMeta(deck)
       });
     }
 
@@ -126,6 +138,73 @@
     }
 
     return chapter.file;
+  }
+
+  function getDeckMeta(deck) {
+    if (!deck || typeof deck !== "object") {
+      return {};
+    }
+
+    return {
+      id: deck.id || "",
+      name: deck.name || "",
+      description: deck.description || ""
+    };
+  }
+
+  function normalizeDeck(deck) {
+    var normalized = {};
+
+    if (!deck || typeof deck !== "object") {
+      return normalized;
+    }
+
+    Object.keys(deck).forEach(function (key) {
+      if (Array.isArray(deck[key])) {
+        normalized[key] = deck[key].map(normalizeCard);
+      }
+    });
+
+    if (Array.isArray(deck.cards)) {
+      normalized[deck.id || "cards"] = deck.cards.map(normalizeNodeCard);
+    }
+
+    return normalized;
+  }
+
+  function normalizeCard(card) {
+    return {
+      Q: card && card.Q ? String(card.Q) : "",
+      A: normalizeAnswerList(card && card.A),
+      O: card && Array.isArray(card.O) ? card.O.map(String) : undefined,
+      frontAudio: card && card.frontAudio ? card.frontAudio : "",
+      backAudio: card && card.backAudio ? card.backAudio : ""
+    };
+  }
+
+  function normalizeNodeCard(card) {
+    var front = card && card.front ? card.front : {};
+    var back = card && card.back ? card.back : {};
+
+    return {
+      Q: front.text ? String(front.text) : "",
+      A: back.text ? [String(back.text)] : [],
+      O: undefined,
+      frontAudio: front.audio || "",
+      backAudio: back.audio || ""
+    };
+  }
+
+  function normalizeAnswerList(answers) {
+    if (Array.isArray(answers)) {
+      return answers.map(String);
+    }
+
+    if (answers === undefined || answers === null) {
+      return [];
+    }
+
+    return [String(answers)];
   }
 
   function setInitialSection() {
@@ -149,18 +228,43 @@
     els.prev.addEventListener("click", previousCard);
     els.next.addEventListener("click", nextCard);
     els.flip.addEventListener("click", flipCard);
-    els.known.addEventListener("click", toggleKnown);
-    els.questionFirst.addEventListener("click", function () {
-      setMode(false);
+    els.speak.addEventListener("click", speakVisibleCard);
+    els.right.addEventListener("click", function () {
+      markSelfGrade(true);
     });
-    els.answerFirst.addEventListener("click", function () {
-      setMode(true);
+    els.wrong.addEventListener("click", function () {
+      markSelfGrade(false);
+    });
+    els.card.addEventListener("click", function (event) {
+      if (event.target instanceof Element && event.target.closest("button, a")) {
+        return;
+      }
+
+      flipCard();
+    });
+
+    document.addEventListener("click", function (event) {
+      var action = event.target instanceof Element ? event.target.closest("button, a") : null;
+
+      if (
+        !action ||
+        action.disabled ||
+        isControllerAction(action) ||
+        action.closest(".quiz-controls")
+      ) {
+        return;
+      }
+
+      playSoundEffect("cursor");
     });
 
     document.addEventListener("keydown", function (event) {
-      if (event.target && /a|button|input|textarea|select/i.test(event.target.tagName)) {
+      if (isTextInput(event.target)) {
         return;
       }
+
+      var key = event.key.toLowerCase();
+      var focusedControl = event.target instanceof HTMLElement && /a|button/i.test(event.target.tagName);
 
       if (event.key === "ArrowLeft") {
         previousCard();
@@ -169,13 +273,30 @@
       } else if (event.key === "ArrowUp" || event.key === "ArrowDown") {
         event.preventDefault();
         flipCard();
-      } else if (event.key === " " || event.key === "Enter") {
+      } else if (!focusedControl && (event.key === " " || event.key === "Enter")) {
         event.preventDefault();
         flipCard();
-      } else if (event.key.toLowerCase() === "k") {
-        toggleKnown();
+      } else if (key === "x") {
+        flipCard();
+      } else if (key === "y") {
+        speakVisibleCard();
+      } else if (key === "a") {
+        markSelfGrade(true);
+      } else if (key === "b") {
+        markSelfGrade(false);
       }
     });
+
+    window.addEventListener("gamepadconnected", function (event) {
+      syncConnectedGamepadStatus(event.gamepad);
+      ensureFocusedElement();
+    });
+    window.addEventListener("gamepaddisconnected", function () {
+      syncConnectedGamepadStatus();
+    });
+
+    syncConnectedGamepadStatus();
+    pollGamepads();
   }
 
   function renderAll() {
@@ -191,6 +312,7 @@
     renderCard();
     renderControls();
     updateLocation();
+    ensureFocusedElement();
   }
 
   function renderToc() {
@@ -264,7 +386,7 @@
       els.overallLabel.textContent = "No cards in this test yet";
     } else if (quiz.total) {
       els.overallLabel.textContent =
-        totals.seen + " of " + totals.total + " cards studied | Quiz " + quizSummaryText(quiz);
+        totals.seen + " of " + totals.total + " cards studied | Score " + quizSummaryText(quiz);
     } else {
       els.overallLabel.textContent = totals.seen + " of " + totals.total + " cards studied";
     }
@@ -286,13 +408,8 @@
     els.chapterLabel.textContent = chapter.name;
     els.card.classList.toggle("is-flipped", state.flipped);
 
-    if (state.answerFirst) {
-      renderAnswers(els.front, card.A);
-      renderQuestion(els.back, card);
-    } else {
-      renderQuestion(els.front, card);
-      renderAnswers(els.back, card.A);
-    }
+    renderQuestion(els.front, card);
+    renderAnswers(els.back, card.A);
 
     els.count.textContent = "Card " + (state.cardIndex + 1) + " of " + cards.length;
   }
@@ -300,16 +417,16 @@
   function renderControls() {
     var cards = currentCards();
     var hasCard = cards.length > 0;
-    var known = hasCard && hasKnown(currentSectionKey(), state.cardIndex);
+    var selfGrade = hasCard ? getSelfGrade(currentSectionKey(), state.cardIndex) : null;
 
     els.prev.disabled = !previousTarget();
     els.next.disabled = !nextTarget();
     els.flip.disabled = !hasCard;
-    els.known.disabled = !hasCard;
-    els.known.classList.toggle("is-known", known);
-    els.known.textContent = known ? "Known" : "Mark Known";
-    els.questionFirst.classList.toggle("is-active", !state.answerFirst);
-    els.answerFirst.classList.toggle("is-active", state.answerFirst);
+    els.speak.disabled = !hasCard;
+    els.right.disabled = !hasCard;
+    els.wrong.disabled = !hasCard;
+    els.right.classList.toggle("is-selected", Boolean(selfGrade && selfGrade.correct));
+    els.wrong.classList.toggle("is-selected", Boolean(selfGrade && !selfGrade.correct));
   }
 
   function showEmpty(message) {
@@ -345,6 +462,10 @@
     var section = chapter && chapter.sections.find(function (item) {
       return item.name === state.sectionName;
     });
+
+    if (section && section.label && chapter.deckMeta && chapter.deckMeta.id === section.name) {
+      return section.label;
+    }
 
     if (section && section.label) {
       return "Section " + section.name + ": " + section.label;
@@ -414,6 +535,7 @@
   }
 
   function selectSection(chapterIndex, sectionName) {
+    stopPlayback();
     state.chapterIndex = chapterIndex;
     state.sectionName = sectionName;
     state.cardIndex = 0;
@@ -432,6 +554,7 @@
     state.sectionName = target.sectionName;
     state.cardIndex = target.cardIndex;
     state.flipped = false;
+    stopPlayback();
     clampCardIndex();
     renderAll();
   }
@@ -447,6 +570,7 @@
     state.sectionName = target.sectionName;
     state.cardIndex = target.cardIndex;
     state.flipped = false;
+    stopPlayback();
     clampCardIndex();
     renderAll();
   }
@@ -456,11 +580,98 @@
       return;
     }
 
+    stopPlayback();
+    playSoundEffect("flip");
     state.flipped = !state.flipped;
     renderAll();
   }
 
-  function toggleKnown() {
+  function speakVisibleCard() {
+    var speech = currentVisibleSpeech();
+
+    if (!speech.text) {
+      return;
+    }
+
+    stopPlayback();
+
+    if (speech.audio && els.audioPlayer) {
+      els.audioPlayer.src = mediaURL(speech.audio);
+      els.audioPlayer.play().catch(function () {
+        fallbackSpeak(speech.text);
+      });
+      return;
+    }
+
+    fallbackSpeak(speech.text);
+  }
+
+  function currentVisibleSpeech() {
+    var card = currentCards()[state.cardIndex];
+
+    if (!card) {
+      return { text: "", audio: "" };
+    }
+
+    if (!state.flipped) {
+      return { text: card.Q, audio: card.frontAudio };
+    }
+
+    return {
+      text: normalizeAnswerList(card.A).join(". "),
+      audio: card.backAudio
+    };
+  }
+
+  function fallbackSpeak(text) {
+    if (!("speechSynthesis" in window)) {
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    var utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 0.9;
+    utterance.pitch = 1;
+    window.speechSynthesis.speak(utterance);
+  }
+
+  function stopPlayback() {
+    if (els.audioPlayer) {
+      els.audioPlayer.pause();
+      els.audioPlayer.removeAttribute("src");
+      els.audioPlayer.load();
+    }
+
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+    }
+  }
+
+  function playSoundEffect(effectName) {
+    var source = SOUND_EFFECTS[effectName];
+
+    if (!source || !els.sfxPlayer) {
+      return;
+    }
+
+    els.sfxPlayer.pause();
+    if (els.sfxPlayer.getAttribute("src") !== mediaURL(source)) {
+      els.sfxPlayer.src = mediaURL(source);
+    }
+    els.sfxPlayer.currentTime = 0;
+    els.sfxPlayer.play().catch(function () {});
+  }
+
+  function mediaURL(path) {
+    if (/^(https?:|data:|blob:)/i.test(path)) {
+      return path;
+    }
+
+    return assetURL(path);
+  }
+
+  function markSelfGrade(correct) {
     if (!currentCards().length) {
       return;
     }
@@ -468,15 +679,21 @@
     var key = currentSectionKey();
     var data = ensureProgressSection(key);
     var id = String(state.cardIndex);
-    var index = data.known.indexOf(id);
+    var entry = data.selfGrade[id] || { attempts: 0 };
 
-    if (index >= 0) {
-      data.known.splice(index, 1);
-    } else {
-      data.known.push(id);
+    entry.correct = Boolean(correct);
+    entry.attempts = Number(entry.attempts || 0) + 1;
+    data.selfGrade[id] = entry;
+
+    stopPlayback();
+    playSoundEffect(correct ? "correct" : "wrong");
+    saveProgress();
+
+    if (nextTarget()) {
+      nextCard();
+      return;
     }
 
-    saveProgress();
     renderAll();
   }
 
@@ -521,6 +738,7 @@
     quiz.correct = selectionsMatchAnswers(quiz.selected, card.A);
     quiz.attempts = Number(quiz.attempts || 0) + 1;
 
+    playSoundEffect(quiz.correct ? "correct" : "wrong");
     saveProgress();
     renderAll();
   }
@@ -532,12 +750,6 @@
     quiz.correct = false;
 
     saveProgress();
-    renderAll();
-  }
-
-  function setMode(answerFirst) {
-    state.answerFirst = answerFirst;
-    state.flipped = false;
     renderAll();
   }
 
@@ -688,12 +900,12 @@
 
   function ensureProgressSection(key) {
     if (!progress.sections[key]) {
-      progress.sections[key] = { seen: [], known: [] };
+      progress.sections[key] = { seen: [] };
     }
 
     progress.sections[key].seen = uniqueStrings(progress.sections[key].seen);
-    progress.sections[key].known = uniqueStrings(progress.sections[key].known);
     progress.sections[key].quiz = progress.sections[key].quiz || {};
+    progress.sections[key].selfGrade = progress.sections[key].selfGrade || {};
     return progress.sections[key];
   }
 
@@ -728,6 +940,19 @@
     return entry;
   }
 
+  function getSelfGrade(key, cardIndex) {
+    var data = ensureProgressSection(key);
+    var entry = data.selfGrade[String(cardIndex)];
+
+    if (!entry) {
+      return null;
+    }
+
+    entry.correct = Boolean(entry.correct);
+    entry.attempts = Number(entry.attempts || 0);
+    return entry;
+  }
+
   function markSeen() {
     if (!currentCards().length) {
       return;
@@ -740,11 +965,6 @@
       data.seen.push(id);
       saveProgress();
     }
-  }
-
-  function hasKnown(key, cardIndex) {
-    var data = ensureProgressSection(key);
-    return data.known.indexOf(String(cardIndex)) >= 0;
   }
 
   function getSectionProgress(chapter, sectionName) {
@@ -784,18 +1004,21 @@
   function getSectionQuizProgress(chapter, sectionName) {
     var cards = getCards(chapter, sectionName);
     var data = ensureProgressSection(chapter.index + ":" + sectionName);
-    var total = 0;
+    var total = cards.length;
     var graded = 0;
     var correct = 0;
 
     cards.forEach(function (card, index) {
-      if (!card || !Array.isArray(card.O) || !card.O.length) {
+      var id = String(index);
+      var selfGrade = data.selfGrade[id];
+
+      if (selfGrade) {
+        graded += 1;
+        correct += selfGrade.correct ? 1 : 0;
         return;
       }
 
-      total += 1;
-
-      var entry = data.quiz[String(index)];
+      var entry = data.quiz[id];
       if (entry && entry.graded) {
         graded += 1;
         correct += entry.correct ? 1 : 0;
@@ -896,6 +1119,286 @@
     }
 
     return quiz.correct + "/" + quiz.graded + " correct (" + quiz.percent + "%)";
+  }
+
+  function isTextInput(element) {
+    return element instanceof HTMLElement && /input|textarea|select/i.test(element.tagName);
+  }
+
+  function isControllerAction(element) {
+    return element instanceof HTMLElement && element.classList.contains("controller-action");
+  }
+
+  function isVisible(element) {
+    return Boolean(
+      element instanceof HTMLElement &&
+      !element.hidden &&
+      !element.disabled &&
+      element.getClientRects().length &&
+      window.getComputedStyle(element).visibility !== "hidden"
+    );
+  }
+
+  function getNavigableElements() {
+    return Array.prototype.slice.call(
+      document.querySelectorAll("button:not(:disabled), a[href], [tabindex]:not([tabindex='-1'])")
+    ).filter(isVisible);
+  }
+
+  function elementNeedsScrollIntoView(element) {
+    var rect = element.getBoundingClientRect();
+    var padding = 20;
+
+    return (
+      rect.top < padding ||
+      rect.left < padding ||
+      rect.bottom > window.innerHeight - padding ||
+      rect.right > window.innerWidth - padding
+    );
+  }
+
+  function focusElement(element) {
+    if (!isVisible(element)) {
+      return false;
+    }
+
+    element.focus({ preventScroll: true });
+
+    if (elementNeedsScrollIntoView(element)) {
+      element.scrollIntoView({ behavior: "auto", block: "nearest", inline: "nearest" });
+    }
+
+    return true;
+  }
+
+  function defaultFocusElement() {
+    return isVisible(els.flip) ? els.flip : getNavigableElements()[0];
+  }
+
+  function ensureFocusedElement() {
+    var navigableElements = getNavigableElements();
+    var active = document.activeElement;
+
+    if (!navigableElements.length) {
+      return;
+    }
+
+    if (!(active instanceof HTMLElement) || navigableElements.indexOf(active) === -1) {
+      focusElement(defaultFocusElement());
+    }
+  }
+
+  function getCenterPoint(element) {
+    var rect = element.getBoundingClientRect();
+
+    return {
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height / 2
+    };
+  }
+
+  function isCandidateInDirection(dx, dy, direction) {
+    if (direction === "up") return dy < -6;
+    if (direction === "down") return dy > 6;
+    if (direction === "left") return dx < -6;
+    if (direction === "right") return dx > 6;
+    return false;
+  }
+
+  function directionScore(dx, dy, direction) {
+    if (direction === "up" || direction === "down") {
+      return Math.abs(dy) * 1000 + Math.abs(dx);
+    }
+
+    if (direction === "left" || direction === "right") {
+      return Math.abs(dx) * 1000 + Math.abs(dy);
+    }
+
+    return Number.MAX_SAFE_INTEGER;
+  }
+
+  function moveFocus(direction) {
+    var navigableElements = getNavigableElements();
+    var active = document.activeElement instanceof HTMLElement &&
+      navigableElements.indexOf(document.activeElement) >= 0
+      ? document.activeElement
+      : null;
+
+    if (!navigableElements.length) {
+      return;
+    }
+
+    if (!active) {
+      focusElement(defaultFocusElement());
+      return;
+    }
+
+    var origin = getCenterPoint(active);
+    var candidates = navigableElements
+      .filter(function (element) {
+        return element !== active;
+      })
+      .map(function (element) {
+        var center = getCenterPoint(element);
+        var dx = center.x - origin.x;
+        var dy = center.y - origin.y;
+
+        return {
+          element: element,
+          dx: dx,
+          dy: dy,
+          score: directionScore(dx, dy, direction)
+        };
+      })
+      .filter(function (candidate) {
+        return isCandidateInDirection(candidate.dx, candidate.dy, direction);
+      })
+      .sort(function (left, right) {
+        return left.score - right.score;
+      });
+
+    if (candidates[0]) {
+      focusElement(candidates[0].element);
+      playSoundEffect("cursor");
+      return;
+    }
+
+    var currentIndex = navigableElements.indexOf(active);
+    var delta = direction === "up" || direction === "left" ? -1 : 1;
+    var nextIndex = currentIndex === -1
+      ? 0
+      : (currentIndex + delta + navigableElements.length) % navigableElements.length;
+
+    focusElement(navigableElements[nextIndex]);
+    playSoundEffect("cursor");
+  }
+
+  function activateFocusedElement() {
+    var active = document.activeElement;
+
+    if (!(active instanceof HTMLElement) || getNavigableElements().indexOf(active) === -1) {
+      return;
+    }
+
+    active.click();
+  }
+
+  function getFriendlyControllerName(gamepadId) {
+    var normalizedId = String(gamepadId || "").toLowerCase();
+
+    if (normalizedId.indexOf("xbox") >= 0) return "Xbox controller";
+    if (
+      normalizedId.indexOf("dualsense") >= 0 ||
+      normalizedId.indexOf("dualshock") >= 0 ||
+      normalizedId.indexOf("playstation") >= 0 ||
+      normalizedId.indexOf("ps5") >= 0 ||
+      normalizedId.indexOf("ps4") >= 0
+    ) {
+      return "PlayStation controller";
+    }
+    if (
+      normalizedId.indexOf("switch") >= 0 ||
+      normalizedId.indexOf("nintendo") >= 0 ||
+      normalizedId.indexOf("pro controller") >= 0
+    ) {
+      return "Nintendo controller";
+    }
+
+    return "Gamepad detected";
+  }
+
+  function setControllerStatus(status) {
+    if (!els.controllerStatus) {
+      return;
+    }
+
+    var connected = status && status.connected;
+    var id = status && status.id ? status.id : "";
+
+    els.controllerStatus.dataset.controllerState = connected ? "connected" : "disconnected";
+    els.controllerStatus.title = connected && id ? id : "";
+    els.controllerStatusLabel.textContent = connected ? "Controller ready" : "No controller";
+    els.controllerStatusDetail.textContent = connected
+      ? getFriendlyControllerName(id)
+      : "Keyboard controls are available";
+  }
+
+  function syncConnectedGamepadStatus(gamepad) {
+    if (!navigator.getGamepads) {
+      setControllerStatus({ connected: false });
+      return;
+    }
+
+    var gamepads = Array.prototype.slice.call(navigator.getGamepads());
+    var connectedGamepad = gamepad || gamepads.find(Boolean) || null;
+
+    if (!connectedGamepad) {
+      setControllerStatus({ connected: false });
+      return;
+    }
+
+    setControllerStatus({ connected: true, id: connectedGamepad.id });
+  }
+
+  function cooldownReady(key, cooldownMs) {
+    var now = Date.now();
+    var last = state.gamepadCooldowns[key] || 0;
+
+    if (now - last < cooldownMs) {
+      return false;
+    }
+
+    state.gamepadCooldowns[key] = now;
+    return true;
+  }
+
+  function isPressedWithCooldown(gamepad, buttonIndex, cooldownMs) {
+    if (!gamepad.buttons[buttonIndex] || !gamepad.buttons[buttonIndex].pressed) {
+      return false;
+    }
+
+    return cooldownReady(gamepad.index + ":" + buttonIndex, cooldownMs || 220);
+  }
+
+  function axisTriggered(gamepad, axisIndex, direction, threshold, cooldownMs) {
+    var axisValue = gamepad.axes[axisIndex] || 0;
+    var matches = direction === "negative" ? axisValue < -(threshold || 0.65) : axisValue > (threshold || 0.65);
+
+    if (!matches) {
+      return false;
+    }
+
+    return cooldownReady(gamepad.index + ":axis:" + axisIndex + ":" + direction, cooldownMs || 220);
+  }
+
+  function pollGamepads() {
+    var gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
+
+    for (var index = 0; index < gamepads.length; index += 1) {
+      var gamepad = gamepads[index];
+
+      if (!gamepad) {
+        continue;
+      }
+
+      if (isPressedWithCooldown(gamepad, 12) || axisTriggered(gamepad, 1, "negative")) moveFocus("up");
+      if (isPressedWithCooldown(gamepad, 13) || axisTriggered(gamepad, 1, "positive")) moveFocus("down");
+      if (isPressedWithCooldown(gamepad, 14) || axisTriggered(gamepad, 0, "negative")) moveFocus("left");
+      if (isPressedWithCooldown(gamepad, 15) || axisTriggered(gamepad, 0, "positive")) moveFocus("right");
+
+      if (isPressedWithCooldown(gamepad, 6)) previousCard();
+      if (isPressedWithCooldown(gamepad, 7)) nextCard();
+      if (isPressedWithCooldown(gamepad, 2)) flipCard();
+      if (isPressedWithCooldown(gamepad, 3)) speakVisibleCard();
+      if (isPressedWithCooldown(gamepad, 0)) markSelfGrade(true);
+      if (isPressedWithCooldown(gamepad, 1)) markSelfGrade(false);
+
+      if (isPressedWithCooldown(gamepad, 10)) {
+        activateFocusedElement();
+      }
+    }
+
+    window.requestAnimationFrame(pollGamepads);
   }
 
   function loadProgress(test) {
