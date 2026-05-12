@@ -462,6 +462,7 @@ button:disabled {
   background: #08090b;
   box-shadow: var(--shadow);
   overflow: auto;
+  transform-style: preserve-3d;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
@@ -477,12 +478,15 @@ button:disabled {
 .card-face > * {
   position: relative;
   z-index: 1;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .card-front {
   font-size: clamp(1.8rem, 5vw, 4.6rem);
   line-height: 1.05;
   text-align: center;
+  transform: rotateY(0deg);
 }
 
 .card-question {
