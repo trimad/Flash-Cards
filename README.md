@@ -28,15 +28,9 @@ Hugo writes the generated site to `docs/` for GitHub Pages branch-folder deploym
 
 ## GitHub Pages
 
-This repository deploys without a Node.js-based GitHub Actions workflow.
+GitHub Pages is served from the `gh-pages` branch.
 
-GitHub Pages should be configured to deploy from the `master` branch and the `/docs` folder. Hugo writes there because `hugo.toml` sets `publishDir = "docs"`.
-
-Before pushing source changes, rebuild and commit the generated output:
-
-```bash
-hugo --minify
-```
+Pushing to `master` runs `.github/workflows/deploy.yml`, builds the site with Hugo, and publishes the generated `public/` output to `gh-pages`. The `docs/` folder is still the local `publishDir`, but the live site updates from `gh-pages`.
 
 
 ## Requirements
