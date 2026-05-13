@@ -5,7 +5,7 @@
       <h1>Choose a deck.</h1>
       <p class="home-intro">Pick any flashcard set and start reviewing. This app can hold certification prep, reading practice, personal notes, or whatever you want to learn next.</p>
       <div class="test-grid">
-        {{ range where site.RegularPages "Section" "tests" }}
+        {{ range where (where site.RegularPages "Section" "tests") "Draft" "ne" true }}
           <a class="test-card" href="{{ .RelPermalink }}" style="--accent: {{ .Params.accent | default "#6E298D" }}">
             <small>Deck</small>
             <span>{{ .Title }}</span>

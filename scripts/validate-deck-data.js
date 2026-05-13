@@ -41,6 +41,10 @@ function frontMatterValue(markdown, key) {
   return match ? match[1].trim() : '';
 }
 
+function frontMatterBoolean(markdown, key) {
+  return frontMatterValue(markdown, key).toLowerCase() === 'true';
+}
+
 function deckPath(test, chapter) {
   if (chapter.file.includes('/')) return chapter.file;
   if (test.assetPath) return test.assetPath.replace(/\/+$/, '') + '/' + chapter.file;
@@ -149,8 +153,11 @@ for (const test of menu) {
 
 const routeFiles = fs.readdirSync(testsDir).filter((file) => file.endsWith('.md'));
 assert.ok(routeFiles.length > 0, 'content/tests should define practice test routes');
+let publicRouteCount = 0;
 for (const routeFile of routeFiles) {
   const markdown = fs.readFileSync(path.join(testsDir, routeFile), 'utf8');
+  if (frontMatterBoolean(markdown, 'draft')) continue;
+  publicRouteCount += 1;
   const testName = frontMatterValue(markdown, 'testName');
   const testIndex = Number(frontMatterValue(markdown, 'testIndex'));
   assert.ok(testName, `${routeFile} should define testName front matter`);
@@ -159,4 +166,4 @@ for (const routeFile of routeFiles) {
   assert.equal(menu[testIndex]?.name, testName, `${routeFile} testIndex should point at ${testName} in menu.json`);
 }
 
-console.log(`Deck data invariants passed for ${jsonAssetPaths.length} JSON assets, ${menu.length} menu tests, and ${routeFiles.length} routes.`);
+console.log(`Deck data invariants passed for ${jsonAssetPaths.length} JSON assets, ${menu.length} menu tests, and ${publicRouteCount} public routes.`);

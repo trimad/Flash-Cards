@@ -13,7 +13,7 @@
       <a class="brand" href="{{ site.Home.RelPermalink }}">Flash Cards</a>
       <div class="header-tools">
         <nav class="test-nav" aria-label="Flashcard decks">
-          {{ range where site.RegularPages "Section" "tests" }}
+          {{ range where (where site.RegularPages "Section" "tests") "Draft" "ne" true }}
             <a href="{{ .RelPermalink }}" {{ if eq $.RelPermalink .RelPermalink }}aria-current="page"{{ end }}>{{ .Title }}</a>
           {{ end }}
         </nav>

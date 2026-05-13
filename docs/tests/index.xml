@@ -8,35 +8,21 @@
     <language>en-us</language>
     <atom:link href="http://localhost:1313/Flash-Cards/tests/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>CompTIA A&#43; 220-1001</title>
-      <link>http://localhost:1313/Flash-Cards/tests/a-plus-220-1001/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/Flash-Cards/tests/a-plus-220-1001/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>CompTIA A&#43; 220-1002</title>
-      <link>http://localhost:1313/Flash-Cards/tests/a-plus-220-1002/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/Flash-Cards/tests/a-plus-220-1002/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>CompTIA Network&#43;</title>
+      <title>CompTIA Network&#43; (N10-009)</title>
       <link>http://localhost:1313/Flash-Cards/tests/network-plus/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/Flash-Cards/tests/network-plus/</guid>
       <description></description>
     </item>
     <item>
-      <title>CompTIA Security&#43;</title>
+      <title>CompTIA Security&#43; Security&#43; (SY0-701)</title>
       <link>http://localhost:1313/Flash-Cards/tests/security-plus/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/Flash-Cards/tests/security-plus/</guid>
       <description></description>
     </item>
     <item>
-      <title>CompTIA Tech&#43; FC0-U71</title>
+      <title>CompTIA Tech&#43; (FC0-U71)</title>
       <link>http://localhost:1313/Flash-Cards/tests/tech-plus-fc0-u71/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/Flash-Cards/tests/tech-plus-fc0-u71/</guid>
