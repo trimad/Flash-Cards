@@ -7,7 +7,7 @@
       testSlug: {{ .File.BaseFileName | jsonify | safeJS }}
     };
   </script>
-  <main class="app-shell" data-test="{{ .Params.testName }}">
+  <main class="app-shell" data-test="{{ .Params.testName }}" data-enable-progress-reset>
     <aside class="toc-panel" aria-label="Table of contents">
       <div class="toc-header">
         <p class="eyebrow">Deck</p>

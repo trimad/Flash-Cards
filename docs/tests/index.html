@@ -1,29 +1,55 @@
 <!doctype html>
-<html lang="en-us">
-  <head>
+<html lang="en-us" data-theme="nerv">
+  <head><script src="/Flash-Cards/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=Flash-Cards/livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tests | Flash Cards</title>
     <link rel="stylesheet" href="/Flash-Cards/css/flashcards.css">
+    <script src="/Flash-Cards/js/theme-selector.js" defer></script>
     <script src="/Flash-Cards/js/welcome-modal.js" defer></script>
   </head>
   <body>
     <header class="site-header">
       <a class="brand" href="/Flash-Cards/">Flash Cards</a>
-      <nav class="test-nav" aria-label="Flashcard decks">
-        
-          <a href="/Flash-Cards/tests/a-plus-220-1001/" >CompTIA A&#43; 220-1001</a>
-        
-          <a href="/Flash-Cards/tests/a-plus-220-1002/" >CompTIA A&#43; 220-1002</a>
-        
-          <a href="/Flash-Cards/tests/network-plus/" >CompTIA Network&#43;</a>
-        
-          <a href="/Flash-Cards/tests/security-plus/" >CompTIA Security&#43;</a>
-        
-          <a href="/Flash-Cards/tests/early-reading/" >Early Reading</a>
-        
-      </nav>
+      <div class="header-tools">
+        <nav class="test-nav" aria-label="Flashcard decks">
+          
+            <a href="/Flash-Cards/tests/a-plus-220-1001/" >CompTIA A&#43; 220-1001</a>
+          
+            <a href="/Flash-Cards/tests/a-plus-220-1002/" >CompTIA A&#43; 220-1002</a>
+          
+            <a href="/Flash-Cards/tests/network-plus/" >CompTIA Network&#43;</a>
+          
+            <a href="/Flash-Cards/tests/security-plus/" >CompTIA Security&#43;</a>
+          
+            <a href="/Flash-Cards/tests/tech-plus-fc0-u71/" >CompTIA Tech&#43; FC0-U71</a>
+          
+            <a href="/Flash-Cards/tests/early-reading/" >Early Reading</a>
+          
+        </nav>
+        <button class="settings-button" type="button" data-theme-settings-button aria-haspopup="dialog" aria-controls="theme-settings" aria-expanded="false">Settings</button>
+      </div>
     </header>
+    <div class="theme-dialog-backdrop" data-theme-dialog-backdrop hidden></div>
+    <section class="theme-dialog" id="theme-settings" data-theme-dialog role="dialog" aria-modal="true" aria-labelledby="theme-settings-title" hidden>
+      <div class="theme-dialog__panel">
+        <div class="theme-dialog__header">
+          <div>
+            <p class="eyebrow">Interface settings</p>
+            <h2 id="theme-settings-title">Evangelion theme</h2>
+          </div>
+          <button class="theme-dialog__close" type="button" data-theme-dialog-close aria-label="Close settings">×</button>
+        </div>
+        <fieldset class="theme-selector" aria-label="Evangelion theme">
+          <legend>Choose a pilot palette</legend>
+          <button type="button" data-theme-choice="rei" aria-pressed="false">Rei</button>
+          <button type="button" data-theme-choice="shinji" aria-pressed="false">Shinji</button>
+          <button type="button" data-theme-choice="asuka" aria-pressed="false">Asuka</button>
+          <button type="button" data-theme-choice="nerv" aria-pressed="true">NERV</button>
+        </fieldset>
+        
+      </div>
+    </section>
     
   <main class="home">
     <section class="home-panel">
@@ -57,6 +83,13 @@
             <small>Deck</small>
             <span>CompTIA Security&#43;</span>
             <p>Security concepts, threats, controls, architecture, operations, and governance.</p>
+            <strong>Open deck</strong>
+          </a>
+        
+          <a class="test-card" href="/Flash-Cards/tests/tech-plus-fc0-u71/" style="--accent: #2B8CBE">
+            <small>Deck</small>
+            <span>CompTIA Tech&#43; FC0-U71</span>
+            <p>Foundational IT concepts, infrastructure, software, data, security, and troubleshooting.</p>
             <strong>Open deck</strong>
           </a>
         

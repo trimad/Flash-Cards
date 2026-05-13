@@ -18,13 +18,25 @@ Then open:
 http://127.0.0.1:3000/
 ```
 
-## Build
+## Build and Validate
 
 ```bash
-hugo --minify
+npm test
 ```
 
-Hugo writes the generated site to `docs/` for GitHub Pages branch-folder deployment.
+The validation entrypoint runs package/source invariants, menu-to-deck data checks, `hugo --minify`, a generated-export check that verifies required `docs/` files plus local HTML `href`/`src` references, and a headless browser smoke test for the settings modal, theme persistence, and reset-progress action. Hugo writes the generated site to `docs/` for GitHub Pages branch-folder deployment.
+
+To rerun only the browser smoke check after building `docs/`:
+
+```bash
+npm run browser:smoke
+```
+
+For a build-only run:
+
+```bash
+npm run build
+```
 
 ## GitHub Pages
 
@@ -50,7 +62,7 @@ The Network+, Security+, and Early Reading routes currently have card decks. The
 
 ## Progress
 
-The table of contents is segmented by chapter and section. Progress is stored in the browser with `localStorage`, keyed per practice test route.
+The table of contents is segmented by chapter and section. Progress is stored in the browser with `localStorage`, keyed per practice test route. Use **Settings → Reset progress** on a deck page to clear saved studied-card progress, quiz answers, and self-graded scores for that deck in the current browser.
 
 Cards with an `O` option list can also be answered as quiz questions. Select one or more choices, use **Check Answer**, and the app stores graded quiz results alongside study progress in `localStorage`.
 

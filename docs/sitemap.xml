@@ -2,18 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://trimad.github.io/Flash-Cards/tests/a-plus-220-1001/</loc>
+    <loc>http://localhost:1313/Flash-Cards/tests/a-plus-220-1001/</loc>
   </url><url>
-    <loc>https://trimad.github.io/Flash-Cards/tests/a-plus-220-1002/</loc>
+    <loc>http://localhost:1313/Flash-Cards/tests/a-plus-220-1002/</loc>
   </url><url>
-    <loc>https://trimad.github.io/Flash-Cards/tests/network-plus/</loc>
+    <loc>http://localhost:1313/Flash-Cards/tests/network-plus/</loc>
   </url><url>
-    <loc>https://trimad.github.io/Flash-Cards/tests/security-plus/</loc>
+    <loc>http://localhost:1313/Flash-Cards/tests/security-plus/</loc>
   </url><url>
-    <loc>https://trimad.github.io/Flash-Cards/tests/early-reading/</loc>
+    <loc>http://localhost:1313/Flash-Cards/tests/tech-plus-fc0-u71/</loc>
   </url><url>
-    <loc>https://trimad.github.io/Flash-Cards/</loc>
+    <loc>http://localhost:1313/Flash-Cards/tests/early-reading/</loc>
   </url><url>
-    <loc>https://trimad.github.io/Flash-Cards/tests/</loc>
+    <loc>http://localhost:1313/Flash-Cards/</loc>
+  </url><url>
+    <loc>http://localhost:1313/Flash-Cards/tests/</loc>
   </url>
 </urlset>

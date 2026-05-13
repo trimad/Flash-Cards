@@ -3,64 +3,55 @@
         {
             "Q": "Motion detection",
             "A": [
-                "Detection",
-                ""
+                "Detection"
             ]
         },
         {
             "Q": "Video surveillance",
             "A": [
-                "Detection",
-                ""
+                "Detection"
             ]
         },
         {
             "Q": "Asset tracking tags",
             "A": [
-                "Detection",
-                ""
+                "Detection"
             ]
         },
         {
             "Q": "Tamper detection",
             "A": [
-                "Detection",
-                ""
+                "Detection"
             ]
         },
         {
             "Q": "Badges",
             "A": [
-                "Prevention",
-                ""
+                "Prevention"
             ]
         },
         {
             "Q": "Biometrics",
             "A": [
-                "Prevention",
-                ""
+                "Prevention"
             ]
         },
         {
             "Q": "Smart cards",
             "A": [
-                "Prevention",
-                ""
+                "Prevention"
             ]
         },
         {
             "Q": "Key fob",
             "A": [
-                "Prevention",
-                ""
+                "Prevention"
             ]
         },
         {
             "Q": "Locks",
             "A": [
-                "Prevention",
-                ""
+                "Prevention"
             ]
         }
     ],
@@ -124,10 +115,10 @@
         {
             "Q": "Multifactor authentication",
             "A": [
-                " Something you know",
+                "Something you know",
                 "Something you have",
                 "Something you are",
-                " Somewhere you are",
+                "Somewhere you are",
                 "Something you do"
             ]
         },
@@ -264,22 +255,19 @@
         {
             "Q": "Reflective attack",
             "A": [
-                "DOS",
-                ""
+                "DOS"
             ]
         },
         {
             "Q": "Amplified attack",
             "A": [
-                "DOS",
-                ""
+                "DOS"
             ]
         },
         {
             "Q": "Distributed attack",
             "A": [
-                "DOS",
-                ""
+                "DOS"
             ]
         },
         {
@@ -527,15 +515,13 @@
         {
             "Q": "DMZ",
             "A": [
-                "Network segmentation",
-                ""
+                "Network segmentation"
             ]
         },
         {
             "Q": "VLAN",
             "A": [
-                "Network segmentation",
-                ""
+                "Network segmentation"
             ]
         },
         {

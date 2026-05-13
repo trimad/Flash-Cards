@@ -2,13 +2,13 @@
   var config = window.FlashCardsConfig || {};
   var baseURL = normalizeBase(config.baseURL || "/");
   var SOUND_EFFECTS = {
-    correct: "audio/heart-piece-2.mp3",
-    wrong: "audio/error.mp3",
-    flipForward: "audio/SNES - The Legend of Zelda_ A Link to the Past - Miscellaneous - Sound Effects/fighter sword 1.wav",
-    flipBack: "audio/SNES - The Legend of Zelda_ A Link to the Past - Miscellaneous - Sound Effects/fighter sword 2.wav",
-    previous: "audio/SNES - The Legend of Zelda_ A Link to the Past - Miscellaneous - Sound Effects/arrow 1.wav",
-    next: "audio/SNES - The Legend of Zelda_ A Link to the Past - Miscellaneous - Sound Effects/arrow 2.wav",
-    cursor: "audio/cursor.mp3"
+    correct: "audio/SNES - The Legend of Zelda_ A Link to the Past - Miscellaneous - Sound Effects/cursor.wav",
+    wrong: "audio/SNES - The Legend of Zelda_ A Link to the Past - Miscellaneous - Sound Effects/cursor.wav",
+    flipForward: "audio/SNES - The Legend of Zelda_ A Link to the Past - Miscellaneous - Sound Effects/arrow 1.wav",
+    flipBack: "audio/SNES - The Legend of Zelda_ A Link to the Past - Miscellaneous - Sound Effects/arrow 2.wav",
+    previous: "audio/SNES - The Legend of Zelda_ A Link to the Past - Miscellaneous - Sound Effects/fighter sword 1.wav",
+    next: "audio/SNES - The Legend of Zelda_ A Link to the Past - Miscellaneous - Sound Effects/fighter sword 2.wav",
+    cursor: "audio/SNES - The Legend of Zelda_ A Link to the Past - Miscellaneous - Sound Effects/cursor.wav"
   };
   var menu = [];
   var chapters = [];
@@ -19,6 +19,7 @@
     cardIndex: 0,
     flipped: false,
     transitioning: false,
+    skipNextSeenMark: false,
     gamepadCooldowns: {}
   };
 
@@ -43,7 +44,9 @@
     sfxPlayer: document.getElementById("sfx-player"),
     controllerStatus: document.getElementById("controller-status"),
     controllerStatusLabel: document.getElementById("controller-status-label"),
-    controllerStatusDetail: document.getElementById("controller-status-detail")
+    controllerStatusDetail: document.getElementById("controller-status-detail"),
+    resetProgressButton: document.querySelector("[data-reset-progress]"),
+    resetProgressStatus: document.querySelector("[data-reset-progress-status]")
   };
 
   boot();
@@ -240,6 +243,9 @@
     els.wrong.addEventListener("click", function () {
       markSelfGrade(false);
     });
+    if (els.resetProgressButton && els.app && els.app.hasAttribute("data-enable-progress-reset")) {
+      els.resetProgressButton.addEventListener("click", resetStoredProgress);
+    }
     els.card.addEventListener("click", function (event) {
       if (event.target instanceof Element && event.target.closest("button, a")) {
         return;
@@ -311,7 +317,11 @@
       els.app.style.setProperty("--accent", chapter.color);
     }
 
-    markSeen();
+    if (state.skipNextSeenMark) {
+      state.skipNextSeenMark = false;
+    } else {
+      markSeen();
+    }
     renderToc();
     renderProgress();
     renderCard();
@@ -462,6 +472,14 @@
     element.appendChild(question);
   }
 
+  function renderCardTypeBadge(label) {
+    var badge = document.createElement("span");
+
+    badge.className = "card-type-badge";
+    badge.textContent = label;
+    return badge;
+  }
+
   function sectionHeading() {
     var chapter = currentChapter();
     var section = chapter && chapter.sections.find(function (item) {
@@ -490,6 +508,8 @@
     if (!options.length) {
       return;
     }
+
+    element.insertBefore(renderCardTypeBadge("Multiple choice"), element.firstChild);
 
     var list = document.createElement("ul");
     list.className = "option-list";
@@ -811,6 +831,25 @@
     renderAll();
   }
 
+  function resetStoredProgress() {
+    if (!window.confirm("Reset all saved scores and progress for this deck in this browser?")) {
+      return;
+    }
+
+    stopPlayback();
+    progress = { sections: {} };
+    state.flipped = false;
+    state.transitioning = false;
+    state.skipNextSeenMark = true;
+    localStorage.removeItem(progressKey(getCurrentTest()));
+
+    if (els.resetProgressStatus) {
+      els.resetProgressStatus.textContent = "Progress reset for this deck.";
+    }
+
+    renderAll();
+  }
+
   function previousTarget() {
     var cards = currentCards();
     var sections = sectionsWithCards();
@@ -1117,10 +1156,12 @@
       message.textContent = quiz.correct ? "Correct" : "Incorrect";
       controls.appendChild(message);
 
-      button.type = "button";
-      button.textContent = "Try Again";
-      button.addEventListener("click", resetCurrentGrade);
-      controls.appendChild(button);
+      if (!quiz.correct) {
+        button.type = "button";
+        button.textContent = "Try Again";
+        button.addEventListener("click", resetCurrentGrade);
+        controls.appendChild(button);
+      }
       return controls;
     }
 

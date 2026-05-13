@@ -48,7 +48,7 @@
             "A": [
                 "Trivial File Transfer Protocol",
                 "UDP Port 69",
-				"Provides no security features",
+                "Provides no security features",
                 "No authentication, no encryption",
                 "A very basic form of file sharing protocol"
             ]
@@ -60,7 +60,7 @@
                 "TCP Port 23",
                 "Transmits data in an unencrypted form \"in-the-clear communication\"",
                 "Provides username and password authentication",
-				"Enables remote login and command execution"
+                "Enables remote login and command execution"
             ]
         },
         {
@@ -127,7 +127,7 @@
             "A": [
                 "Server Message Block/Common Internet File System",
                 "TCP Port 445",
-				"Provides shared access to files, directories, and devices",
+                "Provides shared access to files, directories, and devices",
                 "Used mainly by computers running Microsoft Windows operating systems"
             ]
         },
@@ -309,15 +309,13 @@
         {
             "Q": "CSMA/CD",
             "A": [
-                "Carrier Sense Multiple Access/Collision Detection",
-                ""
+                "Carrier Sense Multiple Access/Collision Detection"
             ]
         },
         {
             "Q": "CSMA/CA",
             "A": [
-                "Carrier Sense Multiple Access/Collision Avoidance",
-                ""
+                "Carrier Sense Multiple Access/Collision Avoidance"
             ]
         },
         {
@@ -422,8 +420,7 @@
         {
             "Q": "DMZ",
             "A": [
-                "Demilitarized Zone",
-                ""
+                "Demilitarized Zone"
             ]
         },
         {
@@ -569,8 +566,7 @@
         {
             "Q": "QoS",
             "A": [
-                "Quality of Service",
-                ""
+                "Quality of Service"
             ]
         },
         {
@@ -583,8 +579,7 @@
         {
             "Q": "CoS",
             "A": [
-                "Class of Service",
-                ""
+                "Class of Service"
             ]
         },
         {
@@ -728,7 +723,6 @@
         {
             "Q": "VLSM",
             "A": [
-                "",
                 "Classless subnet"
             ]
         },
@@ -756,8 +750,7 @@
         {
             "Q": "APIPA",
             "A": [
-                "Automatic Private Internet Protocol Addressing",
-                ""
+                "Automatic Private Internet Protocol Addressing"
             ]
         },
         {
@@ -835,50 +828,43 @@
         {
             "Q": "LAN",
             "A": [
-                "Local Area Network",
-                ""
+                "Local Area Network"
             ]
         },
         {
             "Q": "WLAN",
             "A": [
-                "Wireless Local Area Network",
-                ""
+                "Wireless Local Area Network"
             ]
         },
         {
             "Q": "MAN",
             "A": [
-                "Metropolitan Area Network",
-                ""
+                "Metropolitan Area Network"
             ]
         },
         {
             "Q": "WAN",
             "A": [
-                "Wide Area Network",
-                ""
+                "Wide Area Network"
             ]
         },
         {
             "Q": "CAN",
             "A": [
-                "Campus Area Network",
-                ""
+                "Campus Area Network"
             ]
         },
         {
             "Q": "SAN",
             "A": [
-                "Storage Area Network",
-                ""
+                "Storage Area Network"
             ]
         },
         {
             "Q": "PAN",
             "A": [
-                "Personal Area Network",
-                ""
+                "Personal Area Network"
             ]
         },
         {
@@ -905,22 +891,19 @@
         {
             "Q": "NFC",
             "A": [
-                "Near Field Communication",
-                ""
+                "Near Field Communication"
             ]
         },
         {
             "Q": "IR",
             "A": [
-                "Infrared",
-                ""
+                "Infrared"
             ]
         },
         {
             "Q": "RFID",
             "A": [
-                "Radio-Frequency Identification",
-                ""
+                "Radio-Frequency Identification"
             ]
         },
         {
@@ -1005,15 +988,13 @@
         {
             "Q": "MIMO",
             "A": [
-                "Multiple Input, Multiple Output",
-                ""
+                "Multiple Input, Multiple Output"
             ]
         },
         {
             "Q": "MU-MIMO",
             "A": [
-                "Multiuser Multiple Input, Multiple Output",
-                ""
+                "Multiuser Multiple Input, Multiple Output"
             ]
         }
     ],
@@ -1093,8 +1074,7 @@
         {
             "Q": "CNAME Records",
             "A": [
-                "Canonical Name",
-                ""
+                "Canonical Name"
             ]
         },
         {
@@ -1107,8 +1087,7 @@
         {
             "Q": "PTR Records",
             "A": [
-                "\"Pointer\"",
-                ""
+                "\"Pointer\""
             ]
         },
         {
@@ -1191,8 +1170,7 @@
         {
             "Q": "NTP",
             "A": [
-                "Network Time Protocol",
-                ""
+                "Network Time Protocol"
             ]
         },
         {

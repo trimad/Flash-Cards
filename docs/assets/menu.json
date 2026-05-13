@@ -400,6 +400,342 @@
             "name": "5.5"
           }
         ]
+      },
+      {
+        "color": "#D35400",
+        "file": "examcompass-n10-009-practice-tests.json",
+        "name": "ExamCompass N10-009 Practice Exams",
+        "section": [
+          {
+            "name": "Exam 1",
+            "label": "Network+ Practice Exam 1",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-practice-test-1-exam-n10-009"
+          },
+          {
+            "name": "Exam 2",
+            "label": "Network+ Practice Exam 2",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-practice-test-2-exam-n10-009"
+          },
+          {
+            "name": "Exam 3",
+            "label": "Network+ Practice Exam 3",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-practice-test-3-exam-n10-009"
+          },
+          {
+            "name": "Exam 4",
+            "label": "Network+ Practice Exam 4",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-practice-test-4-exam-n10-009"
+          },
+          {
+            "name": "Exam 5",
+            "label": "Network+ Practice Exam 5",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-practice-test-5-exam-n10-009"
+          },
+          {
+            "name": "Exam 6",
+            "label": "Network+ Practice Exam 6",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-practice-test-6-exam-n10-009"
+          },
+          {
+            "name": "Exam 7",
+            "label": "Network+ Practice Exam 7",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-practice-test-7-exam-n10-009"
+          },
+          {
+            "name": "Exam 8",
+            "label": "Network+ Practice Exam 8",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-practice-test-8-exam-n10-009"
+          },
+          {
+            "name": "Exam 9",
+            "label": "Network+ Practice Exam 9",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-practice-test-9-exam-n10-009"
+          },
+          {
+            "name": "Exam 10",
+            "label": "Network+ Practice Exam 10",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-practice-test-10-exam-n10-009"
+          },
+          {
+            "name": "Exam 11",
+            "label": "Network+ Practice Exam 11",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-practice-test-11-exam-n10-009"
+          },
+          {
+            "name": "Exam 12",
+            "label": "Network+ Practice Exam 12",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-practice-test-12-exam-n10-009"
+          },
+          {
+            "name": "Exam 13",
+            "label": "Network+ Practice Exam 13",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-practice-test-13-exam-n10-009"
+          },
+          {
+            "name": "Exam 14",
+            "label": "Network+ Practice Exam 14",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-practice-test-14-exam-n10-009"
+          },
+          {
+            "name": "Exam 15",
+            "label": "Network+ Practice Exam 15",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-practice-test-15-exam-n10-009"
+          },
+          {
+            "name": "Exam 16",
+            "label": "Network+ Practice Exam 16",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-practice-test-16-exam-n10-009"
+          },
+          {
+            "name": "Exam 17",
+            "label": "Network+ Practice Exam 17",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-practice-test-17-exam-n10-009"
+          },
+          {
+            "name": "Exam 18",
+            "label": "Network+ Practice Exam 18",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-practice-test-18-exam-n10-009"
+          },
+          {
+            "name": "Exam 19",
+            "label": "Network+ Practice Exam 19",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-practice-test-19-exam-n10-009"
+          },
+          {
+            "name": "Exam 20",
+            "label": "Network+ Practice Exam 20",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-practice-test-20-exam-n10-009"
+          },
+          {
+            "name": "Exam 21",
+            "label": "Network+ Practice Exam 21",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-practice-test-21-exam-n10-009"
+          },
+          {
+            "name": "Exam 22",
+            "label": "Network+ Practice Exam 22",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-practice-test-22-exam-n10-009"
+          },
+          {
+            "name": "Exam 23",
+            "label": "Network+ Practice Exam 23",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-practice-test-23-exam-n10-009"
+          }
+        ]
+      },
+      {
+        "color": "#8E44AD",
+        "file": "examcompass-n10-009-practice-tests.json",
+        "name": "ExamCompass N10-009 Acronym Quizzes",
+        "section": [
+          {
+            "name": "Acronyms 1",
+            "label": "N10-009 Exam Acronyms Quiz pt. 1",
+            "source": "https://www.examcompass.com/comptia-network-plus-n10-009-exam-acronyms-quiz-part-1"
+          },
+          {
+            "name": "Acronyms 2",
+            "label": "N10-009 Exam Acronyms Quiz pt. 2",
+            "source": "https://www.examcompass.com/comptia-network-plus-n10-009-exam-acronyms-quiz-part-2"
+          },
+          {
+            "name": "Acronyms 3",
+            "label": "N10-009 Exam Acronyms Quiz pt. 3",
+            "source": "https://www.examcompass.com/comptia-network-plus-n10-009-exam-acronyms-quiz-part-3"
+          },
+          {
+            "name": "Acronyms 4",
+            "label": "N10-009 Exam Acronyms Quiz pt. 4",
+            "source": "https://www.examcompass.com/comptia-network-plus-n10-009-exam-acronyms-quiz-part-4"
+          },
+          {
+            "name": "Acronyms 5",
+            "label": "N10-009 Exam Acronyms Quiz pt. 5",
+            "source": "https://www.examcompass.com/comptia-network-plus-n10-009-exam-acronyms-quiz-part-5"
+          },
+          {
+            "name": "Acronyms 6",
+            "label": "N10-009 Exam Acronyms Quiz pt. 6",
+            "source": "https://www.examcompass.com/comptia-network-plus-n10-009-exam-acronyms-quiz-part-6"
+          }
+        ]
+      },
+      {
+        "color": "#1F7A8C",
+        "file": "examcompass-n10-009-practice-tests.json",
+        "name": "ExamCompass N10-009 Topic Quizzes",
+        "section": [
+          {
+            "name": "OSI Reference Model",
+            "label": "OSI Reference Model Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-osi-reference-model-quiz"
+          },
+          {
+            "name": "Networking Appliances",
+            "label": "Networking Appliances Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-networking-appliances-quiz"
+          },
+          {
+            "name": "Cloud Computing Concepts",
+            "label": "Cloud Computing Concepts Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-cloud-computing-concepts-quiz"
+          },
+          {
+            "name": "Network Protocols",
+            "label": "Network Protocols Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-network-protocols-quiz"
+          },
+          {
+            "name": "TCP & UDP Ports",
+            "label": "TCP & UDP Ports Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-tcp-and-udp-ports-quiz"
+          },
+          {
+            "name": "Wireless Networking",
+            "label": "Wireless Networking Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-wireless-networking-quiz"
+          },
+          {
+            "name": "802.3 Standards",
+            "label": "802.3 Standards Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-wired-networking-standards-quiz"
+          },
+          {
+            "name": "Network Cabling",
+            "label": "Network Cabling Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-network-cabling-quiz"
+          },
+          {
+            "name": "Cable Connectors",
+            "label": "Cable Connectors Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-cable-connectors-quiz"
+          },
+          {
+            "name": "Network Designs",
+            "label": "Network Designs Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-network-designs-quiz"
+          },
+          {
+            "name": "IPv4 Addressing",
+            "label": "IPv4 Addressing Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-ipv4-addressing-quiz"
+          },
+          {
+            "name": "Subnetting",
+            "label": "Subnetting Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-subnetting-quiz"
+          },
+          {
+            "name": "Infrastructure as Code (IaC)",
+            "label": "Infrastructure as Code (IaC) Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-infrastructure-as-code-quiz"
+          },
+          {
+            "name": "IPv6 Addressing",
+            "label": "IPv6 Addressing Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-ipv6-addressing-quiz"
+          },
+          {
+            "name": "Routing Technologies",
+            "label": "Routing Technologies Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-routing-technologies-quiz"
+          },
+          {
+            "name": "Switching Technologies",
+            "label": "Switching Technologies Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-switching-technologies-quiz"
+          },
+          {
+            "name": "Physical Installations",
+            "label": "Physical Installations Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-physical-installations-quiz"
+          },
+          {
+            "name": "Network Documentation",
+            "label": "Network Documentation Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-network-documentation-quiz"
+          },
+          {
+            "name": "Network Monitoring",
+            "label": "Network Monitoring Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-network-monitoring-quiz"
+          },
+          {
+            "name": "Disaster Recovery (DR) Concepts",
+            "label": "Disaster Recovery (DR) Concepts Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-disaster-recovery-concepts-quiz"
+          },
+          {
+            "name": "DHCP",
+            "label": "DHCP Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-dhcp-quiz"
+          },
+          {
+            "name": "DNS",
+            "label": "DNS Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-dns-quiz"
+          },
+          {
+            "name": "Network Access & Management Methods",
+            "label": "Network Access & Management Methods Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-network-access-and-management-methods-quiz"
+          },
+          {
+            "name": "Basic Network Security Concepts",
+            "label": "Basic Network Security Concepts Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-basic-network-security-concepts-quiz"
+          },
+          {
+            "name": "Common Attack Types",
+            "label": "Common Attack Types Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-common-attack-types-quiz"
+          },
+          {
+            "name": "Troubleshooting Methodology",
+            "label": "Troubleshooting Methodology Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-troubleshooting-methodology-quiz"
+          },
+          {
+            "name": "Cabling Issues Troubleshooting",
+            "label": "Cabling Issues Troubleshooting Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-cabling-issues-troubleshooting-quiz"
+          },
+          {
+            "name": "Physical Interface Issues Troubleshooting",
+            "label": "Physical Interface Issues Troubleshooting Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-physical-interface-issues-troubleshooting-quiz"
+          },
+          {
+            "name": "Hardware Issues Troubleshooting",
+            "label": "Hardware Issues Troubleshooting Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-hardware-issues-troubleshooting-quiz"
+          },
+          {
+            "name": "Network Services Troubleshooting",
+            "label": "Network Services Troubleshooting Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-network-services-troubleshooting-quiz"
+          },
+          {
+            "name": "Common Performance Issues Troubleshooting",
+            "label": "Common Performance Issues Troubleshooting Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-common-performance-issues-troubleshooting-quiz"
+          },
+          {
+            "name": "Software Troubleshooting Tools",
+            "label": "Software Troubleshooting Tools Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-software-troubleshooting-tools-quiz"
+          },
+          {
+            "name": "Hardware Troubleshooting Tools",
+            "label": "Hardware Troubleshooting Tools Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-hardware-troubleshooting-tools-quiz"
+          },
+          {
+            "name": "Basic Networking Device Commands",
+            "label": "Basic Networking Device Commands Quiz",
+            "source": "https://www.examcompass.com/comptia-network-plus-certification-exam-n10-009-basic-networking-device-commands-quiz"
+          }
+        ]
       }
     ]
   },
@@ -590,6 +926,283 @@
           {
             "name": "ar-words",
             "label": "20 simple words that contain the 'ar' sound."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "CompTIA Tech+ FC0-U71",
+    "assetPath": "Tech+/",
+    "chapter": [
+      {
+        "color": "#2B8CBE",
+        "file": "examcompass-fc0-u71-practice-tests.json",
+        "name": "ExamCompass FC0-U71 Practice Exams",
+        "section": [
+          {
+            "name": "Exam 1",
+            "label": "Tech+ Practice Test 1",
+            "source": "https://www.examcompass.com/comptia-tech-plus-certification-exam-fc0-u71-practice-test-1"
+          },
+          {
+            "name": "Exam 2",
+            "label": "Tech+ Practice Test 2",
+            "source": "https://www.examcompass.com/comptia-tech-plus-certification-exam-fc0-u71-practice-test-2"
+          },
+          {
+            "name": "Exam 3",
+            "label": "Tech+ Practice Test 3",
+            "source": "https://www.examcompass.com/comptia-tech-plus-certification-exam-fc0-u71-practice-test-3"
+          },
+          {
+            "name": "Exam 4",
+            "label": "Tech+ Practice Test 4",
+            "source": "https://www.examcompass.com/comptia-tech-plus-certification-exam-fc0-u71-practice-test-4"
+          },
+          {
+            "name": "Exam 5",
+            "label": "Tech+ Practice Test 5",
+            "source": "https://www.examcompass.com/comptia-tech-plus-certification-exam-fc0-u71-practice-test-5"
+          },
+          {
+            "name": "Exam 6",
+            "label": "Tech+ Practice Test 6",
+            "source": "https://www.examcompass.com/comptia-tech-plus-certification-exam-fc0-u71-practice-test-6"
+          },
+          {
+            "name": "Exam 7",
+            "label": "Tech+ Practice Test 7",
+            "source": "https://www.examcompass.com/comptia-tech-plus-certification-exam-fc0-u71-practice-test-7"
+          },
+          {
+            "name": "Exam 8",
+            "label": "Tech+ Practice Test 8",
+            "source": "https://www.examcompass.com/comptia-tech-plus-certification-exam-fc0-u71-practice-test-8"
+          },
+          {
+            "name": "Exam 9",
+            "label": "Tech+ Practice Test 9",
+            "source": "https://www.examcompass.com/comptia-tech-plus-certification-exam-fc0-u71-practice-test-9"
+          },
+          {
+            "name": "Exam 10",
+            "label": "Tech+ Practice Test 10",
+            "source": "https://www.examcompass.com/comptia-tech-plus-certification-exam-fc0-u71-practice-test-10"
+          },
+          {
+            "name": "Exam 11",
+            "label": "Tech+ Practice Test 11",
+            "source": "https://www.examcompass.com/comptia-tech-plus-certification-exam-fc0-u71-practice-test-11"
+          },
+          {
+            "name": "Exam 12",
+            "label": "Tech+ Practice Test 12",
+            "source": "https://www.examcompass.com/comptia-tech-plus-certification-exam-fc0-u71-practice-test-12"
+          },
+          {
+            "name": "Exam 13",
+            "label": "Tech+ Practice Test 13",
+            "source": "https://www.examcompass.com/comptia-tech-plus-certification-exam-fc0-u71-practice-test-13"
+          },
+          {
+            "name": "Exam 14",
+            "label": "Tech+ Practice Test 14",
+            "source": "https://www.examcompass.com/comptia-tech-plus-certification-exam-fc0-u71-practice-test-14"
+          },
+          {
+            "name": "Exam 15",
+            "label": "Tech+ Practice Test 15",
+            "source": "https://www.examcompass.com/comptia-tech-plus-certification-exam-fc0-u71-practice-test-15"
+          },
+          {
+            "name": "Exam 16",
+            "label": "Tech+ Practice Test 16",
+            "source": "https://www.examcompass.com/comptia-tech-plus-certification-exam-fc0-u71-practice-test-16"
+          }
+        ]
+      },
+      {
+        "color": "#8E44AD",
+        "file": "examcompass-fc0-u71-practice-tests.json",
+        "name": "ExamCompass FC0-U71 Acronym Quizzes",
+        "section": [
+          {
+            "name": "Acronyms 1",
+            "label": "Tech+ FC0-U71 Exam Acronyms Quiz pt. 1",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-exam-acronyms-quiz-part-1"
+          },
+          {
+            "name": "Acronyms 2",
+            "label": "Tech+ FC0-U71 Exam Acronyms Quiz pt. 2",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-exam-acronyms-quiz-part-2"
+          },
+          {
+            "name": "Acronyms 3",
+            "label": "Tech+ FC0-U71 Exam Acronyms Quiz pt. 3",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-exam-acronyms-quiz-part-3"
+          },
+          {
+            "name": "Acronyms 4",
+            "label": "Tech+ FC0-U71 Exam Acronyms Quiz pt. 4",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-exam-acronyms-quiz-part-4"
+          },
+          {
+            "name": "Acronyms 5",
+            "label": "Tech+ FC0-U71 Exam Acronyms Quiz pt. 5",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-exam-acronyms-quiz-part-5"
+          },
+          {
+            "name": "Acronyms 6",
+            "label": "Tech+ FC0-U71 Exam Acronyms Quiz pt. 6",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-exam-acronyms-quiz-part-6"
+          }
+        ]
+      },
+      {
+        "color": "#1F7A8C",
+        "file": "examcompass-fc0-u71-practice-tests.json",
+        "name": "ExamCompass FC0-U71 Topic Quizzes",
+        "section": [
+          {
+            "name": "Computing Basics",
+            "label": "Computing Basics Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-computing-basics-quiz"
+          },
+          {
+            "name": "Notational Systems",
+            "label": "Notational Systems Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-notational-systems-quiz"
+          },
+          {
+            "name": "Units of Measure",
+            "label": "Units of Measure Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-units-of-measure-quiz"
+          },
+          {
+            "name": "Troubleshooting Methodology",
+            "label": "Troubleshooting Methodology Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-troubleshooting-methodology-quiz"
+          },
+          {
+            "name": "Common Computing Devices",
+            "label": "Common Computing Devices Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-common-computing-devices-quiz"
+          },
+          {
+            "name": "Internal Computing Components",
+            "label": "Internal Computing Components Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-internal-computing-components-quiz"
+          },
+          {
+            "name": "Storage Types",
+            "label": "Storage Types Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-storage-types-quiz"
+          },
+          {
+            "name": "Peripheral Devices",
+            "label": "Peripheral Devices Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-peripheral-devices-quiz"
+          },
+          {
+            "name": "Device Interfaces",
+            "label": "Device Interfaces Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-device-interfaces-quiz"
+          },
+          {
+            "name": "Cloud & Virtualization",
+            "label": "Cloud & Virtualization Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-cloud-and-virtualization-quiz"
+          },
+          {
+            "name": "Internet Service Types",
+            "label": "Internet Service Types Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-internet-service-types-quiz"
+          },
+          {
+            "name": "Basic Networking Concepts",
+            "label": "Basic Networking Concepts Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-basic-networking-concepts-quiz"
+          },
+          {
+            "name": "Wireless Networking",
+            "label": "Wireless Networking Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-wireless-networking-quiz"
+          },
+          {
+            "name": "Operating Systems",
+            "label": "Operating Systems Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-operating-systems-quiz"
+          },
+          {
+            "name": "Common Software Types",
+            "label": "Common Software Types Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-common-software-types-quiz"
+          },
+          {
+            "name": "Web Browser Features",
+            "label": "Web Browser Features Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-web-browser-features-quiz"
+          },
+          {
+            "name": "AI Basics",
+            "label": "AI Basics Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-ai-basics-quiz"
+          },
+          {
+            "name": "Software Development Concepts",
+            "label": "Software Development Concepts Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-software-development-concepts-quiz"
+          },
+          {
+            "name": "Database Concepts",
+            "label": "Database Concepts Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-database-concepts-quiz"
+          },
+          {
+            "name": "Database Structures",
+            "label": "Database Structures Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-database-structures-quiz"
+          },
+          {
+            "name": "Data Backup Concepts",
+            "label": "Data Backup Concepts Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-data-backup-concepts-quiz"
+          },
+          {
+            "name": "Fundamental Security Concepts",
+            "label": "Fundamental Security Concepts Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-fundamental-security-concepts-quiz"
+          },
+          {
+            "name": "Device Security Concepts",
+            "label": "Device Security Concepts Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-device-security-concepts-quiz"
+          },
+          {
+            "name": "Device Use Best Practices",
+            "label": "Device Use Best Practices Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-device-use-best-practices-quiz"
+          },
+          {
+            "name": "Privacy Considerations",
+            "label": "Privacy Considerations Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-privacy-considerations-quiz"
+          },
+          {
+            "name": "Password Best Practices",
+            "label": "Password Best Practices Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-password-best-practices-quiz"
+          },
+          {
+            "name": "Encryption Use Cases",
+            "label": "Encryption Use Cases Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-encryption-use-cases-quiz"
+          },
+          {
+            "name": "Wireless Security Configuration",
+            "label": "Wireless Security Configuration Quiz",
+            "source": "https://www.examcompass.com/comptia-tech-plus-fc0-u71-certification-exam-wireless-security-configuration-quiz"
           }
         ]
       }
