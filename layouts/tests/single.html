@@ -25,6 +25,9 @@
         {{ with .Params.professorMesser }}
           <a class="resource-link" href="{{ . }}" target="_blank" rel="noopener">Professor Messer</a>
         {{ end }}
+        {{ with .Params.scheduleTest }}
+          <a class="resource-link" href="{{ . }}" target="_blank" rel="noopener">Schedule Exam</a>
+        {{ end }}
       </div>
       <div id="toc" class="toc"></div>
     </aside>

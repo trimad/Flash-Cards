@@ -22,6 +22,7 @@
     skipNextSeenMark: false,
     gamepadCooldowns: {}
   };
+  var cardFitFrame = 0;
 
   var els = {
     app: document.querySelector(".app-shell"),
@@ -233,6 +234,8 @@
   }
 
   function bindControls() {
+    bindTestNavSound();
+
     els.prev.addEventListener("click", previousCard);
     els.next.addEventListener("click", nextCard);
     els.flip.addEventListener("click", flipCard);
@@ -260,6 +263,7 @@
       if (
         !action ||
         action.disabled ||
+        action.closest(".test-nav") ||
         isControllerAction(action) ||
         action.closest(".quiz-controls")
       ) {
@@ -298,6 +302,8 @@
       }
     });
 
+    window.addEventListener("resize", scheduleCardContentFit);
+
     window.addEventListener("gamepadconnected", function (event) {
       syncConnectedGamepadStatus(event.gamepad);
       ensureFocusedElement();
@@ -328,6 +334,7 @@
     renderControls();
     updateLocation();
     ensureFocusedElement();
+    scheduleCardContentFit();
   }
 
   function renderToc() {
@@ -346,7 +353,8 @@
       summary.className = "chapter-summary";
       summary.innerHTML =
         "<strong>" + escapeHtml(chapter.name) + "</strong>" +
-        "<small>" + chapterProgress.seen + "/" + chapterProgress.total + "</small>" +
+        '<small><span class="chapter-score">' + chapterProgress.percent + "%</span> " +
+        chapterProgress.seen + "/" + chapterProgress.total + "</small>" +
         '<div class="progress-track"><span style="width: ' + chapterProgress.percent + '%"></span></div>';
       summary.addEventListener("click", function () {
         var target = firstSectionWithCards(chapter) || { chapter: chapter, section: chapter.sections[0] };
@@ -454,6 +462,50 @@
     els.card.classList.remove("is-flipped");
     els.count.textContent = "";
     renderControls();
+    scheduleCardContentFit();
+  }
+
+  function scheduleCardContentFit() {
+    if (cardFitFrame) {
+      window.cancelAnimationFrame(cardFitFrame);
+    }
+
+    cardFitFrame = window.requestAnimationFrame(function () {
+      cardFitFrame = 0;
+      fitCardContents();
+    });
+  }
+
+  function fitCardContents() {
+    fitCardFace(els.front);
+    fitCardFace(els.back);
+  }
+
+  function fitCardFace(face) {
+    if (!face) {
+      return;
+    }
+
+    var minScale = 0.42;
+    var scale = 1;
+
+    face.style.setProperty("--card-content-scale", String(scale));
+
+    for (var i = 0; i < 4; i++) {
+      var availableHeight = face.clientHeight;
+      var contentHeight = face.scrollHeight;
+
+      if (!availableHeight || !contentHeight || contentHeight <= availableHeight + 1) {
+        break;
+      }
+
+      scale = Math.max(minScale, scale * ((availableHeight - 2) / contentHeight));
+      face.style.setProperty("--card-content-scale", scale.toFixed(3));
+
+      if (scale === minScale) {
+        break;
+      }
+    }
   }
 
   function emptyMessage(message) {
@@ -822,10 +874,12 @@
   }
 
   function resetCurrentGrade() {
+    var data = ensureProgressSection(currentSectionKey());
     var quiz = ensureQuizEntry(currentSectionKey(), state.cardIndex);
 
     quiz.graded = false;
     quiz.correct = false;
+    delete data.selfGrade[String(state.cardIndex)];
 
     saveProgress();
     renderAll();
@@ -965,6 +1019,44 @@
     }
 
     return null;
+  }
+
+  function bindTestNavSound() {
+    document.querySelectorAll(".test-nav a").forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        if (event.defaultPrevented || shouldLetBrowserHandleRouteClick(event, link)) {
+          return;
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
+        playSoundEffect("cursor");
+
+        window.setTimeout(function () {
+          if (link.href === window.location.href) {
+            return;
+          }
+
+          window.location.href = link.href;
+        }, 120);
+      });
+    });
+  }
+
+  function shouldLetBrowserHandleRouteClick(event, link) {
+    if (
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      link.target ||
+      link.hasAttribute("download")
+    ) {
+      return true;
+    }
+
+    return false;
   }
 
   function currentChapter() {
@@ -1148,15 +1240,17 @@
     var controls = document.createElement("div");
     var message = document.createElement("p");
     var button = document.createElement("button");
+    var selfGrade = getSelfGrade(currentSectionKey(), state.cardIndex);
+    var result = selfGrade || (quiz && quiz.graded ? quiz : null);
 
     controls.className = "quiz-controls";
 
-    if (quiz && quiz.graded) {
-      message.className = "quiz-result " + (quiz.correct ? "is-correct" : "is-incorrect");
-      message.textContent = quiz.correct ? "Correct" : "Incorrect";
+    if (result) {
+      message.className = "quiz-result " + (result.correct ? "is-correct" : "is-incorrect");
+      message.textContent = result.correct ? "Correct" : "Incorrect";
       controls.appendChild(message);
 
-      if (!quiz.correct) {
+      if (!result.correct) {
         button.type = "button";
         button.textContent = "Try Again";
         button.addEventListener("click", resetCurrentGrade);
