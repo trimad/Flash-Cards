@@ -671,13 +671,6 @@
   }
 
   function runCardTransition(className) {
-    var prefersReducedMotion = window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (prefersReducedMotion) {
-      return Promise.resolve();
-    }
-
     return new Promise(function (resolve) {
       var done = false;
       var timeout = window.setTimeout(finish, 520);

@@ -32,9 +32,10 @@ async function main() {
 
     await smokeThemeSelector(client, `${origin}${pagesPrefix}/`);
     await smokeResetProgress(client, `${origin}${pagesPrefix}/tests/network-plus/`);
+    await smokeCardAnimations(client, `${origin}${pagesPrefix}/tests/network-plus/`);
 
     await client.close();
-    console.log('Browser smoke checks passed for theme selector and reset progress.');
+    console.log('Browser smoke checks passed for theme selector, reset progress, and card animations.');
   } finally {
     await closeServer(server);
     await stopChrome(chrome);
@@ -140,6 +141,61 @@ async function smokeResetProgress(client, url) {
   assert.match(resetState.status, /Progress reset for this deck\./, 'reset progress should announce completion');
   assert.ok(resetState.cardText.trim().length > 0, 'deck should still render a visible card after reset');
   assert.equal(resetState.dialogHidden, false, 'reset action should be reachable inside the settings dialog');
+}
+
+async function smokeCardAnimations(client, url) {
+  await client.send('Emulation.setEmulatedMedia', {
+    features: [{ name: 'prefers-reduced-motion', value: 'reduce' }]
+  });
+
+  try {
+    await navigate(client, url);
+    await waitFor(
+      client,
+      `document.readyState === 'complete' && document.querySelector('#card-front') && !document.querySelector('#card-front').textContent.includes('Loading')`,
+      'Network+ deck cards to load for animation checks'
+    );
+
+    const motionState = await evaluate(client, `(() => {
+      const card = document.querySelector('#card');
+      const inner = card.querySelector('.flash-card-inner');
+      const next = document.querySelector('#next-card');
+      const toMs = (value) => value.split(',').map((part) => {
+        const trimmed = part.trim();
+        return trimmed.endsWith('ms') ? parseFloat(trimmed) : parseFloat(trimmed) * 1000;
+      });
+
+      card.classList.add('slide-out-next');
+      const slideStyle = getComputedStyle(card);
+      const slideAnimationName = slideStyle.animationName;
+      const slideAnimationMs = Math.max(...toMs(slideStyle.animationDuration));
+      card.classList.remove('slide-out-next');
+
+      next.click();
+
+      return {
+        reducedMotion: matchMedia('(prefers-reduced-motion: reduce)').matches,
+        flipTransitionMs: Math.max(...toMs(getComputedStyle(inner).transitionDuration)),
+        slideAnimationName,
+        slideAnimationMs,
+        slideClassAfterClick: card.classList.contains('slide-out-next')
+      };
+    })()`);
+
+    assert.equal(motionState.reducedMotion, true, 'smoke test should emulate reduced motion as Windows can report it');
+    assert.ok(motionState.flipTransitionMs >= 600, 'card flip should keep its transition duration under reduced-motion media');
+    assert.match(motionState.slideAnimationName, /cardSlideOutNext/, 'card swipe should still have a slide animation name');
+    assert.ok(motionState.slideAnimationMs >= 180, 'card swipe should keep its animation duration under reduced-motion media');
+    assert.equal(motionState.slideClassAfterClick, true, 'next-card click should start a swipe transition even under reduced-motion media');
+
+    await waitFor(
+      client,
+      `!document.querySelector('#card').className.includes('slide-')`,
+      'card animation classes to clear after animation smoke check'
+    );
+  } finally {
+    await client.send('Emulation.setEmulatedMedia', { features: [] });
+  }
 }
 
 async function navigate(client, url) {
@@ -264,6 +320,11 @@ async function startChrome() {
 function findChromeExecutable() {
   const candidates = [
     process.env.CHROME_BIN,
+    path.join(process.env.PROGRAMFILES || '', 'Google', 'Chrome', 'Application', 'chrome.exe'),
+    path.join(process.env['PROGRAMFILES(X86)'] || '', 'Google', 'Chrome', 'Application', 'chrome.exe'),
+    path.join(process.env.LOCALAPPDATA || '', 'Google', 'Chrome', 'Application', 'chrome.exe'),
+    path.join(process.env.PROGRAMFILES || '', 'Microsoft', 'Edge', 'Application', 'msedge.exe'),
+    path.join(process.env['PROGRAMFILES(X86)'] || '', 'Microsoft', 'Edge', 'Application', 'msedge.exe'),
     '/usr/bin/google-chrome',
     '/usr/bin/google-chrome-stable',
     '/usr/bin/chromium',

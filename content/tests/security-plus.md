@@ -1,6 +1,6 @@
 ---
-title: "CompTIA Security+ Security+ (SY0-701)"
-testName: "CompTIA Security+ Security+ (SY0-701)"
+title: "CompTIA Security+ (SY0-701)"
+testName: "CompTIA Security+ (SY0-701)"
 testIndex: 3
 accent: "#c9476a"
 deckDescription: "Security concepts, threats, controls, architecture, operations, and governance."

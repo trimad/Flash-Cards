@@ -1,6 +1,6 @@
 [
   {
-    "name": "CompTIA A+ 220-1001",
+    "name": "CompTIA A+ (220-1001)",
     "chapter": [
       {
         "color": "#FFFFFF",
@@ -145,7 +145,7 @@
     ]
   },
   {
-    "name": "CompTIA A+ 220-1002",
+    "name": "CompTIA A+ (220-1002)",
     "chapter": [
       {
         "color": "#FFFFFF",
@@ -277,7 +277,8 @@
     ]
   },
   {
-    "name": "CompTIA Network+",
+    "name": "CompTIA Network+ (N10-009)",
+    "assetPath": "Network+/",
     "chapter": [
       {
         "color": "#6E298D",
@@ -433,7 +434,7 @@
     ]
   },
   {
-    "name": "CompTIA Security+",
+    "name": "CompTIA Security+ (SY0-701)",
     "assetPath": "Security+/",
     "chapter": [
       {
@@ -625,7 +626,7 @@
     ]
   },
   {
-    "name": "CompTIA Tech+ FC0-U71",
+    "name": "CompTIA Tech+ (FC0-U71)",
     "assetPath": "Tech+/",
     "chapter": [
       {

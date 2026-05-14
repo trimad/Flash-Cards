@@ -1515,8 +1515,6 @@ kbd {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .flash-card,
-  .flash-card-inner,
   .controller-status__pulse,
   .card-actions button {
     transition-duration: 0.01ms !important;
