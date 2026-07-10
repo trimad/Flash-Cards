@@ -1,7 +1,7 @@
 ---
 title: "CompTIA Security+ (SY0-701)"
 testName: "CompTIA Security+ (SY0-701)"
-testIndex: 3
+testIndex: 1
 accent: "#c9476a"
 deckDescription: "Security concepts, threats, controls, architecture, operations, and governance."
 objectivePdf: "assets/Security+/CompTIA-Security-Plus-SY0-701-Exam-Objectives.pdf"

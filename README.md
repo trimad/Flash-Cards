@@ -1,15 +1,48 @@
 # Flash Cards
 
-A Hugo-powered static flash-card site for CompTIA study decks. The site builds routes for each practice test and loads card decks from JSON in `static/assets`.
+A Hugo-powered, browser-only flashcard platform for certification study and early reading practice.
 
-The card player supports keyboard, mouse, and Gamepad API controls. Xbox-style face buttons are mapped as X = flip, Y = speak the visible side, A = mark right, and B = mark wrong. Left and right triggers move to the previous and next card. Sound effects and speech synthesis run entirely in the browser.
+The app is static, fast, offline-capable, and JSON-driven. It runs entirely in the browser with no backend, no database, and no account system.
 
-## Run Locally
+## Supported decks
+
+- CompTIA Network+ (N10-009)
+- CompTIA Security+ (SY0-701)
+- CompTIA Tech+ (FC0-U71)
+- Early Reading
+
+Incomplete CompTIA A+ placeholder decks were removed so the catalog contains only complete study material.
+
+## Features
+
+- Static Hugo deployment
+- JSON-driven decks
+- Fast cached and parallel deck loading
+- Global Ctrl+K search across all decks
+- Fuzzy instant search with highlighted results
+- Keyboard, mouse, and gamepad controls
+- Speech synthesis and optional card audio
+- Multiple-choice quiz cards
+- Right/Wrong recall grading
+- SM-2 spaced repetition with Again/Hard/Good/Easy controls
+- Due-card review
+- Shuffle/random study
+- Bookmarks and suspended cards
+- Session timer and review summary
+- Browser-local progress and scheduling
+- Settings dialog with Evangelion + Light/Dark/AMOLED themes
+- Persisted welcome dismissal
+- Local browser deck editor with JSON export
+- Installable PWA with offline support
+- Responsive desktop/tablet/mobile layout
+- Headless browser smoke tests
+
+## Run locally
 
 From the project root:
 
 ```bash
-hugo server --bind 127.0.0.1 --port 3000 --baseURL http://127.0.0.1:3000/ --disableFastRender --renderToMemory
+npm run serve
 ```
 
 Then open:
@@ -18,152 +51,120 @@ Then open:
 http://127.0.0.1:3000/
 ```
 
-## Build and Validate
+Equivalent Hugo command:
+
+```bash
+hugo server --bind 127.0.0.1 --port 3000 --baseURL http://127.0.0.1:3000/ --disableFastRender --renderToMemory
+```
+
+## Build and validate
 
 ```bash
 npm test
 ```
 
-The validation entrypoint runs package/source invariants, menu-to-deck data checks, `hugo --minify`, a generated-export check that verifies required `docs/` files plus local HTML `href`/`src` references, and a headless browser smoke test for the settings modal, theme persistence, and reset-progress action. Hugo writes the generated site to `docs/` for GitHub Pages branch-folder deployment.
+The validation entrypoint runs package/source invariants, deck/menu data checks, `hugo --minify`, generated-export validation, and a headless browser smoke test covering settings, themes, search, editor, reset progress, and card behavior.
 
-To rerun only the browser smoke check after building `docs/`:
-
-```bash
-npm run browser:smoke
-```
-
-For a build-only run:
+Build only:
 
 ```bash
 npm run build
 ```
 
-## GitHub Pages
+Browser smoke only after building `docs/`:
 
-GitHub Pages is served from the `gh-pages` branch.
-
-Pushing to `master` runs `.github/workflows/deploy.yml`, builds the site with Hugo, and publishes the generated `public/` output to `gh-pages`. The `docs/` folder is still the local `publishDir`, but the live site updates from `gh-pages`.
-
-
-## Requirements
-
-- Hugo Extended
-- A modern web browser
-
-## Routes
-
-- `/tests/a-plus-220-1001/`
-- `/tests/a-plus-220-1002/`
-- `/tests/network-plus/`
-- `/tests/security-plus/`
-- `/tests/early-reading/`
-
-The Network+, Security+, and Early Reading routes currently have card decks. The A+ routes are in place and show their objectives from the shared menu data, but they will remain empty until deck JSON files are added.
-
-## Progress
-
-The table of contents is segmented by chapter and section. Progress is stored in the browser with `localStorage`, keyed per practice test route. Use **Settings → Reset progress** on a deck page to clear saved studied-card progress, quiz answers, and self-graded scores for that deck in the current browser.
-
-Cards with an `O` option list can also be answered as quiz questions. Select one or more choices, use **Check Answer**, and the app stores graded quiz results alongside study progress in `localStorage`.
-
-## JSON Schema
-
-Scraped decks are wired into the app through `static/assets/menu.json`. Each top-level item is a practice test.
-
-```json
-{
-  "name": "CompTIA Security+",
-  "assetPath": "Security+/",
-  "chapter": [
-    {
-      "color": "#C9476A",
-      "file": "security-plus-objectives.json",
-      "name": "General Security Concepts",
-      "section": [
-        {
-          "name": "1.1",
-          "label": "Compare and contrast various types of security controls."
-        }
-      ]
-    }
-  ]
-}
+```bash
+npm run browser:smoke
 ```
 
-Practice test fields:
+## Deployment
 
-- `name` - Display name. Must match `testName` in the corresponding `content/tests/*.md` file.
-- `assetPath` - Optional folder under `static/assets/` where this test's deck files live. Include the trailing slash.
-- `chapter` - Ordered list of TOC segments/domains.
+GitHub Pages deployment is handled by `.github/workflows/deploy.yml`.
 
-Chapter fields:
+On push to `master`, CI:
 
-- `name` - Display name for the TOC segment.
-- `color` - Accent color used for that segment and active cards.
-- `file` - Deck JSON filename. Relative to `assetPath` when present. Multiple chapters may point to the same deck file.
-- `section` - Ordered list of sections inside the chapter.
+1. Checks out the repository.
+2. Installs Hugo Extended.
+3. Installs Node.js 20.
+4. Runs `npm test`.
+5. Uploads the validated `docs/` output as a Pages artifact.
+6. Deploys with `actions/deploy-pages`.
 
-Section fields:
+Deployments fail if validation or browser smoke tests fail.
 
-- `name` - Required key used to find cards in the deck JSON.
-- `label` - Optional display text. Use exact exam objective text when available.
+## Study controls
 
-Deck files are JSON objects keyed by section name. Each key maps to an array of cards:
+Keyboard:
 
-```json
-{
-  "1.1": [
-    {
-      "Q": "Which of the following answers can be used to describe technical security controls? (Select 3 answers)",
-      "A": [
-        "Sometimes called logical security controls",
-        "Executed by computer systems (instead of people)",
-        "Implemented with technology"
-      ],
-      "O": [
-        "Focused on protecting material assets",
-        "Sometimes called logical security controls",
-        "Executed by computer systems (instead of people)",
-        "Also known as administrative controls",
-        "Implemented with technology",
-        "Primarily implemented and executed by people (as opposed to computer systems)"
-      ]
-    }
-  ]
-}
+- Left/right arrows: previous/next card
+- Up/down arrows: flip
+- Space/Enter: flip
+- X: flip
+- Y: speak
+- A: right
+- B: wrong
+- Ctrl+K: global search
+
+Gamepad:
+
+- LT/RT: previous/next
+- X: flip
+- Y: speak
+- A: right
+- B: wrong
+- D-pad/stick: move focus
+
+Gamepad / Xbox-first navigation:
+
+- LB: focus the Deck / table-of-contents panel from anywhere
+- RB: focus the Study panel from anywhere
+- D-pad or left stick: move deterministically within the active panel using roving focus
+- A in Deck panel: select the focused section and automatically return to Study
+- B in Deck panel: return to Study
+- LT/RT in Study panel: previous/next card
+- X in Study panel: flip
+- Y in Study panel: speak
+- A/B in Study panel: right/wrong
+
+The active controller panel is highlighted visually, and the command bar updates to show the current Xbox controls. Open dialogs such as Settings, Search, Editor, and Welcome temporarily become the active controller context; D-pad/stick movement stays inside the dialog, A activates the focused control, and B closes the dialog without changing cards.
+
+Spaced repetition:
+
+- Again: forgot; schedule relearning soon
+- Hard: remembered with difficulty
+- Good: normal successful recall
+- Easy: strong recall; longer interval
+
+## Deck format
+
+See `DECK_FORMAT.md`.
+
+## Architecture
+
+See `ARCHITECTURE.md`.
+
+## Study engine
+
+See `STUDY_ENGINE.md`.
+
+## Testing
+
+See `TESTING.md`.
+
+## Contributing
+
+See `CONTRIBUTING.md`.
+
+## Migration notes
+
+See `MIGRATION.md`.
+
+## Python import scripts
+
+The ExamCompass import scripts are developer tools and are not required for runtime. If you need to run them:
+
+```bash
+python -m pip install requests beautifulsoup4
 ```
 
-Card fields:
-
-- `Q` - Question/prompt text.
-- `A` - Array of correct answers shown on the answer side.
-- `O` - Optional array of all answer options shown on the question side. Use this for multiple-choice scrape sources.
-
-The player also accepts imported browser-app decks with this static schema:
-
-```json
-{
-  "id": "oo-words",
-  "name": "\"OO\" Words",
-  "description": "20 simple words that contain the 'oo' sound.",
-  "cards": [
-    { "front": { "text": "zoo" }, "back": { "text": "We saw lions at the zoo." } }
-  ]
-}
-```
-
-When scraping a new source, prefer generating one deck object keyed by official objective IDs, such as `1.1` or `4.6`. If the source provides practice tests instead of objective IDs, create a normalized objective-grouped deck and point `menu.json` at that normalized file.
-
-## Project Layout
-
-- `hugo.toml` - Hugo site configuration
-- `content/tests/` - practice test routes
-- `layouts/` - Hugo templates
-- `static/js/flashcards.js` - card state, deck loading, navigation, and progress
-- `static/css/flashcards.css` - app styling
-- `static/assets/menu.json` - exam/chapter/section menu data
-- `static/assets/Network+/` - Network+ deck JSON files
-- `static/assets/Security+/` - Security+ objective PDF and deck JSON files
-- `static/assets/Reading/` - early reading decks imported from the browser app
-- `static/audio/` - browser-served sound effects
-- `.github/workflows/deploy-pages.yml` - GitHub Pages deployment
+Then run the specific script and finish with `npm test`.

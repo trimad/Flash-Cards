@@ -1,16 +1,27 @@
 {{ define "main" }}
   <main class="home">
     <section class="home-panel">
-      <p class="eyebrow">Deck Library</p>
-      <h1>Choose a deck.</h1>
-      <p class="home-intro">Pick any flashcard set and start reviewing. This app can hold certification prep, reading practice, personal notes, or whatever you want to learn next.</p>
+      <div class="home-hero">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="status-dot"></span> Your personal study space</p>
+          <h1>Learn it.<br><em>Keep it.</em></h1>
+          <p class="home-intro">Focused flashcards, smart review, and zero distractions. Your progress stays on this device and every deck works offline.</p>
+          <div class="hero-meta" aria-label="Application highlights"><span>Offline ready</span><span>Private by design</span><span>Controller friendly</span></div>
+        </div>
+        <div class="hero-card-stack" aria-hidden="true">
+          <div class="hero-study-card hero-study-card--back"><span>02</span></div>
+          <div class="hero-study-card hero-study-card--middle"><span>01</span></div>
+          <div class="hero-study-card hero-study-card--front"><small>ACTIVE RECALL</small><strong>What will you<br>master today?</strong><i>Tap a deck to begin →</i></div>
+        </div>
+      </div>
+      <div class="library-heading"><div><p class="eyebrow">Deck library</p><h2>Pick up where curiosity leads.</h2></div><span>{{ len (where (where site.RegularPages "Section" "tests") "Draft" "ne" true) }} curated decks</span></div>
       <div class="test-grid">
-        {{ range where (where site.RegularPages "Section" "tests") "Draft" "ne" true }}
-          <a class="test-card" href="{{ .RelPermalink }}" style="--accent: {{ .Params.accent | default "#6E298D" }}">
-            <small>Deck</small>
+        {{ range $index, $page := where (where site.RegularPages "Section" "tests") "Draft" "ne" true }}
+          <a class="test-card" href="{{ .RelPermalink }}" style="--deck-accent: {{ .Params.accent | default "#7c3aed" }}">
+            <div class="test-card__top"><small>Deck {{ printf "%02d" (add $index 1) }}</small><span class="deck-arrow" aria-hidden="true">↗</span></div>
             <span>{{ .Title }}</span>
             <p>{{ .Params.deckdescription | default "Open this flashcard deck and review at your own pace." }}</p>
-            <strong>Open deck</strong>
+            <strong><i></i>Start studying</strong>
           </a>
         {{ end }}
       </div>

@@ -1,6 +1,7 @@
 (function () {
   var modal = document.getElementById("welcome-modal");
   var closeButton = document.getElementById("welcome-modal-close");
+  var dismissKey = "flashcards.welcomeDismissed.v2";
   var previousFocus = null;
 
   if (!modal) {
@@ -8,7 +9,9 @@
   }
 
   bindModal();
-  openModal();
+  if (!hasDismissedWelcome()) {
+    openModal();
+  }
 
   function bindModal() {
     modal.addEventListener("click", function (event) {
@@ -50,9 +53,26 @@
     }
 
     modal.hidden = true;
+    rememberDismissal();
 
     if (previousFocus && document.contains(previousFocus)) {
       previousFocus.focus();
+    }
+  }
+
+  function hasDismissedWelcome() {
+    try {
+      return window.localStorage.getItem(dismissKey) === "true";
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function rememberDismissal() {
+    try {
+      window.localStorage.setItem(dismissKey, "true");
+    } catch (error) {
+      // Welcome persistence is a convenience; the app should keep working without storage.
     }
   }
 

@@ -1,558 +1,558 @@
 {
-    "3.1": [
-        {
-            "Q": "Diagram symbols",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Standard operating procedures/work instructions",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Logical vs. physical diagrams",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Rack diagrams",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Change management documentation",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Wiring and port locations",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "IDF/MDF documentation",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Labeling",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Network configuration and performance baselines",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": " Inventory management",
-            "A": [
-                "",
-                ""
-            ]
-        }
-    ],
-    "3.2": [
-        {
-            "Q": "Fault tolerance",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "High availability",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Load balancing",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "NIC teaming",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Port aggregation",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Clustering",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Power management",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Battery backups/UPS",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Power generators",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Dual power supplies",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": " Redundant circuits",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Cold sites",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Warm sites",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Hot sites",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Full Backups",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Differential Backups",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Incremental Backups",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Snapshots",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "MTTR",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "MTBF",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "SLA requirements",
-            "A": [
-                "",
-                ""
-            ]
-        }
-    ],
-    "3.3": [
-        {
-            "Q": "Log reviewing",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Port scanning",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Vulnerability scanning",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Patch Management",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Rollback",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Reviewing baselines",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Packet/traffic analysis",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Notifications",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Alerts",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "SIEM",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "SNMP monitors",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "MIB",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Error rate",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Utilization",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Packet drops",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Bandwidth/throughput",
-            "A": [
-                "",
-                ""
-            ]
-        }
-    ],
-    "3.4": [
-        {
-            "Q": "VPN",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "IPSec",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "SSL/TLS/DTLS",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Site-to-site",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Client-to-site",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "RDP",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "SSH",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "VNC",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Telnet",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "HTTPS/management URL",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Remote file access",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "FTP/FTPS",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "SFTP",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "TFTP",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Out-of-band management",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": " Modem",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Console router",
-            "A": [
-                "",
-                ""
-            ]
-        }
-    ],
-    "3.5": [
-        {
-            "Q": "Privileged user agreement",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Password policy",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "On-boarding/off-boarding procedures",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Licensing restrictions",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "International export controls",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Data loss prevention",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Remote access policies",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Incident response policies",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "BYOD",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "AUP",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "NDA",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "System life cycle",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Asset disposal",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Safety procedures and policies",
-            "A": [
-                "",
-                ""
-            ]
-        }
-    ]
+  "3.1": [
+    {
+      "Q": "Diagram symbols",
+      "A": [
+        "Standardized icons representing routers, switches, firewalls, servers, and links in network diagrams",
+        "Consistent symbols make diagrams readable across teams (e.g., Cisco icon set)"
+      ]
+    },
+    {
+      "Q": "Standard operating procedures/work instructions",
+      "A": [
+        "Documented step-by-step processes for routine tasks",
+        "Ensure consistent, repeatable operations and simplify training and audits"
+      ]
+    },
+    {
+      "Q": "Logical vs. physical diagrams",
+      "A": [
+        "Physical diagrams show actual hardware, ports, and cable runs",
+        "Logical diagrams show IP subnets, VLANs, and traffic flows"
+      ]
+    },
+    {
+      "Q": "Rack diagrams",
+      "A": [
+        "Show equipment placement in racks by rack unit (U)",
+        "Document power, airflow, and physical location for maintenance"
+      ]
+    },
+    {
+      "Q": "Change management documentation",
+      "A": [
+        "Records of proposed and completed changes: reason, plan, rollback, approval",
+        "Reduces outages by making changes reviewable and reversible"
+      ]
+    },
+    {
+      "Q": "Wiring and port locations",
+      "A": [
+        "Documentation mapping wall jacks and patch panel ports to switch ports",
+        "Essential for troubleshooting and moves/adds/changes"
+      ]
+    },
+    {
+      "Q": "IDF/MDF documentation",
+      "A": [
+        "Main Distribution Frame: primary wiring/equipment room",
+        "Intermediate Distribution Frames: per-floor closets uplinked to the MDF; documentation covers layout and cross-connects"
+      ]
+    },
+    {
+      "Q": "Labeling",
+      "A": [
+        "Marking cables, ports, patch panels, and equipment with consistent IDs",
+        "Speeds troubleshooting and prevents accidental disconnects"
+      ]
+    },
+    {
+      "Q": "Network configuration and performance baselines",
+      "A": [
+        "Saved configurations and normal performance metrics (throughput, utilization, latency)",
+        "Comparing current behavior to the baseline reveals anomalies"
+      ]
+    },
+    {
+      "Q": " Inventory management",
+      "A": [
+        "Tracking hardware/software assets, serials, licenses, and lifecycle",
+        "Supports budgeting, patching, warranty, and audit needs"
+      ]
+    }
+  ],
+  "3.2": [
+    {
+      "Q": "Fault tolerance",
+      "A": [
+        "The ability to keep operating when a component fails",
+        "Achieved with redundant hardware, links, power, and data paths"
+      ]
+    },
+    {
+      "Q": "High availability",
+      "A": [
+        "Designing for maximum uptime (e.g., 99.999%)",
+        "Redundancy plus automatic failover; measured against SLA targets"
+      ]
+    },
+    {
+      "Q": "Load balancing",
+      "A": [
+        "Distributing work across multiple servers/links",
+        "Improves performance and removes single points of failure"
+      ]
+    },
+    {
+      "Q": "NIC teaming",
+      "A": [
+        "Combining multiple network adapters on one host",
+        "Provides bandwidth aggregation and/or failover for server connectivity"
+      ]
+    },
+    {
+      "Q": "Port aggregation",
+      "A": [
+        "Bonding multiple switch links into one logical link (LACP/802.3ad)",
+        "Increases bandwidth between switches and provides link redundancy"
+      ]
+    },
+    {
+      "Q": "Clustering",
+      "A": [
+        "Grouping servers to act as a single system",
+        "Provides failover (active/passive) or scale-out (active/active) capacity"
+      ]
+    },
+    {
+      "Q": "Power management",
+      "A": [
+        "Planning and monitoring power delivery to network equipment",
+        "Includes UPS, generators, redundant circuits, and PDU monitoring"
+      ]
+    },
+    {
+      "Q": "Battery backups/UPS",
+      "A": [
+        "Uninterruptible Power Supply: battery power during outages",
+        "Bridges short outages and allows graceful shutdown; conditions power"
+      ]
+    },
+    {
+      "Q": "Power generators",
+      "A": [
+        "Provide long-term power during extended outages",
+        "Take over after UPS bridges the transfer gap; require fuel and testing"
+      ]
+    },
+    {
+      "Q": "Dual power supplies",
+      "A": [
+        "Redundant PSUs in one device fed from separate circuits",
+        "Device keeps running if one supply or feed fails"
+      ]
+    },
+    {
+      "Q": " Redundant circuits",
+      "A": [
+        "Separate electrical feeds (ideally separate providers/panels)",
+        "Prevents a single breaker or utility failure from taking equipment down"
+      ]
+    },
+    {
+      "Q": "Cold sites",
+      "A": [
+        "Backup facility with space and power but no configured equipment",
+        "Cheapest option; longest recovery time (days+)"
+      ]
+    },
+    {
+      "Q": "Warm sites",
+      "A": [
+        "Backup facility with hardware in place but data restored at failover",
+        "Middle cost; recovery in hours to a day"
+      ]
+    },
+    {
+      "Q": "Hot sites",
+      "A": [
+        "Fully equipped duplicate facility with near-live data replication",
+        "Most expensive; recovery in minutes"
+      ]
+    },
+    {
+      "Q": "Full Backups",
+      "A": [
+        "Copy all selected data every run",
+        "Simplest restore (one set) but slowest backup and most storage"
+      ]
+    },
+    {
+      "Q": "Differential Backups",
+      "A": [
+        "Copy everything changed since the last full backup",
+        "Restore = last full + latest differential; grows until next full"
+      ]
+    },
+    {
+      "Q": "Incremental Backups",
+      "A": [
+        "Copy only changes since the last backup of any type",
+        "Fastest backups, least storage; restore needs full + every incremental"
+      ]
+    },
+    {
+      "Q": "Snapshots",
+      "A": [
+        "Point-in-time image of a VM or filesystem",
+        "Near-instant capture and rollback; not a substitute for real backups"
+      ]
+    },
+    {
+      "Q": "MTTR",
+      "A": [
+        "Mean Time To Repair",
+        "Average time to restore a failed component to service"
+      ]
+    },
+    {
+      "Q": "MTBF",
+      "A": [
+        "Mean Time Between Failures",
+        "Average operating time between failures; a reliability metric"
+      ]
+    },
+    {
+      "Q": "SLA requirements",
+      "A": [
+        "Service Level Agreement commitments: uptime, response time, resolution time",
+        "Define measurable targets and penalties with providers or between teams"
+      ]
+    }
+  ],
+  "3.3": [
+    {
+      "Q": "Log reviewing",
+      "A": [
+        "Regularly examining system/network logs for errors and security events",
+        "Detects failures and attacks early; centralize with syslog/SIEM"
+      ]
+    },
+    {
+      "Q": "Port scanning",
+      "A": [
+        "Probing hosts to find open TCP/UDP ports and services",
+        "Used to verify firewall policy and find unexpected services (e.g., Nmap)"
+      ]
+    },
+    {
+      "Q": "Vulnerability scanning",
+      "A": [
+        "Automated checks for known weaknesses and missing patches",
+        "Non-intrusive assessment (e.g., Nessus, OpenVAS); drives remediation"
+      ]
+    },
+    {
+      "Q": "Patch Management",
+      "A": [
+        "Testing and deploying software/firmware updates on a schedule",
+        "Closes vulnerabilities while controlling change risk"
+      ]
+    },
+    {
+      "Q": "Rollback",
+      "A": [
+        "Reverting to the previous configuration/version after a failed change",
+        "Requires saved configs/backups; a core part of change plans"
+      ]
+    },
+    {
+      "Q": "Reviewing baselines",
+      "A": [
+        "Comparing current performance/config to recorded normal values",
+        "Reveals drift, degradation, or compromise"
+      ]
+    },
+    {
+      "Q": "Packet/traffic analysis",
+      "A": [
+        "Capturing and inspecting packets or flow data",
+        "Wireshark/tcpdump for deep inspection; NetFlow for traffic patterns"
+      ]
+    },
+    {
+      "Q": "Notifications",
+      "A": [
+        "Messages generated by monitoring systems about events",
+        "Email/SMS/chat delivery keeps staff informed of state changes"
+      ]
+    },
+    {
+      "Q": "Alerts",
+      "A": [
+        "High-priority notifications triggered by thresholds or failures",
+        "Should be actionable; tuned to avoid alert fatigue"
+      ]
+    },
+    {
+      "Q": "SIEM",
+      "A": [
+        "Security Information and Event Management",
+        "Aggregates and correlates logs across systems for security detection and compliance"
+      ]
+    },
+    {
+      "Q": "SNMP monitors",
+      "A": [
+        "Poll devices via Simple Network Management Protocol",
+        "Read interface counters/health via OIDs; v3 adds authentication and encryption"
+      ]
+    },
+    {
+      "Q": "MIB",
+      "A": [
+        "Management Information Base",
+        "The hierarchical database of OIDs a device exposes to SNMP"
+      ]
+    },
+    {
+      "Q": "Error rate",
+      "A": [
+        "Percentage of frames/packets with errors (CRC, alignment)",
+        "Rising errors indicate cabling, duplex, or hardware problems"
+      ]
+    },
+    {
+      "Q": "Utilization",
+      "A": [
+        "Percentage of available bandwidth or resource in use",
+        "Sustained high utilization signals congestion and capacity needs"
+      ]
+    },
+    {
+      "Q": "Packet drops",
+      "A": [
+        "Packets discarded due to congestion, errors, or policy",
+        "Cause retransmissions and poor performance; watch queue/interface drops"
+      ]
+    },
+    {
+      "Q": "Bandwidth/throughput",
+      "A": [
+        "Bandwidth: theoretical link capacity",
+        "Throughput: actual data transfer achieved; the gap reveals overhead or problems"
+      ]
+    }
+  ],
+  "3.4": [
+    {
+      "Q": "VPN",
+      "A": [
+        "Virtual Private Network: encrypted tunnel over an untrusted network",
+        "Provides confidentiality/integrity for remote access and site links"
+      ]
+    },
+    {
+      "Q": "IPSec",
+      "A": [
+        "IP-layer security suite: AH (integrity) and ESP (encryption)",
+        "Tunnel mode for site-to-site; transport mode host-to-host; IKE negotiates keys"
+      ]
+    },
+    {
+      "Q": "SSL/TLS/DTLS",
+      "A": [
+        "TLS secures TCP application traffic (HTTPS); SSL is its deprecated predecessor",
+        "DTLS provides TLS security over UDP (VPNs, real-time apps)"
+      ]
+    },
+    {
+      "Q": "Site-to-site",
+      "A": [
+        "VPN connecting entire networks via gateway devices",
+        "Always-on tunnel between offices; transparent to end users"
+      ]
+    },
+    {
+      "Q": "Client-to-site",
+      "A": [
+        "Remote-access VPN from an individual device to the network",
+        "User authenticates via VPN client (or clientless SSL portal)"
+      ]
+    },
+    {
+      "Q": "RDP",
+      "A": [
+        "Remote Desktop Protocol (TCP 3389)",
+        "Graphical remote control of Windows systems"
+      ]
+    },
+    {
+      "Q": "SSH",
+      "A": [
+        "Secure Shell (TCP 22)",
+        "Encrypted CLI access, tunneling, and file transfer (SCP/SFTP); replaces Telnet"
+      ]
+    },
+    {
+      "Q": "VNC",
+      "A": [
+        "Virtual Network Computing (TCP 5900)",
+        "Cross-platform graphical remote control; secure it with tunneling"
+      ]
+    },
+    {
+      "Q": "Telnet",
+      "A": [
+        "Legacy remote terminal protocol (TCP 23)",
+        "Sends everything in cleartext including passwords — use SSH instead"
+      ]
+    },
+    {
+      "Q": "HTTPS/management URL",
+      "A": [
+        "Web-based device administration over TLS (TCP 443)",
+        "Preferred over HTTP for management interfaces"
+      ]
+    },
+    {
+      "Q": "Remote file access",
+      "A": [
+        "Transferring files to/from remote systems",
+        "FTP/FTPS, SFTP, TFTP, and SMB/NFS shares"
+      ]
+    },
+    {
+      "Q": "FTP/FTPS",
+      "A": [
+        "FTP: cleartext file transfer (TCP 20/21)",
+        "FTPS adds TLS encryption to FTP"
+      ]
+    },
+    {
+      "Q": "SFTP",
+      "A": [
+        "SSH File Transfer Protocol (TCP 22)",
+        "Encrypted file transfer within an SSH session; unrelated to FTP"
+      ]
+    },
+    {
+      "Q": "TFTP",
+      "A": [
+        "Trivial FTP (UDP 69)",
+        "Minimal unauthenticated transfer for firmware/config on the LAN"
+      ]
+    },
+    {
+      "Q": "Out-of-band management",
+      "A": [
+        "Managing devices via a path separate from production traffic",
+        "Console/serial servers or dedicated management network; works during outages"
+      ]
+    },
+    {
+      "Q": " Modem",
+      "A": [
+        "Analog dial-up device used for out-of-band access",
+        "Legacy emergency access to console ports at remote sites"
+      ]
+    },
+    {
+      "Q": "Console router",
+      "A": [
+        "Terminal/console server aggregating many serial console ports",
+        "Provides remote out-of-band CLI access to network devices"
+      ]
+    }
+  ],
+  "3.5": [
+    {
+      "Q": "Privileged user agreement",
+      "A": [
+        "Policy defining acceptable behavior for admin-level accounts",
+        "Acknowledges elevated access, logging, and consequences of misuse"
+      ]
+    },
+    {
+      "Q": "Password policy",
+      "A": [
+        "Rules for password length, complexity, history, and lockout",
+        "Balances security with usability; encourages passphrases/MFA"
+      ]
+    },
+    {
+      "Q": "On-boarding/off-boarding procedures",
+      "A": [
+        "Standard steps for granting access to new hires and revoking it at departure",
+        "Prevents orphaned accounts and lingering access"
+      ]
+    },
+    {
+      "Q": "Licensing restrictions",
+      "A": [
+        "Terms limiting how software may be installed and used",
+        "Track seats/subscriptions to stay compliant and pass audits"
+      ]
+    },
+    {
+      "Q": "International export controls",
+      "A": [
+        "Laws restricting export of certain technology (e.g., strong encryption)",
+        "Compliance matters when shipping equipment or software across borders"
+      ]
+    },
+    {
+      "Q": "Data loss prevention",
+      "A": [
+        "Controls that detect and block unauthorized data exfiltration",
+        "Monitors email, web, USB for sensitive data (PII, PCI) leaving the org"
+      ]
+    },
+    {
+      "Q": "Remote access policies",
+      "A": [
+        "Rules for connecting remotely: approved methods, MFA, device posture",
+        "Defines who may connect, from where, and with what protections"
+      ]
+    },
+    {
+      "Q": "Incident response policies",
+      "A": [
+        "Defined steps for handling security incidents",
+        "Identify, contain, eradicate, recover, and document lessons learned"
+      ]
+    },
+    {
+      "Q": "BYOD",
+      "A": [
+        "Bring Your Own Device",
+        "Personal devices on the network governed by MDM/enrollment and usage policy"
+      ]
+    },
+    {
+      "Q": "AUP",
+      "A": [
+        "Acceptable Use Policy",
+        "Defines permitted use of company systems and networks; signed by users"
+      ]
+    },
+    {
+      "Q": "NDA",
+      "A": [
+        "Non-Disclosure Agreement",
+        "Legal contract protecting confidential information shared with staff/partners"
+      ]
+    },
+    {
+      "Q": "System life cycle",
+      "A": [
+        "Stages from procurement through deployment, maintenance, and disposal",
+        "Plan upgrades and end-of-life before support lapses"
+      ]
+    },
+    {
+      "Q": "Asset disposal",
+      "A": [
+        "Secure retirement of equipment and media",
+        "Wipe or destroy storage; document chain of custody and recycling"
+      ]
+    },
+    {
+      "Q": "Safety procedures and policies",
+      "A": [
+        "Rules protecting people and equipment: lifting, ESD, electrical, fire suppression",
+        "Includes MSDS handling and emergency procedures"
+      ]
+    }
+  ]
 }

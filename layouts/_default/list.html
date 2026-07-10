@@ -1,22 +1,14 @@
 {{ define "main" }}
   <main class="home">
     <section class="home-panel">
-      <p class="eyebrow">Deck Library</p>
-      <h1>Choose a deck.</h1>
-      <p class="home-intro">Pick any flashcard set and start reviewing. This app can hold certification prep, reading practice, personal notes, or whatever you want to learn next.</p>
+      <div class="home-hero home-hero--compact"><div class="hero-copy"><p class="eyebrow"><span class="status-dot"></span> Study library</p><h1>Choose your<br><em>next focus.</em></h1><p class="home-intro">Every deck is available offline after your first visit. Progress is stored privately on this device.</p></div></div>
+      <div class="library-heading"><div><p class="eyebrow">Available now</p><h2>Study decks</h2></div><span>{{ len (where .Pages "Draft" "ne" true) }} curated decks</span></div>
       <div class="test-grid">
-        {{ range where .Pages "Draft" "ne" true }}
-          <a class="test-card" href="{{ .RelPermalink }}" style="--accent: {{ .Params.accent | default "#6E298D" }}">
-            <small>Deck</small>
-            <span>{{ .Title }}</span>
-            <p>{{ .Params.deckdescription | default "Open this flashcard deck and review at your own pace." }}</p>
-            <strong>Open deck</strong>
-          </a>
+        {{ range $index, $page := where .Pages "Draft" "ne" true }}
+          <a class="test-card" href="{{ .RelPermalink }}" style="--deck-accent: {{ .Params.accent | default "#7c3aed" }}"><div class="test-card__top"><small>Deck {{ printf "%02d" (add $index 1) }}</small><span class="deck-arrow" aria-hidden="true">↗</span></div><span>{{ .Title }}</span><p>{{ .Params.deckdescription | default "Open this flashcard deck and review at your own pace." }}</p><strong><i></i>Start studying</strong></a>
         {{ end }}
       </div>
     </section>
   </main>
-  {{ if eq .Section "tests" }}
-    {{ partial "welcome-modal.html" . }}
-  {{ end }}
+  {{ if eq .Section "tests" }}{{ partial "welcome-modal.html" . }}{{ end }}
 {{ end }}

@@ -31,13 +31,18 @@ jobs:
           hugo-version: "0.123.7"
           extended: true
 
-      - name: Build site
-        run: hugo --minify --destination public
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validate and build site
+        run: npm test
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./public
+          path: ./docs
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4

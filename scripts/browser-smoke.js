@@ -31,11 +31,18 @@ async function main() {
     await client.send('Runtime.enable');
 
     await smokeThemeSelector(client, `${origin}${pagesPrefix}/`);
+    await smokeGlobalSearch(client, `${origin}${pagesPrefix}/`);
+    await smokeDeckEditor(client, `${origin}${pagesPrefix}/`);
+    await smokeControllerPanels(client, `${origin}${pagesPrefix}/tests/network-plus/`);
     await smokeResetProgress(client, `${origin}${pagesPrefix}/tests/network-plus/`);
     await smokeCardAnimations(client, `${origin}${pagesPrefix}/tests/network-plus/`);
+    await smokeAnswerSideOptions(client, `${origin}${pagesPrefix}/tests/tech-plus-fc0-u71/`);
+    await captureMobileAnswerOptions(client, `${origin}${pagesPrefix}/tests/tech-plus-fc0-u71/`);
+    await captureDesktopQa(client, `${origin}${pagesPrefix}/tests/network-plus/`);
+    await smokeMobilePwa(client, `${origin}${pagesPrefix}/tests/network-plus/`);
 
     await client.close();
-    console.log('Browser smoke checks passed for theme selector, reset progress, and card animations.');
+    console.log('Browser smoke checks passed for theme selector, global search, deck editor, controller panels, reset progress, card animations, touch gestures, and iPhone PWA layout.');
   } finally {
     await closeServer(server);
     await stopChrome(chrome);
@@ -70,8 +77,8 @@ async function smokeThemeSelector(client, url) {
   assert.equal(initial.backdropHidden, true, 'theme backdrop should start hidden');
   assert.deepEqual(
     initial.choices.map((choice) => choice.theme).sort(),
-    ['asuka', 'nerv', 'rei', 'shinji'],
-    'theme choices should include all Evangelion palettes'
+    ['amoled', 'asuka', 'dark', 'light', 'nerv', 'rei', 'shinji'],
+    'theme choices should include Evangelion and productivity palettes'
   );
 
   const afterSelection = await evaluate(client, `(() => {
@@ -105,7 +112,122 @@ async function smokeThemeSelector(client, url) {
   assert.equal(afterSelection.dialogHidden, true, 'theme dialog should close via the close button');
 
   await navigate(client, url);
-  await waitFor(client, `document.documentElement.dataset.theme === 'asuka'`, 'stored Asuka theme to apply after reload');
+  await waitFor(client, `document.documentElement && document.documentElement.dataset.theme === 'asuka'`, 'stored Asuka theme to apply after reload');
+}
+
+async function smokeGlobalSearch(client, url) {
+  await navigate(client, url);
+  await waitFor(client, 'document.readyState === "complete"', 'home page to finish loading for search');
+  const state = await evaluate(client, `new Promise((resolve) => {
+    document.querySelector('[data-global-search-open]').click();
+    const input = document.querySelector('[data-global-search-input]');
+    input.value = 'subnet';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    const started = Date.now();
+    const timer = setInterval(() => {
+      const results = Array.from(document.querySelectorAll('.search-result'));
+      if (results.length || Date.now() - started > 6000) {
+        clearInterval(timer);
+        resolve({
+          hidden: document.querySelector('[data-global-search-dialog]').hidden,
+          count: results.length,
+          first: results[0] ? results[0].textContent : '',
+          status: document.querySelector('[data-global-search-status]').textContent
+        });
+      }
+    }, 100);
+  })`);
+  assert.equal(state.hidden, false, 'global search dialog should open');
+  assert.ok(state.count > 0, `global search should return results for subnet: ${state.status}`);
+  assert.match(state.first, /subnet/i, 'global search results should include highlighted matching content');
+}
+
+async function smokeDeckEditor(client, url) {
+  await navigate(client, url);
+  await waitFor(client, 'document.readyState === "complete"', 'home page to finish loading for editor');
+  const state = await evaluate(client, `(() => {
+    document.querySelector('[data-deck-editor-open]').click();
+    document.querySelector('[data-editor-name]').value = 'Smoke Deck';
+    document.querySelector('[data-editor-id]').value = 'smoke-deck';
+    document.querySelector('[data-editor-source]').value = 'Q: Front\\nA: Back';
+    document.querySelector('[data-editor-preview]').click();
+    return {
+      hidden: document.querySelector('[data-deck-editor-dialog]').hidden,
+      output: document.querySelector('[data-editor-output]').textContent
+    };
+  })()`);
+  assert.equal(state.hidden, false, 'deck editor dialog should open');
+  assert.match(state.output, /smoke-deck/, 'deck editor should preview exported deck JSON');
+  assert.match(state.output, /Front/, 'deck editor should parse markdown-style cards');
+}
+
+async function smokeControllerPanels(client, url) {
+  await navigate(client, url);
+  await waitFor(
+    client,
+    `document.readyState === 'complete' && document.querySelector('.section-button:not(:disabled)') && document.querySelector('#card-front') && !document.querySelector('#card-front').textContent.includes('Loading')`,
+    'Network+ deck cards and TOC to load for controller panel checks'
+  );
+
+  const state = await evaluate(client, `new Promise((resolve) => {
+    const nav = window.FlashCardsControllerNav;
+    const beforeFront = document.querySelector('#card-front').textContent;
+    nav.focusPanel('toc');
+    const tocStart = document.activeElement.textContent;
+    nav.move('down');
+    const tocAfterDown = document.activeElement.textContent;
+    const tocClass = document.activeElement.classList.contains('is-controller-focused');
+    nav.activate();
+    requestAnimationFrame(() => {
+      const afterTocSelection = {
+        activePanel: document.querySelector('.app-shell').dataset.controllerPanel,
+        tocActive: document.querySelector('[data-controller-panel="toc"]').classList.contains('is-controller-active'),
+        studyActive: document.querySelector('.study-panel[data-controller-panel="study"]').classList.contains('is-controller-active'),
+        studyClass: document.querySelector('.study-panel[data-controller-panel="study"]').className,
+        genericStudyClass: document.querySelector('[data-controller-panel="study"]').className,
+        panelCount: document.querySelectorAll('[data-controller-panel="study"]').length,
+        commandBar: document.querySelector('#controller-command-bar').textContent,
+        activeElementId: document.activeElement.id,
+        activeElementText: document.activeElement.textContent
+      };
+      document.querySelector('[data-theme-settings-button]').click();
+      requestAnimationFrame(() => {
+        const beforeModalFront = document.querySelector('#card-front').textContent;
+        const modalContext = nav.context();
+        const focusedBeforeModalMove = document.activeElement.textContent;
+        nav.move('right');
+        const focusedAfterModalMove = document.activeElement.textContent;
+        nav.closeModal();
+        requestAnimationFrame(() => resolve({
+          beforeFront,
+          beforeModalFront,
+          tocStart,
+          tocAfterDown,
+          tocClass,
+          afterTocSelection,
+          modalContext,
+          focusedBeforeModalMove,
+          focusedAfterModalMove,
+          themeDialogHidden: document.querySelector('[data-theme-dialog]').hidden,
+          afterFront: document.querySelector('#card-front').textContent,
+          roving: nav.rovingIndexes()
+        }));
+      });
+    });
+  })`);
+
+  assert.notEqual(state.tocAfterDown, state.tocStart, 'TOC roving focus should move deterministically to the next section');
+  assert.equal(state.tocClass, true, 'roving focus should mark the focused TOC section visually');
+  assert.equal(state.afterTocSelection.activePanel, 'study', 'selecting a TOC section should return controller focus to Study');
+  assert.equal(state.afterTocSelection.tocActive, false, 'TOC panel should not remain controller-active after section selection');
+  assert.equal(state.afterTocSelection.studyActive, true, `Study panel should become controller-active after section selection: ${JSON.stringify(state.afterTocSelection)}`);
+  assert.match(state.afterTocSelection.commandBar, /RB\s*Study active/i, 'controller command bar should explain active Study focus');
+  assert.equal(state.afterTocSelection.activeElementId, 'flip-card', 'Study panel focus should restore to the primary Flip control');
+  assert.equal(state.modalContext, 'modal', 'open dialogs should take controller context priority over Study');
+  assert.notEqual(state.focusedAfterModalMove, state.focusedBeforeModalMove, 'modal roving focus should move within the dialog');
+  assert.equal(state.themeDialogHidden, true, 'controller B/close should close the active modal');
+  assert.equal(state.afterFront, state.beforeModalFront, 'modal controller input should not leak into card navigation');
+  assert.ok(state.roving.toc >= 0 && state.roving.study >= 0 && state.roving.modal >= 0, 'controller roving indexes should be tracked per context');
 }
 
 async function smokeResetProgress(client, url) {
@@ -198,6 +320,182 @@ async function smokeCardAnimations(client, url) {
   }
 }
 
+async function smokeAnswerSideOptions(client, url) {
+  await navigate(client, url);
+  await waitFor(
+    client,
+    `document.readyState === 'complete' && document.querySelectorAll('#card-front .option-list .option-button').length > 1`,
+    'multiple-choice card options to load'
+  );
+
+  const state = await evaluate(client, `(() => {
+    const front = Array.from(document.querySelectorAll('#card-front .option-button')).map((button) => button.textContent.trim());
+    const backItems = Array.from(document.querySelectorAll('#card-back .option-list li'));
+    return {
+      front,
+      back: backItems.map((item) => item.textContent.trim()),
+      correct: backItems.filter((item) => item.classList.contains('is-correct')).length,
+      muted: backItems.filter((item) => item.classList.contains('is-muted')).length,
+      disabled: backItems.filter((item) => item.querySelector('.option-button')?.disabled).length,
+      frontScale: parseFloat(getComputedStyle(document.querySelector('#card-front')).getPropertyValue('--card-content-scale')),
+      backScale: parseFloat(getComputedStyle(document.querySelector('#card-back')).getPropertyValue('--card-content-scale')),
+      frontFontSize: parseFloat(getComputedStyle(document.querySelector('#card-front .option-button')).fontSize),
+      backFontSize: parseFloat(getComputedStyle(document.querySelector('#card-back .option-button')).fontSize),
+      frontHeights: Array.from(document.querySelectorAll('#card-front .option-list li')).map((item) => Math.round(item.getBoundingClientRect().height * 10) / 10),
+      backHeights: backItems.map((item) => Math.round(item.getBoundingClientRect().height * 10) / 10)
+    };
+  })()`);
+
+  assert.deepEqual(state.back, state.front, 'answer side should repeat the same options in the same order');
+  assert.ok(state.correct > 0, 'answer side should identify at least one correct option');
+  assert.ok(state.muted > 0, 'answer side should mute incorrect options');
+  assert.equal(state.disabled, state.back.length, 'answer-side options should be presentational, not re-answerable');
+  assert.equal(state.backScale, state.frontScale, `front and back option faces should share one content scale: ${JSON.stringify(state)}`);
+  assert.ok(Math.abs(state.backFontSize - state.frontFontSize) <= 0.1, `front and back option text should be the same size: ${JSON.stringify(state)}`);
+  assert.deepEqual(state.backHeights, state.frontHeights, `front and back option buttons should have matching heights: ${JSON.stringify(state)}`);
+}
+
+async function captureMobileAnswerOptions(client, url) {
+  await client.send('Emulation.setDeviceMetricsOverride', {
+    width: 390,
+    height: 844,
+    deviceScaleFactor: 2,
+    mobile: true,
+    screenWidth: 390,
+    screenHeight: 844
+  });
+  await client.send('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
+  try {
+    await navigate(client, url);
+    await waitFor(client, `document.querySelectorAll('#card-back .option-list--answer li').length > 1`, 'answer-side options to load in iPhone viewport');
+    await evaluate(client, `document.querySelector('#flip-card').click()`);
+    await waitFor(client, `document.querySelector('#card').classList.contains('is-flipped')`, 'multiple-choice card to flip to its answer side');
+    await evaluate(client, `new Promise((resolve) => setTimeout(resolve, 760))`);
+    const screenshot = await client.send('Page.captureScreenshot', { format: 'png', fromSurface: true });
+    const screenshotPath = path.join(os.tmpdir(), 'flash-cards-answer-options-iphone-qa.png');
+    fs.writeFileSync(screenshotPath, Buffer.from(screenshot.data, 'base64'));
+    console.log(`Answer options visual QA screenshot: ${screenshotPath}`);
+  } finally {
+    await client.send('Emulation.clearDeviceMetricsOverride');
+    await client.send('Emulation.setTouchEmulationEnabled', { enabled: false });
+  }
+}
+
+async function captureDesktopQa(client, url) {
+  await client.send('Emulation.setDeviceMetricsOverride', {
+    width: 1440,
+    height: 1000,
+    deviceScaleFactor: 1,
+    mobile: false,
+    screenWidth: 1440,
+    screenHeight: 1000
+  });
+  try {
+    await navigate(client, url);
+    await waitFor(client, `document.readyState === 'complete' && document.querySelector('#card-front') && !document.querySelector('#card-front').textContent.includes('Loading')`, 'desktop deck visual QA state');
+    const screenshot = await client.send('Page.captureScreenshot', { format: 'png', fromSurface: true });
+    const screenshotPath = path.join(os.tmpdir(), 'flash-cards-desktop-qa.png');
+    fs.writeFileSync(screenshotPath, Buffer.from(screenshot.data, 'base64'));
+    console.log(`Desktop visual QA screenshot: ${screenshotPath}`);
+  } finally {
+    await client.send('Emulation.clearDeviceMetricsOverride');
+  }
+}
+
+async function smokeMobilePwa(client, url) {
+  await client.send('Emulation.setDeviceMetricsOverride', {
+    width: 390,
+    height: 844,
+    deviceScaleFactor: 2,
+    mobile: true,
+    screenWidth: 390,
+    screenHeight: 844
+  });
+  await client.send('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
+
+  try {
+    await navigate(client, url);
+    await waitFor(
+      client,
+      `document.readyState === 'complete' && document.querySelector('#card-front') && !document.querySelector('#card-front').textContent.includes('Loading')`,
+      'Network+ deck to load in iPhone viewport'
+    );
+
+    await evaluate(client, `new Promise((resolve) => {
+      document.querySelector('[data-mobile-deck-toggle]').click();
+      setTimeout(resolve, 380);
+    })`);
+    const deckScreenshot = await client.send('Page.captureScreenshot', { format: 'png', fromSurface: true });
+    const deckScreenshotPath = path.join(os.tmpdir(), 'flash-cards-deck-sheet-qa.png');
+    fs.writeFileSync(deckScreenshotPath, Buffer.from(deckScreenshot.data, 'base64'));
+    console.log(`Deck sheet visual QA screenshot: ${deckScreenshotPath}`);
+
+    const mobile = await evaluate(client, `(() => {
+      const card = document.querySelector('#card');
+      const utility = document.querySelector('.utility-nav');
+      const deckToggle = document.querySelector('[data-mobile-deck-toggle]');
+      const deckPanel = document.querySelector('#deck-navigator');
+      const activeSection = deckPanel.querySelector('.section-button.is-active');
+      const deckState = {
+        open: document.querySelector('.app-shell').classList.contains('is-mobile-deck-open'),
+        expanded: deckToggle.getAttribute('aria-expanded'),
+        width: deckPanel.getBoundingClientRect().width,
+        height: deckPanel.getBoundingClientRect().height,
+        activeSectionHeight: activeSection ? activeSection.getBoundingClientRect().height : 0
+      };
+      document.querySelector('[data-mobile-deck-close]').click();
+      const actions = Array.from(document.querySelectorAll('.card-actions button'));
+      const before = document.querySelector('#card-count').textContent;
+      card.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, pointerId: 91, pointerType: 'touch', clientX: 320, clientY: 400 }));
+      card.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, pointerId: 91, pointerType: 'touch', clientX: 90, clientY: 405 }));
+      return {
+        viewport: document.querySelector('meta[name="viewport"]')?.content || '',
+        appleCapable: document.querySelector('meta[name="apple-mobile-web-app-capable"]')?.content || '',
+        appleIcon: document.querySelector('link[rel="apple-touch-icon"]')?.getAttribute('href') || '',
+        manifest: document.querySelector('link[rel="manifest"]')?.getAttribute('href') || '',
+        horizontalOverflow: document.documentElement.scrollWidth - innerWidth,
+        cardWidth: card.getBoundingClientRect().width,
+        utilityPosition: getComputedStyle(utility).position,
+        utilityBottom: Math.round(innerHeight - utility.getBoundingClientRect().bottom),
+        utilityHeight: utility.getBoundingClientRect().height,
+        cardFontSize: parseFloat(getComputedStyle(document.querySelector('#card-front')).fontSize),
+        deckState,
+        deckClosed: !document.querySelector('.app-shell').classList.contains('is-mobile-deck-open'),
+        shortTargets: actions.filter((button) => button.getBoundingClientRect().height < 44).length,
+        swipeStarted: card.classList.contains('slide-out-next'),
+        before
+      };
+    })()`);
+
+    assert.match(mobile.viewport, /viewport-fit=cover/, 'viewport should opt into iPhone safe-area coverage');
+    assert.equal(mobile.appleCapable, 'yes', 'iOS standalone mode metadata should be enabled');
+    assert.match(mobile.appleIcon, /apple-touch-icon\.png/, 'iOS should receive a dedicated touch icon');
+    assert.match(mobile.manifest, /manifest\.webmanifest/, 'PWA manifest should remain linked');
+    assert.ok(mobile.horizontalOverflow <= 1, `iPhone layout should not overflow horizontally: ${mobile.horizontalOverflow}px`);
+    assert.ok(mobile.cardWidth >= 350 && mobile.cardWidth <= 390, `study card should fill the iPhone canvas without clipping: ${mobile.cardWidth}px`);
+    assert.equal(mobile.utilityPosition, 'fixed', 'mobile utility navigation should behave like a native bottom tab bar');
+    assert.ok(Math.abs(mobile.utilityBottom) <= 1, `mobile tab bar should dock to the viewport bottom: ${mobile.utilityBottom}px`);
+    assert.ok(mobile.utilityHeight >= 44 && mobile.utilityHeight <= 52, `mobile tab bar should be compact but touchable: ${mobile.utilityHeight}px`);
+    assert.ok(mobile.cardFontSize >= 32, `mobile card prompt should remain comfortably readable: ${mobile.cardFontSize}px`);
+    assert.equal(mobile.deckState.open, true, 'Deck button should open the mobile deck navigator');
+    assert.equal(mobile.deckState.expanded, 'true', 'Deck button should announce its expanded state');
+    assert.ok(mobile.deckState.width >= 360 && mobile.deckState.height >= 400, `Deck navigator should use a roomy native-style sheet: ${JSON.stringify(mobile.deckState)}`);
+    assert.ok(mobile.deckState.activeSectionHeight >= 44, 'Deck navigator sections should remain touch friendly');
+    assert.equal(mobile.deckClosed, true, 'Deck navigator scrim should close the sheet');
+    assert.equal(mobile.shortTargets, 0, 'primary card actions should retain at least 44px touch height');
+    assert.equal(mobile.swipeStarted, true, 'a left touch swipe should start next-card navigation');
+
+    await waitFor(client, `!document.querySelector('#card').className.includes('slide-')`, 'touch swipe animation to finish');
+    const screenshot = await client.send('Page.captureScreenshot', { format: 'png', fromSurface: true });
+    const screenshotPath = path.join(os.tmpdir(), 'flash-cards-iphone-qa.png');
+    fs.writeFileSync(screenshotPath, Buffer.from(screenshot.data, 'base64'));
+    console.log(`iPhone visual QA screenshot: ${screenshotPath}`);
+  } finally {
+    await client.send('Emulation.clearDeviceMetricsOverride');
+    await client.send('Emulation.setTouchEmulationEnabled', { enabled: false });
+  }
+}
+
 async function navigate(client, url) {
   await client.send('Page.navigate', { url });
 }
@@ -225,7 +523,9 @@ async function evaluate(client, expression) {
   });
 
   if (response.exceptionDetails) {
-    throw new Error(`Browser evaluation failed: ${response.exceptionDetails.text}`);
+    const exception = response.exceptionDetails.exception;
+    const detail = exception && (exception.description || exception.value);
+    throw new Error(`Browser evaluation failed: ${response.exceptionDetails.text}${detail ? `\n${detail}` : ''}`);
   }
 
   return response.result ? response.result.value : undefined;

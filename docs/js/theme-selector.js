@@ -1,6 +1,6 @@
 (function () {
   var THEME_STORAGE_KEY = "flashcards.evangelionTheme";
-  var THEMES = ["rei", "shinji", "asuka", "nerv"];
+  var THEMES = ["rei", "shinji", "asuka", "nerv", "light", "dark", "amoled"];
   var DEFAULT_THEME = "nerv";
 
   function safeStoredTheme() {

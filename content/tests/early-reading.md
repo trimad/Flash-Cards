@@ -1,7 +1,7 @@
 ---
 title: "Early Reading"
 testName: "Early Reading"
-testIndex: 4
+testIndex: 2
 accent: "#ff7330"
 deckDescription: "Simple word and sound practice for early readers."
 ---

@@ -1,570 +1,570 @@
 {
-    "4.1": [
-        {
-            "Q": "Motion detection",
-            "A": [
-                "Detection"
-            ]
-        },
-        {
-            "Q": "Video surveillance",
-            "A": [
-                "Detection"
-            ]
-        },
-        {
-            "Q": "Asset tracking tags",
-            "A": [
-                "Detection"
-            ]
-        },
-        {
-            "Q": "Tamper detection",
-            "A": [
-                "Detection"
-            ]
-        },
-        {
-            "Q": "Badges",
-            "A": [
-                "Prevention"
-            ]
-        },
-        {
-            "Q": "Biometrics",
-            "A": [
-                "Prevention"
-            ]
-        },
-        {
-            "Q": "Smart cards",
-            "A": [
-                "Prevention"
-            ]
-        },
-        {
-            "Q": "Key fob",
-            "A": [
-                "Prevention"
-            ]
-        },
-        {
-            "Q": "Locks",
-            "A": [
-                "Prevention"
-            ]
-        }
-    ],
-    "4.2": [
-        {
-            "Q": "RADIUS",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "TACAS+",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Kerberos",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Single sign-on",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Local authentication",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "LDAP",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Certificates",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Auditing and logging",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Multifactor authentication",
-            "A": [
-                "Something you know",
-                "Something you have",
-                "Something you are",
-                "Somewhere you are",
-                "Something you do"
-            ]
-        },
-        {
-            "Q": "802.1x",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "NAC",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Port security",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "MAC filtering",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Captive portal",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Access control lists",
-            "A": [
-                "",
-                ""
-            ]
-        }
-    ],
-    "4.3": [
-        {
-            "Q": "WPA",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "WPA2",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "TKIP-RC4",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "CCMP-AES",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "EAP",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "PEAP",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "EAP-FAST",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "EAP-TLS",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "\nShared or open\n",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Preshared key",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "MAC filtering",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Geofencing",
-            "A": [
-                "",
-                ""
-            ]
-        }
-    ],
-    "4.4": [
-        {
-            "Q": "Reflective attack",
-            "A": [
-                "DOS"
-            ]
-        },
-        {
-            "Q": "Amplified attack",
-            "A": [
-                "DOS"
-            ]
-        },
-        {
-            "Q": "Distributed attack",
-            "A": [
-                "DOS"
-            ]
-        },
-        {
-            "Q": "Social engineering",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Insider threat",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Logic bomb",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Rogue access point",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Evil twin",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "War-driving",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Phishing",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Ransomware",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "DNS poisoning",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "ARP poisoning",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Spoofing",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Deauthentication",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Brute force",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "VLAN hopping",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Man-in-the-middle",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Exploits vs. vulnerabilities",
-            "A": [
-                "",
-                ""
-            ]
-        }
-    ],
-    "4.5": [
-        {
-            "Q": "Changing default credentials",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Avoiding common passwords",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Upgrading firmware",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Patching and updates",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "File hashing",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Disabling unnecessary services",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Using secure protocols",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Generating new keys",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Disabling IP ports",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Device ports",
-            "A": [
-                "",
-                ""
-            ]
-        }
-    ],
-    "4.6": [
-        {
-            "Q": "Signature management",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Device hardening",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Change native VLAN",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Spanning tree",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Flood guard",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "BPDU guard",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Root guard",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "DHCP",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "DMZ",
-            "A": [
-                "Network segmentation"
-            ]
-        },
-        {
-            "Q": "VLAN",
-            "A": [
-                "Network segmentation"
-            ]
-        },
-        {
-            "Q": "Privileged user account",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "File integrity monitoring",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Role separation",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Restricting access via ACLs",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Honeypot/honeynet",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Penetration testing",
-            "A": [
-                "",
-                ""
-            ]
-        }
-    ]
+  "4.1": [
+    {
+      "Q": "Motion detection",
+      "A": [
+        "Detection"
+      ]
+    },
+    {
+      "Q": "Video surveillance",
+      "A": [
+        "Detection"
+      ]
+    },
+    {
+      "Q": "Asset tracking tags",
+      "A": [
+        "Detection"
+      ]
+    },
+    {
+      "Q": "Tamper detection",
+      "A": [
+        "Detection"
+      ]
+    },
+    {
+      "Q": "Badges",
+      "A": [
+        "Prevention"
+      ]
+    },
+    {
+      "Q": "Biometrics",
+      "A": [
+        "Prevention"
+      ]
+    },
+    {
+      "Q": "Smart cards",
+      "A": [
+        "Prevention"
+      ]
+    },
+    {
+      "Q": "Key fob",
+      "A": [
+        "Prevention"
+      ]
+    },
+    {
+      "Q": "Locks",
+      "A": [
+        "Prevention"
+      ]
+    }
+  ],
+  "4.2": [
+    {
+      "Q": "RADIUS",
+      "A": [
+        "Remote Authentication Dial-In User Service: centralized AAA protocol",
+        "Uses UDP 1812 for authentication/authorization and 1813 for accounting; common for VPN, Wi-Fi, and 802.1X"
+      ]
+    },
+    {
+      "Q": "TACAS+",
+      "A": [
+        "TACACS+ is Cisco's centralized AAA protocol for device administration",
+        "Uses TCP 49 and separates authentication, authorization, and accounting; encrypts the full payload"
+      ]
+    },
+    {
+      "Q": "Kerberos",
+      "A": [
+        "Ticket-based network authentication protocol",
+        "Uses a Key Distribution Center and time-limited tickets; default port TCP/UDP 88"
+      ]
+    },
+    {
+      "Q": "Single sign-on",
+      "A": [
+        "Authentication model where one login grants access to multiple applications",
+        "Usually implemented with federation protocols such as SAML, OAuth/OIDC, or Kerberos"
+      ]
+    },
+    {
+      "Q": "Local authentication",
+      "A": [
+        "User accounts stored and verified directly on the device or system",
+        "Simple fallback method, but difficult to manage consistently at scale"
+      ]
+    },
+    {
+      "Q": "LDAP",
+      "A": [
+        "Lightweight Directory Access Protocol used to query and manage directory services",
+        "Commonly used with Active Directory; LDAP uses 389, LDAPS uses 636"
+      ]
+    },
+    {
+      "Q": "Certificates",
+      "A": [
+        "Digital documents binding an identity to a public key",
+        "Used for TLS, 802.1X/EAP-TLS, VPNs, and device/user authentication"
+      ]
+    },
+    {
+      "Q": "Auditing and logging",
+      "A": [
+        "Recording security-relevant events such as logons, configuration changes, and access attempts",
+        "Supports accountability, incident response, and compliance"
+      ]
+    },
+    {
+      "Q": "Multifactor authentication",
+      "A": [
+        "Something you know",
+        "Something you have",
+        "Something you are",
+        "Somewhere you are",
+        "Something you do"
+      ]
+    },
+    {
+      "Q": "802.1x",
+      "A": [
+        "Port-based Network Access Control",
+        "Uses supplicant, authenticator, and authentication server (often RADIUS) to control wired/wireless access"
+      ]
+    },
+    {
+      "Q": "NAC",
+      "A": [
+        "Network Access Control validates device/user posture before allowing network access",
+        "Can enforce VLAN assignment, quarantine, remediation, or denial"
+      ]
+    },
+    {
+      "Q": "Port security",
+      "A": [
+        "Switch feature limiting which MAC addresses may use a port",
+        "Can restrict max MAC count, sticky learn addresses, and shutdown/restrict on violation"
+      ]
+    },
+    {
+      "Q": "MAC filtering",
+      "A": [
+        "Allows or blocks devices based on MAC address",
+        "Weak control because MAC addresses can be spoofed; useful only as a minor layer"
+      ]
+    },
+    {
+      "Q": "Captive portal",
+      "A": [
+        "Web page users must interact with before network access is granted",
+        "Common on guest Wi-Fi for terms acceptance, payment, or authentication"
+      ]
+    },
+    {
+      "Q": "Access control lists",
+      "A": [
+        "Rules permitting or denying traffic based on source/destination, protocol, and ports",
+        "Applied on routers, firewalls, switches, and hosts to enforce policy"
+      ]
+    }
+  ],
+  "4.3": [
+    {
+      "Q": "WPA",
+      "A": [
+        "Wi-Fi Protected Access: interim replacement for WEP",
+        "Uses TKIP and is considered deprecated compared with WPA2/WPA3"
+      ]
+    },
+    {
+      "Q": "WPA2",
+      "A": [
+        "Wi-Fi Protected Access 2",
+        "Uses AES-CCMP and supports Personal (PSK) or Enterprise (802.1X) authentication"
+      ]
+    },
+    {
+      "Q": "TKIP-RC4",
+      "A": [
+        "Temporal Key Integrity Protocol using RC4 encryption",
+        "Legacy WPA mechanism; deprecated because RC4/TKIP are weak"
+      ]
+    },
+    {
+      "Q": "CCMP-AES",
+      "A": [
+        "Counter Mode CBC-MAC Protocol using AES",
+        "Standard strong encryption/integrity mechanism for WPA2"
+      ]
+    },
+    {
+      "Q": "EAP",
+      "A": [
+        "Extensible Authentication Protocol framework for network authentication",
+        "Used by 802.1X; supports methods such as PEAP, EAP-TLS, and EAP-FAST"
+      ]
+    },
+    {
+      "Q": "PEAP",
+      "A": [
+        "Protected EAP wraps EAP authentication inside a TLS tunnel",
+        "Commonly uses server certificate plus user/password authentication inside the tunnel"
+      ]
+    },
+    {
+      "Q": "EAP-FAST",
+      "A": [
+        "Cisco EAP method using Protected Access Credentials",
+        "Designed as a tunnelled authentication method without relying on client certificates"
+      ]
+    },
+    {
+      "Q": "EAP-TLS",
+      "A": [
+        "Certificate-based EAP method using mutual TLS",
+        "Very strong 802.1X authentication; requires client and server certificates"
+      ]
+    },
+    {
+      "Q": "\nShared or open\n",
+      "A": [
+        "Open Wi-Fi has no encryption/authentication and exposes traffic to eavesdropping",
+        "Shared-key/PSK networks use one shared passphrase for all users, making revocation harder"
+      ]
+    },
+    {
+      "Q": "Preshared key",
+      "A": [
+        "A shared Wi-Fi/VPN secret configured on clients and infrastructure",
+        "Simple for small networks but scales poorly and must be rotated if disclosed"
+      ]
+    },
+    {
+      "Q": "MAC filtering",
+      "A": [
+        "Allows or blocks devices based on MAC address",
+        "Weak control because MAC addresses can be spoofed; useful only as a minor layer"
+      ]
+    },
+    {
+      "Q": "Geofencing",
+      "A": [
+        "Security or access policy based on physical/geographic location",
+        "Can allow, deny, or alert when devices/users operate outside approved areas"
+      ]
+    }
+  ],
+  "4.4": [
+    {
+      "Q": "Reflective attack",
+      "A": [
+        "DOS"
+      ]
+    },
+    {
+      "Q": "Amplified attack",
+      "A": [
+        "DOS"
+      ]
+    },
+    {
+      "Q": "Distributed attack",
+      "A": [
+        "DOS"
+      ]
+    },
+    {
+      "Q": "Social engineering",
+      "A": [
+        "Manipulating people into revealing information or performing unsafe actions",
+        "Examples: pretexting, tailgating, phishing, impersonation"
+      ]
+    },
+    {
+      "Q": "Insider threat",
+      "A": [
+        "Security risk from an authorized user or trusted party",
+        "Can be malicious, negligent, or compromised; mitigated with least privilege and monitoring"
+      ]
+    },
+    {
+      "Q": "Logic bomb",
+      "A": [
+        "Malicious code triggered by a condition such as date, time, or event",
+        "Often planted by insiders to execute later"
+      ]
+    },
+    {
+      "Q": "Rogue access point",
+      "A": [
+        "Unauthorized AP connected to the network",
+        "Bypasses security controls and may expose internal network access"
+      ]
+    },
+    {
+      "Q": "Evil twin",
+      "A": [
+        "Malicious AP impersonating a legitimate SSID",
+        "Tricks users into connecting so attackers can intercept or manipulate traffic"
+      ]
+    },
+    {
+      "Q": "War-driving",
+      "A": [
+        "Searching for Wi-Fi networks while moving through an area",
+        "Used to map SSIDs, security types, and signal strength"
+      ]
+    },
+    {
+      "Q": "Phishing",
+      "A": [
+        "Fraudulent messages/sites that trick users into revealing credentials or installing malware",
+        "Variants include spear phishing, whaling, smishing, and vishing"
+      ]
+    },
+    {
+      "Q": "Ransomware",
+      "A": [
+        "Malware that encrypts or blocks access to data and demands payment",
+        "Mitigated with backups, patching, least privilege, and user training"
+      ]
+    },
+    {
+      "Q": "DNS poisoning",
+      "A": [
+        "Corrupting DNS responses/cache to redirect users to malicious addresses",
+        "DNSSEC and secure resolvers help mitigate it"
+      ]
+    },
+    {
+      "Q": "ARP poisoning",
+      "A": [
+        "Sending forged ARP messages to associate attacker MAC with another host's IP",
+        "Enables man-in-the-middle on local networks; mitigated by DAI/static ARP"
+      ]
+    },
+    {
+      "Q": "Spoofing",
+      "A": [
+        "Faking an identity such as IP, MAC, email sender, or caller ID",
+        "Used to bypass trust or hide attack origin"
+      ]
+    },
+    {
+      "Q": "Deauthentication",
+      "A": [
+        "Sending spoofed 802.11 deauth frames to disconnect Wi-Fi clients",
+        "Used for denial-of-service or to force reassociation to an evil twin"
+      ]
+    },
+    {
+      "Q": "Brute force",
+      "A": [
+        "Trying many credential combinations until one works",
+        "Mitigate with account lockout, MFA, rate limiting, and strong passwords"
+      ]
+    },
+    {
+      "Q": "VLAN hopping",
+      "A": [
+        "Attack that sends traffic into a VLAN the attacker should not access",
+        "Mitigate by disabling DTP, using access ports, and changing the native VLAN"
+      ]
+    },
+    {
+      "Q": "Man-in-the-middle",
+      "A": [
+        "Attacker secretly intercepts/relays communication between parties",
+        "Mitigate with TLS, certificate validation, VPNs, and secure switching features"
+      ]
+    },
+    {
+      "Q": "Exploits vs. vulnerabilities",
+      "A": [
+        "A vulnerability is a weakness that could be abused",
+        "An exploit is the code or method that takes advantage of that weakness"
+      ]
+    }
+  ],
+  "4.5": [
+    {
+      "Q": "Changing default credentials",
+      "A": [
+        "Replace vendor default usernames/passwords before connecting devices to production",
+        "Default credentials are publicly known and commonly exploited"
+      ]
+    },
+    {
+      "Q": "Avoiding common passwords",
+      "A": [
+        "Reject weak, reused, and predictable passwords",
+        "Use long passphrases, MFA, and banned-password lists"
+      ]
+    },
+    {
+      "Q": "Upgrading firmware",
+      "A": [
+        "Install vendor firmware updates for devices",
+        "Fixes security flaws, stability issues, and feature bugs"
+      ]
+    },
+    {
+      "Q": "Patching and updates",
+      "A": [
+        "Apply operating system, application, and device updates regularly",
+        "Reduces exposure to known vulnerabilities"
+      ]
+    },
+    {
+      "Q": "File hashing",
+      "A": [
+        "Computing a digest (e.g., SHA-256) to verify file integrity",
+        "Detects tampering or corruption by comparing expected and actual hashes"
+      ]
+    },
+    {
+      "Q": "Disabling unnecessary services",
+      "A": [
+        "Turn off services/daemons not required for business function",
+        "Reduces attack surface and resource use"
+      ]
+    },
+    {
+      "Q": "Using secure protocols",
+      "A": [
+        "Prefer encrypted/authenticated protocols such as SSH, HTTPS, SFTP, SNMPv3",
+        "Avoid Telnet, HTTP management, FTP, and SNMPv1/v2c where possible"
+      ]
+    },
+    {
+      "Q": "Generating new keys",
+      "A": [
+        "Create fresh cryptographic keys/certificates during deployment or after compromise",
+        "Avoid using factory/default/private keys shared across devices"
+      ]
+    },
+    {
+      "Q": "Disabling IP ports",
+      "A": [
+        "Close unused TCP/UDP ports and block them with host/network firewalls",
+        "Limits reachable services and reduces attack surface"
+      ]
+    },
+    {
+      "Q": "Device ports",
+      "A": [
+        "Disable unused physical switch/device ports",
+        "Prevents unauthorized plug-in access; combine with port security/802.1X"
+      ]
+    }
+  ],
+  "4.6": [
+    {
+      "Q": "Signature management",
+      "A": [
+        "Keeping IDS/IPS/AV signatures current",
+        "Ensures detection tools recognize new threats and reduce false positives"
+      ]
+    },
+    {
+      "Q": "Device hardening",
+      "A": [
+        "Reducing attack surface by applying secure configuration baselines",
+        "Includes disabling unused services, strong management access, logging, and patching"
+      ]
+    },
+    {
+      "Q": "Change native VLAN",
+      "A": [
+        "Move the 802.1Q native VLAN away from VLAN 1 and unused VLANs",
+        "Reduces VLAN hopping and accidental untagged traffic exposure"
+      ]
+    },
+    {
+      "Q": "Spanning tree",
+      "A": [
+        "Layer 2 protocol preventing switching loops",
+        "STP/RSTP blocks redundant paths and reconverges on failures"
+      ]
+    },
+    {
+      "Q": "Flood guard",
+      "A": [
+        "Switch protection against excessive flooding or broadcast storms",
+        "Limits abnormal traffic that can overwhelm a LAN"
+      ]
+    },
+    {
+      "Q": "BPDU guard",
+      "A": [
+        "Disables a port if Bridge Protocol Data Units are received unexpectedly",
+        "Protects edge/access ports from rogue switches affecting spanning tree"
+      ]
+    },
+    {
+      "Q": "Root guard",
+      "A": [
+        "Prevents a switch port from becoming the STP root path",
+        "Protects the intended root bridge from being displaced"
+      ]
+    },
+    {
+      "Q": "DHCP",
+      "A": [
+        "Dynamic Host Configuration Protocol assigns IP settings automatically",
+        "Security controls include DHCP snooping to block rogue DHCP servers"
+      ]
+    },
+    {
+      "Q": "DMZ",
+      "A": [
+        "Network segmentation"
+      ]
+    },
+    {
+      "Q": "VLAN",
+      "A": [
+        "Network segmentation"
+      ]
+    },
+    {
+      "Q": "Privileged user account",
+      "A": [
+        "Account with elevated administrative permissions",
+        "Should use least privilege, MFA, auditing, and separate admin identities"
+      ]
+    },
+    {
+      "Q": "File integrity monitoring",
+      "A": [
+        "Detects unauthorized changes to critical files and configurations",
+        "Compares current hashes/metadata to a known-good baseline"
+      ]
+    },
+    {
+      "Q": "Role separation",
+      "A": [
+        "Dividing duties so no single person has unchecked control",
+        "Reduces fraud/mistakes; common in change approval and security administration"
+      ]
+    },
+    {
+      "Q": "Restricting access via ACLs",
+      "A": [
+        "Using access control lists to limit who or what can reach resources",
+        "Apply least privilege by source, destination, protocol, and port"
+      ]
+    },
+    {
+      "Q": "Honeypot/honeynet",
+      "A": [
+        "Decoy system/network designed to attract attackers",
+        "Used for detection, research, and distraction; should be isolated from production"
+      ]
+    },
+    {
+      "Q": "Penetration testing",
+      "A": [
+        "Authorized simulated attack to validate security controls",
+        "Finds exploitable weaknesses and provides prioritized remediation evidence"
+      ]
+    }
+  ]
 }

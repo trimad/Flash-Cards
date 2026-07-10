@@ -1,34 +1,16 @@
 <div id="welcome-modal" class="welcome-modal" role="dialog" aria-modal="true" aria-labelledby="welcome-modal-title" hidden>
   <div class="welcome-modal__scrim" data-welcome-close></div>
   <section class="welcome-modal__panel" aria-describedby="welcome-modal-copy">
-    <button id="welcome-modal-close" class="welcome-modal__close" type="button" aria-label="Close welcome dialog" data-welcome-close>
-      <span aria-hidden="true">X</span>
-    </button>
-    <p class="eyebrow">Flash Card Studio</p>
-    <h2 id="welcome-modal-title">Study Anything</h2>
-    <p id="welcome-modal-copy" class="welcome-modal__lead">
-      This is a flexible flashcard app for whatever you want to learn. Choose a deck, flip each card to reveal the answer, and keep moving through your material at your own pace.
-    </p>
+    <button id="welcome-modal-close" class="welcome-modal__close" type="button" aria-label="Close welcome dialog" data-welcome-close><span aria-hidden="true">×</span></button>
+    <div class="welcome-orbit" aria-hidden="true"><span></span><i></i></div>
+    <p class="eyebrow">Welcome to your study studio</p>
+    <h2 id="welcome-modal-title">Make knowledge<br><em>stick.</em></h2>
+    <p id="welcome-modal-copy" class="welcome-modal__lead">A focused flashcard experience built for deep recall. Choose a deck, reveal the answer, and rate what you remember.</p>
     <div class="welcome-modal__steps" aria-label="How to use this flash card app">
-      <div>
-        <span aria-hidden="true">1</span>
-        <strong>Pick a deck</strong>
-        <p>Start from the deck library and choose the topic you want to review.</p>
-      </div>
-      <div>
-        <span aria-hidden="true">2</span>
-        <strong>Flip and review</strong>
-        <p>Click a card, press Space, or use X on a controller to see the answer.</p>
-      </div>
-      <div>
-        <span aria-hidden="true">3</span>
-        <strong>Mark your recall</strong>
-        <p>Choose Right or Wrong so your progress and score stay visible while you practice.</p>
-      </div>
+      <div><span aria-hidden="true">01</span><strong>Choose a focus</strong><p>Pick a deck from your library and jump into any chapter.</p></div>
+      <div><span aria-hidden="true">02</span><strong>Recall, then reveal</strong><p>Think first. Tap the card or swipe up to reveal the answer.</p></div>
+      <div><span aria-hidden="true">03</span><strong>Build momentum</strong><p>Rate your recall and let progress stay saved on this device.</p></div>
     </div>
-    <div class="welcome-modal__footer">
-      <p>Progress saves in this browser. Keyboard, speech, mouse, and gamepad controls are ready when you are.</p>
-      <button class="welcome-modal__start primary" type="button" data-welcome-close>Choose a Deck</button>
-    </div>
+    <div class="welcome-modal__footer"><p><strong>Tip:</strong> Add this app to your iPhone Home Screen for a full-screen, offline study experience.</p><button class="welcome-modal__start primary" type="button" data-welcome-close>Enter the studio <span aria-hidden="true">→</span></button></div>
   </section>
 </div>

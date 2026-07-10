@@ -23,18 +23,19 @@ assert.match(baseLayout, /js\/theme-selector\.js/, 'base layout should load the 
 
 for (const theme of ['rei', 'shinji', 'asuka', 'nerv']) {
   assert.match(css, new RegExp(`html\\[data-theme="${theme}"\\]`), `CSS should define ${theme} theme variables`);
-  assert.match(css, new RegExp(`html\\[data-theme="${theme}"\\][\\s\\S]*--surface-base:`), `${theme} theme should define a polished surface base`);
-  assert.match(css, new RegExp(`html\\[data-theme="${theme}"\\][\\s\\S]*--header-bg:`), `${theme} theme should define a header treatment`);
-  assert.match(css, new RegExp(`html\\[data-theme="${theme}"\\][\\s\\S]*--card-bg:`), `${theme} theme should define card-face polish`);
-  assert.match(css, new RegExp(`html\\[data-theme="${theme}"\\][\\s\\S]*--button-bg:`), `${theme} theme should define button polish`);
-  assert.match(css, new RegExp(`html\\[data-theme="${theme}"\\][\\s\\S]*--theme-aura:`), `${theme} theme should define an atmospheric aura`);
   assert.match(js, new RegExp(`\\b${theme}\\b`), `theme selector script should recognize ${theme}`);
 }
 
+for (const token of ['--surface-solid:', '--surface-raised:', '--header-bg:', '--card-bg:', '--accent-rgb:']) {
+  assert.match(css, new RegExp(token), `premium theme system should define ${token}`);
+}
+assert.match(css, /html\[data-theme="rei"\][\s\S]*color-scheme:\s*light/, 'Rei should provide a polished light atmosphere');
+assert.match(css, /html\[data-theme="nerv"\][\s\S]*--accent:/, 'NERV should provide its signature accent');
 assert.doesNotMatch(css, /\.app-shell\s*\{[^}]*--accent:/s, 'app shell should not override the active theme accent');
-assert.match(css, /body\s*\{[\s\S]*var\(--bg-gradient\)/, 'body should use theme-specific background polish');
-assert.match(css, /\.site-header\s*\{[\s\S]*var\(--header-bg\)/, 'site header should use theme-specific header polish');
+assert.match(css, /body\s*\{[\s\S]*background:var\(--bg\)/, 'body should use the active theme background');
+assert.match(css, /\.site-header\s*\{[\s\S]*var\(--header-bg\)/, 'site header should use theme-specific glass treatment');
 assert.match(css, /\.card-face\s*\{[\s\S]*var\(--card-bg\)/, 'flash card faces should use theme-specific card polish');
+assert.match(css, /button\s*\{[\s\S]*var\(--surface-raised\)/, 'buttons should use the active theme surface system');
 assert.match(css, /\.theme-selector button::before/, 'theme buttons should include visual swatches for each theme');
 assert.match(js, /DEFAULT_THEME\s*=\s*"nerv"/, 'theme selector script should fall back to NERV by default');
 assert.match(js, /localStorage\.setItem\(THEME_STORAGE_KEY/, 'theme choices should persist to localStorage');

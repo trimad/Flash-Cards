@@ -1,54 +1,104 @@
 <!doctype html>
-<html lang="{{ site.LanguageCode }}" data-theme="nerv">
+<html lang="en-us" data-theme="nerv">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
+    <meta name="description" content="A focused, offline-ready study space for flashcards, quizzes, and spaced repetition.">
+    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#f4f4f5" media="(prefers-color-scheme: light)">
+    <meta name="color-scheme" content="dark light">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Flash Cards">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="manifest" href="{{ "manifest.webmanifest" | relURL }}">
+    <link rel="icon" type="image/svg+xml" href="{{ "icons/icon.svg" | relURL }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ "icons/apple-touch-icon.png" | relURL }}">
     <link rel="stylesheet" href="{{ "css/flashcards.css" | relURL }}">
     <script src="{{ "js/theme-selector.js" | relURL }}" defer></script>
     <script src="{{ "js/welcome-modal.js" | relURL }}" defer></script>
+    <script src="{{ "js/global-search.js" | relURL }}" defer></script>
+    <script src="{{ "js/deck-editor.js" | relURL }}" defer></script>
+    <script src="{{ "js/pwa.js" | relURL }}" defer></script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header">
-      <a class="brand" href="{{ site.Home.RelPermalink }}">Flash Cards</a>
+      <a class="brand" href="{{ site.Home.RelPermalink }}" aria-label="Flash Cards home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand-copy"><strong>Flash Cards</strong><small>Study Studio</small></span>
+      </a>
       <div class="header-tools">
         <nav class="test-nav" aria-label="Flashcard decks">
           {{ range where (where site.RegularPages "Section" "tests") "Draft" "ne" true }}
             <a href="{{ .RelPermalink }}" {{ if eq $.RelPermalink .RelPermalink }}aria-current="page"{{ end }}>{{ .Title }}</a>
           {{ end }}
         </nav>
-        <button class="settings-button" type="button" data-theme-settings-button aria-haspopup="dialog" aria-controls="theme-settings" aria-expanded="false">Settings</button>
+        <div class="utility-nav" aria-label="Application tools">
+          <button class="utility-button" type="button" data-global-search-open aria-haspopup="dialog" aria-controls="global-search-dialog" aria-label="Search cards">
+            <span class="tool-icon tool-icon--search" aria-hidden="true"></span><span class="tool-label">Search</span><span class="shortcut-hint">⌘ K</span>
+          </button>
+          <button class="utility-button" type="button" data-deck-editor-open aria-haspopup="dialog" aria-controls="deck-editor-dialog" aria-label="Open deck editor">
+            <span class="tool-icon tool-icon--edit" aria-hidden="true"></span><span class="tool-label">Editor</span>
+          </button>
+          <button class="utility-button pwa-install-button" type="button" data-pwa-install hidden aria-label="Install Flash Cards">
+            <span class="tool-icon tool-icon--install" aria-hidden="true"></span><span class="tool-label">Install</span>
+          </button>
+          <button class="settings-button" type="button" data-theme-settings-button aria-haspopup="dialog" aria-controls="theme-settings" aria-expanded="false" aria-label="Open settings">
+            <span class="tool-icon tool-icon--settings" aria-hidden="true"></span><span class="tool-label">Settings</span>
+          </button>
+        </div>
       </div>
     </header>
+    <div class="connection-pill" data-connection-status role="status" aria-live="polite" hidden></div>
     <div class="theme-dialog-backdrop" data-theme-dialog-backdrop hidden></div>
     <section class="theme-dialog" id="theme-settings" data-theme-dialog role="dialog" aria-modal="true" aria-labelledby="theme-settings-title" hidden>
       <div class="theme-dialog__panel">
         <div class="theme-dialog__header">
-          <div>
-            <p class="eyebrow">Interface settings</p>
-            <h2 id="theme-settings-title">Evangelion theme</h2>
-          </div>
+          <div><p class="eyebrow">Personalize</p><h2 id="theme-settings-title">Your study atmosphere</h2></div>
           <button class="theme-dialog__close" type="button" data-theme-dialog-close aria-label="Close settings">×</button>
         </div>
-        <fieldset class="theme-selector" aria-label="Evangelion theme">
-          <legend>Choose a pilot palette</legend>
+        <fieldset class="theme-selector" aria-label="Color theme">
+          <legend>Choose a palette</legend>
           <button type="button" data-theme-choice="rei" aria-pressed="false">Rei</button>
           <button type="button" data-theme-choice="shinji" aria-pressed="false">Shinji</button>
           <button type="button" data-theme-choice="asuka" aria-pressed="false">Asuka</button>
           <button type="button" data-theme-choice="nerv" aria-pressed="true">NERV</button>
+          <button type="button" data-theme-choice="light" aria-pressed="false">Light</button>
+          <button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+          <button type="button" data-theme-choice="amoled" aria-pressed="false">AMOLED</button>
         </fieldset>
         {{ if and (eq .Section "tests") .IsPage }}
           <section class="settings-section" data-reset-progress-panel aria-labelledby="reset-progress-title">
-            <div>
-              <h3 id="reset-progress-title">Deck progress</h3>
-              <p>Clear saved scores, quiz answers, and studied-card progress for this deck in this browser.</p>
-            </div>
+            <div><h3 id="reset-progress-title">Deck progress</h3><p>Clear saved scores, quiz answers, and studied-card progress for this deck on this device.</p></div>
             <button class="danger-button" type="button" data-reset-progress>Reset progress</button>
             <p class="settings-section__status" data-reset-progress-status aria-live="polite"></p>
           </section>
         {{ end }}
       </div>
     </section>
-    {{ block "main" . }}{{ end }}
+    <section class="utility-dialog" id="global-search-dialog" data-global-search-dialog role="dialog" aria-modal="true" aria-labelledby="global-search-title" hidden>
+      <div class="utility-dialog__panel utility-dialog__panel--wide">
+        <div class="utility-dialog__header"><div><p class="eyebrow">Instant recall</p><h2 id="global-search-title">Find any card</h2></div><button class="theme-dialog__close" type="button" data-global-search-close aria-label="Close search">×</button></div>
+        <label class="search-box"><span>Search decks, chapters, prompts, and answers</span><input type="search" data-global-search-input placeholder="Try: VLAN, Kerberos, sight words, subnet…" autocomplete="off" autocapitalize="none" enterkeyhint="search"></label>
+        <div class="search-meta" data-global-search-status aria-live="polite">Press Ctrl+K or ⌘K to search from anywhere.</div>
+        <div class="search-results" data-global-search-results></div>
+      </div>
+    </section>
+    <section class="utility-dialog" id="deck-editor-dialog" data-deck-editor-dialog role="dialog" aria-modal="true" aria-labelledby="deck-editor-title" hidden>
+      <div class="utility-dialog__panel utility-dialog__panel--wide">
+        <div class="utility-dialog__header"><div><p class="eyebrow">Local authoring</p><h2 id="deck-editor-title">Deck editor</h2></div><button class="theme-dialog__close" type="button" data-deck-editor-close aria-label="Close editor">×</button></div>
+        <div class="editor-grid">
+          <label>Deck name <input data-editor-name type="text" placeholder="My custom deck"></label>
+          <label>Deck ID <input data-editor-id type="text" placeholder="my-custom-deck" autocapitalize="none"></label>
+          <label class="editor-wide">Cards JSON or Markdown<textarea data-editor-source rows="10" placeholder="Q: What is DNS?\nA: Domain Name System\n---\nQ: Port for HTTPS?\nA: TCP 443" autocapitalize="sentences"></textarea></label>
+          <div class="editor-actions"><button type="button" data-editor-preview>Preview</button><button type="button" data-editor-export class="primary">Export JSON</button><button type="button" data-editor-undo>Undo</button><button type="button" data-editor-redo>Redo</button></div>
+          <pre class="editor-preview" data-editor-output aria-live="polite"></pre>
+        </div>
+      </div>
+    </section>
+    <div id="main-content">{{ block "main" . }}{{ end }}</div>
   </body>
 </html>

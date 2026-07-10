@@ -20,12 +20,22 @@
     flipped: false,
     transitioning: false,
     skipNextSeenMark: false,
+    studyMode: "all",
+    activeControllerPanel: "study",
+    lastTocFocusKey: "",
+    preferStudyPrimaryFocus: false,
+    rovingIndexes: { toc: 0, study: 0, modal: 0 },
     gamepadCooldowns: {}
   };
+  var session = { startedAt: Date.now(), reviews: 0, correct: 0 };
   var cardFitFrame = 0;
+  var jsonCache = {};
 
   var els = {
     app: document.querySelector(".app-shell"),
+    tocPanel: document.querySelector("[data-controller-panel='toc']"),
+    studyPanel: document.querySelector("[data-controller-panel='study']"),
+    controllerCommandBar: document.getElementById("controller-command-bar"),
     toc: document.getElementById("toc"),
     overallLabel: document.getElementById("overall-label"),
     overallBar: document.getElementById("overall-bar"),
@@ -40,6 +50,15 @@
     right: document.getElementById("right-card"),
     wrong: document.getElementById("wrong-card"),
     next: document.getElementById("next-card"),
+    again: document.getElementById("again-card"),
+    hard: document.getElementById("hard-card"),
+    good: document.getElementById("good-card"),
+    easy: document.getElementById("easy-card"),
+    bookmark: document.getElementById("bookmark-card"),
+    suspend: document.getElementById("suspend-card"),
+    shuffle: document.getElementById("shuffle-mode"),
+    dueMode: document.getElementById("due-mode"),
+    sessionSummary: document.getElementById("session-summary"),
     count: document.getElementById("card-count"),
     audioPlayer: document.getElementById("audio-player"),
     sfxPlayer: document.getElementById("sfx-player"),
@@ -47,7 +66,9 @@
     controllerStatusLabel: document.getElementById("controller-status-label"),
     controllerStatusDetail: document.getElementById("controller-status-detail"),
     resetProgressButton: document.querySelector("[data-reset-progress]"),
-    resetProgressStatus: document.querySelector("[data-reset-progress-status]")
+    resetProgressStatus: document.querySelector("[data-reset-progress-status]"),
+    mobileDeckToggle: document.querySelector("[data-mobile-deck-toggle]"),
+    mobileDeckClosers: Array.from(document.querySelectorAll("[data-mobile-deck-close]"))
   };
 
   boot();
@@ -79,13 +100,18 @@
   }
 
   async function fetchJson(path) {
-    var response = await fetch(assetURL(path));
+    var url = assetURL(path);
 
-    if (!response.ok) {
-      throw new Error("Unable to load " + path + ": " + response.status);
+    if (!jsonCache[url]) {
+      jsonCache[url] = fetch(url).then(function (response) {
+        if (!response.ok) {
+          throw new Error("Unable to load " + path + ": " + response.status);
+        }
+        return response.json();
+      });
     }
 
-    return response.json();
+    return jsonCache[url];
   }
 
   function getCurrentTest() {
@@ -108,17 +134,14 @@
   }
 
   async function loadChapters(test) {
-    var loaded = [];
-
-    for (var i = 0; i < test.chapter.length; i++) {
-      var chapter = test.chapter[i];
+    return Promise.all(test.chapter.map(async function (chapter, i) {
       var deck = {};
 
       if (chapter.file) {
         deck = await fetchJson("assets/" + deckPath(test, chapter));
       }
 
-      loaded.push({
+      return {
         index: i,
         name: chapter.name,
         color: chapter.color || "#6E298D",
@@ -126,10 +149,8 @@
         sections: chapter.section || [],
         deck: normalizeDeck(deck),
         deckMeta: getDeckMeta(deck)
-      });
-    }
-
-    return loaded;
+      };
+    }));
   }
 
   function deckPath(test, chapter) {
@@ -236,8 +257,26 @@
   function bindControls() {
     bindTestNavSound();
 
+    if (els.mobileDeckToggle) {
+      els.mobileDeckToggle.addEventListener("click", function () {
+        setMobileDeckOpen(!els.app.classList.contains("is-mobile-deck-open"));
+      });
+    }
+    els.mobileDeckClosers.forEach(function (closer) {
+      closer.addEventListener("click", function () { setMobileDeckOpen(false, true); });
+    });
+    setMobileDeckOpen(false);
+
     els.prev.addEventListener("click", previousCard);
     els.next.addEventListener("click", nextCard);
+    if (els.again) els.again.addEventListener("click", function () { gradeSpacedRepetition("again"); });
+    if (els.hard) els.hard.addEventListener("click", function () { gradeSpacedRepetition("hard"); });
+    if (els.good) els.good.addEventListener("click", function () { gradeSpacedRepetition("good"); });
+    if (els.easy) els.easy.addEventListener("click", function () { gradeSpacedRepetition("easy"); });
+    if (els.bookmark) els.bookmark.addEventListener("click", toggleBookmark);
+    if (els.suspend) els.suspend.addEventListener("click", toggleSuspend);
+    if (els.shuffle) els.shuffle.addEventListener("click", jumpToRandomCard);
+    if (els.dueMode) els.dueMode.addEventListener("click", jumpToNextDueCard);
     els.flip.addEventListener("click", flipCard);
     els.speak.addEventListener("click", speakVisibleCard);
     els.right.addEventListener("click", function () {
@@ -249,8 +288,36 @@
     if (els.resetProgressButton && els.app && els.app.hasAttribute("data-enable-progress-reset")) {
       els.resetProgressButton.addEventListener("click", resetStoredProgress);
     }
+    var cardGesture = { pointerId: null, x: 0, y: 0, time: 0, suppressClickUntil: 0 };
+    els.card.addEventListener("pointerdown", function (event) {
+      if (event.pointerType === "mouse" || (event.target instanceof Element && event.target.closest("button, a"))) {
+        return;
+      }
+      cardGesture.pointerId = event.pointerId;
+      cardGesture.x = event.clientX;
+      cardGesture.y = event.clientY;
+      cardGesture.time = Date.now();
+    }, { passive: true });
+    els.card.addEventListener("pointerup", function (event) {
+      if (cardGesture.pointerId !== event.pointerId) return;
+      var deltaX = event.clientX - cardGesture.x;
+      var deltaY = event.clientY - cardGesture.y;
+      var elapsed = Date.now() - cardGesture.time;
+      cardGesture.pointerId = null;
+      if (elapsed > 650) return;
+      if (Math.abs(deltaX) > 54 && Math.abs(deltaX) > Math.abs(deltaY) * 1.15) {
+        cardGesture.suppressClickUntil = Date.now() + 450;
+        if (deltaX < 0) nextCard(); else previousCard();
+      } else if (deltaY < -54 && Math.abs(deltaY) > Math.abs(deltaX) * 1.15) {
+        cardGesture.suppressClickUntil = Date.now() + 450;
+        flipCard();
+      }
+    }, { passive: true });
+    els.card.addEventListener("pointercancel", function () {
+      cardGesture.pointerId = null;
+    }, { passive: true });
     els.card.addEventListener("click", function (event) {
-      if (event.target instanceof Element && event.target.closest("button, a")) {
+      if (Date.now() < cardGesture.suppressClickUntil || (event.target instanceof Element && event.target.closest("button, a"))) {
         return;
       }
 
@@ -281,6 +348,12 @@
       var key = event.key.toLowerCase();
       var focusedControl = event.target instanceof HTMLElement && /a|button/i.test(event.target.tagName);
 
+      if (event.key === "Escape" && els.app.classList.contains("is-mobile-deck-open")) {
+        event.preventDefault();
+        setMobileDeckOpen(false, true);
+        return;
+      }
+
       if (event.key === "ArrowLeft") {
         previousCard();
       } else if (event.key === "ArrowRight") {
@@ -302,7 +375,10 @@
       }
     });
 
-    window.addEventListener("resize", scheduleCardContentFit);
+    window.addEventListener("resize", function () {
+      setMobileDeckOpen(false);
+      scheduleCardContentFit();
+    });
 
     window.addEventListener("gamepadconnected", function (event) {
       syncConnectedGamepadStatus(event.gamepad);
@@ -313,14 +389,38 @@
     });
 
     syncConnectedGamepadStatus();
+    exposeControllerDebugApi();
     pollGamepads();
+  }
+
+  function setMobileDeckOpen(open, restoreFocus) {
+    if (!els.app || !els.mobileDeckToggle || !els.tocPanel) return;
+    var isMobile = window.matchMedia("(max-width: 800px)").matches;
+    var shouldOpen = Boolean(open && isMobile);
+    els.app.classList.toggle("is-mobile-deck-open", shouldOpen);
+    els.mobileDeckToggle.setAttribute("aria-expanded", shouldOpen ? "true" : "false");
+    els.tocPanel.setAttribute("aria-hidden", shouldOpen || !isMobile ? "false" : "true");
+    els.mobileDeckClosers.forEach(function (closer) { closer.tabIndex = shouldOpen ? 0 : -1; });
+
+    if (shouldOpen) {
+      window.requestAnimationFrame(function () {
+        var active = els.tocPanel.querySelector(".section-button.is-active") || els.tocPanel.querySelector(".section-button:not(:disabled)");
+        if (active) {
+          active.focus({ preventScroll: true });
+          active.scrollIntoView({ block: "nearest" });
+        }
+      });
+    } else if (restoreFocus && els.mobileDeckToggle) {
+      els.mobileDeckToggle.focus({ preventScroll: true });
+    }
+    scheduleCardContentFit();
   }
 
   function renderAll() {
     var chapter = currentChapter();
 
     if (chapter) {
-      els.app.style.setProperty("--accent", chapter.color);
+      els.app.style.setProperty("--deck-accent", chapter.color);
     }
 
     if (state.skipNextSeenMark) {
@@ -332,6 +432,7 @@
     renderProgress();
     renderCard();
     renderControls();
+    renderControllerPanelState();
     updateLocation();
     ensureFocusedElement();
     scheduleCardContentFit();
@@ -373,6 +474,8 @@
 
         button.type = "button";
         button.className = "section-button";
+        button.dataset.controllerTarget = "toc";
+        button.dataset.sectionKey = chapter.index + ":" + section.name;
         button.disabled = cards.length === 0;
         button.title = section.label ? section.name + " " + section.label : section.name;
         button.innerHTML =
@@ -448,6 +551,21 @@
     els.speak.disabled = state.transitioning || !hasCard;
     els.right.disabled = state.transitioning || !hasCard;
     els.wrong.disabled = state.transitioning || !hasCard;
+    if (els.again) els.again.disabled = state.transitioning || !hasCard;
+    if (els.hard) els.hard.disabled = state.transitioning || !hasCard;
+    if (els.good) els.good.disabled = state.transitioning || !hasCard;
+    if (els.easy) els.easy.disabled = state.transitioning || !hasCard;
+    if (els.bookmark) {
+      els.bookmark.disabled = !hasCard;
+      els.bookmark.classList.toggle("is-selected", hasCard && isBookmarked(currentSectionKey(), state.cardIndex));
+      els.bookmark.textContent = hasCard && isBookmarked(currentSectionKey(), state.cardIndex) ? "Bookmarked" : "Bookmark";
+    }
+    if (els.suspend) {
+      els.suspend.disabled = !hasCard;
+      els.suspend.classList.toggle("is-selected", hasCard && isSuspended(currentSectionKey(), state.cardIndex));
+      els.suspend.textContent = hasCard && isSuspended(currentSectionKey(), state.cardIndex) ? "Suspended" : "Suspend";
+    }
+    renderSessionSummary();
     els.right.classList.toggle("is-selected", Boolean(selfGrade && selfGrade.correct));
     els.wrong.classList.toggle("is-selected", Boolean(selfGrade && !selfGrade.correct));
   }
@@ -477,16 +595,22 @@
   }
 
   function fitCardContents() {
-    fitCardFace(els.front);
-    fitCardFace(els.back);
+    var frontScale = fitCardFace(els.front);
+    var backScale = fitCardFace(els.back);
+
+    if (els.front.classList.contains("has-options") && els.back.classList.contains("has-options")) {
+      var sharedScale = Math.min(frontScale, backScale).toFixed(3);
+      els.front.style.setProperty("--card-content-scale", sharedScale);
+      els.back.style.setProperty("--card-content-scale", sharedScale);
+    }
   }
 
   function fitCardFace(face) {
     if (!face) {
-      return;
+      return 1;
     }
 
-    var minScale = 0.42;
+    var minScale = window.matchMedia("(max-width: 800px)").matches ? 0.58 : 0.42;
     var scale = 1;
 
     face.style.setProperty("--card-content-scale", String(scale));
@@ -506,6 +630,8 @@
         break;
       }
     }
+
+    return scale;
   }
 
   function emptyMessage(message) {
@@ -595,12 +721,47 @@
     element.appendChild(renderQuizControls(card, quiz));
   }
 
+  function renderAnswerOptions(element, card, options) {
+    var list = document.createElement("ul");
+
+    element.classList.add("has-options");
+    element.classList.remove("has-plain-back");
+    element.appendChild(renderCardTypeBadge("Correct answer"));
+    list.className = "option-list option-list--answer";
+    list.setAttribute("aria-label", "Answer options");
+
+    options.forEach(function (option) {
+      var item = document.createElement("li");
+      var button = document.createElement("button");
+      var correct = isCorrectAnswer(card, option);
+
+      button.type = "button";
+      button.className = "option-button";
+      button.textContent = option;
+      button.disabled = true;
+      button.setAttribute("aria-disabled", "true");
+
+      item.classList.toggle("is-correct", correct);
+      item.classList.toggle("is-muted", !correct);
+      item.appendChild(button);
+      list.appendChild(item);
+    });
+
+    element.appendChild(list);
+  }
+
   function renderAnswers(element, answers, card) {
     var list = document.createElement("ul");
     var normalizedAnswers = answers || [];
+    var options = card && Array.isArray(card.O) ? card.O : [];
 
     element.innerHTML = "";
     element.classList.remove("has-options");
+
+    if (options.length) {
+      renderAnswerOptions(element, card, options);
+      return;
+    }
 
     if (card && card.plainBack && normalizedAnswers.length <= 1) {
       renderText(element, normalizedAnswers[0] || "");
@@ -622,10 +783,15 @@
 
   function selectSection(chapterIndex, sectionName) {
     stopPlayback();
+    setMobileDeckOpen(false);
     state.chapterIndex = chapterIndex;
     state.sectionName = sectionName;
+    state.lastTocFocusKey = chapterIndex + ":" + sectionName;
     state.cardIndex = 0;
     state.flipped = false;
+    state.preferStudyPrimaryFocus = true;
+    state.rovingIndexes.study = studyPrimaryIndex();
+    focusControllerPanel("study", { deferFocus: true, silent: true });
     renderAll();
   }
 
@@ -897,6 +1063,133 @@
     renderAll();
   }
 
+  function toggleBookmark() {
+    var key = currentSectionKey();
+    var data = ensureProgressSection(key);
+    var id = String(state.cardIndex);
+    var list = data.bookmarks;
+    var index = list.indexOf(id);
+    if (index >= 0) list.splice(index, 1); else list.push(id);
+    saveProgress();
+    renderControls();
+  }
+
+  function toggleSuspend() {
+    var key = currentSectionKey();
+    var data = ensureProgressSection(key);
+    var id = String(state.cardIndex);
+    var list = data.suspended;
+    var index = list.indexOf(id);
+    if (index >= 0) list.splice(index, 1); else list.push(id);
+    saveProgress();
+    renderControls();
+  }
+
+  function isBookmarked(key, cardIndex) {
+    return ensureProgressSection(key).bookmarks.indexOf(String(cardIndex)) >= 0;
+  }
+
+  function isSuspended(key, cardIndex) {
+    return ensureProgressSection(key).suspended.indexOf(String(cardIndex)) >= 0;
+  }
+
+  function gradeSpacedRepetition(grade) {
+    if (!currentCards().length) return;
+    var key = currentSectionKey();
+    var data = ensureProgressSection(key);
+    var id = String(state.cardIndex);
+    var previous = data.schedule[id] || { ease: 2.5, interval: 0, repetitions: 0, lapses: 0 };
+    data.schedule[id] = sm2(previous, grade);
+    session.reviews += 1;
+    if (grade === "good" || grade === "easy") session.correct += 1;
+    markSelfGrade(grade !== "again");
+  }
+
+  function sm2(previous, grade) {
+    var quality = { again: 1, hard: 3, good: 4, easy: 5 }[grade] || 4;
+    var ease = Number(previous.ease || 2.5);
+    var interval = Number(previous.interval || 0);
+    var repetitions = Number(previous.repetitions || 0);
+    var lapses = Number(previous.lapses || 0);
+
+    ease = Math.max(1.3, ease + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02)));
+
+    if (quality < 3) {
+      repetitions = 0;
+      interval = 0.01;
+      lapses += 1;
+    } else if (repetitions === 0) {
+      interval = grade === "hard" ? 0.5 : 1;
+      repetitions = 1;
+    } else if (repetitions === 1) {
+      interval = grade === "easy" ? 4 : grade === "hard" ? 3 : 6;
+      repetitions = 2;
+    } else {
+      interval = Math.round(interval * ease * (grade === "easy" ? 1.35 : grade === "hard" ? 0.75 : 1));
+      repetitions += 1;
+    }
+
+    return {
+      algorithm: "SM-2",
+      grade: grade,
+      ease: Number(ease.toFixed(2)),
+      interval: interval,
+      repetitions: repetitions,
+      lapses: lapses,
+      reviewedAt: new Date().toISOString(),
+      due: new Date(Date.now() + interval * 24 * 60 * 60 * 1000).toISOString()
+    };
+  }
+
+  function jumpToRandomCard() {
+    var refs = allCardRefs().filter(function (ref) { return !isSuspended(ref.key, ref.cardIndex); });
+    if (!refs.length) return;
+    var ref = refs[Math.floor(Math.random() * refs.length)];
+    state.chapterIndex = ref.chapterIndex;
+    state.sectionName = ref.sectionName;
+    state.cardIndex = ref.cardIndex;
+    state.flipped = false;
+    renderAll();
+  }
+
+  function jumpToNextDueCard() {
+    var now = Date.now();
+    var refs = allCardRefs().filter(function (ref) {
+      if (isSuspended(ref.key, ref.cardIndex)) return false;
+      var entry = ensureProgressSection(ref.key).schedule[String(ref.cardIndex)];
+      return !entry || !entry.due || Date.parse(entry.due) <= now;
+    });
+    if (!refs.length) {
+      if (els.sessionSummary) els.sessionSummary.textContent = "No due cards right now. Nice work.";
+      return;
+    }
+    var ref = refs[0];
+    state.chapterIndex = ref.chapterIndex;
+    state.sectionName = ref.sectionName;
+    state.cardIndex = ref.cardIndex;
+    state.flipped = false;
+    renderAll();
+  }
+
+  function allCardRefs() {
+    var refs = [];
+    chapters.forEach(function (chapter) {
+      chapter.sections.forEach(function (section) {
+        getCards(chapter, section.name).forEach(function (_card, cardIndex) {
+          refs.push({ chapterIndex: chapter.index, sectionName: section.name, cardIndex: cardIndex, key: chapter.index + ":" + section.name });
+        });
+      });
+    });
+    return refs;
+  }
+
+  function renderSessionSummary() {
+    if (!els.sessionSummary) return;
+    var minutes = Math.floor((Date.now() - session.startedAt) / 60000);
+    var accuracy = session.reviews ? Math.round((session.correct / session.reviews) * 100) : 0;
+    els.sessionSummary.textContent = "Session " + minutes + "m · " + session.reviews + " reviews" + (session.reviews ? " · " + accuracy + "%" : "");
+  }
+
   function previousTarget() {
     var cards = currentCards();
     var sections = sectionsWithCards();
@@ -1088,6 +1381,9 @@
     progress.sections[key].seen = uniqueStrings(progress.sections[key].seen);
     progress.sections[key].quiz = progress.sections[key].quiz || {};
     progress.sections[key].selfGrade = progress.sections[key].selfGrade || {};
+    progress.sections[key].schedule = progress.sections[key].schedule || {};
+    progress.sections[key].bookmarks = uniqueStrings(progress.sections[key].bookmarks || []);
+    progress.sections[key].suspended = uniqueStrings(progress.sections[key].suspended || []);
     return progress.sections[key];
   }
 
@@ -1307,6 +1603,75 @@
     return quiz.correct + "/" + quiz.graded + " correct (" + quiz.percent + "%)";
   }
 
+  function focusControllerPanel(panel, options) {
+    var opts = options || {};
+
+    if (panel !== "toc" && panel !== "study") {
+      return;
+    }
+
+    state.activeControllerPanel = panel;
+    renderControllerPanelState();
+
+    if (!opts.deferFocus) {
+      ensureFocusedElement();
+    }
+
+    if (!opts.silent) {
+      playSoundEffect("cursor");
+    }
+  }
+
+  function exposeControllerDebugApi() {
+    window.FlashCardsControllerNav = {
+      focusPanel: function (panel) { focusControllerPanel(panel, { silent: true }); },
+      move: function (direction) { moveFocus(direction); },
+      activate: function () { activateFocusedElement(); },
+      closeModal: function () { return closeControllerModal(); },
+      context: function () { return currentControllerContext(); },
+      activePanel: function () { return state.activeControllerPanel; },
+      rovingIndexes: function () { return Object.assign({}, state.rovingIndexes); }
+    };
+  }
+
+  function renderControllerPanelState() {
+    var panel = state.activeControllerPanel;
+    var app = els.app || document.querySelector(".app-shell");
+    var tocPanel = document.querySelector(".toc-panel[data-controller-panel='toc']");
+    var studyPanel = document.querySelector(".study-panel[data-controller-panel='study']");
+
+    if (app) {
+      els.app = app;
+      app.dataset.controllerPanel = panel;
+    }
+
+    if (tocPanel) {
+      els.tocPanel = tocPanel;
+      tocPanel.classList.toggle("is-controller-active", panel === "toc");
+      tocPanel.setAttribute("aria-current", panel === "toc" ? "true" : "false");
+    }
+
+    if (studyPanel) {
+      els.studyPanel = studyPanel;
+      studyPanel.classList.toggle("is-controller-active", panel === "study");
+      studyPanel.setAttribute("aria-current", panel === "study" ? "true" : "false");
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll("[data-panel-focus-badge]"), function (badge) {
+      var isActive = badge.dataset.panelFocusBadge === panel;
+      badge.classList.toggle("is-active", isActive);
+      badge.textContent = isActive
+        ? (panel === "toc" ? "LB Deck Focus Active" : "RB Study Focus Active")
+        : (badge.dataset.panelFocusBadge === "toc" ? "LB Deck" : "RB Study");
+    });
+
+    if (els.controllerCommandBar) {
+      els.controllerCommandBar.innerHTML = panel === "toc"
+        ? "<span><kbd>LB</kbd> Deck active</span><span><kbd>RB</kbd> Study</span><span><kbd>↑↓</kbd> Move section</span><span><kbd>A</kbd> Select</span><span><kbd>B</kbd> Study</span>"
+        : "<span><kbd>LB</kbd> Deck</span><span><kbd>RB</kbd> Study active</span><span><kbd>LT</kbd>/<kbd>RT</kbd> Prev/Next</span><span><kbd>X</kbd> Flip</span><span><kbd>Y</kbd> Speak</span><span><kbd>A</kbd> Right</span><span><kbd>B</kbd> Wrong</span>";
+    }
+  }
+
   function isTextInput(element) {
     return element instanceof HTMLElement && /input|textarea|select/i.test(element.tagName);
   }
@@ -1325,10 +1690,44 @@
     );
   }
 
-  function getNavigableElements() {
-    return Array.prototype.slice.call(
-      document.querySelectorAll("button:not(:disabled), a[href], [tabindex]:not([tabindex='-1'])")
-    ).filter(isVisible);
+  function getPanelElement(panel) {
+    if (panel === "modal") {
+      return currentControllerModal();
+    }
+
+    return panel === "toc" ? els.tocPanel : els.studyPanel;
+  }
+
+  function currentControllerContext() {
+    return currentControllerModal() ? "modal" : state.activeControllerPanel;
+  }
+
+  function currentControllerModal() {
+    var selectors = [
+      "#welcome-modal:not([hidden])",
+      "[data-theme-dialog]:not([hidden])",
+      "[data-global-search-dialog]:not([hidden])",
+      "[data-deck-editor-dialog]:not([hidden])"
+    ];
+
+    for (var i = 0; i < selectors.length; i += 1) {
+      var modal = document.querySelector(selectors[i]);
+      if (modal && isVisible(modal)) {
+        return modal;
+      }
+    }
+
+    return null;
+  }
+
+  function getNavigableElements(panel) {
+    var targetPanel = panel || currentControllerContext();
+    var root = getPanelElement(targetPanel) || document;
+    var selector = targetPanel === "toc"
+      ? ".section-button:not(:disabled)"
+      : "button:not(:disabled), a[href], input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex='-1'])";
+
+    return Array.prototype.slice.call(root.querySelectorAll(selector)).filter(isVisible);
   }
 
   function elementNeedsScrollIntoView(element) {
@@ -1343,12 +1742,22 @@
     );
   }
 
-  function focusElement(element) {
+  function focusElement(element, context) {
     if (!isVisible(element)) {
       return false;
     }
 
+    document.querySelectorAll(".is-controller-focused").forEach(function (item) {
+      item.classList.remove("is-controller-focused");
+    });
+    element.classList.add("is-controller-focused");
     element.focus({ preventScroll: true });
+
+    if (element.classList.contains("section-button") && element.dataset.sectionKey) {
+      state.lastTocFocusKey = element.dataset.sectionKey;
+    }
+
+    updateRovingIndex(context || currentControllerContext(), element);
 
     if (elementNeedsScrollIntoView(element)) {
       element.scrollIntoView({ behavior: "auto", block: "nearest", inline: "nearest" });
@@ -1357,12 +1766,40 @@
     return true;
   }
 
-  function defaultFocusElement() {
-    return isVisible(els.flip) ? els.flip : getNavigableElements()[0];
+  function defaultFocusElement(panel) {
+    var targetPanel = panel || currentControllerContext();
+
+    if (targetPanel === "toc") {
+      return findTocFocusElement() || getNavigableElements("toc")[0];
+    }
+
+    if (targetPanel === "modal") {
+      return getNavigableElements("modal")[state.rovingIndexes.modal] || getNavigableElements("modal")[0];
+    }
+
+    if (state.preferStudyPrimaryFocus && isVisible(els.flip)) {
+      state.preferStudyPrimaryFocus = false;
+      state.rovingIndexes.study = studyPrimaryIndex();
+      return els.flip;
+    }
+
+    return getNavigableElements("study")[state.rovingIndexes.study] || (isVisible(els.flip) ? els.flip : getNavigableElements("study")[0]);
+  }
+
+  function studyPrimaryIndex() {
+    var studyElements = getNavigableElements("study");
+    var index = studyElements.indexOf(els.flip);
+    return index >= 0 ? index : 0;
+  }
+
+  function findTocFocusElement() {
+    var key = state.lastTocFocusKey || currentSectionKey();
+    return key ? els.toc.querySelector(".section-button[data-section-key='" + cssEscape(key) + "']") : null;
   }
 
   function ensureFocusedElement() {
-    var navigableElements = getNavigableElements();
+    var context = currentControllerContext();
+    var navigableElements = getNavigableElements(context);
     var active = document.activeElement;
 
     if (!navigableElements.length) {
@@ -1370,7 +1807,9 @@
     }
 
     if (!(active instanceof HTMLElement) || navigableElements.indexOf(active) === -1) {
-      focusElement(defaultFocusElement());
+      focusElement(defaultFocusElement(context), context);
+    } else {
+      updateRovingIndex(context, active);
     }
   }
 
@@ -1403,8 +1842,32 @@
     return Number.MAX_SAFE_INTEGER;
   }
 
+  function updateRovingIndex(context, element) {
+    var key = context || currentControllerContext();
+    var elements = getNavigableElements(key);
+    var index = elements.indexOf(element);
+
+    if (index >= 0 && Object.prototype.hasOwnProperty.call(state.rovingIndexes, key)) {
+      state.rovingIndexes[key] = index;
+    }
+  }
+
+  function clampRovingIndex(context, length) {
+    var value = state.rovingIndexes[context] || 0;
+
+    if (!length) {
+      state.rovingIndexes[context] = 0;
+      return 0;
+    }
+
+    value = Math.max(0, Math.min(value, length - 1));
+    state.rovingIndexes[context] = value;
+    return value;
+  }
+
   function moveFocus(direction) {
-    var navigableElements = getNavigableElements();
+    var context = currentControllerContext();
+    var navigableElements = getNavigableElements(context);
     var active = document.activeElement instanceof HTMLElement &&
       navigableElements.indexOf(document.activeElement) >= 0
       ? document.activeElement
@@ -1415,58 +1878,49 @@
     }
 
     if (!active) {
-      focusElement(defaultFocusElement());
-      return;
-    }
-
-    var origin = getCenterPoint(active);
-    var candidates = navigableElements
-      .filter(function (element) {
-        return element !== active;
-      })
-      .map(function (element) {
-        var center = getCenterPoint(element);
-        var dx = center.x - origin.x;
-        var dy = center.y - origin.y;
-
-        return {
-          element: element,
-          dx: dx,
-          dy: dy,
-          score: directionScore(dx, dy, direction)
-        };
-      })
-      .filter(function (candidate) {
-        return isCandidateInDirection(candidate.dx, candidate.dy, direction);
-      })
-      .sort(function (left, right) {
-        return left.score - right.score;
-      });
-
-    if (candidates[0]) {
-      focusElement(candidates[0].element);
-      playSoundEffect("cursor");
+      focusElement(defaultFocusElement(context), context);
       return;
     }
 
     var currentIndex = navigableElements.indexOf(active);
     var delta = direction === "up" || direction === "left" ? -1 : 1;
     var nextIndex = currentIndex === -1
-      ? 0
+      ? clampRovingIndex(context, navigableElements.length)
       : (currentIndex + delta + navigableElements.length) % navigableElements.length;
 
-    focusElement(navigableElements[nextIndex]);
+    state.rovingIndexes[context] = nextIndex;
+    focusElement(navigableElements[nextIndex], context);
     playSoundEffect("cursor");
   }
 
   function activateFocusedElement() {
+    var context = currentControllerContext();
     var active = document.activeElement;
 
-    if (!(active instanceof HTMLElement) || getNavigableElements().indexOf(active) === -1) {
+    if (!(active instanceof HTMLElement) || getNavigableElements(context).indexOf(active) === -1) {
       return;
     }
 
     active.click();
+  }
+
+  function closeControllerModal() {
+    var modal = currentControllerModal();
+    var closeTarget;
+
+    if (!modal) {
+      return false;
+    }
+
+    closeTarget = modal.querySelector("[data-welcome-close], [data-theme-dialog-close], [data-global-search-close], [data-deck-editor-close]");
+
+    if (closeTarget instanceof HTMLElement) {
+      closeTarget.click();
+      return true;
+    }
+
+    modal.hidden = true;
+    return true;
   }
 
   function getFriendlyControllerName(gamepadId) {
@@ -1505,7 +1959,7 @@
     els.controllerStatus.title = connected && id ? id : "";
     els.controllerStatusLabel.textContent = connected ? "Controller ready" : "No controller";
     els.controllerStatusDetail.textContent = connected
-      ? getFriendlyControllerName(id)
+      ? getFriendlyControllerName(id) + " · LB deck / RB study"
       : "Keyboard controls are available";
   }
 
@@ -1567,10 +2021,29 @@
         continue;
       }
 
+      if (currentControllerContext() === "modal") {
+        if (isPressedWithCooldown(gamepad, 12) || axisTriggered(gamepad, 1, "negative")) moveFocus("up");
+        if (isPressedWithCooldown(gamepad, 13) || axisTriggered(gamepad, 1, "positive")) moveFocus("down");
+        if (isPressedWithCooldown(gamepad, 14) || axisTriggered(gamepad, 0, "negative")) moveFocus("left");
+        if (isPressedWithCooldown(gamepad, 15) || axisTriggered(gamepad, 0, "positive")) moveFocus("right");
+        if (isPressedWithCooldown(gamepad, 0)) activateFocusedElement();
+        if (isPressedWithCooldown(gamepad, 1)) closeControllerModal();
+        continue;
+      }
+
+      if (isPressedWithCooldown(gamepad, 4)) focusControllerPanel("toc");
+      if (isPressedWithCooldown(gamepad, 5)) focusControllerPanel("study");
+
       if (isPressedWithCooldown(gamepad, 12) || axisTriggered(gamepad, 1, "negative")) moveFocus("up");
       if (isPressedWithCooldown(gamepad, 13) || axisTriggered(gamepad, 1, "positive")) moveFocus("down");
       if (isPressedWithCooldown(gamepad, 14) || axisTriggered(gamepad, 0, "negative")) moveFocus("left");
       if (isPressedWithCooldown(gamepad, 15) || axisTriggered(gamepad, 0, "positive")) moveFocus("right");
+
+      if (state.activeControllerPanel === "toc") {
+        if (isPressedWithCooldown(gamepad, 0)) activateFocusedElement();
+        if (isPressedWithCooldown(gamepad, 1)) focusControllerPanel("study");
+        continue;
+      }
 
       if (isPressedWithCooldown(gamepad, 6)) previousCard();
       if (isPressedWithCooldown(gamepad, 7)) nextCard();
@@ -1628,6 +2101,14 @@
 
   function slugify(value) {
     return String(value).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  }
+
+  function cssEscape(value) {
+    if (window.CSS && typeof window.CSS.escape === "function") {
+      return window.CSS.escape(String(value));
+    }
+
+    return String(value).replace(/['"\\]/g, "\\$&");
   }
 
   function escapeHtml(value) {

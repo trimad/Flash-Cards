@@ -1,7 +1,7 @@
 ---
 title: "CompTIA Tech+ (FC0-U71)"
 testName: "CompTIA Tech+ (FC0-U71)"
-testIndex: 5
+testIndex: 3
 accent: "#2B8CBE"
 deckDescription: "Foundational IT concepts, infrastructure, software, data, security, and troubleshooting."
 objectivePdf: "comptia-tech-plus-fc0-u71-exam-objectives.pdf"

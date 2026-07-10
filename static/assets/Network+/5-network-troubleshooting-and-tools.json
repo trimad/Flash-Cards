@@ -1,606 +1,606 @@
 {
-    "5.1": [
-        {
-            "Q": "1. Identify the problem",
-            "A": [
-                "Gather information",
-                "Duplicate the problem, if possible",
-                "Question users",
-                "Identify symptoms",
-                "Determine if anything has changed",
-                "Approach multiple problems individually"
-            ]
-        },
-        {
-            "Q": "2. Establish a theory of probable cause",
-            "A": [
-                "Question the obvious",
-                "Consider multiple approaches",
-                "Top-to-bottom/bottom-to-top OSI model",
-                "Divide and conquer"
-            ]
-        },
-        {
-            "Q": "3. Test the theory to determine the cause",
-            "A": [
-                "Once the theory is confirmed, determine the next steps to resolve the problem",
-                "If the theory is not confirmed, reestablish a new theory or escalate"
-            ]
-        },
-        {
-            "Q": "4. Establish a plan of action to resolve the problem and identify potential effects",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Implement the solution or escalate as necessary",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Verify full system functionality and, if applicable, implement preventive measures",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Document findings, actions, and outcomes",
-            "A": [
-                "",
-                ""
-            ]
-        }
-    ],
-    "5.2": [
-        {
-            "Q": "Crimper",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Cable testers",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Punchdown",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "OTDR",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Light meter",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Tone generator",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Loopback adapter",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Multimeter",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Spectrum analyzer",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Packet sniffer",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Port scanner",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Protocol analyzer",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "WiFi adapter",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Bandwidth speed tester",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "ping",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "tracert, traceroute",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "nslookup",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "ipconfig",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "ifconfig",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "iptables",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "netstat",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "tcpdump",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "pathping",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "nmap",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "route",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "arp",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "dig",
-            "A": [
-                "",
-                ""
-            ]
-        }
-    ],
-    "5.3": [
-        {
-            "Q": "Attenuation",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Latency",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Jitter",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Crosstalk",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "EMI",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Open/short",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Incorrect pin-out",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Incorrect cable type",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Bad port",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Transceiver mismatch",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "TX/RX reverse",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Duplex/speed mismatch",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Damaged cables",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Bent pins",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Bottlenecks",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "VLAN mismatch",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Network connection LED status indicators",
-            "A": [
-                "",
-                ""
-            ]
-        }
-    ],
-    "5.4": [
-        {
-            "Q": "Reflection",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Refraction",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Absorption",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Latency",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Jitter",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Attenuation",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Incorrect antenna type",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Interference",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Incorrect antenna placement",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Channel overlap",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Overcapacity",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Distance limitations",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Frequency mismatch",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Wrong SSID",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Wrong passphrase",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Security type mismatch",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Power levels",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Signal-to-noise ratio",
-            "A": [
-                "",
-                ""
-            ]
-        }
-    ],
-    "5.5": [
-        {
-            "Q": "Names not resolving",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Incorrect gateway",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Incorrect netmask",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Duplicate IP addresses",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Duplicate MAC addresses",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Expired IP addresses",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Rogue DHCP server",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Untrusted SSL certificate",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Incorrect time",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Exhausted DHCP scope",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Blocked TCP/UDP ports",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Incorrect host-based firewall settings",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Incorrect ACL settings",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Unresponsive service",
-            "A": [
-                "",
-                ""
-            ]
-        },
-        {
-            "Q": "Hardware failure",
-            "A": [
-                "",
-                ""
-            ]
-        }
-    ]
+  "5.1": [
+    {
+      "Q": "1. Identify the problem",
+      "A": [
+        "Gather information",
+        "Duplicate the problem, if possible",
+        "Question users",
+        "Identify symptoms",
+        "Determine if anything has changed",
+        "Approach multiple problems individually"
+      ]
+    },
+    {
+      "Q": "2. Establish a theory of probable cause",
+      "A": [
+        "Question the obvious",
+        "Consider multiple approaches",
+        "Top-to-bottom/bottom-to-top OSI model",
+        "Divide and conquer"
+      ]
+    },
+    {
+      "Q": "3. Test the theory to determine the cause",
+      "A": [
+        "Once the theory is confirmed, determine the next steps to resolve the problem",
+        "If the theory is not confirmed, reestablish a new theory or escalate"
+      ]
+    },
+    {
+      "Q": "4. Establish a plan of action to resolve the problem and identify potential effects",
+      "A": [
+        "Choose a fix based on the confirmed root cause and evaluate risk before acting",
+        "Consider users, services, security, downtime, rollback, and change-control requirements"
+      ]
+    },
+    {
+      "Q": "Implement the solution or escalate as necessary",
+      "A": [
+        "Apply the approved fix when it is within your authority and skill set",
+        "Escalate with clear documentation when the issue is outside scope, requires higher privileges, or needs another team/vendor"
+      ]
+    },
+    {
+      "Q": "Verify full system functionality and, if applicable, implement preventive measures",
+      "A": [
+        "Confirm the original problem is resolved and no related services were broken",
+        "Add preventive controls such as monitoring, documentation, patches, or configuration changes"
+      ]
+    },
+    {
+      "Q": "Document findings, actions, and outcomes",
+      "A": [
+        "Record symptoms, root cause, troubleshooting steps, fix applied, and final result",
+        "Good documentation speeds future troubleshooting and supports change/audit history"
+      ]
+    }
+  ],
+  "5.2": [
+    {
+      "Q": "Crimper",
+      "A": [
+        "Tool used to attach modular connectors such as RJ-45 to twisted-pair cable",
+        "Compresses connector pins into the conductors and strain relief"
+      ]
+    },
+    {
+      "Q": "Cable testers",
+      "A": [
+        "Verify copper cable continuity, pinout, shorts, opens, and miswires",
+        "Advanced certifiers test performance against Cat standards"
+      ]
+    },
+    {
+      "Q": "Punchdown",
+      "A": [
+        "Tool used to terminate wires onto 66/110 blocks and patch panels",
+        "Cuts excess conductor while seating it into the IDC slot"
+      ]
+    },
+    {
+      "Q": "OTDR",
+      "A": [
+        "Optical Time-Domain Reflectometer used to test fiber links",
+        "Measures distance to breaks, splices, and loss events by analyzing reflected light"
+      ]
+    },
+    {
+      "Q": "Light meter",
+      "A": [
+        "Measures optical power level on a fiber link",
+        "Used with a light source to verify insertion loss and signal strength"
+      ]
+    },
+    {
+      "Q": "Tone generator",
+      "A": [
+        "Injects an audible signal onto a cable for tracing",
+        "Used with a probe to identify cables in bundles or wall jacks"
+      ]
+    },
+    {
+      "Q": "Loopback adapter",
+      "A": [
+        "Connector that loops transmit pins back to receive pins",
+        "Tests NICs, switch ports, serial ports, or fiber interfaces without a remote endpoint"
+      ]
+    },
+    {
+      "Q": "Multimeter",
+      "A": [
+        "Measures voltage, current, resistance, and continuity",
+        "Useful for checking power, shorts, and cable continuity"
+      ]
+    },
+    {
+      "Q": "Spectrum analyzer",
+      "A": [
+        "Displays RF signal strength across frequencies",
+        "Used to locate wireless interference and channel utilization"
+      ]
+    },
+    {
+      "Q": "Packet sniffer",
+      "A": [
+        "Captures packets from a network interface for analysis",
+        "Examples: Wireshark, tcpdump; requires proper capture point/SPAN/TAP"
+      ]
+    },
+    {
+      "Q": "Port scanner",
+      "A": [
+        "Discovers open TCP/UDP ports and services on hosts",
+        "Example: nmap; useful for verifying exposure and firewall rules"
+      ]
+    },
+    {
+      "Q": "Protocol analyzer",
+      "A": [
+        "Decodes captured traffic by protocol for troubleshooting",
+        "Shows conversations, errors, retransmissions, and application details"
+      ]
+    },
+    {
+      "Q": "WiFi adapter",
+      "A": [
+        "Wireless network interface used to connect to or test WLANs",
+        "Troubleshooting adapters may support monitor mode and packet capture"
+      ]
+    },
+    {
+      "Q": "Bandwidth speed tester",
+      "A": [
+        "Measures practical throughput between endpoints or to the Internet",
+        "Examples: iperf, speedtest; helps separate LAN and ISP performance issues"
+      ]
+    },
+    {
+      "Q": "ping",
+      "A": [
+        "Tests IP reachability using ICMP Echo Request/Reply",
+        "Reports packet loss and round-trip latency"
+      ]
+    },
+    {
+      "Q": "tracert, traceroute",
+      "A": [
+        "Shows Layer 3 hops between source and destination",
+        "Uses TTL/hop-limit expiration to identify path and possible failure points"
+      ]
+    },
+    {
+      "Q": "nslookup",
+      "A": [
+        "Queries DNS records and name resolution",
+        "Useful for testing A/AAAA/MX records and DNS server responses"
+      ]
+    },
+    {
+      "Q": "ipconfig",
+      "A": [
+        "Windows command showing IP configuration",
+        "Can release/renew DHCP leases and flush DNS cache"
+      ]
+    },
+    {
+      "Q": "ifconfig",
+      "A": [
+        "Legacy Unix/Linux command showing/configuring interfaces",
+        "Modern Linux commonly uses the `ip` command instead"
+      ]
+    },
+    {
+      "Q": "iptables",
+      "A": [
+        "Linux firewall/NAT rule management tool",
+        "Controls packet filtering chains and tables; replaced by nftables on many systems"
+      ]
+    },
+    {
+      "Q": "netstat",
+      "A": [
+        "Displays network connections, listening ports, and routing tables",
+        "Useful for finding open services and connection state"
+      ]
+    },
+    {
+      "Q": "tcpdump",
+      "A": [
+        "Command-line packet capture tool",
+        "Captures and filters traffic for analysis or saving to pcap"
+      ]
+    },
+    {
+      "Q": "pathping",
+      "A": [
+        "Windows tool combining ping and traceroute",
+        "Reports packet loss/latency at each hop over time"
+      ]
+    },
+    {
+      "Q": "nmap",
+      "A": [
+        "Network mapper used for host discovery, port scanning, and service/version detection",
+        "Can also run NSE scripts for additional checks"
+      ]
+    },
+    {
+      "Q": "route",
+      "A": [
+        "Displays or modifies the local routing table",
+        "Used to inspect default gateway and static routes"
+      ]
+    },
+    {
+      "Q": "arp",
+      "A": [
+        "Displays or modifies the ARP cache",
+        "Maps IPv4 addresses to MAC addresses on the local network"
+      ]
+    },
+    {
+      "Q": "dig",
+      "A": [
+        "DNS lookup tool with detailed query output",
+        "Common on Unix/Linux; useful for troubleshooting authoritative and recursive DNS"
+      ]
+    }
+  ],
+  "5.3": [
+    {
+      "Q": "Attenuation",
+      "A": [
+        "Signal loss over distance or through media",
+        "Too much attenuation causes weak signals and errors; measured in dB"
+      ]
+    },
+    {
+      "Q": "Latency",
+      "A": [
+        "Delay for traffic to travel from source to destination",
+        "Measured in milliseconds; affects voice, video, and interactive apps"
+      ]
+    },
+    {
+      "Q": "Jitter",
+      "A": [
+        "Variation in packet delay over time",
+        "High jitter causes choppy voice/video; mitigated with QoS and buffers"
+      ]
+    },
+    {
+      "Q": "Crosstalk",
+      "A": [
+        "Interference between adjacent copper pairs or cables",
+        "Reduced by twisting, separation, and proper termination"
+      ]
+    },
+    {
+      "Q": "EMI",
+      "A": [
+        "Electromagnetic interference from motors, lights, power cables, or radio sources",
+        "Can corrupt copper signals; mitigate with shielding, distance, or fiber"
+      ]
+    },
+    {
+      "Q": "Open/short",
+      "A": [
+        "Open: broken conductor/no continuity",
+        "Short: unintended connection between conductors; both cause link failure or errors"
+      ]
+    },
+    {
+      "Q": "Incorrect pin-out",
+      "A": [
+        "Cable terminated with the wrong conductor order",
+        "Causes split pairs, failed links, or reduced performance"
+      ]
+    },
+    {
+      "Q": "Incorrect cable type",
+      "A": [
+        "Using a cable not suited for speed, distance, or environment",
+        "Examples: Cat5 for 10G, straight-through where crossover needed, indoor cable outdoors"
+      ]
+    },
+    {
+      "Q": "Bad port",
+      "A": [
+        "Failed or misconfigured switch/NIC port",
+        "Test by moving cable/device to a known-good port"
+      ]
+    },
+    {
+      "Q": "Transceiver mismatch",
+      "A": [
+        "Optics/media modules do not match fiber type, wavelength, speed, or distance",
+        "Can prevent link or cause high errors"
+      ]
+    },
+    {
+      "Q": "TX/RX reverse",
+      "A": [
+        "Transmit and receive fiber strands are swapped",
+        "Fix by reversing polarity at one end or using correct patch cable"
+      ]
+    },
+    {
+      "Q": "Duplex/speed mismatch",
+      "A": [
+        "One side uses different speed/duplex than the other",
+        "Causes collisions, errors, and poor throughput; use auto-negotiation or matching settings"
+      ]
+    },
+    {
+      "Q": "Damaged cables",
+      "A": [
+        "Physical damage such as kinks, cuts, crushed jacket, or broken latches",
+        "May cause intermittent link, errors, or no connectivity"
+      ]
+    },
+    {
+      "Q": "Bent pins",
+      "A": [
+        "Damaged connector pins in ports or plugs",
+        "Prevents proper electrical contact and causes intermittent/failing links"
+      ]
+    },
+    {
+      "Q": "Bottlenecks",
+      "A": [
+        "A constrained link/device/resource limiting end-to-end throughput",
+        "Identify with utilization, interface counters, and path testing"
+      ]
+    },
+    {
+      "Q": "VLAN mismatch",
+      "A": [
+        "Ports/trunks have inconsistent VLAN assignment or allowed VLANs",
+        "Causes hosts to land in wrong broadcast domain or lose connectivity"
+      ]
+    },
+    {
+      "Q": "Network connection LED status indicators",
+      "A": [
+        "Link/activity/speed LEDs provide quick physical-layer status",
+        "No link, wrong speed color, or no activity helps isolate cabling/NIC/switch issues"
+      ]
+    }
+  ],
+  "5.4": [
+    {
+      "Q": "Reflection",
+      "A": [
+        "Radio waves bouncing off surfaces",
+        "Can cause multipath interference but may also extend coverage"
+      ]
+    },
+    {
+      "Q": "Refraction",
+      "A": [
+        "Radio waves bending as they pass through materials",
+        "Can alter propagation path and coverage"
+      ]
+    },
+    {
+      "Q": "Absorption",
+      "A": [
+        "Materials absorbing RF energy and weakening the signal",
+        "Water, concrete, metal, and dense walls significantly attenuate Wi-Fi"
+      ]
+    },
+    {
+      "Q": "Latency",
+      "A": [
+        "Delay for traffic to travel from source to destination",
+        "Measured in milliseconds; affects voice, video, and interactive apps"
+      ]
+    },
+    {
+      "Q": "Jitter",
+      "A": [
+        "Variation in packet delay over time",
+        "High jitter causes choppy voice/video; mitigated with QoS and buffers"
+      ]
+    },
+    {
+      "Q": "Attenuation",
+      "A": [
+        "Signal loss over distance or through media",
+        "Too much attenuation causes weak signals and errors; measured in dB"
+      ]
+    },
+    {
+      "Q": "Incorrect antenna type",
+      "A": [
+        "Using an antenna pattern/gain unsuited to the coverage need",
+        "Omnidirectional covers around the AP; directional focuses energy"
+      ]
+    },
+    {
+      "Q": "Interference",
+      "A": [
+        "Competing RF energy degrading wireless communication",
+        "Sources include neighboring Wi-Fi, microwaves, Bluetooth, cordless phones"
+      ]
+    },
+    {
+      "Q": "Incorrect antenna placement",
+      "A": [
+        "Poor AP/antenna location causing weak or uneven coverage",
+        "Mount centrally, avoid obstructions/metal, and match orientation/polarization"
+      ]
+    },
+    {
+      "Q": "Channel overlap",
+      "A": [
+        "Adjacent APs using overlapping channels interfere with each other",
+        "In 2.4 GHz use non-overlapping channels 1, 6, and 11"
+      ]
+    },
+    {
+      "Q": "Overcapacity",
+      "A": [
+        "Too many clients or too much traffic for an AP/radio",
+        "Symptoms include high latency, retries, and low throughput; add APs or tune channels"
+      ]
+    },
+    {
+      "Q": "Distance limitations",
+      "A": [
+        "Wireless signal strength drops with distance",
+        "Clients at cell edge have lower data rates and more retries"
+      ]
+    },
+    {
+      "Q": "Frequency mismatch",
+      "A": [
+        "Client and AP do not support/use the same band or channel",
+        "Example: 5 GHz-only SSID with 2.4 GHz-only client"
+      ]
+    },
+    {
+      "Q": "Wrong SSID",
+      "A": [
+        "Client is attempting to join the wrong wireless network name",
+        "Can happen with similar SSIDs or stale profiles"
+      ]
+    },
+    {
+      "Q": "Wrong passphrase",
+      "A": [
+        "Incorrect PSK/password for a wireless network",
+        "Authentication fails or repeatedly prompts for credentials"
+      ]
+    },
+    {
+      "Q": "Security type mismatch",
+      "A": [
+        "Client and AP configured for different authentication/encryption methods",
+        "Example: client expects WPA2-PSK but SSID uses WPA2-Enterprise"
+      ]
+    },
+    {
+      "Q": "Power levels",
+      "A": [
+        "Transmit power settings affect cell size and roaming",
+        "Too high causes sticky clients/co-channel interference; too low causes coverage gaps"
+      ]
+    },
+    {
+      "Q": "Signal-to-noise ratio",
+      "A": [
+        "Difference between desired signal and background noise",
+        "Higher SNR means better data rates and reliability"
+      ]
+    }
+  ],
+  "5.5": [
+    {
+      "Q": "Names not resolving",
+      "A": [
+        "DNS failure or misconfiguration prevents hostnames from resolving",
+        "Check DNS server, zone records, search suffix, cache, and connectivity"
+      ]
+    },
+    {
+      "Q": "Incorrect gateway",
+      "A": [
+        "Host default gateway is wrong or unreachable",
+        "Local subnet works but off-subnet/Internet traffic fails"
+      ]
+    },
+    {
+      "Q": "Incorrect netmask",
+      "A": [
+        "Subnet mask/prefix does not match the network",
+        "Host may think remote addresses are local or local addresses are remote"
+      ]
+    },
+    {
+      "Q": "Duplicate IP addresses",
+      "A": [
+        "Two devices using the same IP address",
+        "Causes intermittent connectivity and ARP conflicts"
+      ]
+    },
+    {
+      "Q": "Duplicate MAC addresses",
+      "A": [
+        "Two devices presenting the same MAC address",
+        "Switch MAC table flaps between ports causing unstable connectivity"
+      ]
+    },
+    {
+      "Q": "Expired IP addresses",
+      "A": [
+        "DHCP lease expired or not renewed",
+        "Client may lose address or fall back to APIPA; check DHCP reachability"
+      ]
+    },
+    {
+      "Q": "Rogue DHCP server",
+      "A": [
+        "Unauthorized DHCP server handing out bad leases",
+        "Clients receive wrong gateway/DNS; mitigate with DHCP snooping"
+      ]
+    },
+    {
+      "Q": "Untrusted SSL certificate",
+      "A": [
+        "Certificate is expired, self-signed, wrong name, or from untrusted CA",
+        "Browsers/clients warn or refuse TLS connections"
+      ]
+    },
+    {
+      "Q": "Incorrect time",
+      "A": [
+        "System clock differs from trusted time",
+        "Breaks Kerberos, certificates, logs, and scheduled tasks; fix NTP"
+      ]
+    },
+    {
+      "Q": "Exhausted DHCP scope",
+      "A": [
+        "No available addresses remain in the DHCP pool",
+        "New clients cannot obtain leases; expand scope, shorten leases, or remove stale reservations"
+      ]
+    },
+    {
+      "Q": "Blocked TCP/UDP ports",
+      "A": [
+        "Firewall/ACL is denying required application ports",
+        "Verify listening services, path firewalls, and security group rules"
+      ]
+    },
+    {
+      "Q": "Incorrect host-based firewall settings",
+      "A": [
+        "Local OS firewall blocks expected inbound/outbound traffic",
+        "Compare policy to application requirements and logs"
+      ]
+    },
+    {
+      "Q": "Incorrect ACL settings",
+      "A": [
+        "Network access control list permits/denies the wrong traffic",
+        "Can block valid traffic or expose restricted services"
+      ]
+    },
+    {
+      "Q": "Unresponsive service",
+      "A": [
+        "Application/daemon is stopped, hung, overloaded, or misconfigured",
+        "Check service status, logs, listening ports, dependencies, and restart/escalate"
+      ]
+    },
+    {
+      "Q": "Hardware failure",
+      "A": [
+        "Physical component failure such as NIC, switch port, cable, PSU, or storage",
+        "Confirm with LEDs, logs, loopback tests, swaps, and diagnostics"
+      ]
+    }
+  ]
 }
