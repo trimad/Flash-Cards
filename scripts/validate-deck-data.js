@@ -7,6 +7,22 @@ const root = path.resolve(__dirname, '..');
 const assetsDir = path.join(root, 'static', 'assets');
 const testsDir = path.join(root, 'content', 'tests');
 const menuPath = path.join(assetsDir, 'menu.json');
+const questionTypes = new Set(['true_false', 'single_choice', 'multiple_choice']);
+
+function normalizedOption(value) {
+  return String(value).trim().toLowerCase().replace(/[.?!]+$/, '');
+}
+
+function inferredQuestionType(card) {
+  const answers = Array.isArray(card.A) ? card.A : [card.A];
+  const optionValues = new Set(card.O.map(normalizedOption));
+
+  if (card.O.length === 2 && optionValues.size === 2 && optionValues.has('true') && optionValues.has('false')) {
+    return 'true_false';
+  }
+
+  return answers.length === 1 ? 'single_choice' : 'multiple_choice';
+}
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -93,6 +109,8 @@ function validateCard(card, context) {
   if (card.O !== undefined) {
     assert.ok(Array.isArray(card.O), `${context} card O should be an array when present`);
     assert.ok(card.O.length > 0, `${context} card O should not be empty when present`);
+    assert.ok(questionTypes.has(card.questionType), `${context} option card must declare a valid questionType`);
+    assert.equal(card.questionType, inferredQuestionType(card), `${context} questionType should match its options and answer cardinality`);
   }
 }
 

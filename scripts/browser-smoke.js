@@ -36,7 +36,12 @@ async function main() {
     await smokeControllerPanels(client, `${origin}${pagesPrefix}/tests/network-plus/`);
     await smokeResetProgress(client, `${origin}${pagesPrefix}/tests/network-plus/`);
     await smokeCardAnimations(client, `${origin}${pagesPrefix}/tests/network-plus/`);
-    await smokeAnswerSideOptions(client, `${origin}${pagesPrefix}/tests/tech-plus-fc0-u71/`);
+    await smokePretextFlipAndTts(client, `${origin}${pagesPrefix}/tests/network-plus/`);
+    await smokeStudyStateCues(client, `${origin}${pagesPrefix}/tests/network-plus/`);
+    await smokeReadableTypography(client, `${origin}${pagesPrefix}/tests/tech-plus-fc0-u71/`);
+    await smokeAnswerSideOptions(client, `${origin}${pagesPrefix}/tests/security-plus/?smoke=multiple#section=1.1&card=1`);
+    await smokeSingleChoiceTypeBadge(client, `${origin}${pagesPrefix}/tests/security-plus/?smoke=single#section=1.1&card=5`);
+    await smokeTrueFalseTypeBadge(client, `${origin}${pagesPrefix}/tests/security-plus/?smoke=true-false#section=1.1&card=7`);
     await captureMobileAnswerOptions(client, `${origin}${pagesPrefix}/tests/tech-plus-fc0-u71/`);
     await captureDesktopQa(client, `${origin}${pagesPrefix}/tests/network-plus/`);
     await smokeMobilePwa(client, `${origin}${pagesPrefix}/tests/network-plus/`);
@@ -320,6 +325,155 @@ async function smokeCardAnimations(client, url) {
   }
 }
 
+async function smokePretextFlipAndTts(client, url) {
+  await navigate(client, url);
+  await waitFor(
+    client,
+    `document.readyState === 'complete' && window.FlashCardsPretext && document.querySelectorAll('#card [data-pretext-text]').length >= 2`,
+    'Pretext-backed card text to render'
+  );
+
+  const state = await evaluate(client, `(() => {
+    const card = document.querySelector('#card');
+    const inner = card.querySelector('.flash-card-inner');
+    const flip = document.querySelector('#flip-card');
+    const speakQuestion = document.querySelector('#speak-question');
+    const speakAnswer = document.querySelector('#speak-answer');
+    const speakBoth = document.querySelector('#speak-card');
+    const stop = document.querySelector('#stop-speaking');
+    const front = document.querySelector('#card-front');
+    const back = document.querySelector('#card-back');
+    const textTypography = (element) => {
+      const style = getComputedStyle(element);
+      return {
+        fontSize: style.fontSize,
+        fontWeight: style.fontWeight,
+        letterSpacing: style.letterSpacing,
+        lineHeight: style.lineHeight,
+        textTransform: style.textTransform
+      };
+    };
+    const initial = {
+      pretextVersion: window.FlashCardsPretext.version,
+      pretextBlocks: Array.from(card.querySelectorAll('[data-pretext-text]')).map((node) => ({
+        lines: Number(node.dataset.pretextLineCount || 0),
+        height: Number(node.dataset.pretextHeight || 0)
+      })),
+      frontContentLayers: front.querySelectorAll(':scope > .card-face-content').length,
+      backContentLayers: back.querySelectorAll(':scope > .card-face-content').length,
+      contentScrollbarStyles: [front, back].map((face) => getComputedStyle(face.querySelector(':scope > .card-face-content')).scrollbarWidth),
+      answerQuestion: Boolean(back.querySelector('.card-question--prompt')),
+      questionTypography: {
+        front: textTypography(front.querySelector('.card-question')),
+        answer: textTypography(back.querySelector('.card-question--prompt'))
+      },
+      faceStyle: {
+        frontBackface: getComputedStyle(front).backfaceVisibility,
+        backBackface: getComputedStyle(back).backfaceVisibility,
+        frontTransform: getComputedStyle(front).transform,
+        backTransform: getComputedStyle(back).transform
+      },
+      cardStackLayers: [
+        getComputedStyle(card, '::before').content,
+        getComputedStyle(card, '::after').content
+      ],
+      ttsButtons: [speakQuestion, speakAnswer, speakBoth, stop].every(Boolean)
+    };
+    flip.click();
+    return new Promise((resolve) => setTimeout(() => {
+      resolve({
+        initial,
+        flipped: card.classList.contains('is-flipped'),
+        answerTransform: getComputedStyle(back).transform,
+        shellTransform: getComputedStyle(inner).transform
+      });
+    }, 760));
+  })()`);
+
+  assert.equal(state.initial.pretextVersion, '0.0.6', 'card text should be laid out with the bundled Pretext version');
+  assert.ok(state.initial.pretextBlocks.length >= 2, 'question and answer text should both be rendered through Pretext');
+  assert.ok(state.initial.pretextBlocks.every((block) => block.lines >= 1 && block.height > 0), `Pretext should provide line and height metrics for every card block: ${JSON.stringify(state)}`);
+  assert.equal(state.initial.frontContentLayers, 1, 'front face should have one independent scrolling content layer');
+  assert.equal(state.initial.backContentLayers, 1, 'back face should have one independent scrolling content layer');
+  assert.deepEqual(state.initial.contentScrollbarStyles, ['none', 'none'], 'flashcard content may scroll for long material, but its scrollbars must stay hidden');
+  assert.equal(state.initial.answerQuestion, true, 'answer face should repeat the original question for comparison');
+  assert.deepEqual(state.initial.questionTypography.answer, state.initial.questionTypography.front, `answer prompt should use exactly the front question typography: ${JSON.stringify(state)}`);
+  assert.equal(state.initial.faceStyle.frontBackface, 'hidden', 'front face should hide its reverse during a flip');
+  assert.equal(state.initial.faceStyle.backBackface, 'hidden', 'back face should hide its reverse during a flip');
+  assert.deepEqual(state.initial.cardStackLayers, ['none', 'none'], 'the card shell should not render decorative duplicate-card layers behind a flip');
+  assert.match(state.initial.faceStyle.backTransform, /matrix3d|matrix/, 'back face should own a physical 3D transform');
+  assert.equal(state.initial.ttsButtons, true, 'TTS should expose question, answer, full-card, and stop actions');
+  assert.match(state.shellTransform, /^matrix3d\(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1\)$/, `a single card shell should settle at 180 degrees: ${JSON.stringify(state)}`);
+  assert.equal(state.flipped, true, 'flip action should still reveal the answer side');
+}
+
+async function smokeStudyStateCues(client, url) {
+  await navigate(client, url);
+  await waitFor(client, `document.readyState === 'complete' && document.querySelector('#card-front') && !document.querySelector('#card-front').textContent.includes('Loading')`, 'study state cue fixture to load');
+
+  const state = await evaluate(client, `(() => {
+    const app = document.querySelector('.app-shell');
+    const flip = document.querySelector('#flip-card');
+    const front = {
+      side: app.dataset.cardSide,
+      flipLabel: flip.querySelector('span:last-child')?.textContent.trim(),
+      flipAria: flip.getAttribute('aria-label'),
+      interactionHints: document.querySelectorAll('[data-card-interaction-hint]').length,
+      frontLabel: document.querySelector('#card-front')?.dataset.sideLabel,
+      backLabel: document.querySelector('#card-back')?.dataset.sideLabel,
+      gradePromptHidden: document.querySelector('[data-study-tools-label]')?.hidden
+    };
+    flip.click();
+    const back = {
+      side: app.dataset.cardSide,
+      flipLabel: flip.querySelector('span:last-child')?.textContent.trim(),
+      flipAria: flip.getAttribute('aria-label'),
+      gradePromptHidden: document.querySelector('[data-study-tools-label]')?.hidden
+    };
+    return { front, back };
+  })()`);
+
+  assert.equal(state.front.side, 'front', 'study shell should identify the question side');
+  assert.equal(state.front.flipLabel, 'Show answer', 'front-side primary action should say Show answer');
+  assert.equal(state.front.interactionHints, 0, 'redundant card interaction hints should not render');
+  assert.equal(state.front.frontLabel, 'Question', 'front face should carry a clear Question label');
+  assert.equal(state.front.backLabel, 'Answer', 'back face should carry a clear Answer label');
+  assert.equal(state.front.gradePromptHidden, true, 'recall-rating prompt should stay hidden before revealing the answer');
+  assert.equal(state.back.side, 'back', 'study shell should identify the answer side after flipping');
+  assert.equal(state.back.flipLabel, 'Show question', 'back-side primary action should say Show question');
+
+  assert.equal(state.back.gradePromptHidden, false, 'recall-rating prompt should appear after revealing the answer');
+}
+
+async function smokeReadableTypography(client, url) {
+  await navigate(client, url);
+  await waitFor(client, `document.readyState === 'complete' && document.querySelector('.quiz-hint')`, 'quiz typography fixture to load');
+
+  const typography = await evaluate(client, `(() => {
+    const body = getComputedStyle(document.body);
+    const hint = getComputedStyle(document.querySelector('.quiz-hint'));
+    const question = getComputedStyle(document.querySelector('.card-question'));
+    const checkButton = getComputedStyle(document.querySelector('.quiz-controls button'));
+    return {
+      bodyFamily: body.fontFamily,
+      hintFamily: hint.fontFamily,
+      hintSize: parseFloat(hint.fontSize),
+      hintLineHeight: parseFloat(hint.lineHeight),
+      hintLetterSpacing: parseFloat(hint.letterSpacing) || 0,
+      questionLetterSpacing: parseFloat(question.letterSpacing) || 0,
+      checkButtonSize: parseFloat(checkButton.fontSize)
+    };
+  })()`);
+
+  assert.match(typography.bodyFamily, /system-ui/i, `body should use the native readable system font stack: ${JSON.stringify(typography)}`);
+  assert.equal(typography.hintFamily, typography.bodyFamily, 'quiz hint should use the same readable family as body text');
+  assert.ok(typography.hintSize >= 14, `quiz hint should never shrink below 14px: ${JSON.stringify(typography)}`);
+  assert.ok(typography.hintLineHeight / typography.hintSize >= 1.3, `quiz hint should have comfortable line spacing: ${JSON.stringify(typography)}`);
+  assert.ok(typography.hintLetterSpacing >= 0, `quiz hint letters should not be compressed: ${JSON.stringify(typography)}`);
+  assert.ok(typography.questionLetterSpacing >= -0.5, `question text should avoid aggressive tracking: ${JSON.stringify(typography)}`);
+  assert.ok(typography.checkButtonSize >= 14 && typography.checkButtonSize <= 18, `Check Answer should use a readable UI text size instead of inheriting display typography: ${JSON.stringify(typography)}`);
+}
+
 async function smokeAnswerSideOptions(client, url) {
   await navigate(client, url);
   await waitFor(
@@ -329,6 +483,10 @@ async function smokeAnswerSideOptions(client, url) {
   );
 
   const state = await evaluate(client, `(() => {
+    const frontFace = document.querySelector('#card-front');
+    const frontMeta = frontFace.querySelector(':scope > .card-face-meta');
+    const frontLabel = frontMeta.querySelector('.card-side-label');
+    const frontBadge = frontMeta.querySelector('.card-type-badge');
     const front = Array.from(document.querySelectorAll('#card-front .option-button')).map((button) => button.textContent.trim());
     const backItems = Array.from(document.querySelectorAll('#card-back .option-list li'));
     return {
@@ -337,6 +495,11 @@ async function smokeAnswerSideOptions(client, url) {
       correct: backItems.filter((item) => item.classList.contains('is-correct')).length,
       muted: backItems.filter((item) => item.classList.contains('is-muted')).length,
       disabled: backItems.filter((item) => item.querySelector('.option-button')?.disabled).length,
+      answerBadges: document.querySelectorAll('#card-back .card-type-badge').length,
+      frontLabel: frontLabel?.textContent.trim(),
+      frontBadge: frontBadge?.textContent.trim(),
+      badgeUsesSharedMeta: frontBadge?.parentElement === frontMeta,
+      badgeToRightOfLabel: Boolean(frontLabel && frontBadge && frontBadge.getBoundingClientRect().left >= frontLabel.getBoundingClientRect().right),
       frontScale: parseFloat(getComputedStyle(document.querySelector('#card-front')).getPropertyValue('--card-content-scale')),
       backScale: parseFloat(getComputedStyle(document.querySelector('#card-back')).getPropertyValue('--card-content-scale')),
       frontFontSize: parseFloat(getComputedStyle(document.querySelector('#card-front .option-button')).fontSize),
@@ -350,9 +513,61 @@ async function smokeAnswerSideOptions(client, url) {
   assert.ok(state.correct > 0, 'answer side should identify at least one correct option');
   assert.ok(state.muted > 0, 'answer side should mute incorrect options');
   assert.equal(state.disabled, state.back.length, 'answer-side options should be presentational, not re-answerable');
+  assert.equal(state.answerBadges, 0, 'answer-side options should not render a redundant card-type badge');
+  assert.equal(state.frontLabel, 'Question', 'the question-side label should render as a reusable card chip');
+  assert.equal(state.frontBadge, 'Multiple choice', 'multiple-choice cards should render a type badge');
+  assert.equal(state.badgeUsesSharedMeta, true, 'the type badge should share the card metadata container with the side label');
+  assert.equal(state.badgeToRightOfLabel, true, 'the type badge should sit directly to the right of the Question label');
   assert.equal(state.backScale, state.frontScale, `front and back option faces should share one content scale: ${JSON.stringify(state)}`);
   assert.ok(Math.abs(state.backFontSize - state.frontFontSize) <= 0.1, `front and back option text should be the same size: ${JSON.stringify(state)}`);
   assert.deepEqual(state.backHeights, state.frontHeights, `front and back option buttons should have matching heights: ${JSON.stringify(state)}`);
+}
+
+async function smokeSingleChoiceTypeBadge(client, url) {
+  await navigate(client, url);
+  await waitFor(
+    client,
+    `document.readyState === 'complete' && document.querySelector('#card-front .card-type-badge')?.textContent.trim() === 'Single choice'`,
+    'single-choice card type badge to render'
+  );
+
+  const state = await evaluate(client, `(() => {
+    const buttons = Array.from(document.querySelectorAll('#card-front .option-button'));
+    buttons[0].click();
+    Array.from(document.querySelectorAll('#card-front .option-button'))[1].click();
+    return {
+      badge: document.querySelector('#card-front .card-type-badge')?.textContent.trim(),
+      selected: Array.from(document.querySelectorAll('#card-front li.is-selected .option-button')).map((button) => button.textContent.trim())
+    };
+  })()`);
+
+  assert.equal(state.badge, 'Single choice', `one-answer cards should use the single-choice schema label: ${JSON.stringify(state)}`);
+  assert.equal(state.selected.length, 1, `single-choice cards must only retain one selected option: ${JSON.stringify(state)}`);
+}
+
+async function smokeTrueFalseTypeBadge(client, url) {
+  await navigate(client, url);
+  await waitFor(
+    client,
+    `document.readyState === 'complete' && document.querySelector('#card-front .card-type-badge')?.textContent.trim() === 'True or False'`,
+    'true-or-false card type badge to render'
+  );
+
+  const state = await evaluate(client, `(() => {
+    Array.from(document.querySelectorAll('#card-front .option-button')).find((button) => button.textContent.trim() === 'True').click();
+    Array.from(document.querySelectorAll('#card-front .option-button')).find((button) => button.textContent.trim() === 'False').click();
+    return {
+      badge: document.querySelector('#card-front .card-type-badge')?.textContent.trim(),
+      options: Array.from(document.querySelectorAll('#card-front .option-button')).map((button) => button.textContent.trim()),
+      selected: Array.from(document.querySelectorAll('#card-front li.is-selected .option-button')).map((button) => button.textContent.trim()),
+      sharedMeta: document.querySelector('#card-front .card-type-badge')?.parentElement === document.querySelector('#card-front .card-face-meta')
+    };
+  })()`);
+
+  assert.equal(state.badge, 'True or False', `True/False options should not be mislabeled as multiple choice: ${JSON.stringify(state)}`);
+  assert.deepEqual(state.options, ['True', 'False'], 'the true-or-false fixture should present the canonical two choices');
+  assert.deepEqual(state.selected, ['False'], `True/False cards must replace the first choice when a second answer is selected: ${JSON.stringify(state)}`);
+  assert.equal(state.sharedMeta, true, 'the True or False chip should share the reusable card metadata row');
 }
 
 async function captureMobileAnswerOptions(client, url) {
@@ -367,7 +582,11 @@ async function captureMobileAnswerOptions(client, url) {
   await client.send('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
   try {
     await navigate(client, url);
-    await waitFor(client, `document.querySelectorAll('#card-back .option-list--answer li').length > 1`, 'answer-side options to load in iPhone viewport');
+    await waitFor(client, `document.querySelectorAll('#card-back .option-list--answer li').length > 1 && document.querySelector('.quiz-hint')`, 'answer-side options and quiz hint to load in iPhone viewport');
+    const quizScreenshot = await client.send('Page.captureScreenshot', { format: 'png', fromSurface: true });
+    const quizScreenshotPath = path.join(os.tmpdir(), 'flash-cards-quiz-hint-iphone-qa.png');
+    fs.writeFileSync(quizScreenshotPath, Buffer.from(quizScreenshot.data, 'base64'));
+    console.log(`Quiz typography visual QA screenshot: ${quizScreenshotPath}`);
     await evaluate(client, `document.querySelector('#flip-card').click()`);
     await waitFor(client, `document.querySelector('#card').classList.contains('is-flipped')`, 'multiple-choice card to flip to its answer side');
     await evaluate(client, `new Promise((resolve) => setTimeout(resolve, 760))`);
@@ -450,11 +669,12 @@ async function smokeMobilePwa(client, url) {
       card.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, pointerId: 91, pointerType: 'touch', clientX: 90, clientY: 405 }));
       return {
         viewport: document.querySelector('meta[name="viewport"]')?.content || '',
+        viewportWidth: innerWidth,
         appleCapable: document.querySelector('meta[name="apple-mobile-web-app-capable"]')?.content || '',
         appleIcon: document.querySelector('link[rel="apple-touch-icon"]')?.getAttribute('href') || '',
         manifest: document.querySelector('link[rel="manifest"]')?.getAttribute('href') || '',
         horizontalOverflow: document.documentElement.scrollWidth - innerWidth,
-        cardWidth: card.getBoundingClientRect().width,
+        cardWidth: card.offsetWidth,
         utilityPosition: getComputedStyle(utility).position,
         utilityBottom: Math.round(innerHeight - utility.getBoundingClientRect().bottom),
         utilityHeight: utility.getBoundingClientRect().height,
@@ -462,6 +682,7 @@ async function smokeMobilePwa(client, url) {
         deckState,
         deckClosed: !document.querySelector('.app-shell').classList.contains('is-mobile-deck-open'),
         shortTargets: actions.filter((button) => button.getBoundingClientRect().height < 44).length,
+        shortStudyTargets: Array.from(document.querySelectorAll('.study-tools button')).filter((button) => button.getClientRects().length && button.getBoundingClientRect().height < 44).length,
         swipeStarted: card.classList.contains('slide-out-next'),
         before
       };
@@ -472,7 +693,7 @@ async function smokeMobilePwa(client, url) {
     assert.match(mobile.appleIcon, /apple-touch-icon\.png/, 'iOS should receive a dedicated touch icon');
     assert.match(mobile.manifest, /manifest\.webmanifest/, 'PWA manifest should remain linked');
     assert.ok(mobile.horizontalOverflow <= 1, `iPhone layout should not overflow horizontally: ${mobile.horizontalOverflow}px`);
-    assert.ok(mobile.cardWidth >= 350 && mobile.cardWidth <= 390, `study card should fill the iPhone canvas without clipping: ${mobile.cardWidth}px`);
+    assert.ok(mobile.cardWidth >= mobile.viewportWidth - 48 && mobile.cardWidth <= mobile.viewportWidth, `study card should fill the iPhone canvas without clipping: ${JSON.stringify(mobile)}`);
     assert.equal(mobile.utilityPosition, 'fixed', 'mobile utility navigation should behave like a native bottom tab bar');
     assert.ok(Math.abs(mobile.utilityBottom) <= 1, `mobile tab bar should dock to the viewport bottom: ${mobile.utilityBottom}px`);
     assert.ok(mobile.utilityHeight >= 44 && mobile.utilityHeight <= 52, `mobile tab bar should be compact but touchable: ${mobile.utilityHeight}px`);
@@ -482,7 +703,8 @@ async function smokeMobilePwa(client, url) {
     assert.ok(mobile.deckState.width >= 360 && mobile.deckState.height >= 400, `Deck navigator should use a roomy native-style sheet: ${JSON.stringify(mobile.deckState)}`);
     assert.ok(mobile.deckState.activeSectionHeight >= 44, 'Deck navigator sections should remain touch friendly');
     assert.equal(mobile.deckClosed, true, 'Deck navigator scrim should close the sheet');
-    assert.equal(mobile.shortTargets, 0, 'primary card actions should retain at least 44px touch height');
+    assert.equal(mobile.shortTargets, 0, 'primary card actions should preserve 44px touch targets');
+    assert.equal(mobile.shortStudyTargets, 0, 'visible mobile study tools should preserve 44px touch targets');
     assert.equal(mobile.swipeStarted, true, 'a left touch swipe should start next-card navigation');
 
     await waitFor(client, `!document.querySelector('#card').className.includes('slide-')`, 'touch swipe animation to finish');
@@ -595,6 +817,7 @@ async function startChrome() {
     '--disable-gpu',
     '--disable-dev-shm-usage',
     '--no-sandbox',
+    '--do-not-de-elevate',
     '--no-first-run',
     '--no-default-browser-check',
     `--remote-debugging-port=${debugPort}`,

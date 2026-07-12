@@ -56,8 +56,18 @@
 
       <article id="card" class="flash-card" aria-live="polite">
         <div class="flash-card-inner">
-          <div id="card-front" class="card-face card-front">Loading cards...</div>
-          <div id="card-back" class="card-face card-back"></div>
+          <div id="card-front" class="card-face card-front" data-side-label="Question">
+            <div class="card-face-meta" aria-hidden="true">
+              <span class="card-face-chip card-side-label">Question</span>
+            </div>
+            <div class="card-face-content">Loading cards...</div>
+          </div>
+          <div id="card-back" class="card-face card-back" data-side-label="Answer">
+            <div class="card-face-meta" aria-hidden="true">
+              <span class="card-face-chip card-side-label">Answer</span>
+            </div>
+            <div class="card-face-content"></div>
+          </div>
         </div>
       </article>
 
@@ -76,7 +86,7 @@
         </button>
         <button id="speak-card" type="button" class="controller-action controller-action--y">
           <span class="controller-action__badge" aria-hidden="true">Y</span>
-          <span>Speak</span>
+          <span>Speak card</span>
         </button>
         <button id="right-card" type="button" class="controller-action controller-action--a">
           <span class="controller-action__badge" aria-hidden="true">A</span>
@@ -87,7 +97,29 @@
           <span>Wrong</span>
         </button>
       </div>
+      <section class="tts-tools" aria-label="Read this card aloud">
+        <div class="tts-tools__header">
+          <span class="tts-tools__label">Listen</span>
+          <span id="speech-status" class="tts-tools__status" role="status" aria-live="polite">Ready to read</span>
+        </div>
+        <div class="tts-tools__actions">
+          <button id="speak-question" type="button">Question</button>
+          <button id="speak-answer" type="button">Answer</button>
+          <button id="stop-speaking" type="button">Stop</button>
+        </div>
+        <label class="tts-tools__setting" for="speech-rate">Speed
+          <select id="speech-rate">
+            <option value="0.8">Slow</option>
+            <option value="1" selected>Normal</option>
+            <option value="1.2">Fast</option>
+          </select>
+        </label>
+        <label class="tts-tools__setting" for="speech-voice">Voice
+          <select id="speech-voice"><option value="">System default</option></select>
+        </label>
+      </section>
       <div class="study-tools" aria-label="Study tools">
+        <span class="study-tools-label" data-study-tools-label hidden>How well did you know it?</span>
         <button id="again-card" type="button" class="grade-button grade-button--again">Again</button>
         <button id="hard-card" type="button" class="grade-button grade-button--hard">Hard</button>
         <button id="good-card" type="button" class="grade-button grade-button--good">Good</button>
@@ -123,5 +155,6 @@
   </main>
   <audio id="audio-player"></audio>
   <audio id="sfx-player" preload="auto"></audio>
+  <script type="module" src="{{ "js/pretext-bootstrap.js" | relURL }}"></script>
   <script src="{{ "js/flashcards.js" | relURL }}" defer></script>
 {{ end }}

@@ -30,6 +30,7 @@
   var session = { startedAt: Date.now(), reviews: 0, correct: 0 };
   var cardFitFrame = 0;
   var jsonCache = {};
+  var speechState = { active: false };
 
   var els = {
     app: document.querySelector(".app-shell"),
@@ -42,11 +43,18 @@
     sectionLabel: document.getElementById("section-label"),
     chapterLabel: document.getElementById("chapter-label"),
     card: document.getElementById("card"),
+    studyToolsLabel: document.querySelector("[data-study-tools-label]"),
     front: document.getElementById("card-front"),
     back: document.getElementById("card-back"),
     prev: document.getElementById("prev-card"),
     flip: document.getElementById("flip-card"),
     speak: document.getElementById("speak-card"),
+    speakQuestion: document.getElementById("speak-question"),
+    speakAnswer: document.getElementById("speak-answer"),
+    stopSpeaking: document.getElementById("stop-speaking"),
+    speechRate: document.getElementById("speech-rate"),
+    speechVoice: document.getElementById("speech-voice"),
+    speechStatus: document.getElementById("speech-status"),
     right: document.getElementById("right-card"),
     wrong: document.getElementById("wrong-card"),
     next: document.getElementById("next-card"),
@@ -71,7 +79,11 @@
     mobileDeckClosers: Array.from(document.querySelectorAll("[data-mobile-deck-close]"))
   };
 
-  boot();
+  if (window.FlashCardsPretext) {
+    boot();
+  } else {
+    window.addEventListener("flashcards-pretext-ready", boot, { once: true });
+  }
 
   async function boot() {
     bindControls();
@@ -202,10 +214,14 @@
   }
 
   function normalizeCard(card) {
+    var answers = normalizeAnswerList(card && card.A);
+    var options = card && Array.isArray(card.O) ? card.O.map(String) : undefined;
+
     return {
       Q: card && card.Q ? String(card.Q) : "",
-      A: normalizeAnswerList(card && card.A),
-      O: card && Array.isArray(card.O) ? card.O.map(String) : undefined,
+      A: answers,
+      O: options,
+      questionType: normalizeQuestionType(card && card.questionType, options, answers),
       frontAudio: card && card.frontAudio ? card.frontAudio : "",
       backAudio: card && card.backAudio ? card.backAudio : ""
     };
@@ -235,6 +251,43 @@
     }
 
     return [String(answers)];
+  }
+
+  function normalizeQuestionType(questionType, options, answers) {
+    var supported = ["true_false", "single_choice", "multiple_choice"];
+    var value = String(questionType || "").trim().toLowerCase();
+
+    if (!options || !options.length) {
+      return "";
+    }
+
+    if (supported.indexOf(value) >= 0) {
+      return value;
+    }
+
+    if (options.length === 2 && hasTrueFalseOptions(options)) {
+      return "true_false";
+    }
+
+    return answers.length === 1 ? "single_choice" : "multiple_choice";
+  }
+
+  function hasTrueFalseOptions(options) {
+    var values = options.map(function (option) {
+      return String(option || "").trim().toLowerCase().replace(/[.?!]+$/, "");
+    });
+
+    return values.length === 2 && values.indexOf("true") >= 0 && values.indexOf("false") >= 0;
+  }
+
+  function isSingleChoiceQuestion(card) {
+    return card && (card.questionType === "true_false" || card.questionType === "single_choice");
+  }
+
+  function questionTypeLabel(questionType) {
+    if (questionType === "true_false") return "True or False";
+    if (questionType === "single_choice") return "Single choice";
+    return "Multiple choice";
   }
 
   function setInitialSection() {
@@ -278,7 +331,13 @@
     if (els.shuffle) els.shuffle.addEventListener("click", jumpToRandomCard);
     if (els.dueMode) els.dueMode.addEventListener("click", jumpToNextDueCard);
     els.flip.addEventListener("click", flipCard);
-    els.speak.addEventListener("click", speakVisibleCard);
+    els.speak.addEventListener("click", speakFullCard);
+    if (els.speakQuestion) els.speakQuestion.addEventListener("click", speakQuestion);
+    if (els.speakAnswer) els.speakAnswer.addEventListener("click", speakAnswer);
+    if (els.stopSpeaking) els.stopSpeaking.addEventListener("click", stopPlayback);
+    if (els.speechRate) els.speechRate.addEventListener("change", persistSpeechPreferences);
+    if (els.speechVoice) els.speechVoice.addEventListener("change", persistSpeechPreferences);
+    initializeSpeechControls();
     els.right.addEventListener("click", function () {
       markSelfGrade(true);
     });
@@ -367,7 +426,7 @@
       } else if (key === "x") {
         flipCard();
       } else if (key === "y") {
-        speakVisibleCard();
+        speakFullCard();
       } else if (key === "a") {
         markSelfGrade(true);
       } else if (key === "b") {
@@ -508,14 +567,17 @@
     var totals = getOverallProgress();
     var quiz = getOverallQuizProgress();
 
+    var progressText;
+
     if (!totals.total) {
-      els.overallLabel.textContent = "No cards in this test yet";
+      progressText = "No cards in this test yet";
     } else if (quiz.total) {
-      els.overallLabel.textContent =
-        totals.seen + " of " + totals.total + " cards studied | Score " + quizSummaryText(quiz);
+      progressText = totals.seen + " of " + totals.total + " cards studied | Score " + quizSummaryText(quiz);
     } else {
-      els.overallLabel.textContent = totals.seen + " of " + totals.total + " cards studied";
+      progressText = totals.seen + " of " + totals.total + " cards studied";
     }
+
+    setPretextText(els.overallLabel, progressText);
 
     els.overallBar.style.width = totals.percent + "%";
   }
@@ -530,14 +592,14 @@
       return;
     }
 
-    els.sectionLabel.textContent = sectionHeading();
-    els.chapterLabel.textContent = chapter.name;
+    setPretextText(els.sectionLabel, sectionHeading());
+    setPretextText(els.chapterLabel, chapter.name);
     els.card.classList.toggle("is-flipped", state.flipped);
 
     renderQuestion(els.front, card);
     renderAnswers(els.back, card.A, card);
 
-    els.count.textContent = "Card " + (state.cardIndex + 1) + " of " + cards.length;
+    setPretextText(els.count, "Card " + (state.cardIndex + 1) + " of " + cards.length);
   }
 
   function renderControls() {
@@ -549,6 +611,9 @@
     els.next.disabled = state.transitioning || !nextTarget();
     els.flip.disabled = state.transitioning || !hasCard;
     els.speak.disabled = state.transitioning || !hasCard;
+    if (els.speakQuestion) els.speakQuestion.disabled = state.transitioning || !hasCard;
+    if (els.speakAnswer) els.speakAnswer.disabled = state.transitioning || !hasCard;
+    if (els.stopSpeaking) els.stopSpeaking.disabled = !speechState.active;
     els.right.disabled = state.transitioning || !hasCard;
     els.wrong.disabled = state.transitioning || !hasCard;
     if (els.again) els.again.disabled = state.transitioning || !hasCard;
@@ -568,15 +633,33 @@
     renderSessionSummary();
     els.right.classList.toggle("is-selected", Boolean(selfGrade && selfGrade.correct));
     els.wrong.classList.toggle("is-selected", Boolean(selfGrade && !selfGrade.correct));
+    syncStudyState();
+  }
+
+  function syncStudyState() {
+    var showingAnswer = Boolean(state.flipped);
+    var side = showingAnswer ? "back" : "front";
+    var flipLabel = els.flip && els.flip.querySelector("span:last-child");
+
+    if (els.app) {
+      els.app.dataset.cardSide = side;
+    }
+    if (flipLabel) {
+      flipLabel.textContent = showingAnswer ? "Show question" : "Show answer";
+    }
+    if (els.flip) {
+      els.flip.setAttribute("aria-label", showingAnswer ? "Show the question side" : "Show the answer side");
+    }
+    if (els.studyToolsLabel) {
+      els.studyToolsLabel.hidden = !showingAnswer;
+    }
   }
 
   function showEmpty(message) {
     els.sectionLabel.textContent = "No deck";
     els.chapterLabel.textContent = config.testName || "Practice Test";
-    els.front.innerHTML = "";
-    els.back.innerHTML = "";
-    els.front.appendChild(emptyMessage(message));
-    els.back.appendChild(emptyMessage(message));
+    resetCardFace(els.front).appendChild(emptyMessage(message));
+    resetCardFace(els.back).appendChild(emptyMessage(message));
     els.card.classList.remove("is-flipped");
     els.count.textContent = "";
     renderControls();
@@ -595,66 +678,139 @@
   }
 
   function fitCardContents() {
-    var frontScale = fitCardFace(els.front);
-    var backScale = fitCardFace(els.back);
-
-    if (els.front.classList.contains("has-options") && els.back.classList.contains("has-options")) {
-      var sharedScale = Math.min(frontScale, backScale).toFixed(3);
-      els.front.style.setProperty("--card-content-scale", sharedScale);
-      els.back.style.setProperty("--card-content-scale", sharedScale);
-    }
+    // Pretext owns wrapping and text-height measurement. Faces scroll after a
+    // readable font floor rather than shrinking one side independently.
+    els.front.style.setProperty("--card-content-scale", "1");
+    els.back.style.setProperty("--card-content-scale", "1");
+    syncAnswerPromptTypography();
+    layoutPretextText(els.app || els.card);
   }
 
-  function fitCardFace(face) {
-    if (!face) {
-      return 1;
+  function syncAnswerPromptTypography() {
+    var frontQuestion = els.front && els.front.querySelector(".card-question");
+    var answerPrompt = els.back && els.back.querySelector(".card-question--prompt");
+
+    if (!frontQuestion || !answerPrompt) {
+      return;
     }
 
-    var minScale = window.matchMedia("(max-width: 800px)").matches ? 0.58 : 0.42;
-    var scale = 1;
+    var source = window.getComputedStyle(frontQuestion);
+    ["fontSize", "fontWeight", "letterSpacing", "lineHeight", "textTransform", "textAlign"].forEach(function (property) {
+      answerPrompt.style[property] = source[property];
+    });
+  }
 
-    face.style.setProperty("--card-content-scale", String(scale));
+  function layoutPretextText(root) {
+    var pretext = window.FlashCardsPretext;
 
-    for (var i = 0; i < 4; i++) {
-      var availableHeight = face.clientHeight;
-      var contentHeight = face.scrollHeight;
-
-      if (!availableHeight || !contentHeight || contentHeight <= availableHeight + 1) {
-        break;
-      }
-
-      scale = Math.max(minScale, scale * ((availableHeight - 2) / contentHeight));
-      face.style.setProperty("--card-content-scale", scale.toFixed(3));
-
-      if (scale === minScale) {
-        break;
-      }
+    if (!pretext || !root) {
+      return;
     }
 
-    return scale;
+    Array.from(root.querySelectorAll("[data-pretext-text]")).forEach(function (element) {
+      var source = element.dataset.pretextText || "";
+      var style = window.getComputedStyle(element);
+      var maxWidth = Math.max(1, (element.clientWidth || (element.parentElement ? element.parentElement.clientWidth : 0)) - horizontalPadding(style));
+      var font = pretextFont(style);
+      var lineHeight = parseLineHeight(style);
+      var cacheKey = font + "\u0000" + source;
+      var prepared = element._pretextCacheKey === cacheKey ? element._pretextPrepared : null;
+      var layout;
+
+      if (!prepared) {
+        prepared = pretext.prepareWithSegments(source, font, { wordBreak: "normal" });
+        element._pretextCacheKey = cacheKey;
+        element._pretextPrepared = prepared;
+      }
+
+      layout = pretext.layoutWithLines(prepared, maxWidth, lineHeight);
+      element.replaceChildren();
+      layout.lines.forEach(function (line) {
+        var lineElement = document.createElement("span");
+        lineElement.className = "pretext-line";
+        lineElement.textContent = line.text || "\u00a0";
+        lineElement.style.setProperty("--pretext-line-width", line.width.toFixed(2) + "px");
+        element.appendChild(lineElement);
+      });
+      element.dataset.pretextLineCount = String(layout.lineCount || 1);
+      element.dataset.pretextHeight = String(Math.max(lineHeight, layout.height).toFixed(2));
+      element.style.setProperty("--pretext-height", Math.max(lineHeight, layout.height).toFixed(2) + "px");
+    });
+  }
+
+  function pretextFont(style) {
+    return [style.fontStyle, style.fontWeight, style.fontSize, style.fontFamily].filter(Boolean).join(" ");
+  }
+
+  function parseLineHeight(style) {
+    var value = parseFloat(style.lineHeight);
+    return Number.isFinite(value) ? value : parseFloat(style.fontSize) * 1.35;
+  }
+
+  function horizontalPadding(style) {
+    return (parseFloat(style.paddingLeft) || 0) + (parseFloat(style.paddingRight) || 0);
+  }
+
+  function cardFaceContent(face) {
+    var content = face.querySelector(":scope > .card-face-content");
+
+    if (!content) {
+      content = document.createElement("div");
+      content.className = "card-face-content";
+      face.appendChild(content);
+    }
+
+    return content;
+  }
+
+  function cardFaceMeta(face) {
+    var meta = face.querySelector(":scope > .card-face-meta");
+
+    if (!meta) {
+      meta = document.createElement("div");
+      meta.className = "card-face-meta";
+      meta.setAttribute("aria-hidden", "true");
+      face.insertBefore(meta, cardFaceContent(face));
+    }
+
+    return meta;
+  }
+
+  function resetCardFace(face) {
+    var content = cardFaceContent(face);
+
+    cardFaceMeta(face).querySelectorAll(".card-type-badge").forEach(function (badge) {
+      badge.remove();
+    });
+    content.replaceChildren();
+    return content;
+  }
+
+  function pretextText(text, className) {
+    var element = document.createElement("span");
+    element.className = (className || "") + " pretext-text";
+    element.dataset.pretextText = String(text || "");
+    element.textContent = String(text || "");
+    return element;
+  }
+
+  function setPretextText(element, text) {
+    if (!element) return;
+    element.replaceChildren(pretextText(text));
   }
 
   function emptyMessage(message) {
-    var div = document.createElement("div");
-    div.className = "empty-message";
-    div.textContent = message;
-    return div;
+    return pretextText(message, "empty-message");
   }
 
-  function renderText(element, text) {
-    var question = document.createElement("div");
-
-    element.innerHTML = "";
-    question.className = "card-question";
-    question.textContent = text || "";
-    element.appendChild(question);
+  function renderText(element, text, className) {
+    element.appendChild(pretextText(text, "card-question" + (className ? " " + className : "")));
   }
 
-  function renderCardTypeBadge(label) {
-    var badge = document.createElement("span");
+  function renderCardTypeBadge(face, label) {
+    var badge = pretextText(label, "card-face-chip card-type-badge");
 
-    badge.className = "card-type-badge";
-    badge.textContent = label;
+    cardFaceMeta(face).appendChild(badge);
     return badge;
   }
 
@@ -679,15 +835,16 @@
     var options = card && Array.isArray(card.O) ? card.O : [];
     var quiz = options.length ? getQuizEntry(currentSectionKey(), state.cardIndex) : null;
     var selected = quiz ? quiz.selected : [];
+    var content = resetCardFace(element);
 
-    renderText(element, card ? card.Q : "");
     element.classList.toggle("has-options", options.length > 0);
+    renderText(content, card ? card.Q : "");
 
     if (!options.length) {
       return;
     }
 
-    element.insertBefore(renderCardTypeBadge("Multiple choice"), element.firstChild);
+    renderCardTypeBadge(element, questionTypeLabel(card && card.questionType));
 
     var list = document.createElement("ul");
     list.className = "option-list";
@@ -702,7 +859,7 @@
 
       button.type = "button";
       button.className = "option-button";
-      button.textContent = option;
+      button.appendChild(pretextText(option));
       button.setAttribute("aria-pressed", isSelected ? "true" : "false");
       button.disabled = Boolean(quiz && quiz.graded);
       button.addEventListener("click", function () {
@@ -717,16 +874,15 @@
       list.appendChild(item);
     });
 
-    element.appendChild(list);
-    element.appendChild(renderQuizControls(card, quiz));
+    content.appendChild(list);
+    content.appendChild(renderQuizControls(card, quiz));
   }
 
-  function renderAnswerOptions(element, card, options) {
+  function renderAnswerOptions(face, content, card, options) {
     var list = document.createElement("ul");
 
-    element.classList.add("has-options");
-    element.classList.remove("has-plain-back");
-    element.appendChild(renderCardTypeBadge("Correct answer"));
+    face.classList.add("has-options");
+    face.classList.remove("has-plain-back");
     list.className = "option-list option-list--answer";
     list.setAttribute("aria-label", "Answer options");
 
@@ -737,7 +893,7 @@
 
       button.type = "button";
       button.className = "option-button";
-      button.textContent = option;
+      button.appendChild(pretextText(option));
       button.disabled = true;
       button.setAttribute("aria-disabled", "true");
 
@@ -747,24 +903,25 @@
       list.appendChild(item);
     });
 
-    element.appendChild(list);
+    content.appendChild(list);
   }
 
   function renderAnswers(element, answers, card) {
     var list = document.createElement("ul");
     var normalizedAnswers = answers || [];
     var options = card && Array.isArray(card.O) ? card.O : [];
+    var content = resetCardFace(element);
 
-    element.innerHTML = "";
     element.classList.remove("has-options");
+    renderText(content, card ? card.Q : "", "card-question--prompt");
 
     if (options.length) {
-      renderAnswerOptions(element, card, options);
+      renderAnswerOptions(element, content, card, options);
       return;
     }
 
     if (card && card.plainBack && normalizedAnswers.length <= 1) {
-      renderText(element, normalizedAnswers[0] || "");
+      renderText(content, normalizedAnswers[0] || "", "card-answer-text");
       element.classList.add("has-plain-back");
       return;
     }
@@ -774,11 +931,11 @@
 
     normalizedAnswers.forEach(function (answer) {
       var item = document.createElement("li");
-      item.textContent = answer;
+      item.appendChild(pretextText(answer));
       list.appendChild(item);
     });
 
-    element.appendChild(list);
+    content.appendChild(list);
   }
 
   function selectSection(chapterIndex, sectionName) {
@@ -873,59 +1030,124 @@
     playSoundEffect(state.flipped ? "flipBack" : "flipForward");
     state.flipped = !state.flipped;
     els.card.classList.toggle("is-flipped", state.flipped);
+    syncStudyState();
   }
 
-  function speakVisibleCard() {
-    var speech = currentVisibleSpeech();
+  function initializeSpeechControls() {
+    var saved = {};
 
-    if (!speech.text) {
+    try {
+      saved = JSON.parse(localStorage.getItem("flash-cards:speech-preferences") || "{}");
+    } catch (error) {}
+
+    if (els.speechRate && saved.rate) els.speechRate.value = String(saved.rate);
+    if (els.speechVoice && saved.voice) els.speechVoice.dataset.savedVoice = saved.voice;
+    populateSpeechVoices();
+
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.onvoiceschanged = populateSpeechVoices;
+    }
+
+    if (els.audioPlayer) {
+      els.audioPlayer.addEventListener("play", function () { setSpeechState(true, "Playing recorded audio"); });
+      els.audioPlayer.addEventListener("ended", function () { setSpeechState(false, "Finished reading"); });
+      els.audioPlayer.addEventListener("error", function () { setSpeechState(false, "Audio could not be played"); });
+    }
+  }
+
+  function populateSpeechVoices() {
+    if (!els.speechVoice || !("speechSynthesis" in window)) {
       return;
     }
 
-    stopPlayback();
+    var selected = els.speechVoice.value || els.speechVoice.dataset.savedVoice || "";
+    var voices = window.speechSynthesis.getVoices().slice().sort(function (a, b) {
+      return a.name.localeCompare(b.name);
+    });
 
+    els.speechVoice.replaceChildren();
+    var defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "System default";
+    els.speechVoice.appendChild(defaultOption);
+    voices.forEach(function (voice) {
+      var option = document.createElement("option");
+      option.value = voice.name;
+      option.textContent = voice.name + " — " + voice.lang;
+      els.speechVoice.appendChild(option);
+    });
+    els.speechVoice.value = Array.from(els.speechVoice.options).some(function (option) { return option.value === selected; }) ? selected : "";
+  }
+
+  function persistSpeechPreferences() {
+    try {
+      localStorage.setItem("flash-cards:speech-preferences", JSON.stringify({
+        rate: els.speechRate ? els.speechRate.value : "1",
+        voice: els.speechVoice ? els.speechVoice.value : ""
+      }));
+    } catch (error) {}
+  }
+
+  function speakQuestion() {
+    var card = currentCards()[state.cardIndex];
+    if (card) speakSpeech({ text: card.Q, audio: card.frontAudio, label: "question" });
+  }
+
+  function speakAnswer() {
+    var card = currentCards()[state.cardIndex];
+    if (card) speakSpeech({ text: normalizeAnswerList(card.A).join(". "), audio: card.backAudio, label: "answer" });
+  }
+
+  function speakFullCard() {
+    var card = currentCards()[state.cardIndex];
+    if (!card) return;
+
+    fallbackSpeak("Question. " + card.Q + ". Answer. " + normalizeAnswerList(card.A).join(". "), "full card");
+  }
+
+  function speakSpeech(speech) {
+    if (!speech || !speech.text) return;
+
+    stopPlayback(true);
     if (speech.audio && els.audioPlayer) {
       els.audioPlayer.src = mediaURL(speech.audio);
       els.audioPlayer.play().catch(function () {
-        fallbackSpeak(speech.text);
+        fallbackSpeak(speech.text, speech.label);
       });
       return;
     }
 
-    fallbackSpeak(speech.text);
+    fallbackSpeak(speech.text, speech.label);
   }
 
-  function currentVisibleSpeech() {
-    var card = currentCards()[state.cardIndex];
-
-    if (!card) {
-      return { text: "", audio: "" };
-    }
-
-    if (!state.flipped) {
-      return { text: card.Q, audio: card.frontAudio };
-    }
-
-    return {
-      text: normalizeAnswerList(card.A).join(". "),
-      audio: card.backAudio
-    };
-  }
-
-  function fallbackSpeak(text) {
+  function fallbackSpeak(text, label) {
     if (!("speechSynthesis" in window)) {
+      setSpeechState(false, "Speech is not supported in this browser");
       return;
     }
 
     window.speechSynthesis.cancel();
-
     var utterance = new SpeechSynthesisUtterance(text);
-    utterance.rate = 0.9;
+    var voiceName = els.speechVoice ? els.speechVoice.value : "";
+    var rate = els.speechRate ? Number(els.speechRate.value) : 1;
+    var voice = window.speechSynthesis.getVoices().find(function (item) { return item.name === voiceName; });
+
+    utterance.rate = Number.isFinite(rate) ? rate : 1;
     utterance.pitch = 1;
+    if (voice) utterance.voice = voice;
+    utterance.onstart = function () { setSpeechState(true, "Reading " + (label || "card")); };
+    utterance.onend = function () { setSpeechState(false, "Finished reading"); };
+    utterance.onerror = function () { setSpeechState(false, "Speech could not be played"); };
     window.speechSynthesis.speak(utterance);
   }
 
-  function stopPlayback() {
+  function setSpeechState(active, status) {
+    speechState.active = Boolean(active);
+    if (els.speechStatus) els.speechStatus.textContent = status;
+    if (els.stopSpeaking) els.stopSpeaking.disabled = !speechState.active;
+  }
+
+  function stopPlayback(silent) {
     if (els.audioPlayer) {
       els.audioPlayer.pause();
       els.audioPlayer.removeAttribute("src");
@@ -934,6 +1156,10 @@
 
     if ("speechSynthesis" in window) {
       window.speechSynthesis.cancel();
+    }
+
+    if (speechState.active || !silent) {
+      setSpeechState(false, silent ? "Ready to read" : "Stopped");
     }
   }
 
@@ -1003,6 +1229,8 @@
 
     if (index >= 0) {
       quiz.selected.splice(index, 1);
+    } else if (isSingleChoiceQuestion(card)) {
+      quiz.selected = [option];
     } else {
       quiz.selected.push(option);
     }
@@ -1023,6 +1251,9 @@
     quiz.selected = quiz.selected.filter(function (option) {
       return card.O.indexOf(option) >= 0;
     });
+    if (isSingleChoiceQuestion(card) && quiz.selected.length > 1) {
+      quiz.selected = [quiz.selected[quiz.selected.length - 1]];
+    }
     quiz.graded = true;
     quiz.correct = selectionsMatchAnswers(quiz.selected, card.A);
     quiz.attempts = Number(quiz.attempts || 0) + 1;
@@ -1536,12 +1767,12 @@
 
     if (result) {
       message.className = "quiz-result " + (result.correct ? "is-correct" : "is-incorrect");
-      message.textContent = result.correct ? "Correct" : "Incorrect";
+      message.appendChild(pretextText(result.correct ? "Correct" : "Incorrect"));
       controls.appendChild(message);
 
       if (!result.correct) {
         button.type = "button";
-        button.textContent = "Try Again";
+        button.appendChild(pretextText("Try Again"));
         button.addEventListener("click", resetCurrentGrade);
         controls.appendChild(button);
       }
@@ -1549,12 +1780,12 @@
     }
 
     message.className = "quiz-hint";
-    message.textContent = selectedCountText(quiz ? quiz.selected.length : 0, card.A);
+    message.appendChild(pretextText(selectedCountText(quiz ? quiz.selected.length : 0, card.A)));
     controls.appendChild(message);
 
     button.type = "button";
     button.className = "primary";
-    button.textContent = "Check Answer";
+    button.appendChild(pretextText("Check Answer"));
     button.addEventListener("click", gradeCurrentCard);
     controls.appendChild(button);
     return controls;
@@ -2048,7 +2279,7 @@
       if (isPressedWithCooldown(gamepad, 6)) previousCard();
       if (isPressedWithCooldown(gamepad, 7)) nextCard();
       if (isPressedWithCooldown(gamepad, 2)) flipCard();
-      if (isPressedWithCooldown(gamepad, 3)) speakVisibleCard();
+      if (isPressedWithCooldown(gamepad, 3)) speakFullCard();
       if (isPressedWithCooldown(gamepad, 0)) markSelfGrade(true);
       if (isPressedWithCooldown(gamepad, 1)) markSelfGrade(false);
 
