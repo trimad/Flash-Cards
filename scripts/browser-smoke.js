@@ -6,6 +6,7 @@ const http = require('node:http');
 const net = require('node:net');
 const os = require('node:os');
 const path = require('node:path');
+const { httpJson, waitForDevTools } = require('./browser-smoke-transport');
 
 const root = path.resolve(__dirname, '..');
 const docsDir = path.join(root, 'docs');
@@ -860,22 +861,19 @@ function findChromeExecutable() {
 }
 
 async function waitForChrome(port, chrome) {
-  const started = Date.now();
-
-  while (Date.now() - started < 8000) {
+  try {
+    await waitForDevTools({
+      port,
+      abortError: () => chrome.exitCode !== null
+        ? new Error(`Chrome exited early with code ${chrome.exitCode}: ${chrome.stderrText()}`)
+        : null
+    });
+  } catch (error) {
     if (chrome.exitCode !== null) {
-      throw new Error(`Chrome exited early with code ${chrome.exitCode}: ${chrome.stderrText()}`);
+      throw error;
     }
-
-    try {
-      await httpJson(port, '/json/version');
-      return;
-    } catch (error) {
-      await delay(100);
-    }
+    throw new Error(`${error.message}\nChrome stderr: ${chrome.stderrText()}`);
   }
-
-  throw new Error(`Timed out waiting for Chrome DevTools: ${chrome.stderrText()}`);
 }
 
 async function openPageClient(port) {
@@ -889,34 +887,6 @@ async function openPageClient(port) {
   assert.ok(target.webSocketDebuggerUrl, 'Chrome should expose a page WebSocket debugger URL');
   return new CdpClient(target.webSocketDebuggerUrl);
 }
-
-function httpJson(port, requestPath, method = 'GET') {
-  return new Promise((resolve, reject) => {
-    const request = http.request({ hostname: '127.0.0.1', port, path: requestPath, method }, (response) => {
-      let body = '';
-      response.setEncoding('utf8');
-      response.on('data', (chunk) => {
-        body += chunk;
-      });
-      response.on('end', () => {
-        if (response.statusCode < 200 || response.statusCode >= 300) {
-          reject(new Error(`DevTools HTTP ${response.statusCode}: ${body}`));
-          return;
-        }
-
-        try {
-          resolve(JSON.parse(body));
-        } catch (error) {
-          reject(error);
-        }
-      });
-    });
-
-    request.on('error', reject);
-    request.end();
-  });
-}
-
 class CdpClient {
   constructor(webSocketUrl) {
     this.nextId = 1;
