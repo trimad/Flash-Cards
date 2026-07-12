@@ -7,6 +7,7 @@ const net = require('node:net');
 const os = require('node:os');
 const path = require('node:path');
 const { httpJson, waitForDevTools } = require('./browser-smoke-transport');
+const { getWebSocketConstructor } = require('./cdp-websocket');
 
 const root = path.resolve(__dirname, '..');
 const docsDir = path.join(root, 'docs');
@@ -891,7 +892,8 @@ class CdpClient {
   constructor(webSocketUrl) {
     this.nextId = 1;
     this.pending = new Map();
-    this.socket = new WebSocket(webSocketUrl);
+    const WebSocketConstructor = getWebSocketConstructor();
+    this.socket = new WebSocketConstructor(webSocketUrl);
     this.ready = new Promise((resolve, reject) => {
       this.socket.addEventListener('open', resolve, { once: true });
       this.socket.addEventListener('error', reject, { once: true });

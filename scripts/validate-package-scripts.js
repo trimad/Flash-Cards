@@ -13,6 +13,8 @@ assert.equal(pkg.private, true, 'package should be private to avoid accidental p
 assert.equal(pkg.scripts?.test, 'npm run validate', 'npm test should run the full validation suite');
 assert.match(pkg.scripts?.validate || '', /node scripts\/validate-package-scripts\.js/, 'validate script should include package script invariants');
 assert.match(pkg.scripts?.validate || '', /node scripts\/test-browser-smoke-startup\.js/, 'validate script should cover delayed DevTools startup on hosted CI');
+assert.match(pkg.scripts?.validate || '', /node scripts\/test-cdp-websocket\.js/, 'validate script should cover Node runtimes without a global WebSocket');
+assert.match(pkg.scripts?.validate || '', /node scripts\/test-workflow-ci\.js/, 'validate script should verify the GitHub Actions dependency-install step');
 assert.match(pkg.scripts?.validate || '', /node scripts\/validate-theme-selector\.js/, 'validate script should include theme source invariants');
 assert.match(pkg.scripts?.validate || '', /node scripts\/validate-reset-progress\.js/, 'validate script should include reset progress invariants');
 assert.match(pkg.scripts?.validate || '', /node scripts\/validate-deck-data\.js/, 'validate script should include deck/menu data invariants');
