@@ -43,7 +43,6 @@
     sectionLabel: document.getElementById("section-label"),
     chapterLabel: document.getElementById("chapter-label"),
     card: document.getElementById("card"),
-    studyToolsLabel: document.querySelector("[data-study-tools-label]"),
     front: document.getElementById("card-front"),
     back: document.getElementById("card-back"),
     prev: document.getElementById("prev-card"),
@@ -67,7 +66,7 @@
     shuffle: document.getElementById("shuffle-mode"),
     dueMode: document.getElementById("due-mode"),
     sessionSummary: document.getElementById("session-summary"),
-    count: document.getElementById("card-count"),
+    counts: Array.from(document.querySelectorAll("[data-card-count]")),
     audioPlayer: document.getElementById("audio-player"),
     sfxPlayer: document.getElementById("sfx-player"),
     controllerStatus: document.getElementById("controller-status"),
@@ -599,7 +598,9 @@
     renderQuestion(els.front, card);
     renderAnswers(els.back, card.A, card);
 
-    setPretextText(els.count, "Card " + (state.cardIndex + 1) + " of " + cards.length);
+    els.counts.forEach(function (count) {
+      setPretextText(count, "Card " + (state.cardIndex + 1) + " of " + cards.length);
+    });
   }
 
   function renderControls() {
@@ -650,9 +651,6 @@
     if (els.flip) {
       els.flip.setAttribute("aria-label", showingAnswer ? "Show the question side" : "Show the answer side");
     }
-    if (els.studyToolsLabel) {
-      els.studyToolsLabel.hidden = !showingAnswer;
-    }
   }
 
   function showEmpty(message) {
@@ -661,7 +659,7 @@
     resetCardFace(els.front).appendChild(emptyMessage(message));
     resetCardFace(els.back).appendChild(emptyMessage(message));
     els.card.classList.remove("is-flipped");
-    els.count.textContent = "";
+    els.counts.forEach(function (count) { count.textContent = ""; });
     renderControls();
     scheduleCardContentFit();
   }
@@ -678,12 +676,32 @@
   }
 
   function fitCardContents() {
-    // Pretext owns wrapping and text-height measurement. Faces scroll after a
-    // readable font floor rather than shrinking one side independently.
-    els.front.style.setProperty("--card-content-scale", "1");
-    els.back.style.setProperty("--card-content-scale", "1");
-    syncAnswerPromptTypography();
-    layoutPretextText(els.app || els.card);
+    var faces = [els.front, els.back].filter(Boolean);
+    var scale = 1;
+    var minimumScale = 0.15;
+
+    // A flashcard is a single view: every face must fit in full. Keep the two
+    // faces at one shared scale so the flip never changes the card's geometry.
+    for (var attempt = 0; attempt < 18; attempt += 1) {
+      faces.forEach(function (face) {
+        face.style.setProperty("--card-content-scale", String(scale));
+      });
+      syncAnswerPromptTypography();
+      layoutPretextText(els.app || els.card);
+
+      var fitRatio = faces.reduce(function (smallestRatio, face) {
+        var content = cardFaceContent(face);
+        var availableHeight = Math.max(1, content.clientHeight);
+        return Math.min(smallestRatio, availableHeight / Math.max(availableHeight, content.scrollHeight));
+      }, 1);
+
+      if (fitRatio >= 0.999 || scale <= minimumScale) {
+        break;
+      }
+
+      var nextScale = Math.max(minimumScale, scale * Math.min(0.94, fitRatio * 0.98));
+      scale = nextScale < scale - 0.002 ? nextScale : Math.max(minimumScale, scale - 0.02);
+    }
   }
 
   function syncAnswerPromptTypography() {

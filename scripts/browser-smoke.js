@@ -42,10 +42,14 @@ async function main() {
     await smokeStudyStateCues(client, `${origin}${pagesPrefix}/tests/network-plus/`);
     await smokeReadableTypography(client, `${origin}${pagesPrefix}/tests/tech-plus-fc0-u71/`);
     await smokeAnswerSideOptions(client, `${origin}${pagesPrefix}/tests/security-plus/?smoke=multiple#section=1.1&card=1`);
+    await smokeScaledFourKAnswerFit(client, `${origin}${pagesPrefix}/tests/security-plus/#section=1.1&card=1`);
+    await smokeStudyChromeDensity(client, `${origin}${pagesPrefix}/tests/security-plus/#section=1.1&card=1`);
     await smokeSingleChoiceTypeBadge(client, `${origin}${pagesPrefix}/tests/security-plus/?smoke=single#section=1.1&card=5`);
     await smokeTrueFalseTypeBadge(client, `${origin}${pagesPrefix}/tests/security-plus/?smoke=true-false#section=1.1&card=7`);
     await captureMobileAnswerOptions(client, `${origin}${pagesPrefix}/tests/tech-plus-fc0-u71/`);
     await captureDesktopQa(client, `${origin}${pagesPrefix}/tests/network-plus/`);
+    await captureLaptopQa(client, `${origin}${pagesPrefix}/tests/network-plus/`);
+    await smokeStudyPanelScrollAccessibility(client, `${origin}${pagesPrefix}/tests/network-plus/`);
     await smokeMobilePwa(client, `${origin}${pagesPrefix}/tests/network-plus/`);
 
     await client.close();
@@ -363,7 +367,7 @@ async function smokePretextFlipAndTts(client, url) {
       })),
       frontContentLayers: front.querySelectorAll(':scope > .card-face-content').length,
       backContentLayers: back.querySelectorAll(':scope > .card-face-content').length,
-      contentScrollbarStyles: [front, back].map((face) => getComputedStyle(face.querySelector(':scope > .card-face-content')).scrollbarWidth),
+      contentOverflowStyles: [front, back].map((face) => getComputedStyle(face.querySelector(':scope > .card-face-content')).overflowY),
       answerQuestion: Boolean(back.querySelector('.card-question--prompt')),
       questionTypography: {
         front: textTypography(front.querySelector('.card-question')),
@@ -397,7 +401,7 @@ async function smokePretextFlipAndTts(client, url) {
   assert.ok(state.initial.pretextBlocks.every((block) => block.lines >= 1 && block.height > 0), `Pretext should provide line and height metrics for every card block: ${JSON.stringify(state)}`);
   assert.equal(state.initial.frontContentLayers, 1, 'front face should have one independent scrolling content layer');
   assert.equal(state.initial.backContentLayers, 1, 'back face should have one independent scrolling content layer');
-  assert.deepEqual(state.initial.contentScrollbarStyles, ['none', 'none'], 'flashcard content may scroll for long material, but its scrollbars must stay hidden');
+  assert.deepEqual(state.initial.contentOverflowStyles, ['hidden', 'hidden'], 'flashcard content must fit within its faces instead of using internal scrolling');
   assert.equal(state.initial.answerQuestion, true, 'answer face should repeat the original question for comparison');
   assert.deepEqual(state.initial.questionTypography.answer, state.initial.questionTypography.front, `answer prompt should use exactly the front question typography: ${JSON.stringify(state)}`);
   assert.equal(state.initial.faceStyle.frontBackface, 'hidden', 'front face should hide its reverse during a flip');
@@ -423,14 +427,18 @@ async function smokeStudyStateCues(client, url) {
       interactionHints: document.querySelectorAll('[data-card-interaction-hint]').length,
       frontLabel: document.querySelector('#card-front')?.dataset.sideLabel,
       backLabel: document.querySelector('#card-back')?.dataset.sideLabel,
-      gradePromptHidden: document.querySelector('[data-study-tools-label]')?.hidden
+      cardCountChips: Array.from(document.querySelectorAll('[data-card-count]')).map((count) => ({
+        isChip: count.classList.contains('card-face-chip'),
+        inFaceMeta: Boolean(count.closest('.card-face-meta'))
+      })),
+      gradePromptCount: document.querySelectorAll('[data-study-tools-label]').length
     };
     flip.click();
     const back = {
       side: app.dataset.cardSide,
       flipLabel: flip.querySelector('span:last-child')?.textContent.trim(),
       flipAria: flip.getAttribute('aria-label'),
-      gradePromptHidden: document.querySelector('[data-study-tools-label]')?.hidden
+      gradePromptCount: document.querySelectorAll('[data-study-tools-label]').length
     };
     return { front, back };
   })()`);
@@ -440,11 +448,12 @@ async function smokeStudyStateCues(client, url) {
   assert.equal(state.front.interactionHints, 0, 'redundant card interaction hints should not render');
   assert.equal(state.front.frontLabel, 'Question', 'front face should carry a clear Question label');
   assert.equal(state.front.backLabel, 'Answer', 'back face should carry a clear Answer label');
-  assert.equal(state.front.gradePromptHidden, true, 'recall-rating prompt should stay hidden before revealing the answer');
+  assert.deepEqual(state.front.cardCountChips, [{ isChip: true, inFaceMeta: true }, { isChip: true, inFaceMeta: true }], 'card position should render as a card-face chip in both card faces');
+  assert.equal(state.front.gradePromptCount, 0, 'recall-rating prompt should not render');
   assert.equal(state.back.side, 'back', 'study shell should identify the answer side after flipping');
   assert.equal(state.back.flipLabel, 'Show question', 'back-side primary action should say Show question');
 
-  assert.equal(state.back.gradePromptHidden, false, 'recall-rating prompt should appear after revealing the answer');
+  assert.equal(state.back.gradePromptCount, 0, 'recall-rating prompt should stay removed after revealing the answer');
 }
 
 async function smokeReadableTypography(client, url) {
@@ -525,6 +534,100 @@ async function smokeAnswerSideOptions(client, url) {
   assert.deepEqual(state.backHeights, state.frontHeights, `front and back option buttons should have matching heights: ${JSON.stringify(state)}`);
 }
 
+async function smokeScaledFourKAnswerFit(client, url) {
+  await client.send('Emulation.setDeviceMetricsOverride', {
+    width: 1536,
+    height: 864,
+    deviceScaleFactor: 2.5,
+    mobile: false,
+    screenWidth: 3840,
+    screenHeight: 2160
+  });
+
+  try {
+    await navigate(client, url);
+    await waitFor(client, `document.readyState === 'complete' && document.querySelectorAll('#card-back .option-list--answer li').length > 2`, 'Security+ answer options to load on a scaled 4K display');
+    await evaluate(client, `document.querySelector('#flip-card').click()`);
+    await waitFor(client, `document.querySelector('#card').classList.contains('is-flipped')`, 'Security+ card to flip to its answer side on a scaled 4K display');
+    await evaluate(client, `new Promise((resolve) => setTimeout(resolve, 760))`);
+
+    const state = await evaluate(client, `(() => {
+      const content = document.querySelector('#card-back > .card-face-content');
+      const contentBounds = content.getBoundingClientRect();
+      const options = Array.from(content.querySelectorAll('.option-list--answer li'));
+      return {
+        scale: parseFloat(getComputedStyle(document.querySelector('#card-back')).getPropertyValue('--card-content-scale')),
+        scrollHeight: content.scrollHeight,
+        clientHeight: content.clientHeight,
+        overflowY: getComputedStyle(content).overflowY,
+        optionCount: options.length,
+        allOptionsVisible: options.every((option) => {
+          const bounds = option.getBoundingClientRect();
+          return bounds.top >= contentBounds.top && bounds.bottom <= contentBounds.bottom;
+        })
+      };
+    })()`);
+
+    assert.ok(state.scrollHeight <= state.clientHeight + 1, `answer content must fit its flashcard without internal scrolling on a scaled 4K display: ${JSON.stringify(state)}`);
+    assert.equal(state.overflowY, 'hidden', `flashcard answer content must not be internally scrollable: ${JSON.stringify(state)}`);
+    assert.equal(state.allOptionsVisible, true, `every answer option must be visible inside the flashcard at once: ${JSON.stringify(state)}`);
+
+    const screenshot = await client.send('Page.captureScreenshot', { format: 'png', fromSurface: true });
+    const screenshotPath = path.join(os.tmpdir(), 'flash-cards-security-scaled-4k-qa.png');
+    fs.writeFileSync(screenshotPath, Buffer.from(screenshot.data, 'base64'));
+    console.log(`Scaled 4K Security+ answer-card QA screenshot: ${screenshotPath}`);
+  } finally {
+    await client.send('Emulation.clearDeviceMetricsOverride');
+  }
+}
+
+async function smokeStudyChromeDensity(client, url) {
+  await client.send('Emulation.setDeviceMetricsOverride', {
+    width: 1536,
+    height: 864,
+    deviceScaleFactor: 2.5,
+    mobile: false,
+    screenWidth: 3840,
+    screenHeight: 2160
+  });
+
+  try {
+    await navigate(client, url);
+    await waitFor(client, `document.readyState === 'complete' && document.querySelector('.quiz-controls button')`, 'Security+ quiz controls to load on a scaled 4K display');
+    await evaluate(client, `(() => { const flip = document.querySelector('#flip-card'); if (document.querySelector('#card').classList.contains('is-flipped')) flip.click(); })()`);
+    await waitFor(client, `!document.querySelector('#card').classList.contains('is-flipped')`, 'Security+ card to return to its question side for visual QA');
+    await evaluate(client, `new Promise((resolve) => setTimeout(resolve, 760))`);
+    const state = await evaluate(client, `(() => {
+      const checkAnswer = document.querySelector('.quiz-controls button');
+      const bounds = checkAnswer.getBoundingClientRect();
+      const styles = getComputedStyle(checkAnswer);
+      return {
+        studyFocusBadge: Boolean(document.querySelector('[data-panel-focus-badge="study"]')),
+        checkAnswerText: checkAnswer.textContent.trim(),
+        checkAnswerHeight: Math.round(bounds.height),
+        checkAnswerWidth: Math.round(bounds.width),
+        checkAnswerLineCount: Number(checkAnswer.querySelector('[data-pretext-text]')?.dataset.pretextLineCount || 1),
+        checkAnswerSingleLine: checkAnswer.scrollWidth <= checkAnswer.clientWidth,
+        checkAnswerMinHeight: parseFloat(styles.minHeight),
+        checkAnswerPaddingTop: parseFloat(styles.paddingTop)
+      };
+    })()`);
+
+    assert.equal(state.studyFocusBadge, false, `the study controller-focus badge wastes flashcard space: ${JSON.stringify(state)}`);
+    assert.equal(state.checkAnswerText, 'Check Answer', `quiz control should retain its clear action label: ${JSON.stringify(state)}`);
+    assert.ok(state.checkAnswerMinHeight <= 34, `Check Answer should be compact rather than consuming flashcard space: ${JSON.stringify(state)}`);
+    assert.equal(state.checkAnswerLineCount, 1, `Check Answer must remain a compact single-line action: ${JSON.stringify(state)}`);
+    assert.ok(state.checkAnswerPaddingTop <= 6, `Check Answer should use compact vertical padding: ${JSON.stringify(state)}`);
+
+    const screenshot = await client.send('Page.captureScreenshot', { format: 'png', fromSurface: true });
+    const screenshotPath = path.join(os.tmpdir(), 'flash-cards-security-quiz-scaled-4k-qa.png');
+    fs.writeFileSync(screenshotPath, Buffer.from(screenshot.data, 'base64'));
+    console.log(`Scaled 4K Security+ quiz-card QA screenshot: ${screenshotPath}`);
+  } finally {
+    await client.send('Emulation.clearDeviceMetricsOverride');
+  }
+}
+
 async function smokeSingleChoiceTypeBadge(client, url) {
   await navigate(client, url);
   await waitFor(
@@ -592,6 +695,23 @@ async function captureMobileAnswerOptions(client, url) {
     await evaluate(client, `document.querySelector('#flip-card').click()`);
     await waitFor(client, `document.querySelector('#card').classList.contains('is-flipped')`, 'multiple-choice card to flip to its answer side');
     await evaluate(client, `new Promise((resolve) => setTimeout(resolve, 760))`);
+    const fit = await evaluate(client, `(() => {
+      const content = document.querySelector('#card-back > .card-face-content');
+      const bounds = content.getBoundingClientRect();
+      const options = Array.from(content.querySelectorAll('.option-list--answer li'));
+      return {
+        scrollHeight: content.scrollHeight,
+        clientHeight: content.clientHeight,
+        overflowY: getComputedStyle(content).overflowY,
+        allOptionsVisible: options.every((option) => {
+          const optionBounds = option.getBoundingClientRect();
+          return optionBounds.top >= bounds.top && optionBounds.bottom <= bounds.bottom;
+        })
+      };
+    })()`);
+    assert.ok(fit.scrollHeight <= fit.clientHeight + 1, `mobile answer content must fit its flashcard without internal scrolling: ${JSON.stringify(fit)}`);
+    assert.equal(fit.overflowY, 'hidden', `mobile flashcard answer content must not be internally scrollable: ${JSON.stringify(fit)}`);
+    assert.equal(fit.allOptionsVisible, true, `every mobile answer option must be visible inside the flashcard at once: ${JSON.stringify(fit)}`);
     const screenshot = await client.send('Page.captureScreenshot', { format: 'png', fromSurface: true });
     const screenshotPath = path.join(os.tmpdir(), 'flash-cards-answer-options-iphone-qa.png');
     fs.writeFileSync(screenshotPath, Buffer.from(screenshot.data, 'base64'));
@@ -618,6 +738,107 @@ async function captureDesktopQa(client, url) {
     const screenshotPath = path.join(os.tmpdir(), 'flash-cards-desktop-qa.png');
     fs.writeFileSync(screenshotPath, Buffer.from(screenshot.data, 'base64'));
     console.log(`Desktop visual QA screenshot: ${screenshotPath}`);
+  } finally {
+    await client.send('Emulation.clearDeviceMetricsOverride');
+  }
+}
+
+async function captureLaptopQa(client, url) {
+  await client.send('Emulation.setDeviceMetricsOverride', {
+    width: 1366,
+    height: 768,
+    deviceScaleFactor: 1,
+    mobile: false,
+    screenWidth: 1366,
+    screenHeight: 768
+  });
+  try {
+    await navigate(client, url);
+    await waitFor(client, `document.readyState === 'complete' && document.querySelector('#card-front') && !document.querySelector('#card-front').textContent.includes('Loading')`, '1366x768 laptop study layout to load');
+    const screenshot = await client.send('Page.captureScreenshot', { format: 'png', fromSurface: true });
+    const screenshotPath = path.join(os.tmpdir(), 'flash-cards-1366x768-qa.png');
+    fs.writeFileSync(screenshotPath, Buffer.from(screenshot.data, 'base64'));
+    const layout = await evaluate(client, `(() => {
+      const panel = document.querySelector('.study-panel');
+      const card = document.querySelector('#card');
+      return {
+        cardHeight: Math.round(card.getBoundingClientRect().height),
+        panelCanScroll: panel.scrollHeight > panel.clientHeight,
+        panelOverflowY: getComputedStyle(panel).overflowY
+      };
+    })()`);
+    assert.ok(layout.cardHeight >= 360, `1366x768 should preserve a roomy 360px study card instead of compressing it: ${JSON.stringify(layout)}`);
+    assert.equal(layout.panelOverflowY, 'auto', `1366x768 overflow must remain accessible through the study panel scrollbar: ${JSON.stringify(layout)}`);
+    console.log(`1366x768 laptop visual QA screenshot: ${screenshotPath}`);
+  } finally {
+    await client.send('Emulation.clearDeviceMetricsOverride');
+  }
+}
+
+async function smokeStudyPanelScrollAccessibility(client, url) {
+  await client.send('Emulation.setDeviceMetricsOverride', {
+    width: 1440,
+    height: 700,
+    deviceScaleFactor: 1,
+    mobile: false,
+    screenWidth: 1440,
+    screenHeight: 700
+  });
+
+  try {
+    await navigate(client, url);
+    await waitFor(client, `document.readyState === 'complete' && document.querySelector('#card-front') && !document.querySelector('#card-front').textContent.includes('Loading')`, 'short desktop study layout to load');
+
+    const state = await evaluate(client, `(() => {
+      const panel = document.querySelector('.study-panel');
+      const finalElement = document.querySelector('#due-mode');
+      const initialScrollTop = panel.scrollTop;
+      panel.scrollTop = panel.scrollHeight;
+      const panelBounds = panel.getBoundingClientRect();
+      const finalBounds = finalElement.getBoundingClientRect();
+      return {
+        overflowY: getComputedStyle(panel).overflowY,
+        canScroll: panel.scrollHeight > panel.clientHeight,
+        initialScrollTop,
+        finalScrollTop: panel.scrollTop,
+        finalElementVisible: finalBounds.top >= panelBounds.top && finalBounds.bottom <= panelBounds.bottom
+      };
+    })()`);
+
+    assert.equal(state.overflowY, 'auto', `study panel must expose vertical overflow through its own scrollbar: ${JSON.stringify(state)}`);
+    assert.equal(state.canScroll, true, `short study layouts should preserve all controls in a scrollable panel: ${JSON.stringify(state)}`);
+    assert.ok(state.finalScrollTop > state.initialScrollTop, `study panel should scroll to its final element: ${JSON.stringify(state)}`);
+    assert.equal(state.finalElementVisible, true, `the final study-panel element must be visible after scrolling: ${JSON.stringify(state)}`);
+
+    await client.send('Emulation.setDeviceMetricsOverride', {
+      width: 390,
+      height: 700,
+      deviceScaleFactor: 2,
+      mobile: true,
+      screenWidth: 390,
+      screenHeight: 700
+    });
+    await navigate(client, url);
+    await waitFor(client, `document.readyState === 'complete' && document.querySelector('#card-front') && !document.querySelector('#card-front').textContent.includes('Loading')`, 'short mobile study layout to load');
+
+    const mobileState = await evaluate(client, `(() => {
+      const panel = document.querySelector('.study-panel');
+      const finalElement = document.querySelector('#due-mode');
+      panel.scrollTop = panel.scrollHeight;
+      const panelBounds = panel.getBoundingClientRect();
+      const finalBounds = finalElement.getBoundingClientRect();
+      return {
+        overflowY: getComputedStyle(panel).overflowY,
+        canScroll: panel.scrollHeight > panel.clientHeight,
+        scrollTop: panel.scrollTop,
+        finalElementVisible: finalBounds.top >= panelBounds.top && finalBounds.bottom <= panelBounds.bottom
+      };
+    })()`);
+
+    assert.equal(mobileState.overflowY, 'auto', `mobile study panel must expose vertical overflow through its own scrollbar: ${JSON.stringify(mobileState)}`);
+    assert.equal(mobileState.canScroll, true, `short mobile study layouts should preserve all controls in a scrollable panel: ${JSON.stringify(mobileState)}`);
+    assert.ok(mobileState.scrollTop > 0, `mobile study panel should scroll to its final element: ${JSON.stringify(mobileState)}`);
+    assert.equal(mobileState.finalElementVisible, true, `the final mobile study-panel element must be visible after scrolling: ${JSON.stringify(mobileState)}`);
   } finally {
     await client.send('Emulation.clearDeviceMetricsOverride');
   }
