@@ -35,17 +35,33 @@ async function main() {
     await smokeThemeSelector(client, `${origin}${pagesPrefix}/`);
     await smokeGlobalSearch(client, `${origin}${pagesPrefix}/`);
     await smokeDeckEditor(client, `${origin}${pagesPrefix}/`);
+    await smokeNoPhantomControllerFocus(client, `${origin}${pagesPrefix}/tests/network-plus/`);
     await smokeControllerPanels(client, `${origin}${pagesPrefix}/tests/network-plus/`);
+    await smokeControllerTocStickyHeaderScroll(client, `${origin}${pagesPrefix}/tests/network-plus/`);
+    await smokeControllerMobileFocus(client, `${origin}${pagesPrefix}/tests/network-plus/`);
+    await smokeControllerInputMap(client, `${origin}${pagesPrefix}/tests/network-plus/`);
+    await smokeControllerTtsSelects(client, `${origin}${pagesPrefix}/tests/network-plus/`);
+    await smokeSecuritySourceSection(client, `${origin}${pagesPrefix}/tests/security-plus/?smoke=source-section#section=Practice%20Test%201`);
+    await smokeNativeMultipleChoiceInputs(client, `${origin}${pagesPrefix}/tests/security-plus/?smoke=native-checkboxes#section=Practice%20Test%201&card=1`);
+    await smokeMouseOptionGrading(client, `${origin}${pagesPrefix}/tests/security-plus/?smoke=mouse-option-grading#section=Practice%20Test%201&card=1`);
+    await smokeLegacyOptionSelfGradeIsolation(client, `${origin}${pagesPrefix}/tests/security-plus/?smoke=legacy-option-grade#section=Practice%20Test%201&card=1`);
+    await smokeControllerAnswerMarking(client, `${origin}${pagesPrefix}/tests/security-plus/?smoke=controller-answer-marking#section=Practice%20Test%201&card=1`);
+    await smokeControllerFocusedButtonActivation(client, `${origin}${pagesPrefix}/tests/security-plus/?smoke=controller-try-again#section=Practice%20Test%201&card=1`);
+    await smokeControllerCorrectOnlyGrading(client, `${origin}${pagesPrefix}/tests/security-plus/?smoke=controller-correct-only#section=Practice%20Test%201&card=1`);
+    await smokeControllerAxisLatch(client, `${origin}${pagesPrefix}/tests/network-plus/`);
+    await smokeCompletedSectionScore(client, `${origin}${pagesPrefix}/tests/network-plus/`);
     await smokeResetProgress(client, `${origin}${pagesPrefix}/tests/network-plus/`);
     await smokeCardAnimations(client, `${origin}${pagesPrefix}/tests/network-plus/`);
     await smokePretextFlipAndTts(client, `${origin}${pagesPrefix}/tests/network-plus/`);
     await smokeStudyStateCues(client, `${origin}${pagesPrefix}/tests/network-plus/`);
     await smokeReadableTypography(client, `${origin}${pagesPrefix}/tests/tech-plus-fc0-u71/`);
-    await smokeAnswerSideOptions(client, `${origin}${pagesPrefix}/tests/security-plus/?smoke=multiple#section=1.1&card=1`);
-    await smokeScaledFourKAnswerFit(client, `${origin}${pagesPrefix}/tests/security-plus/#section=1.1&card=1`);
-    await smokeStudyChromeDensity(client, `${origin}${pagesPrefix}/tests/security-plus/#section=1.1&card=1`);
-    await smokeSingleChoiceTypeBadge(client, `${origin}${pagesPrefix}/tests/security-plus/?smoke=single#section=1.1&card=5`);
-    await smokeTrueFalseTypeBadge(client, `${origin}${pagesPrefix}/tests/security-plus/?smoke=true-false#section=1.1&card=7`);
+    await smokeAnswerSideOptions(client, `${origin}${pagesPrefix}/tests/security-plus/?smoke=multiple#section=Practice%20Test%201&card=1`);
+    await smokeScaledFourKAnswerFit(client, `${origin}${pagesPrefix}/tests/security-plus/#section=Practice%20Test%201&card=1`);
+    await smokeStudyChromeDensity(client, `${origin}${pagesPrefix}/tests/security-plus/?smoke=study-density#section=Practice%20Test%201&card=1`);
+    await smokeFourKQuizResultLabel(client, `${origin}${pagesPrefix}/tests/security-plus/?smoke=single#section=Practice%20Test%201&card=7`);
+    await smokeSingleChoiceTypeBadge(client, `${origin}${pagesPrefix}/tests/security-plus/?smoke=single#section=Practice%20Test%201&card=7`);
+    await smokeTrueFalseTypeBadge(client, `${origin}${pagesPrefix}/tests/security-plus/?smoke=true-false#section=Practice%20Test%201&card=14`);
+    await smokeCardMetadataClearance(client, `${origin}${pagesPrefix}/tests/security-plus/?smoke=single#section=Practice%20Test%201&card=7`);
     await captureMobileAnswerOptions(client, `${origin}${pagesPrefix}/tests/tech-plus-fc0-u71/`);
     await captureDesktopQa(client, `${origin}${pagesPrefix}/tests/network-plus/`);
     await captureLaptopQa(client, `${origin}${pagesPrefix}/tests/network-plus/`);
@@ -53,7 +69,7 @@ async function main() {
     await smokeMobilePwa(client, `${origin}${pagesPrefix}/tests/network-plus/`);
 
     await client.close();
-    console.log('Browser smoke checks passed for theme selector, global search, deck editor, controller panels, reset progress, card animations, touch gestures, and iPhone PWA layout.');
+    console.log('Browser smoke checks passed for native checkbox/radio quiz controls, mouse and Xbox-style controller answer flows, theme selector, global search, deck editor, controller panels, reset progress, card animations, touch gestures, and iPhone PWA layout.');
   } finally {
     await closeServer(server);
     await stopChrome(chrome);
@@ -172,6 +188,28 @@ async function smokeDeckEditor(client, url) {
   assert.match(state.output, /Front/, 'deck editor should parse markdown-style cards');
 }
 
+async function smokeNoPhantomControllerFocus(client, url) {
+  await navigate(client, url);
+  await waitFor(client, `document.readyState === 'complete' && document.querySelector('[data-controller-state="disconnected"]') && document.querySelector('#next-card:not(:disabled)')`, 'deck without a connected controller to load');
+
+  const initialCount = await evaluate(client, `document.querySelector('#card-count').textContent`);
+  const initialFocused = await evaluate(client, `document.querySelectorAll('.is-controller-focused').length`);
+  await evaluate(client, `document.querySelector('#next-card').click()`);
+  await waitFor(client, `document.querySelector('#card-count').textContent !== ${JSON.stringify(initialCount)}`, 'mouse Next navigation to finish without a controller');
+  await delay(320);
+  const afterNextFocused = await evaluate(client, `document.querySelectorAll('.is-controller-focused').length`);
+  await evaluate(client, `document.querySelector('#prev-card').click()`);
+  await waitFor(client, `document.querySelector('#card-count').textContent === ${JSON.stringify(initialCount)}`, 'mouse Previous navigation to finish without a controller');
+  await delay(320);
+  const afterPreviousFocused = await evaluate(client, `document.querySelectorAll('.is-controller-focused').length`);
+
+  assert.deepEqual(
+    { initialFocused, afterNextFocused, afterPreviousFocused },
+    { initialFocused: 0, afterNextFocused: 0, afterPreviousFocused: 0 },
+    'cards navigated without a detected or active controller must not receive controller-only focus styling'
+  );
+}
+
 async function smokeControllerPanels(client, url) {
   await navigate(client, url);
   await waitFor(
@@ -233,12 +271,681 @@ async function smokeControllerPanels(client, url) {
   assert.equal(state.afterTocSelection.tocActive, false, 'TOC panel should not remain controller-active after section selection');
   assert.equal(state.afterTocSelection.studyActive, true, `Study panel should become controller-active after section selection: ${JSON.stringify(state.afterTocSelection)}`);
   assert.match(state.afterTocSelection.commandBar, /RB\s*Study active/i, 'controller command bar should explain active Study focus');
-  assert.equal(state.afterTocSelection.activeElementId, 'flip-card', 'Study panel focus should restore to the primary Flip control');
+  assert.equal(state.afterTocSelection.activeElementId, 'flip-card', `Study panel focus should restore to the primary Flip control: ${JSON.stringify(state.afterTocSelection)}`);
   assert.equal(state.modalContext, 'modal', 'open dialogs should take controller context priority over Study');
   assert.notEqual(state.focusedAfterModalMove, state.focusedBeforeModalMove, 'modal roving focus should move within the dialog');
   assert.equal(state.themeDialogHidden, true, 'controller B/close should close the active modal');
   assert.equal(state.afterFront, state.beforeModalFront, 'modal controller input should not leak into card navigation');
   assert.ok(state.roving.toc >= 0 && state.roving.study >= 0 && state.roving.modal >= 0, 'controller roving indexes should be tracked per context');
+}
+
+async function smokeControllerTocStickyHeaderScroll(client, url) {
+  await navigate(client, url);
+  await waitFor(
+    client,
+    `document.readyState === 'complete' && document.querySelectorAll('.toc-panel .section-button:not(:disabled)').length > 2`,
+    'Network+ TOC to load for sticky-header controller scrolling checks'
+  );
+
+  const state = await evaluate(client, `(() => {
+    const nav = window.FlashCardsControllerNav;
+    const panel = document.querySelector('.toc-panel');
+    const header = panel.querySelector('.toc-header');
+    const targets = Array.from(panel.querySelectorAll('.section-button:not(:disabled)'));
+    const first = targets[0];
+
+    nav.focusPanel('toc');
+    first.focus({ preventScroll: true });
+    nav.move('up');
+    nav.move('down');
+
+    const headerBounds = header.getBoundingClientRect();
+    const firstBounds = first.getBoundingClientRect();
+    const firstState = {
+      active: document.activeElement === first,
+      scrollTop: panel.scrollTop,
+      top: firstBounds.top
+    };
+    const targetIndex = Math.min(4, targets.length - 1);
+    for (let index = 0; index < targetIndex; index += 1) nav.move('down');
+    const targetBounds = targets[targetIndex].getBoundingClientRect();
+    const panelBounds = panel.getBoundingClientRect();
+    return {
+      first: firstState,
+      headerBottom: headerBounds.bottom,
+      targetTop: targetBounds.top,
+      targetBottom: targetBounds.bottom,
+      panelBottom: panelBounds.bottom
+    };
+  })()`);
+
+  assert.equal(state.first.active, true, `controller wrap-around should return focus to the first TOC section: ${JSON.stringify(state)}`);
+  assert.ok(state.first.scrollTop <= 1, `returning to the first TOC section must reach the true scroll origin: ${JSON.stringify(state)}`);
+  assert.ok(state.first.top >= state.headerBottom, `the first TOC section must not remain hidden behind the sticky header: ${JSON.stringify(state)}`);
+  assert.ok(state.targetTop >= state.headerBottom + 12, `controller navigation must keep later TOC sections below the sticky header: ${JSON.stringify(state)}`);
+  assert.ok(state.targetBottom <= state.panelBottom - 19, `controller navigation must keep later TOC sections inside the TOC viewport: ${JSON.stringify(state)}`);
+}
+
+async function smokeControllerMobileFocus(client, url) {
+  await client.send('Emulation.setDeviceMetricsOverride', {
+    width: 390,
+    height: 844,
+    deviceScaleFactor: 2,
+    mobile: true,
+    screenWidth: 390,
+    screenHeight: 844
+  });
+
+  try {
+    await navigate(client, url);
+    await waitFor(client, `document.readyState === 'complete' && document.querySelector('.section-button:not(:disabled)') && document.querySelector('#card-front') && !document.querySelector('#card-front').textContent.includes('Loading')`, 'Network+ deck to load for mobile controller checks');
+    const state = await evaluate(client, `(() => {
+      const nav = window.FlashCardsControllerNav;
+      nav.focusPanel('toc');
+      return {
+        activePanel: document.querySelector('.app-shell').dataset.controllerPanel,
+        deckOpen: document.querySelector('.app-shell').classList.contains('is-mobile-deck-open'),
+        focusedSection: document.activeElement.classList.contains('section-button'),
+        context: nav.context()
+      };
+    })()`);
+
+    assert.equal(state.activePanel, 'toc', `LB should switch the active controller panel on mobile: ${JSON.stringify(state)}`);
+    assert.equal(state.deckOpen, true, `LB should open the mobile deck sheet so its controller target is actually visible: ${JSON.stringify(state)}`);
+    assert.equal(state.focusedSection, true, `LB should focus a visible section button on mobile: ${JSON.stringify(state)}`);
+    assert.equal(state.context, 'toc', `mobile deck focus should report the TOC controller context: ${JSON.stringify(state)}`);
+  } finally {
+    await client.send('Emulation.clearDeviceMetricsOverride');
+  }
+}
+
+async function smokeControllerInputMap(client, url) {
+  await navigate(client, url);
+  await waitFor(client, `document.readyState === 'complete' && document.querySelector('#card-front') && !document.querySelector('#card-front').textContent.includes('Loading')`, 'Network+ deck to load for controller input mapping checks');
+
+  const state = await evaluate(client, `(() => {
+    const nav = window.FlashCardsControllerNav;
+    const app = document.querySelector('.app-shell');
+    const before = document.querySelector('#card-count').textContent;
+    nav.input('start');
+    const modalOpened = !document.querySelector('[data-theme-dialog]').hidden;
+    nav.input('b');
+    const modalClosed = document.querySelector('[data-theme-dialog]').hidden;
+    nav.input('lb');
+    const tocFocused = app.dataset.controllerPanel === 'toc';
+    nav.input('b');
+    const studyRestored = app.dataset.controllerPanel === 'study';
+    nav.input('x');
+    const flipped = app.dataset.cardSide === 'back';
+    nav.input('x');
+    nav.input('rb');
+    const result = {
+      before,
+      modalOpened,
+      modalClosed,
+      tocFocused,
+      studyRestored,
+      flipped,
+      activePanel: app.dataset.controllerPanel,
+      focusedId: document.activeElement.id
+    };
+    return result;
+  })()`);
+
+  assert.equal(state.modalOpened, true, `Start should open the settings modal: ${JSON.stringify(state)}`);
+  assert.equal(state.modalClosed, true, `B should close a modal before reaching study actions: ${JSON.stringify(state)}`);
+  assert.equal(state.tocFocused, true, `LB should focus the deck panel: ${JSON.stringify(state)}`);
+  assert.equal(state.studyRestored, true, `B should return from the deck panel to Study: ${JSON.stringify(state)}`);
+  assert.equal(state.flipped, true, `X should flip the current card: ${JSON.stringify(state)}`);
+  assert.equal(state.activePanel, 'study', `RB should return the active panel to Study: ${JSON.stringify(state)}`);
+}
+
+async function smokeControllerTtsSelects(client, url) {
+  await navigate(client, url);
+  await waitFor(client, `document.readyState === 'complete' && document.querySelector('#speech-rate') && document.querySelector('#speech-voice')`, 'TTS controls to load for controller selection checks');
+
+  const state = await evaluate(client, `(() => {
+    const nav = window.FlashCardsControllerNav;
+    const rate = document.querySelector('#speech-rate');
+    const voice = document.querySelector('#speech-voice');
+    const question = document.querySelector('#speak-question');
+    const answer = document.querySelector('#speak-answer');
+    const cardBefore = document.querySelector('#card-count').textContent;
+    let questionClicks = 0;
+    let answerClicks = 0;
+
+    question.addEventListener('click', () => { questionClicks += 1; });
+    answer.addEventListener('click', () => { answerClicks += 1; });
+    rate.value = '1';
+    voice.value = '';
+    nav.focusPanel('study');
+
+    rate.focus({ preventScroll: true });
+    nav.input('a');
+    const rateExpanded = rate.classList.contains('is-controller-select-open') && rate.size > 1;
+    const rateExpandedHeight = rate.getBoundingClientRect().height;
+    const rateInsideTools = rate.getBoundingClientRect().bottom <= document.querySelector('.tts-tools').getBoundingClientRect().bottom + 1;
+    const rateBeforeMove = rate.value;
+    nav.input('down');
+    const ratePending = rate.value;
+    nav.input('a');
+    const rateCollapsed = !rate.classList.contains('is-controller-select-open') && rate.size <= 1;
+    const storedRate = JSON.parse(localStorage.getItem('flash-cards:speech-preferences') || '{}').rate;
+
+    voice.focus({ preventScroll: true });
+    nav.input('a');
+    const voiceExpanded = voice.classList.contains('is-controller-select-open') && voice.size > 1;
+    nav.input('down');
+    const voicePending = voice.value;
+    nav.input('a');
+    const voiceCollapsed = !voice.classList.contains('is-controller-select-open') && voice.size <= 1;
+    const storedVoice = JSON.parse(localStorage.getItem('flash-cards:speech-preferences') || '{}').voice;
+
+    question.focus({ preventScroll: true });
+    nav.input('a');
+    answer.focus({ preventScroll: true });
+    nav.input('a');
+
+    return {
+      rateExpanded,
+      rateExpandedHeight,
+      rateInsideTools,
+      rateBeforeMove,
+      ratePending,
+      rateCollapsed,
+      storedRate,
+      voiceExpanded,
+      voicePending,
+      voiceCollapsed,
+      storedVoice,
+      questionClicks,
+      answerClicks,
+      cardUnchanged: document.querySelector('#card-count').textContent === cardBefore
+    };
+  })()`);
+
+  assert.equal(state.rateExpanded, true, `A should expand the focused speech-speed selector: ${JSON.stringify(state)}`);
+  assert.ok(state.rateExpandedHeight > 36, `the expanded speech-speed selector should visibly expose multiple options: ${JSON.stringify(state)}`);
+  assert.equal(state.rateInsideTools, true, `the expanded speech-speed selector must remain inside the TTS panel: ${JSON.stringify(state)}`);
+  assert.notEqual(state.ratePending, state.rateBeforeMove, `D-pad Down should move the pending speech-speed selection: ${JSON.stringify(state)}`);
+  assert.equal(state.rateCollapsed, true, `A should commit and collapse the speech-speed selector: ${JSON.stringify(state)}`);
+  assert.equal(state.storedRate, state.ratePending, `committed controller speech-speed changes should persist: ${JSON.stringify(state)}`);
+  assert.equal(state.voiceExpanded, true, `A should expand the focused speech-voice selector: ${JSON.stringify(state)}`);
+  assert.notEqual(state.voicePending, '', `D-pad Down should move the pending speech-voice selection: ${JSON.stringify(state)}`);
+  assert.equal(state.voiceCollapsed, true, `A should commit and collapse the speech-voice selector: ${JSON.stringify(state)}`);
+  assert.equal(state.storedVoice, state.voicePending, `committed controller speech-voice changes should persist: ${JSON.stringify(state)}`);
+  assert.equal(state.questionClicks, 1, `A should activate the focused Question TTS control: ${JSON.stringify(state)}`);
+  assert.equal(state.answerClicks, 1, `A should activate the focused Answer TTS control: ${JSON.stringify(state)}`);
+  assert.equal(state.cardUnchanged, true, `TTS controller actions must not self-grade or navigate the current card: ${JSON.stringify(state)}`);
+}
+
+async function smokeNativeMultipleChoiceInputs(client, url) {
+  await navigate(client, url);
+  await waitFor(client, `document.readyState === 'complete' && document.querySelector('#card-front .card-type-badge')?.textContent.trim() === 'Multiple choice'`, 'multiple-choice card to load for native checkbox checks');
+
+  const state = await evaluate(client, `(() => {
+    const inputs = Array.from(document.querySelectorAll('#card-front .option-input'));
+    const labels = Array.from(document.querySelectorAll('#card-front .option-label'));
+    const first = inputs[0];
+    labels[0]?.click();
+    const checkedAfterLabelClick = first?.checked;
+    labels[0]?.click();
+
+    return {
+      count: inputs.length,
+      types: inputs.map((input) => input.type),
+      uniqueIds: new Set(inputs.map((input) => input.id)).size,
+      labelsConnected: labels.every((label, index) => label.htmlFor === inputs[index]?.id),
+      checkedAfterLabelClick,
+      uncheckedAfterSecondLabelClick: first ? !first.checked : false
+    };
+  })()`);
+
+  assert.ok(state.count > 1, `the multiple-choice fixture must expose several options: ${JSON.stringify(state)}`);
+  assert.deepEqual(new Set(state.types), new Set(['checkbox']), `multiple-choice answers must use native checkboxes: ${JSON.stringify(state)}`);
+  assert.equal(state.uniqueIds, state.count, `every answer checkbox needs a unique id: ${JSON.stringify(state)}`);
+  assert.equal(state.labelsConnected, true, `every answer checkbox must be connected to its full-row label: ${JSON.stringify(state)}`);
+  assert.equal(state.checkedAfterLabelClick, true, `clicking an answer label should check its checkbox: ${JSON.stringify(state)}`);
+  assert.equal(state.uncheckedAfterSecondLabelClick, true, `clicking the same answer label again should uncheck its checkbox: ${JSON.stringify(state)}`);
+}
+
+async function smokeMouseOptionGrading(client, url) {
+  await navigate(client, url);
+  await waitFor(client, `document.readyState === 'complete' && document.querySelectorAll('#card-front .option-input:not(:disabled)').length >= 2`, 'multiple-choice card to load for mouse grading checks');
+
+  const state = await evaluate(client, `(async () => {
+    const inputs = () => Array.from(document.querySelectorAll('#card-front .option-input'));
+    const correctIndexes = Array.from(document.querySelectorAll('#card-back .option-list--answer li')).flatMap((item, index) => item.classList.contains('is-correct') ? [index] : []);
+    const initialSubmit = document.querySelector('#card-front [data-quiz-submit]');
+    const initialHint = document.querySelector('#card-front .quiz-hint')?.textContent.trim() || '';
+    const initialDisabled = initialSubmit?.disabled;
+
+    inputs()[correctIndexes[0]].click();
+    const selectedAfterFirstClick = document.querySelectorAll('#card-front li.is-selected').length;
+    inputs()[correctIndexes[0]].click();
+    const selectedAfterSecondClick = document.querySelectorAll('#card-front li.is-selected').length;
+
+    correctIndexes.forEach((index) => inputs()[index].click());
+    const submit = document.querySelector('#card-front [data-quiz-submit]');
+    const enabledAfterSelection = submit && !submit.disabled;
+    const selectionStatus = document.querySelector('#card-front .quiz-hint')?.textContent.trim() || '';
+    submit.click();
+    await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+
+    const result = {
+      questionType: document.querySelector('#card-front .card-type-badge')?.textContent.trim(),
+      correctAnswerCount: correctIndexes.length,
+      initialHint,
+      hadSubmit: Boolean(initialSubmit),
+      initialDisabled,
+      selectedAfterFirstClick,
+      selectedAfterSecondClick,
+      enabledAfterSelection,
+      selectionStatus,
+      remainedOnQuestion: document.querySelector('.app-shell').dataset.cardSide === 'front',
+      result: document.querySelector('#card-front .quiz-result')?.textContent.trim() || '',
+      allOptionsLocked: inputs().every((input) => input.disabled),
+      hasNextAction: Array.from(document.querySelectorAll('#card-front .quiz-controls button')).some((button) => /next card/i.test(button.textContent)),
+      toolbarTitleWidth: Math.round(document.querySelector('.deck-toolbar h2').getBoundingClientRect().width),
+      toolbarWidth: Math.round(document.querySelector('.deck-toolbar').getBoundingClientRect().width)
+    };
+    localStorage.removeItem('flash-cards:security-plus:progress:v1');
+    return result;
+  })()`);
+
+  assert.equal(state.questionType, 'Multiple choice', `the mouse regression fixture must be a multiple-choice card: ${JSON.stringify(state)}`);
+  assert.ok(state.correctAnswerCount > 1, `the mouse regression fixture must require multiple answers: ${JSON.stringify(state)}`);
+  assert.match(state.initialHint, /select all.*check/i, `mouse guidance should plainly explain multi-selection and grading: ${JSON.stringify(state)}`);
+  assert.equal(state.hadSubmit, true, `option cards should provide an explicit Check answer button for mouse users: ${JSON.stringify(state)}`);
+  assert.equal(state.initialDisabled, true, `Check answer should stay disabled until an answer is selected: ${JSON.stringify(state)}`);
+  assert.equal(state.selectedAfterFirstClick, 1, `clicking an option should select it: ${JSON.stringify(state)}`);
+  assert.equal(state.selectedAfterSecondClick, 0, `clicking a selected multiple-choice option should deselect it: ${JSON.stringify(state)}`);
+  assert.equal(state.enabledAfterSelection, true, `Check answer should enable after selection: ${JSON.stringify(state)}`);
+  assert.match(state.selectionStatus, new RegExp(`${state.correctAnswerCount} selected`, 'i'), `the interface should confirm how many answers are selected: ${JSON.stringify(state)}`);
+  assert.equal(state.remainedOnQuestion, true, `checking an answer should show inline grading feedback before flipping: ${JSON.stringify(state)}`);
+  assert.match(state.result, /correct/i, `an exact mouse selection should be graded inline: ${JSON.stringify(state)}`);
+  assert.equal(state.allOptionsLocked, true, `graded options should lock until Try Again or navigation: ${JSON.stringify(state)}`);
+  assert.equal(state.hasNextAction, true, `a correct result should offer a clear Next card action: ${JSON.stringify(state)}`);
+  assert.ok(state.toolbarTitleWidth >= state.toolbarWidth * 0.45, `mouse selection must not collapse the deck heading into a narrow column: ${JSON.stringify(state)}`);
+}
+
+async function smokeControllerAnswerMarking(client, url) {
+  await navigate(client, url);
+  await waitFor(client, `document.readyState === 'complete' && document.querySelectorAll('#card-front .option-input:not(:disabled)').length >= 2`, 'option card to load for controller answer-selection checks');
+
+  const state = await evaluate(client, `(() => {
+    const nav = window.FlashCardsControllerNav;
+    const inputs = Array.from(document.querySelectorAll('#card-front .option-input'));
+    inputs[0].focus({ preventScroll: true });
+    nav.input('a');
+    const afterFirstSelection = {
+      checked: inputs[0].checked,
+      focused: document.activeElement === inputs[0],
+      side: document.querySelector('.app-shell').dataset.cardSide
+    };
+
+    nav.input('down');
+    const focusedAfterMove = document.activeElement;
+    nav.input('a');
+    const afterSecondSelection = {
+      movedToNextOption: focusedAfterMove === inputs[1],
+      checked: inputs[1].checked,
+      selectedCount: inputs.filter((input) => input.checked).length
+    };
+
+    nav.input('b');
+    const afterBackOnQuestion = {
+      side: document.querySelector('.app-shell').dataset.cardSide,
+      selectedCount: inputs.filter((input) => input.checked).length
+    };
+
+    nav.input('x');
+    const afterFlip = {
+      side: document.querySelector('.app-shell').dataset.cardSide,
+      graded: Array.from(document.querySelectorAll('#card-front .option-input')).every((input) => input.disabled),
+      focusedFlip: document.activeElement === document.querySelector('#flip-card'),
+      frontInert: document.querySelector('#card-front').inert,
+      frontAriaHidden: document.querySelector('#card-front').getAttribute('aria-hidden'),
+      backInert: document.querySelector('#card-back').inert,
+      backAriaHidden: document.querySelector('#card-back').getAttribute('aria-hidden')
+    };
+
+    const selectedBeforeHiddenNavigation = inputs.filter((input) => input.checked).length;
+    let hiddenFocusReached = false;
+    for (const direction of ['up', 'down', 'left', 'right', 'up', 'up', 'down', 'down', 'left', 'right']) {
+      nav.input(direction);
+      if (document.querySelector('#card-front').contains(document.activeElement)) {
+        hiddenFocusReached = true;
+        nav.input('a');
+        break;
+      }
+    }
+    const hiddenFaceInteraction = {
+      hiddenFocusReached,
+      selectionChanged: inputs.filter((input) => input.checked).length !== selectedBeforeHiddenNavigation
+    };
+    nav.input('b');
+
+    const result = {
+      afterFirstSelection,
+      afterSecondSelection,
+      afterBackOnQuestion,
+      afterFlip,
+      hiddenFaceInteraction,
+      returnedToQuestion: document.querySelector('.app-shell').dataset.cardSide === 'front',
+      restoredOptionFocus: document.activeElement === inputs[1],
+      frontInteractiveAfterReturn: !document.querySelector('#card-front').inert && document.querySelector('#card-front').getAttribute('aria-hidden') === 'false',
+      backHiddenAfterReturn: document.querySelector('#card-back').inert && document.querySelector('#card-back').getAttribute('aria-hidden') === 'true'
+    };
+    localStorage.removeItem('flash-cards:security-plus:progress:v1');
+    return result;
+  })()`);
+
+  assert.deepEqual(state.afterFirstSelection, { checked: true, focused: true, side: 'front' }, `Xbox A should toggle the focused checkbox without moving or flipping the card: ${JSON.stringify(state)}`);
+  assert.deepEqual(state.afterSecondSelection, { movedToNextOption: true, checked: true, selectedCount: 2 }, `the D-pad should move between answer inputs and A should toggle the next checkbox: ${JSON.stringify(state)}`);
+  assert.deepEqual(state.afterBackOnQuestion, { side: 'front', selectedCount: 2 }, `Xbox B should not mutate answers while already on the question side: ${JSON.stringify(state)}`);
+  assert.deepEqual(state.afterFlip, { side: 'back', graded: false, focusedFlip: true, frontInert: true, frontAriaHidden: 'true', backInert: false, backAriaHidden: 'false' }, `Xbox X should reveal only the answer face without submitting and move focus to a visible control: ${JSON.stringify(state)}`);
+  assert.deepEqual(state.hiddenFaceInteraction, { hiddenFocusReached: false, selectionChanged: false }, `controller navigation must not reach or mutate the hidden question face: ${JSON.stringify(state)}`);
+  assert.equal(state.returnedToQuestion, true, `Xbox B should return from the answer side to the question: ${JSON.stringify(state)}`);
+  assert.equal(state.restoredOptionFocus, true, `returning to the question should restore the last focused answer: ${JSON.stringify(state)}`);
+  assert.equal(state.frontInteractiveAfterReturn, true, `the question face should become interactive again after returning: ${JSON.stringify(state)}`);
+  assert.equal(state.backHiddenAfterReturn, true, `the answer face should become inert after returning to the question: ${JSON.stringify(state)}`);
+}
+
+async function smokeLegacyOptionSelfGradeIsolation(client, url) {
+  for (const legacyCorrect of [true, false]) {
+    await navigate(client, url);
+    await waitFor(client, `document.readyState === 'complete' && document.querySelector('.section-button.is-active')`, 'option card section to load before seeding legacy progress');
+    await evaluate(client, `(() => {
+      const sectionKey = document.querySelector('.section-button.is-active').dataset.sectionKey;
+      const total = Number((document.querySelector('#card-count').textContent.match(/of\\s+(\\d+)/i) || [])[1]);
+      localStorage.setItem(${JSON.stringify('flash-cards:security-plus:progress:v1')}, JSON.stringify({
+        sections: {
+          [sectionKey]: {
+            seen: Array.from({ length: total }, (_, index) => String(index)),
+            selfGrade: { '0': { correct: ${legacyCorrect}, attempts: 1 } },
+            quiz: {}
+          }
+        }
+      }));
+      location.reload();
+    })()`);
+    await waitFor(client, `document.readyState === 'complete' && document.querySelectorAll('#card-front .option-input').length > 1`, 'option card to reload with legacy self-grade progress');
+
+    const state = await evaluate(client, `(() => ({
+      hasCheckAnswer: Boolean(document.querySelector('#card-front [data-quiz-submit]')),
+      hasLegacyResult: Boolean(document.querySelector('#card-front .quiz-result')),
+      inputsEnabled: Array.from(document.querySelectorAll('#card-front .option-input')).every((input) => !input.disabled),
+      sectionScore: document.querySelector('.section-button.is-active .section-score')?.textContent.trim()
+    }))()`);
+
+    assert.deepEqual(state, { hasCheckAnswer: true, hasLegacyResult: false, inputsEnabled: true, sectionScore: 'Score 0%' }, `legacy self-grade ${legacyCorrect ? 'correct' : 'incorrect'} state must not own or score an option card: ${JSON.stringify(state)}`);
+  }
+
+  await evaluate(client, `localStorage.removeItem(${JSON.stringify('flash-cards:security-plus:progress:v1')})`);
+}
+
+async function smokeControllerFocusedButtonActivation(client, url) {
+  await navigate(client, url);
+  await waitFor(client, `document.readyState === 'complete' && document.querySelectorAll('#card-front .option-input:not(:disabled)').length >= 2`, 'quiz card to load for generic controller button activation checks');
+
+  const state = await evaluate(client, `(() => {
+    const nav = window.FlashCardsControllerNav;
+    const incorrectIndex = Array.from(document.querySelectorAll('#card-back .option-list--answer li')).findIndex((item) => !item.classList.contains('is-correct'));
+    const option = document.querySelectorAll('#card-front .option-input')[incorrectIndex];
+
+    option.focus({ preventScroll: true });
+    nav.input('a');
+    const submit = document.querySelector('#card-front [data-quiz-submit]');
+    submit.focus({ preventScroll: true });
+    nav.input('a');
+    const tryAgain = Array.from(document.querySelectorAll('#card-front .quiz-controls button')).find((button) => /try again/i.test(button.textContent));
+    const before = document.querySelector('#card-count').textContent;
+    tryAgain.focus({ preventScroll: true });
+    nav.input('a');
+
+    const result = {
+      hasIncorrectOption: incorrectIndex >= 0,
+      hadTryAgain: Boolean(tryAgain),
+      reset: !Array.from(document.querySelectorAll('#card-front .quiz-controls button')).some((button) => /try again/i.test(button.textContent)),
+      clearedSelections: document.querySelectorAll('#card-front .option-input:checked').length === 0,
+      cardUnchanged: document.querySelector('#card-count').textContent === before
+    };
+    localStorage.removeItem('flash-cards:security-plus:progress:v1');
+    return result;
+  })()`);
+
+  assert.equal(state.hasIncorrectOption, true, `the fixture must provide an incorrect answer for Try Again coverage: ${JSON.stringify(state)}`);
+  assert.equal(state.hadTryAgain, true, `a graded incorrect answer should expose Try Again: ${JSON.stringify(state)}`);
+  assert.equal(state.reset, true, `A should activate the focused Try Again button: ${JSON.stringify(state)}`);
+  assert.equal(state.clearedSelections, true, `Try Again should clear the previous attempt so the learner can start fresh: ${JSON.stringify(state)}`);
+  assert.equal(state.cardUnchanged, true, `A activation should operate the focused button without navigating away: ${JSON.stringify(state)}`);
+}
+
+async function smokeControllerCorrectOnlyGrading(client, url) {
+  await navigate(client, url);
+  await waitFor(client, `document.readyState === 'complete' && document.querySelectorAll('#card-front .option-input:not(:disabled)').length >= 2`, 'option card to load for correct-only grading checks');
+
+  const state = await evaluate(client, `(() => {
+    const nav = window.FlashCardsControllerNav;
+    const correctIndexes = Array.from(document.querySelectorAll('#card-back .option-list--answer li')).flatMap((item, index) => item.classList.contains('is-correct') ? [index] : []);
+
+    correctIndexes.forEach((index) => {
+      const input = document.querySelectorAll('#card-front .option-input')[index];
+      input.focus();
+      nav.input('a');
+    });
+
+    const submit = document.querySelector('#card-front [data-quiz-submit]');
+    submit.focus();
+    nav.input('a');
+    const result = document.querySelector('#card-front .quiz-result');
+    const state = {
+      correctIndexes,
+      gradedCorrect: result?.classList.contains('is-correct')
+    };
+    localStorage.removeItem('flash-cards:security-plus:progress:v1');
+    return state;
+  })()`);
+
+  assert.ok(state.correctIndexes.length > 0, `the fixture must contain at least one correct option: ${JSON.stringify(state)}`);
+  assert.equal(state.gradedCorrect, true, `selecting every correct option with A and activating Check answer should earn full credit: ${JSON.stringify(state)}`);
+}
+
+async function smokeControllerAxisLatch(client, url) {
+  await navigate(client, url);
+  await waitFor(client, `document.readyState === 'complete' && document.querySelector('#card-front') && !document.querySelector('#card-front').textContent.includes('Loading')`, 'Network+ deck to load for controller-repeat checks');
+
+  const state = await evaluate(client, `new Promise((resolve) => {
+    const nav = window.FlashCardsControllerNav;
+    const dpadFirst = nav.navigationInput('dpad:down', true);
+    const stickFirst = nav.navigationInput('axis:1:positive', true);
+
+    setTimeout(() => {
+      const beforeInitialDelay = {
+        dpad: nav.navigationInput('dpad:down', true),
+        stick: nav.navigationInput('axis:1:positive', true)
+      };
+
+      setTimeout(() => {
+        const afterInitialDelay = {
+          dpad: nav.navigationInput('dpad:down', true),
+          stick: nav.navigationInput('axis:1:positive', true)
+        };
+
+        setTimeout(() => {
+          const afterRepeatInterval = {
+            dpad: nav.navigationInput('dpad:down', true),
+            stick: nav.navigationInput('axis:1:positive', true)
+          };
+          const released = {
+            dpad: nav.navigationInput('dpad:down', false),
+            stick: nav.navigationInput('axis:1:positive', false)
+          };
+          const pressedAgain = {
+            dpad: nav.navigationInput('dpad:down', true),
+            stick: nav.navigationInput('axis:1:positive', true)
+          };
+          resolve({ dpadFirst, stickFirst, beforeInitialDelay, afterInitialDelay, afterRepeatInterval, released, pressedAgain });
+        }, 110);
+      }, 80);
+    }, 90);
+  })`);
+
+  assert.equal(state.dpadFirst, true, `D-pad focus navigation should happen immediately: ${JSON.stringify(state)}`);
+  assert.equal(state.stickFirst, true, `thumbstick focus navigation should happen immediately: ${JSON.stringify(state)}`);
+  assert.deepEqual(state.beforeInitialDelay, { dpad: false, stick: false }, `held controller input must wait briefly before repeating: ${JSON.stringify(state)}`);
+  assert.deepEqual(state.afterInitialDelay, { dpad: true, stick: true }, `both D-pad and thumbstick should repeat after the initial hold delay: ${JSON.stringify(state)}`);
+  assert.deepEqual(state.afterRepeatInterval, { dpad: true, stick: true }, `held controller navigation should repeat at the fast cadence: ${JSON.stringify(state)}`);
+  assert.deepEqual(state.released, { dpad: false, stick: false }, `releasing a D-pad or thumbstick should clear its repeat state without moving focus: ${JSON.stringify(state)}`);
+  assert.deepEqual(state.pressedAgain, { dpad: true, stick: true }, `controller navigation should be immediately responsive after release: ${JSON.stringify(state)}`);
+}
+
+async function smokeCardMetadataClearance(client, url) {
+  await client.send('Emulation.setDeviceMetricsOverride', {
+    width: 320,
+    height: 568,
+    deviceScaleFactor: 1,
+    mobile: true,
+    screenWidth: 320,
+    screenHeight: 568
+  });
+
+  try {
+    await navigate(client, url);
+    await waitFor(client, `document.readyState === 'complete' && document.querySelector('#card-front .card-type-badge') && !document.querySelector('#card-front').textContent.includes('Loading')`, 'single-choice card metadata to load in a narrow mobile viewport');
+    const state = await evaluate(client, `(() => {
+      const face = document.querySelector('#card-front');
+      const content = face.querySelector(':scope > .card-face-content');
+      const meta = face.querySelector(':scope > .card-face-meta');
+      const question = face.querySelector('.card-question');
+      const metaBounds = meta.getBoundingClientRect();
+      const questionBounds = question.getBoundingClientRect();
+      return {
+        metaBottom: metaBounds.bottom,
+        questionTop: questionBounds.top,
+        clearance: questionBounds.top - metaBounds.bottom,
+        contentPaddingTop: parseFloat(getComputedStyle(content).paddingTop),
+        metaHeight: metaBounds.height,
+        scale: parseFloat(getComputedStyle(face).getPropertyValue('--card-content-scale'))
+      };
+    })()`);
+
+    assert.ok(state.clearance >= 6, `question text must clear every metadata badge instead of overlapping it: ${JSON.stringify(state)}`);
+    assert.ok(state.contentPaddingTop >= state.metaHeight + 18, `question content needs a reserved metadata zone even after dynamic fitting: ${JSON.stringify(state)}`);
+  } finally {
+    await client.send('Emulation.clearDeviceMetricsOverride');
+  }
+}
+
+async function smokeCompletedSectionScore(client, url) {
+  await client.send('Emulation.setDeviceMetricsOverride', {
+    width: 1366,
+    height: 768,
+    deviceScaleFactor: 1,
+    mobile: false,
+    screenWidth: 1366,
+    screenHeight: 768
+  });
+  await navigate(client, url);
+  await waitFor(
+    client,
+    `document.readyState === 'complete' && document.querySelector('.section-button.is-active') && document.querySelector('#card-count')`,
+    'Network+ section progress to load for completed-score checks'
+  );
+
+  const fixture = await evaluate(client, `(() => {
+    const section = document.querySelector('.section-button.is-active');
+    const count = document.querySelector('#card-count').textContent;
+    const total = Number((count.match(/of\\s+(\\d+)/i) || [])[1]);
+    const correct = Math.round(total * 0.8);
+    const seen = Array.from({ length: total }, (_, index) => String(index));
+    const selfGrade = Object.fromEntries(seen.map((id, index) => [id, { correct: index < correct, attempts: 1 }]));
+    localStorage.setItem(${JSON.stringify(progressStorageKey)}, JSON.stringify({
+      sections: {
+        [section.dataset.sectionKey]: { seen, selfGrade, quiz: {} }
+      }
+    }));
+    return { key: section.dataset.sectionKey, total, correct, expectedPercent: Math.round((correct / total) * 100) };
+  })()`);
+
+  await navigate(client, url);
+  const selector = `.section-button[data-section-key="${fixture.key}"]`;
+  await waitFor(client, `document.querySelector(${JSON.stringify(selector)})?.classList.contains('is-complete')`, 'completed section to render in the TOC');
+
+  const state = await evaluate(client, `(() => {
+    const section = document.querySelector(${JSON.stringify(selector)});
+    return {
+      complete: section.classList.contains('is-complete'),
+      progress: section.querySelector('small')?.textContent.replace(/\\s+/g, ' ').trim(),
+      score: section.querySelector('.section-score')?.textContent.replace(/\\s+/g, ' ').trim(),
+      scoreColor: section.querySelector('.section-score') ? getComputedStyle(section.querySelector('.section-score')).color : null,
+      codeMetrics: (() => {
+        const code = section.querySelector('strong');
+        return {
+          height: code.getBoundingClientRect().height,
+          scrollHeight: code.scrollHeight,
+          lineHeight: parseFloat(getComputedStyle(code).lineHeight),
+          width: code.getBoundingClientRect().width,
+          scrollWidth: code.scrollWidth,
+          whiteSpace: getComputedStyle(code).whiteSpace
+        };
+      })()
+    };
+  })()`);
+
+  assert.equal(state.complete, true, `fixture section should render as completed: ${JSON.stringify(state)}`);
+  assert.equal(state.progress, `${fixture.total}/${fixture.total} studied Score ${fixture.expectedPercent}%`, `completed section should preserve studied progress and append its percentage score: ${JSON.stringify(state)}`);
+  assert.equal(state.score, `Score ${fixture.expectedPercent}%`, `completed section should expose a dedicated percentage score: ${JSON.stringify(state)}`);
+  assert.ok(state.scoreColor, `completed section score should receive visible theme styling: ${JSON.stringify(state)}`);
+  assert.equal(state.codeMetrics.whiteSpace, 'nowrap', `completed section code should not wrap beside its title: ${JSON.stringify(state)}`);
+  assert.ok(state.codeMetrics.width >= state.codeMetrics.scrollWidth - 1, `completed section code should have enough horizontal room for one line: ${JSON.stringify(state)}`);
+
+  const screenshot = await client.send('Page.captureScreenshot', { format: 'png', fromSurface: true });
+  const screenshotPath = path.join(os.tmpdir(), 'flash-cards-completed-section-score-qa.png');
+  fs.writeFileSync(screenshotPath, Buffer.from(screenshot.data, 'base64'));
+  console.log(`Completed section score visual QA screenshot: ${screenshotPath}`);
+
+  await client.send('Emulation.setDeviceMetricsOverride', {
+    width: 390,
+    height: 844,
+    deviceScaleFactor: 2,
+    mobile: true,
+    screenWidth: 390,
+    screenHeight: 844
+  });
+  await navigate(client, url);
+  await waitFor(client, `document.querySelector(${JSON.stringify(selector)})?.querySelector('.section-score')`, 'completed section score to render in the mobile deck sheet');
+  await evaluate(client, `new Promise((resolve) => {
+    document.querySelector('[data-mobile-deck-toggle]').click();
+    setTimeout(resolve, 380);
+  })`);
+
+  const mobileState = await evaluate(client, `(() => {
+    const section = document.querySelector(${JSON.stringify(selector)});
+    const score = section.querySelector('.section-score');
+    const sectionBounds = section.getBoundingClientRect();
+    const scoreBounds = score.getBoundingClientRect();
+    return {
+      deckOpen: document.querySelector('.app-shell').classList.contains('is-mobile-deck-open'),
+      sectionHeight: sectionBounds.height,
+      scoreVisible: scoreBounds.left >= sectionBounds.left && scoreBounds.right <= sectionBounds.right && scoreBounds.top >= sectionBounds.top && scoreBounds.bottom <= sectionBounds.bottom,
+      scoreText: score.textContent.trim()
+    };
+  })()`);
+
+  assert.equal(mobileState.deckOpen, true, `mobile deck sheet should open for completed-section score QA: ${JSON.stringify(mobileState)}`);
+  assert.ok(mobileState.sectionHeight >= 64, `completed mobile section should remain touch friendly: ${JSON.stringify(mobileState)}`);
+  assert.equal(mobileState.scoreVisible, true, `completed section score should fit inside its mobile TOC row: ${JSON.stringify(mobileState)}`);
+  assert.equal(mobileState.scoreText, `Score ${fixture.expectedPercent}%`, `mobile TOC should show the same completed percentage score: ${JSON.stringify(mobileState)}`);
+
+  const mobileScreenshot = await client.send('Page.captureScreenshot', { format: 'png', fromSurface: true });
+  const mobileScreenshotPath = path.join(os.tmpdir(), 'flash-cards-completed-section-score-iphone-qa.png');
+  fs.writeFileSync(mobileScreenshotPath, Buffer.from(mobileScreenshot.data, 'base64'));
+  console.log(`Completed section mobile score visual QA screenshot: ${mobileScreenshotPath}`);
+
+  await evaluate(client, `localStorage.removeItem(${JSON.stringify(progressStorageKey)})`);
+  await client.send('Emulation.clearDeviceMetricsOverride');
 }
 
 async function smokeResetProgress(client, url) {
@@ -431,7 +1138,8 @@ async function smokeStudyStateCues(client, url) {
         isChip: count.classList.contains('card-face-chip'),
         inFaceMeta: Boolean(count.closest('.card-face-meta'))
       })),
-      gradePromptCount: document.querySelectorAll('[data-study-tools-label]').length
+      gradePromptCount: document.querySelectorAll('[data-study-tools-label]').length,
+      studyToolsCount: document.querySelectorAll('.study-tools').length
     };
     flip.click();
     const back = {
@@ -450,6 +1158,7 @@ async function smokeStudyStateCues(client, url) {
   assert.equal(state.front.backLabel, 'Answer', 'back face should carry a clear Answer label');
   assert.deepEqual(state.front.cardCountChips, [{ isChip: true, inFaceMeta: true }, { isChip: true, inFaceMeta: true }], 'card position should render as a card-face chip in both card faces');
   assert.equal(state.front.gradePromptCount, 0, 'recall-rating prompt should not render');
+  assert.equal(state.front.studyToolsCount, 0, 'the study tools section should not render');
   assert.equal(state.back.side, 'back', 'study shell should identify the answer side after flipping');
   assert.equal(state.back.flipLabel, 'Show question', 'back-side primary action should say Show question');
 
@@ -464,7 +1173,7 @@ async function smokeReadableTypography(client, url) {
     const body = getComputedStyle(document.body);
     const hint = getComputedStyle(document.querySelector('.quiz-hint'));
     const question = getComputedStyle(document.querySelector('.card-question'));
-    const checkButton = getComputedStyle(document.querySelector('.quiz-controls button'));
+    const hasCheckAnswer = Array.from(document.querySelectorAll('.quiz-controls button')).some((button) => /check answer/i.test(button.textContent));
     return {
       bodyFamily: body.fontFamily,
       hintFamily: hint.fontFamily,
@@ -472,7 +1181,7 @@ async function smokeReadableTypography(client, url) {
       hintLineHeight: parseFloat(hint.lineHeight),
       hintLetterSpacing: parseFloat(hint.letterSpacing) || 0,
       questionLetterSpacing: parseFloat(question.letterSpacing) || 0,
-      checkButtonSize: parseFloat(checkButton.fontSize)
+      hasCheckAnswer
     };
   })()`);
 
@@ -482,14 +1191,14 @@ async function smokeReadableTypography(client, url) {
   assert.ok(typography.hintLineHeight / typography.hintSize >= 1.3, `quiz hint should have comfortable line spacing: ${JSON.stringify(typography)}`);
   assert.ok(typography.hintLetterSpacing >= 0, `quiz hint letters should not be compressed: ${JSON.stringify(typography)}`);
   assert.ok(typography.questionLetterSpacing >= -0.5, `question text should avoid aggressive tracking: ${JSON.stringify(typography)}`);
-  assert.ok(typography.checkButtonSize >= 14 && typography.checkButtonSize <= 18, `Check Answer should use a readable UI text size instead of inheriting display typography: ${JSON.stringify(typography)}`);
+  assert.equal(typography.hasCheckAnswer, true, `option cards should provide a plainly labeled Check answer control: ${JSON.stringify(typography)}`);
 }
 
 async function smokeAnswerSideOptions(client, url) {
   await navigate(client, url);
   await waitFor(
     client,
-    `document.readyState === 'complete' && document.querySelectorAll('#card-front .option-list .option-button').length > 1`,
+    `document.readyState === 'complete' && document.querySelectorAll('#card-front .option-list .option-input').length > 1`,
     'multiple-choice card options to load'
   );
 
@@ -498,14 +1207,14 @@ async function smokeAnswerSideOptions(client, url) {
     const frontMeta = frontFace.querySelector(':scope > .card-face-meta');
     const frontLabel = frontMeta.querySelector('.card-side-label');
     const frontBadge = frontMeta.querySelector('.card-type-badge');
-    const front = Array.from(document.querySelectorAll('#card-front .option-button')).map((button) => button.textContent.trim());
+    const front = Array.from(document.querySelectorAll('#card-front .option-copy')).map((copy) => copy.textContent.trim());
     const backItems = Array.from(document.querySelectorAll('#card-back .option-list li'));
     return {
       front,
       back: backItems.map((item) => item.textContent.trim()),
       correct: backItems.filter((item) => item.classList.contains('is-correct')).length,
       muted: backItems.filter((item) => item.classList.contains('is-muted')).length,
-      disabled: backItems.filter((item) => item.querySelector('.option-button')?.disabled).length,
+      interactiveBackOptions: backItems.filter((item) => item.querySelector('button, input')).length,
       answerBadges: document.querySelectorAll('#card-back .card-type-badge').length,
       frontLabel: frontLabel?.textContent.trim(),
       frontBadge: frontBadge?.textContent.trim(),
@@ -513,8 +1222,8 @@ async function smokeAnswerSideOptions(client, url) {
       badgeToRightOfLabel: Boolean(frontLabel && frontBadge && frontBadge.getBoundingClientRect().left >= frontLabel.getBoundingClientRect().right),
       frontScale: parseFloat(getComputedStyle(document.querySelector('#card-front')).getPropertyValue('--card-content-scale')),
       backScale: parseFloat(getComputedStyle(document.querySelector('#card-back')).getPropertyValue('--card-content-scale')),
-      frontFontSize: parseFloat(getComputedStyle(document.querySelector('#card-front .option-button')).fontSize),
-      backFontSize: parseFloat(getComputedStyle(document.querySelector('#card-back .option-button')).fontSize),
+      frontFontSize: parseFloat(getComputedStyle(document.querySelector('#card-front .option-copy')).fontSize),
+      backFontSize: parseFloat(getComputedStyle(document.querySelector('#card-back .option-answer')).fontSize),
       frontHeights: Array.from(document.querySelectorAll('#card-front .option-list li')).map((item) => Math.round(item.getBoundingClientRect().height * 10) / 10),
       backHeights: backItems.map((item) => Math.round(item.getBoundingClientRect().height * 10) / 10)
     };
@@ -523,7 +1232,7 @@ async function smokeAnswerSideOptions(client, url) {
   assert.deepEqual(state.back, state.front, 'answer side should repeat the same options in the same order');
   assert.ok(state.correct > 0, 'answer side should identify at least one correct option');
   assert.ok(state.muted > 0, 'answer side should mute incorrect options');
-  assert.equal(state.disabled, state.back.length, 'answer-side options should be presentational, not re-answerable');
+  assert.equal(state.interactiveBackOptions, 0, 'answer-side options should be presentational, not disabled fake controls');
   assert.equal(state.answerBadges, 0, 'answer-side options should not render a redundant card-type badge');
   assert.equal(state.frontLabel, 'Question', 'the question-side label should render as a reusable card chip');
   assert.equal(state.frontBadge, 'Multiple choice', 'multiple-choice cards should render a type badge');
@@ -531,7 +1240,7 @@ async function smokeAnswerSideOptions(client, url) {
   assert.equal(state.badgeToRightOfLabel, true, 'the type badge should sit directly to the right of the Question label');
   assert.equal(state.backScale, state.frontScale, `front and back option faces should share one content scale: ${JSON.stringify(state)}`);
   assert.ok(Math.abs(state.backFontSize - state.frontFontSize) <= 0.1, `front and back option text should be the same size: ${JSON.stringify(state)}`);
-  assert.deepEqual(state.backHeights, state.frontHeights, `front and back option buttons should have matching heights: ${JSON.stringify(state)}`);
+  assert.deepEqual(state.backHeights, state.frontHeights, `front and back option rows should have matching heights: ${JSON.stringify(state)}`);
 }
 
 async function smokeScaledFourKAnswerFit(client, url) {
@@ -555,8 +1264,14 @@ async function smokeScaledFourKAnswerFit(client, url) {
       const content = document.querySelector('#card-back > .card-face-content');
       const contentBounds = content.getBoundingClientRect();
       const options = Array.from(content.querySelectorAll('.option-list--answer li'));
+      const quizHint = document.querySelector('#card-front .quiz-hint');
       return {
+        displayDensity: document.documentElement.dataset.displayDensity,
         scale: parseFloat(getComputedStyle(document.querySelector('#card-back')).getPropertyValue('--card-content-scale')),
+        questionFontSize: parseFloat(getComputedStyle(document.querySelector('#card-front .card-question')).fontSize),
+        answerQuestionFontSize: parseFloat(getComputedStyle(document.querySelector('#card-back .card-question')).fontSize),
+        optionFontSize: parseFloat(getComputedStyle(document.querySelector('#card-back .option-answer')).fontSize),
+        quizHintSingleLine: !quizHint || quizHint.scrollHeight <= quizHint.clientHeight + 1,
         scrollHeight: content.scrollHeight,
         clientHeight: content.clientHeight,
         overflowY: getComputedStyle(content).overflowY,
@@ -569,6 +1284,11 @@ async function smokeScaledFourKAnswerFit(client, url) {
     })()`);
 
     assert.ok(state.scrollHeight <= state.clientHeight + 1, `answer content must fit its flashcard without internal scrolling on a scaled 4K display: ${JSON.stringify(state)}`);
+    assert.equal(state.displayDensity, 'large', `the physical 4K display profile should use the large-display card layout: ${JSON.stringify(state)}`);
+    assert.ok(state.scale >= 0.55, `4K card content should remain readable instead of shrinking to tiny text: ${JSON.stringify(state)}`);
+    assert.ok(state.questionFontSize >= 22, `4K question text should use the available card space: ${JSON.stringify(state)}`);
+    assert.ok(state.optionFontSize >= 9, `4K answer text should use the available card space: ${JSON.stringify(state)}`);
+    assert.equal(state.quizHintSingleLine, true, `the quiz status line must not split its final word on a 4K display: ${JSON.stringify(state)}`);
     assert.equal(state.overflowY, 'hidden', `flashcard answer content must not be internally scrollable: ${JSON.stringify(state)}`);
     assert.equal(state.allOptionsVisible, true, `every answer option must be visible inside the flashcard at once: ${JSON.stringify(state)}`);
 
@@ -577,6 +1297,7 @@ async function smokeScaledFourKAnswerFit(client, url) {
     fs.writeFileSync(screenshotPath, Buffer.from(screenshot.data, 'base64'));
     console.log(`Scaled 4K Security+ answer-card QA screenshot: ${screenshotPath}`);
   } finally {
+    await evaluate(client, `localStorage.removeItem('flash-cards:security-plus:progress:v1')`);
     await client.send('Emulation.clearDeviceMetricsOverride');
   }
 }
@@ -592,32 +1313,25 @@ async function smokeStudyChromeDensity(client, url) {
   });
 
   try {
+    await evaluate(client, `localStorage.removeItem('flash-cards:security-plus:progress:v1')`);
     await navigate(client, url);
-    await waitFor(client, `document.readyState === 'complete' && document.querySelector('.quiz-controls button')`, 'Security+ quiz controls to load on a scaled 4K display');
+    await waitFor(client, `document.readyState === 'complete' && document.querySelector('.quiz-hint, .quiz-result')`, 'Security+ option-card status to load on a scaled 4K display');
     await evaluate(client, `(() => { const flip = document.querySelector('#flip-card'); if (document.querySelector('#card').classList.contains('is-flipped')) flip.click(); })()`);
     await waitFor(client, `!document.querySelector('#card').classList.contains('is-flipped')`, 'Security+ card to return to its question side for visual QA');
     await evaluate(client, `new Promise((resolve) => setTimeout(resolve, 760))`);
     const state = await evaluate(client, `(() => {
-      const checkAnswer = document.querySelector('.quiz-controls button');
-      const bounds = checkAnswer.getBoundingClientRect();
-      const styles = getComputedStyle(checkAnswer);
+      const quizStatus = document.querySelector('.quiz-hint, .quiz-result');
       return {
         studyFocusBadge: Boolean(document.querySelector('[data-panel-focus-badge="study"]')),
-        checkAnswerText: checkAnswer.textContent.trim(),
-        checkAnswerHeight: Math.round(bounds.height),
-        checkAnswerWidth: Math.round(bounds.width),
-        checkAnswerLineCount: Number(checkAnswer.querySelector('[data-pretext-text]')?.dataset.pretextLineCount || 1),
-        checkAnswerSingleLine: checkAnswer.scrollWidth <= checkAnswer.clientWidth,
-        checkAnswerMinHeight: parseFloat(styles.minHeight),
-        checkAnswerPaddingTop: parseFloat(styles.paddingTop)
+        quizStatusText: quizStatus.textContent.trim(),
+        quizStatusSingleLine: quizStatus.scrollHeight <= quizStatus.clientHeight + 1,
+        checkAnswerPresent: Array.from(document.querySelectorAll('.quiz-controls button')).some((button) => /check answer/i.test(button.textContent))
       };
     })()`);
 
     assert.equal(state.studyFocusBadge, false, `the study controller-focus badge wastes flashcard space: ${JSON.stringify(state)}`);
-    assert.equal(state.checkAnswerText, 'Check Answer', `quiz control should retain its clear action label: ${JSON.stringify(state)}`);
-    assert.ok(state.checkAnswerMinHeight <= 34, `Check Answer should be compact rather than consuming flashcard space: ${JSON.stringify(state)}`);
-    assert.equal(state.checkAnswerLineCount, 1, `Check Answer must remain a compact single-line action: ${JSON.stringify(state)}`);
-    assert.ok(state.checkAnswerPaddingTop <= 6, `Check Answer should use compact vertical padding: ${JSON.stringify(state)}`);
+    assert.equal(state.quizStatusSingleLine, true, `the option-card status must remain one readable line on 4K displays: ${JSON.stringify(state)}`);
+    assert.equal(state.checkAnswerPresent, true, `option cards should retain the explicit Check answer action on high-density displays: ${JSON.stringify(state)}`);
 
     const screenshot = await client.send('Page.captureScreenshot', { format: 'png', fromSurface: true });
     const screenshotPath = path.join(os.tmpdir(), 'flash-cards-security-quiz-scaled-4k-qa.png');
@@ -626,6 +1340,71 @@ async function smokeStudyChromeDensity(client, url) {
   } finally {
     await client.send('Emulation.clearDeviceMetricsOverride');
   }
+}
+
+async function smokeFourKQuizResultLabel(client, url) {
+  await client.send('Emulation.setDeviceMetricsOverride', {
+    width: 1536,
+    height: 864,
+    deviceScaleFactor: 2.5,
+    mobile: false,
+    screenWidth: 3840,
+    screenHeight: 2160
+  });
+
+  try {
+    await navigate(client, url);
+    await waitFor(client, `document.readyState === 'complete' && document.querySelector('.quiz-hint')`, 'single-choice option-marking guidance to load for 4K result-label checks');
+    await evaluate(client, `(() => {
+      const options = Array.from(document.querySelectorAll('#card-front .option-input'));
+      options[0].click();
+      document.querySelector('#card-front [data-quiz-submit]').click();
+    })()`);
+    await waitFor(client, `document.querySelector('.quiz-result')`, 'quiz result label to render on a scaled 4K display');
+
+    const state = await evaluate(client, `(() => {
+      const result = document.querySelector('.quiz-result');
+      const text = result.querySelector('[data-pretext-text]');
+      const bounds = result.getBoundingClientRect();
+      return {
+        text: result.textContent.trim(),
+        whiteSpace: getComputedStyle(result).whiteSpace,
+        lineCount: Number(text?.dataset.pretextLineCount || 1),
+        singleLine: result.scrollHeight <= result.clientHeight + 1,
+        width: Math.round(bounds.width),
+        height: Math.round(bounds.height)
+      };
+    })()`);
+
+    assert.equal(state.whiteSpace, 'nowrap', `Correct/Incorrect result labels must reserve one line: ${JSON.stringify(state)}`);
+    assert.equal(state.lineCount, 1, `Correct/Incorrect result labels must not be split into multiple pretext lines: ${JSON.stringify(state)}`);
+    assert.equal(state.singleLine, true, `Correct/Incorrect result labels must remain one line on a 4K display: ${JSON.stringify(state)}`);
+  } finally {
+    await evaluate(client, `localStorage.removeItem('flash-cards:security-plus:progress:v1')`);
+    await client.send('Emulation.clearDeviceMetricsOverride');
+  }
+}
+
+async function smokeSecuritySourceSection(client, url) {
+  await navigate(client, url);
+  await waitFor(
+    client,
+    `document.readyState === 'complete' && document.querySelector('#section-label')?.textContent.trim().startsWith('Section Practice Test 1:') && document.querySelector('#card-front .card-question')?.textContent.includes('technical security controls')`,
+    'the first scraped Security+ practice-test section to render',
+  );
+
+  const state = await evaluate(client, `(() => {
+    const section = Array.from(document.querySelectorAll('.section-button')).find((button) => button.textContent.trim().startsWith('Practice Test 1'));
+    return {
+      sectionLabel: document.querySelector('#section-label')?.textContent.trim(),
+      question: document.querySelector('#card-front .card-question')?.textContent.trim(),
+      sectionDisabled: section?.disabled,
+    };
+  })()`);
+
+  assert.equal(state.sectionLabel.startsWith('Section Practice Test 1:'), true, `the first scraped Security+ section must be selected: ${JSON.stringify(state)}`);
+  assert.equal(state.question.includes('technical security controls'), true, `the first scraped Security+ question must render: ${JSON.stringify(state)}`);
+  assert.equal(state.sectionDisabled, false, `a scraped Security+ practice test must be selectable: ${JSON.stringify(state)}`);
 }
 
 async function smokeSingleChoiceTypeBadge(client, url) {
@@ -637,16 +1416,20 @@ async function smokeSingleChoiceTypeBadge(client, url) {
   );
 
   const state = await evaluate(client, `(() => {
-    const buttons = Array.from(document.querySelectorAll('#card-front .option-button'));
-    buttons[0].click();
-    Array.from(document.querySelectorAll('#card-front .option-button'))[1].click();
+    const inputs = Array.from(document.querySelectorAll('#card-front .option-input'));
+    inputs[0].click();
+    inputs[1].click();
     return {
       badge: document.querySelector('#card-front .card-type-badge')?.textContent.trim(),
-      selected: Array.from(document.querySelectorAll('#card-front li.is-selected .option-button')).map((button) => button.textContent.trim())
+      types: inputs.map((input) => input.type),
+      names: inputs.map((input) => input.name),
+      selected: inputs.filter((input) => input.checked).map((input) => input.value)
     };
   })()`);
 
   assert.equal(state.badge, 'Single choice', `one-answer cards should use the single-choice schema label: ${JSON.stringify(state)}`);
+  assert.deepEqual(new Set(state.types), new Set(['radio']), `single-choice cards must use native radio buttons: ${JSON.stringify(state)}`);
+  assert.equal(new Set(state.names).size, 1, `single-choice radio buttons must share one group name: ${JSON.stringify(state)}`);
   assert.equal(state.selected.length, 1, `single-choice cards must only retain one selected option: ${JSON.stringify(state)}`);
 }
 
@@ -659,19 +1442,29 @@ async function smokeTrueFalseTypeBadge(client, url) {
   );
 
   const state = await evaluate(client, `(() => {
-    Array.from(document.querySelectorAll('#card-front .option-button')).find((button) => button.textContent.trim() === 'True').click();
-    Array.from(document.querySelectorAll('#card-front .option-button')).find((button) => button.textContent.trim() === 'False').click();
+    const nav = window.FlashCardsControllerNav;
+    const inputs = Array.from(document.querySelectorAll('#card-front .option-input'));
+    inputs[0].focus({ preventScroll: true });
+    nav.input('a');
+    nav.input('down');
+    nav.input('a');
     return {
       badge: document.querySelector('#card-front .card-type-badge')?.textContent.trim(),
-      options: Array.from(document.querySelectorAll('#card-front .option-button')).map((button) => button.textContent.trim()),
-      selected: Array.from(document.querySelectorAll('#card-front li.is-selected .option-button')).map((button) => button.textContent.trim()),
+      options: inputs.map((input) => input.value),
+      types: inputs.map((input) => input.type),
+      names: inputs.map((input) => input.name),
+      selected: inputs.filter((input) => input.checked).map((input) => input.value),
+      focusedValue: document.activeElement?.value,
       sharedMeta: document.querySelector('#card-front .card-type-badge')?.parentElement === document.querySelector('#card-front .card-face-meta')
     };
   })()`);
 
   assert.equal(state.badge, 'True or False', `True/False options should not be mislabeled as multiple choice: ${JSON.stringify(state)}`);
   assert.deepEqual(state.options, ['True', 'False'], 'the true-or-false fixture should present the canonical two choices');
-  assert.deepEqual(state.selected, ['False'], `True/False cards must replace the first choice when a second answer is selected: ${JSON.stringify(state)}`);
+  assert.deepEqual(new Set(state.types), new Set(['radio']), `True/False answers must use native radio buttons: ${JSON.stringify(state)}`);
+  assert.equal(new Set(state.names).size, 1, `True/False radio buttons must form one exclusive group: ${JSON.stringify(state)}`);
+  assert.deepEqual(state.selected, ['False'], `Xbox A should select False and replace the previous True selection: ${JSON.stringify(state)}`);
+  assert.equal(state.focusedValue, 'False', `controller focus should remain on the selected False radio button: ${JSON.stringify(state)}`);
   assert.equal(state.sharedMeta, true, 'the True or False chip should share the reusable card metadata row');
 }
 
@@ -791,7 +1584,7 @@ async function smokeStudyPanelScrollAccessibility(client, url) {
 
     const state = await evaluate(client, `(() => {
       const panel = document.querySelector('.study-panel');
-      const finalElement = document.querySelector('#due-mode');
+      const finalElement = document.querySelector('.tts-tools');
       const initialScrollTop = panel.scrollTop;
       panel.scrollTop = panel.scrollHeight;
       const panelBounds = panel.getBoundingClientRect();
@@ -823,7 +1616,7 @@ async function smokeStudyPanelScrollAccessibility(client, url) {
 
     const mobileState = await evaluate(client, `(() => {
       const panel = document.querySelector('.study-panel');
-      const finalElement = document.querySelector('#due-mode');
+      const finalElement = document.querySelector('.tts-tools');
       panel.scrollTop = panel.scrollHeight;
       const panelBounds = panel.getBoundingClientRect();
       const finalBounds = finalElement.getBoundingClientRect();
@@ -905,7 +1698,7 @@ async function smokeMobilePwa(client, url) {
         deckState,
         deckClosed: !document.querySelector('.app-shell').classList.contains('is-mobile-deck-open'),
         shortTargets: actions.filter((button) => button.getBoundingClientRect().height < 44).length,
-        shortStudyTargets: Array.from(document.querySelectorAll('.study-tools button')).filter((button) => button.getClientRects().length && button.getBoundingClientRect().height < 44).length,
+        studyTools: document.querySelectorAll('.study-tools').length,
         swipeStarted: card.classList.contains('slide-out-next'),
         before
       };
@@ -927,7 +1720,7 @@ async function smokeMobilePwa(client, url) {
     assert.ok(mobile.deckState.activeSectionHeight >= 44, 'Deck navigator sections should remain touch friendly');
     assert.equal(mobile.deckClosed, true, 'Deck navigator scrim should close the sheet');
     assert.equal(mobile.shortTargets, 0, 'primary card actions should preserve 44px touch targets');
-    assert.equal(mobile.shortStudyTargets, 0, 'visible mobile study tools should preserve 44px touch targets');
+    assert.equal(mobile.studyTools, 0, 'the removed study tools section must not render on mobile');
     assert.equal(mobile.swipeStarted, true, 'a left touch swipe should start next-card navigation');
 
     await waitFor(client, `!document.querySelector('#card').className.includes('slide-')`, 'touch swipe animation to finish');

@@ -10,6 +10,8 @@
     next: "audio/SNES - The Legend of Zelda_ A Link to the Past - Miscellaneous - Sound Effects/fighter sword 2.wav",
     cursor: "audio/SNES - The Legend of Zelda_ A Link to the Past - Miscellaneous - Sound Effects/cursor.wav"
   };
+  var GAMEPAD_NAVIGATION_INITIAL_DELAY_MS = 150;
+  var GAMEPAD_NAVIGATION_REPEAT_MS = 90;
   var menu = [];
   var chapters = [];
   var progress = { sections: {} };
@@ -20,14 +22,17 @@
     flipped: false,
     transitioning: false,
     skipNextSeenMark: false,
-    studyMode: "all",
     activeControllerPanel: "study",
+    lastControllerContext: "study",
     lastTocFocusKey: "",
+    lastQuestionOptionFocus: null,
     preferStudyPrimaryFocus: false,
     rovingIndexes: { toc: 0, study: 0, modal: 0 },
-    gamepadCooldowns: {}
+    gamepadCooldowns: {},
+    gamepadNavigationStates: {},
+    controllerNavigationActive: false,
+    controllerSelect: null
   };
-  var session = { startedAt: Date.now(), reviews: 0, correct: 0 };
   var cardFitFrame = 0;
   var jsonCache = {};
   var speechState = { active: false };
@@ -43,6 +48,7 @@
     sectionLabel: document.getElementById("section-label"),
     chapterLabel: document.getElementById("chapter-label"),
     card: document.getElementById("card"),
+    cardActions: document.querySelector(".card-actions"),
     front: document.getElementById("card-front"),
     back: document.getElementById("card-back"),
     prev: document.getElementById("prev-card"),
@@ -57,15 +63,6 @@
     right: document.getElementById("right-card"),
     wrong: document.getElementById("wrong-card"),
     next: document.getElementById("next-card"),
-    again: document.getElementById("again-card"),
-    hard: document.getElementById("hard-card"),
-    good: document.getElementById("good-card"),
-    easy: document.getElementById("easy-card"),
-    bookmark: document.getElementById("bookmark-card"),
-    suspend: document.getElementById("suspend-card"),
-    shuffle: document.getElementById("shuffle-mode"),
-    dueMode: document.getElementById("due-mode"),
-    sessionSummary: document.getElementById("session-summary"),
     counts: Array.from(document.querySelectorAll("[data-card-count]")),
     audioPlayer: document.getElementById("audio-player"),
     sfxPlayer: document.getElementById("sfx-player"),
@@ -79,9 +76,22 @@
   };
 
   if (window.FlashCardsPretext) {
+    syncDisplayDensity();
+    window.addEventListener("resize", syncDisplayDensity);
     boot();
   } else {
+    syncDisplayDensity();
+    window.addEventListener("resize", syncDisplayDensity);
     window.addEventListener("flashcards-pretext-ready", boot, { once: true });
+  }
+
+  function syncDisplayDensity() {
+    var dpr = window.devicePixelRatio || 1;
+    var cssScreenWidth = window.screen && window.screen.width ? window.screen.width : window.innerWidth;
+    var physicalScreenWidth = cssScreenWidth * dpr;
+    var largeDisplay = window.innerWidth >= 1280 && physicalScreenWidth >= 3000;
+
+    document.documentElement.dataset.displayDensity = largeDisplay ? "large" : "standard";
   }
 
   async function boot() {
@@ -309,6 +319,9 @@
   function bindControls() {
     bindTestNavSound();
 
+    document.addEventListener("pointerdown", deactivateControllerNavigation, { capture: true, passive: true });
+    document.addEventListener("keydown", deactivateControllerNavigation, true);
+
     if (els.mobileDeckToggle) {
       els.mobileDeckToggle.addEventListener("click", function () {
         setMobileDeckOpen(!els.app.classList.contains("is-mobile-deck-open"));
@@ -321,14 +334,6 @@
 
     els.prev.addEventListener("click", previousCard);
     els.next.addEventListener("click", nextCard);
-    if (els.again) els.again.addEventListener("click", function () { gradeSpacedRepetition("again"); });
-    if (els.hard) els.hard.addEventListener("click", function () { gradeSpacedRepetition("hard"); });
-    if (els.good) els.good.addEventListener("click", function () { gradeSpacedRepetition("good"); });
-    if (els.easy) els.easy.addEventListener("click", function () { gradeSpacedRepetition("easy"); });
-    if (els.bookmark) els.bookmark.addEventListener("click", toggleBookmark);
-    if (els.suspend) els.suspend.addEventListener("click", toggleSuspend);
-    if (els.shuffle) els.shuffle.addEventListener("click", jumpToRandomCard);
-    if (els.dueMode) els.dueMode.addEventListener("click", jumpToNextDueCard);
     els.flip.addEventListener("click", flipCard);
     els.speak.addEventListener("click", speakFullCard);
     if (els.speakQuestion) els.speakQuestion.addEventListener("click", speakQuestion);
@@ -348,7 +353,7 @@
     }
     var cardGesture = { pointerId: null, x: 0, y: 0, time: 0, suppressClickUntil: 0 };
     els.card.addEventListener("pointerdown", function (event) {
-      if (event.pointerType === "mouse" || (event.target instanceof Element && event.target.closest("button, a"))) {
+      if (event.pointerType === "mouse" || (event.target instanceof Element && event.target.closest("button, a, input, label"))) {
         return;
       }
       cardGesture.pointerId = event.pointerId;
@@ -375,7 +380,7 @@
       cardGesture.pointerId = null;
     }, { passive: true });
     els.card.addEventListener("click", function (event) {
-      if (Date.now() < cardGesture.suppressClickUntil || (event.target instanceof Element && event.target.closest("button, a"))) {
+      if (Date.now() < cardGesture.suppressClickUntil || (event.target instanceof Element && event.target.closest("button, a, input, label"))) {
         return;
       }
 
@@ -426,10 +431,6 @@
         flipCard();
       } else if (key === "y") {
         speakFullCard();
-      } else if (key === "a") {
-        markSelfGrade(true);
-      } else if (key === "b") {
-        markSelfGrade(false);
       }
     });
 
@@ -528,6 +529,8 @@
         var button = document.createElement("button");
         var cards = getCards(chapter, section.name);
         var sectionProgress = getSectionProgress(chapter, section.name);
+        var sectionQuiz = getSectionQuizProgress(chapter, section.name);
+        var sectionComplete = sectionProgress.total > 0 && sectionProgress.seen === sectionProgress.total;
         var isActive = chapter.index === state.chapterIndex && section.name === state.sectionName;
 
         button.type = "button";
@@ -539,13 +542,15 @@
         button.innerHTML =
           "<strong>" + escapeHtml(section.name) + "</strong>" +
           (section.label ? '<span class="section-title">' + escapeHtml(section.label) + "</span>" : "") +
-          "<small>" + sectionProgress.seen + "/" + sectionProgress.total + " studied</small>";
+          "<small><span>" + sectionProgress.seen + "/" + sectionProgress.total + " studied</span>" +
+          (sectionComplete ? ' <span class="section-score">Score ' + sectionQuiz.percent + "%</span>" : "") +
+          "</small>";
 
         if (isActive) {
           button.classList.add("is-active");
         }
 
-        if (sectionProgress.total > 0 && sectionProgress.seen === sectionProgress.total) {
+        if (sectionComplete) {
           button.classList.add("is-complete");
         }
 
@@ -606,7 +611,8 @@
   function renderControls() {
     var cards = currentCards();
     var hasCard = cards.length > 0;
-    var selfGrade = hasCard ? getSelfGrade(currentSectionKey(), state.cardIndex) : null;
+    var hasOptions = currentCardHasOptions();
+    var selfGrade = hasCard && !hasOptions ? getSelfGrade(currentSectionKey(), state.cardIndex) : null;
 
     els.prev.disabled = state.transitioning || !previousTarget();
     els.next.disabled = state.transitioning || !nextTarget();
@@ -615,23 +621,11 @@
     if (els.speakQuestion) els.speakQuestion.disabled = state.transitioning || !hasCard;
     if (els.speakAnswer) els.speakAnswer.disabled = state.transitioning || !hasCard;
     if (els.stopSpeaking) els.stopSpeaking.disabled = !speechState.active;
-    els.right.disabled = state.transitioning || !hasCard;
-    els.wrong.disabled = state.transitioning || !hasCard;
-    if (els.again) els.again.disabled = state.transitioning || !hasCard;
-    if (els.hard) els.hard.disabled = state.transitioning || !hasCard;
-    if (els.good) els.good.disabled = state.transitioning || !hasCard;
-    if (els.easy) els.easy.disabled = state.transitioning || !hasCard;
-    if (els.bookmark) {
-      els.bookmark.disabled = !hasCard;
-      els.bookmark.classList.toggle("is-selected", hasCard && isBookmarked(currentSectionKey(), state.cardIndex));
-      els.bookmark.textContent = hasCard && isBookmarked(currentSectionKey(), state.cardIndex) ? "Bookmarked" : "Bookmark";
-    }
-    if (els.suspend) {
-      els.suspend.disabled = !hasCard;
-      els.suspend.classList.toggle("is-selected", hasCard && isSuspended(currentSectionKey(), state.cardIndex));
-      els.suspend.textContent = hasCard && isSuspended(currentSectionKey(), state.cardIndex) ? "Suspended" : "Suspend";
-    }
-    renderSessionSummary();
+    els.right.hidden = hasOptions;
+    els.wrong.hidden = hasOptions;
+    els.right.disabled = state.transitioning || !hasCard || hasOptions;
+    els.wrong.disabled = state.transitioning || !hasCard || hasOptions;
+    if (els.cardActions) els.cardActions.classList.toggle("has-option-card", hasOptions);
     els.right.classList.toggle("is-selected", Boolean(selfGrade && selfGrade.correct));
     els.wrong.classList.toggle("is-selected", Boolean(selfGrade && !selfGrade.correct));
     syncStudyState();
@@ -644,6 +638,14 @@
 
     if (els.app) {
       els.app.dataset.cardSide = side;
+    }
+    if (els.front) {
+      els.front.inert = showingAnswer;
+      els.front.setAttribute("aria-hidden", String(showingAnswer));
+    }
+    if (els.back) {
+      els.back.inert = !showingAnswer;
+      els.back.setAttribute("aria-hidden", String(!showingAnswer));
     }
     if (flipLabel) {
       flipLabel.textContent = showingAnswer ? "Show question" : "Show answer";
@@ -688,6 +690,7 @@
       });
       syncAnswerPromptTypography();
       layoutPretextText(els.app || els.card);
+      reserveCardMetadataSpace(faces);
 
       var fitRatio = faces.reduce(function (smallestRatio, face) {
         var content = cardFaceContent(face);
@@ -702,6 +705,18 @@
       var nextScale = Math.max(minimumScale, scale * Math.min(0.94, fitRatio * 0.98));
       scale = nextScale < scale - 0.002 ? nextScale : Math.max(minimumScale, scale - 0.02);
     }
+  }
+
+  function reserveCardMetadataSpace(faces) {
+    faces.forEach(function (face) {
+      var meta = cardFaceMeta(face);
+      var metaStyle = window.getComputedStyle(meta);
+      var top = parseFloat(metaStyle.top) || 0;
+      var height = meta.getBoundingClientRect().height;
+      var reserve = Math.ceil(top + height + 14);
+
+      face.style.setProperty("--card-meta-reserve", reserve + "px");
+    });
   }
 
   function syncAnswerPromptTypography() {
@@ -865,35 +880,56 @@
     renderCardTypeBadge(element, questionTypeLabel(card && card.questionType));
 
     var list = document.createElement("ul");
+    var singleChoice = isSingleChoiceQuestion(card);
     list.className = "option-list";
+    list.classList.toggle("option-list--single", singleChoice);
+    list.classList.toggle("option-list--multiple", !singleChoice);
+    list.setAttribute("aria-label", singleChoice ? "Choose one answer" : "Select all answers that apply");
 
-    options.forEach(function (option) {
+    options.forEach(function (option, optionIndex) {
       var item = document.createElement("li");
-      var button = document.createElement("button");
+      var label = document.createElement("label");
+      var input = document.createElement("input");
       var isSelected = selected.indexOf(option) >= 0;
       var isCorrect = quiz && quiz.graded && isCorrectAnswer(card, option);
       var isWrongSelection = quiz && quiz.graded && isSelected && !isCorrect;
       var isMissed = quiz && quiz.graded && !isSelected && isCorrect;
 
-      button.type = "button";
-      button.className = "option-button";
-      button.appendChild(pretextText(option));
-      button.setAttribute("aria-pressed", isSelected ? "true" : "false");
-      button.disabled = Boolean(quiz && quiz.graded);
-      button.addEventListener("click", function () {
-        toggleOption(option);
+      input.type = singleChoice ? "radio" : "checkbox";
+      input.id = optionInputId(optionIndex);
+      input.name = optionInputName();
+      input.value = option;
+      input.checked = isSelected;
+      input.disabled = Boolean(quiz && quiz.graded);
+      input.className = "option-input";
+      input.dataset.optionValue = option;
+      input.addEventListener("change", function () {
+        setOptionSelected(option, input.checked);
       });
+
+      label.className = "option-label";
+      label.htmlFor = input.id;
+      label.appendChild(input);
+      label.appendChild(pretextText(option, "option-copy"));
 
       item.classList.toggle("is-selected", isSelected);
       item.classList.toggle("is-correct", Boolean(isCorrect));
       item.classList.toggle("is-incorrect", Boolean(isWrongSelection));
       item.classList.toggle("is-missed", Boolean(isMissed));
-      item.appendChild(button);
+      item.appendChild(label);
       list.appendChild(item);
     });
 
     content.appendChild(list);
     content.appendChild(renderQuizControls(card, quiz));
+  }
+
+  function optionInputId(optionIndex) {
+    return "answer-" + state.chapterIndex + "-" + state.cardIndex + "-" + optionIndex;
+  }
+
+  function optionInputName() {
+    return "answer-" + state.chapterIndex + "-" + state.cardIndex;
   }
 
   function renderAnswerOptions(face, content, card, options) {
@@ -906,18 +942,12 @@
 
     options.forEach(function (option) {
       var item = document.createElement("li");
-      var button = document.createElement("button");
+      var answer = pretextText(option, "option-answer");
       var correct = isCorrectAnswer(card, option);
-
-      button.type = "button";
-      button.className = "option-button";
-      button.appendChild(pretextText(option));
-      button.disabled = true;
-      button.setAttribute("aria-disabled", "true");
 
       item.classList.toggle("is-correct", correct);
       item.classList.toggle("is-muted", !correct);
-      item.appendChild(button);
+      item.appendChild(answer);
       list.appendChild(item);
     });
 
@@ -1040,8 +1070,21 @@
   }
 
   function flipCard() {
-    if (state.transitioning || !currentCards().length) {
+    var card = currentCards()[state.cardIndex];
+    var activeOption = document.activeElement instanceof HTMLInputElement && document.activeElement.matches("#card-front .option-input")
+      ? document.activeElement
+      : null;
+
+    if (state.transitioning || !card) {
       return;
+    }
+
+    if (!state.flipped && activeOption) {
+      state.lastQuestionOptionFocus = {
+        sectionKey: currentSectionKey(),
+        cardIndex: state.cardIndex,
+        value: activeOption.dataset.optionValue
+      };
     }
 
     stopPlayback();
@@ -1049,6 +1092,26 @@
     state.flipped = !state.flipped;
     els.card.classList.toggle("is-flipped", state.flipped);
     syncStudyState();
+
+    if (state.flipped && activeOption) {
+      focusElement(els.flip, "study");
+    } else if (!state.flipped && state.lastQuestionOptionFocus) {
+      restoreQuestionOptionFocus();
+    }
+  }
+
+  function restoreQuestionOptionFocus() {
+    var previous = state.lastQuestionOptionFocus;
+    var option;
+
+    if (!previous || previous.sectionKey !== currentSectionKey() || previous.cardIndex !== state.cardIndex) {
+      return;
+    }
+
+    option = Array.prototype.find.call(els.front.querySelectorAll(".option-input:not(:disabled)"), function (input) {
+      return input.dataset.optionValue === previous.value;
+    });
+    if (option) focusElement(option, "study");
   }
 
   function initializeSpeechControls() {
@@ -1205,7 +1268,7 @@
   }
 
   function markSelfGrade(correct) {
-    if (!currentCards().length) {
+    if (!currentCards().length || currentCardHasOptions()) {
       return;
     }
 
@@ -1230,31 +1293,59 @@
     renderAll();
   }
 
-  function toggleOption(option) {
-    var cards = currentCards();
-    var card = cards[state.cardIndex];
+  function currentCardHasOptions() {
+    var card = currentCards()[state.cardIndex];
+    return Boolean(card && Array.isArray(card.O) && card.O.length);
+  }
 
-    if (!card || !Array.isArray(card.O) || !card.O.length) {
+  function activateFocusedOption() {
+    var active = document.activeElement;
+
+    if (!(active instanceof HTMLInputElement) || !active.matches("#card-front .option-input:not(:disabled)")) {
+      return false;
+    }
+
+    active.click();
+    return true;
+  }
+
+  function setOptionSelected(option, selected) {
+    var card = currentCards()[state.cardIndex];
+
+    if (!card || !Array.isArray(card.O) || card.O.indexOf(option) < 0) {
       return;
     }
 
     var quiz = ensureQuizEntry(currentSectionKey(), state.cardIndex);
-    var index = quiz.selected.indexOf(option);
 
     if (quiz.graded) {
       return;
     }
 
-    if (index >= 0) {
-      quiz.selected.splice(index, 1);
-    } else if (isSingleChoiceQuestion(card)) {
-      quiz.selected = [option];
+    if (isSingleChoiceQuestion(card)) {
+      quiz.selected = selected ? [option] : [];
+    } else if (selected) {
+      quiz.selected = uniqueStrings(quiz.selected.concat(option));
     } else {
-      quiz.selected.push(option);
+      quiz.selected = quiz.selected.filter(function (item) { return item !== option; });
     }
 
     saveProgress();
-    renderAll();
+    syncOptionSelectionControls(card, quiz);
+  }
+
+  function syncOptionSelectionControls(card, quiz) {
+    Array.prototype.forEach.call(els.front.querySelectorAll(".option-input"), function (input) {
+      var selected = quiz.selected.indexOf(input.dataset.optionValue) >= 0;
+      input.checked = selected;
+      if (input.closest("li")) input.closest("li").classList.toggle("is-selected", selected);
+    });
+
+    var hint = els.front.querySelector(".quiz-hint");
+    var submit = els.front.querySelector("[data-quiz-submit]");
+    if (hint) hint.textContent = quizMarkingText(quiz, card);
+    if (submit) submit.disabled = quiz.selected.length === 0;
+    scheduleCardContentFit();
   }
 
   function gradeCurrentCard() {
@@ -1266,6 +1357,10 @@
     }
 
     var quiz = ensureQuizEntry(currentSectionKey(), state.cardIndex);
+    if (quiz.graded) {
+      return false;
+    }
+
     quiz.selected = quiz.selected.filter(function (option) {
       return card.O.indexOf(option) >= 0;
     });
@@ -1279,12 +1374,14 @@
     playSoundEffect(quiz.correct ? "correct" : "wrong");
     saveProgress();
     renderAll();
+    return true;
   }
 
   function resetCurrentGrade() {
     var data = ensureProgressSection(currentSectionKey());
     var quiz = ensureQuizEntry(currentSectionKey(), state.cardIndex);
 
+    quiz.selected = [];
     quiz.graded = false;
     quiz.correct = false;
     delete data.selfGrade[String(state.cardIndex)];
@@ -1310,133 +1407,6 @@
     }
 
     renderAll();
-  }
-
-  function toggleBookmark() {
-    var key = currentSectionKey();
-    var data = ensureProgressSection(key);
-    var id = String(state.cardIndex);
-    var list = data.bookmarks;
-    var index = list.indexOf(id);
-    if (index >= 0) list.splice(index, 1); else list.push(id);
-    saveProgress();
-    renderControls();
-  }
-
-  function toggleSuspend() {
-    var key = currentSectionKey();
-    var data = ensureProgressSection(key);
-    var id = String(state.cardIndex);
-    var list = data.suspended;
-    var index = list.indexOf(id);
-    if (index >= 0) list.splice(index, 1); else list.push(id);
-    saveProgress();
-    renderControls();
-  }
-
-  function isBookmarked(key, cardIndex) {
-    return ensureProgressSection(key).bookmarks.indexOf(String(cardIndex)) >= 0;
-  }
-
-  function isSuspended(key, cardIndex) {
-    return ensureProgressSection(key).suspended.indexOf(String(cardIndex)) >= 0;
-  }
-
-  function gradeSpacedRepetition(grade) {
-    if (!currentCards().length) return;
-    var key = currentSectionKey();
-    var data = ensureProgressSection(key);
-    var id = String(state.cardIndex);
-    var previous = data.schedule[id] || { ease: 2.5, interval: 0, repetitions: 0, lapses: 0 };
-    data.schedule[id] = sm2(previous, grade);
-    session.reviews += 1;
-    if (grade === "good" || grade === "easy") session.correct += 1;
-    markSelfGrade(grade !== "again");
-  }
-
-  function sm2(previous, grade) {
-    var quality = { again: 1, hard: 3, good: 4, easy: 5 }[grade] || 4;
-    var ease = Number(previous.ease || 2.5);
-    var interval = Number(previous.interval || 0);
-    var repetitions = Number(previous.repetitions || 0);
-    var lapses = Number(previous.lapses || 0);
-
-    ease = Math.max(1.3, ease + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02)));
-
-    if (quality < 3) {
-      repetitions = 0;
-      interval = 0.01;
-      lapses += 1;
-    } else if (repetitions === 0) {
-      interval = grade === "hard" ? 0.5 : 1;
-      repetitions = 1;
-    } else if (repetitions === 1) {
-      interval = grade === "easy" ? 4 : grade === "hard" ? 3 : 6;
-      repetitions = 2;
-    } else {
-      interval = Math.round(interval * ease * (grade === "easy" ? 1.35 : grade === "hard" ? 0.75 : 1));
-      repetitions += 1;
-    }
-
-    return {
-      algorithm: "SM-2",
-      grade: grade,
-      ease: Number(ease.toFixed(2)),
-      interval: interval,
-      repetitions: repetitions,
-      lapses: lapses,
-      reviewedAt: new Date().toISOString(),
-      due: new Date(Date.now() + interval * 24 * 60 * 60 * 1000).toISOString()
-    };
-  }
-
-  function jumpToRandomCard() {
-    var refs = allCardRefs().filter(function (ref) { return !isSuspended(ref.key, ref.cardIndex); });
-    if (!refs.length) return;
-    var ref = refs[Math.floor(Math.random() * refs.length)];
-    state.chapterIndex = ref.chapterIndex;
-    state.sectionName = ref.sectionName;
-    state.cardIndex = ref.cardIndex;
-    state.flipped = false;
-    renderAll();
-  }
-
-  function jumpToNextDueCard() {
-    var now = Date.now();
-    var refs = allCardRefs().filter(function (ref) {
-      if (isSuspended(ref.key, ref.cardIndex)) return false;
-      var entry = ensureProgressSection(ref.key).schedule[String(ref.cardIndex)];
-      return !entry || !entry.due || Date.parse(entry.due) <= now;
-    });
-    if (!refs.length) {
-      if (els.sessionSummary) els.sessionSummary.textContent = "No due cards right now. Nice work.";
-      return;
-    }
-    var ref = refs[0];
-    state.chapterIndex = ref.chapterIndex;
-    state.sectionName = ref.sectionName;
-    state.cardIndex = ref.cardIndex;
-    state.flipped = false;
-    renderAll();
-  }
-
-  function allCardRefs() {
-    var refs = [];
-    chapters.forEach(function (chapter) {
-      chapter.sections.forEach(function (section) {
-        getCards(chapter, section.name).forEach(function (_card, cardIndex) {
-          refs.push({ chapterIndex: chapter.index, sectionName: section.name, cardIndex: cardIndex, key: chapter.index + ":" + section.name });
-        });
-      });
-    });
-    return refs;
-  }
-
-  function renderSessionSummary() {
-    if (!els.sessionSummary) return;
-    var minutes = Math.floor((Date.now() - session.startedAt) / 60000);
-    var accuracy = session.reviews ? Math.round((session.correct / session.reviews) * 100) : 0;
-    els.sessionSummary.textContent = "Session " + minutes + "m · " + session.reviews + " reviews" + (session.reviews ? " · " + accuracy + "%" : "");
   }
 
   function previousTarget() {
@@ -1630,9 +1600,6 @@
     progress.sections[key].seen = uniqueStrings(progress.sections[key].seen);
     progress.sections[key].quiz = progress.sections[key].quiz || {};
     progress.sections[key].selfGrade = progress.sections[key].selfGrade || {};
-    progress.sections[key].schedule = progress.sections[key].schedule || {};
-    progress.sections[key].bookmarks = uniqueStrings(progress.sections[key].bookmarks || []);
-    progress.sections[key].suspended = uniqueStrings(progress.sections[key].suspended || []);
     return progress.sections[key];
   }
 
@@ -1739,17 +1706,21 @@
       var id = String(index);
       var selfGrade = data.selfGrade[id];
 
+      if (Array.isArray(card.O) && card.O.length) {
+        var optionEntry = data.quiz[id];
+        if (optionEntry && optionEntry.graded) {
+          graded += 1;
+          correct += optionEntry.correct ? 1 : 0;
+        }
+        return;
+      }
+
       if (selfGrade) {
         graded += 1;
         correct += selfGrade.correct ? 1 : 0;
         return;
       }
 
-      var entry = data.quiz[id];
-      if (entry && entry.graded) {
-        graded += 1;
-        correct += entry.correct ? 1 : 0;
-      }
     });
 
     return {
@@ -1777,35 +1748,44 @@
   function renderQuizControls(card, quiz) {
     var controls = document.createElement("div");
     var message = document.createElement("p");
-    var button = document.createElement("button");
-    var selfGrade = getSelfGrade(currentSectionKey(), state.cardIndex);
-    var result = selfGrade || (quiz && quiz.graded ? quiz : null);
+    var result = quiz && quiz.graded ? quiz : null;
 
     controls.className = "quiz-controls";
 
     if (result) {
       message.className = "quiz-result " + (result.correct ? "is-correct" : "is-incorrect");
-      message.appendChild(pretextText(result.correct ? "Correct" : "Incorrect"));
+      message.textContent = result.correct ? "Correct — nice work" : "Not quite — review the highlighted answers";
       controls.appendChild(message);
 
       if (!result.correct) {
-        button.type = "button";
-        button.appendChild(pretextText("Try Again"));
-        button.addEventListener("click", resetCurrentGrade);
-        controls.appendChild(button);
+        var retryButton = document.createElement("button");
+        retryButton.type = "button";
+        retryButton.appendChild(pretextText("Try again"));
+        retryButton.addEventListener("click", resetCurrentGrade);
+        controls.appendChild(retryButton);
+      } else if (nextTarget()) {
+        var nextButton = document.createElement("button");
+        nextButton.type = "button";
+        nextButton.className = "quiz-next-button";
+        nextButton.appendChild(pretextText("Next card"));
+        nextButton.addEventListener("click", nextCard);
+        controls.appendChild(nextButton);
       }
       return controls;
     }
 
     message.className = "quiz-hint";
-    message.appendChild(pretextText(selectedCountText(quiz ? quiz.selected.length : 0, card.A)));
+    message.textContent = quizMarkingText(quiz, card);
     controls.appendChild(message);
 
-    button.type = "button";
-    button.className = "primary";
-    button.appendChild(pretextText("Check Answer"));
-    button.addEventListener("click", gradeCurrentCard);
-    controls.appendChild(button);
+    var checkButton = document.createElement("button");
+    checkButton.type = "button";
+    checkButton.className = "quiz-submit-button";
+    checkButton.dataset.quizSubmit = "";
+    checkButton.disabled = !quiz || !quiz.selected.length;
+    checkButton.appendChild(pretextText("Check answer"));
+    checkButton.addEventListener("click", gradeCurrentCard);
+    controls.appendChild(checkButton);
     return controls;
   }
 
@@ -1826,6 +1806,7 @@
     });
   }
 
+
   function normalizeAnswers(answers) {
     return uniqueStrings(answers || []).map(normalizeAnswer);
   }
@@ -1834,14 +1815,14 @@
     return String(answer).replace(/\s+/g, " ").trim().toLowerCase();
   }
 
-  function selectedCountText(count, answers) {
-    var total = Array.isArray(answers) ? answers.length : 0;
+  function quizMarkingText(quiz, card) {
+    var selectedCount = quiz && quiz.selected ? quiz.selected.length : 0;
 
-    if (!total) {
-      return count + " selected";
+    if (isSingleChoiceQuestion(card)) {
+      return selectedCount ? "1 answer selected. Check when ready." : "Choose one answer, then check it.";
     }
 
-    return count + " selected | " + total + " correct " + (total === 1 ? "choice" : "choices");
+    return "Select all answers that apply, then check. " + selectedCount + " selected.";
   }
 
   function quizSummaryText(quiz) {
@@ -1860,10 +1841,19 @@
     }
 
     state.activeControllerPanel = panel;
+
+    if (panel === "toc" && window.matchMedia("(max-width: 800px)").matches) {
+      setMobileDeckOpen(true);
+    } else if (panel === "study" && els.app && els.app.classList.contains("is-mobile-deck-open")) {
+      setMobileDeckOpen(false);
+    }
+
     renderControllerPanelState();
 
     if (!opts.deferFocus) {
       ensureFocusedElement();
+    } else {
+      window.requestAnimationFrame(ensureFocusedElement);
     }
 
     if (!opts.silent) {
@@ -1873,9 +1863,11 @@
 
   function exposeControllerDebugApi() {
     window.FlashCardsControllerNav = {
-      focusPanel: function (panel) { focusControllerPanel(panel, { silent: true }); },
-      move: function (direction) { moveFocus(direction); },
-      activate: function () { activateFocusedElement(); },
+      focusPanel: function (panel) { activateControllerNavigation(); focusControllerPanel(panel, { silent: true }); },
+      move: function (direction) { activateControllerNavigation(); moveFocus(direction); },
+      activate: function () { activateControllerNavigation(); activateFocusedElement(); },
+      input: function (button) { handleControllerButton(button); },
+      navigationInput: function (source, active) { return navigationInputTriggered("debug:" + source, Boolean(active)); },
       closeModal: function () { return closeControllerModal(); },
       context: function () { return currentControllerContext(); },
       activePanel: function () { return state.activeControllerPanel; },
@@ -1885,6 +1877,7 @@
 
   function renderControllerPanelState() {
     var panel = state.activeControllerPanel;
+    var studyCommands = "<span><kbd>LB</kbd> Deck</span><span><kbd>RB</kbd> Study active</span><span><kbd>LT</kbd>/<kbd>RT</kbd> Prev/Next</span><span><kbd>X</kbd> Flip</span><span><kbd>Y</kbd> Speak</span><span><kbd>A</kbd> Activate / select</span><span><kbd>B</kbd> Back to question</span><span><kbd>LS/RS</kbd> Activate</span><span><kbd>Menu</kbd> Settings</span>";
     var app = els.app || document.querySelector(".app-shell");
     var tocPanel = document.querySelector(".toc-panel[data-controller-panel='toc']");
     var studyPanel = document.querySelector(".study-panel[data-controller-panel='study']");
@@ -1916,8 +1909,8 @@
 
     if (els.controllerCommandBar) {
       els.controllerCommandBar.innerHTML = panel === "toc"
-        ? "<span><kbd>LB</kbd> Deck active</span><span><kbd>RB</kbd> Study</span><span><kbd>↑↓</kbd> Move section</span><span><kbd>A</kbd> Select</span><span><kbd>B</kbd> Study</span>"
-        : "<span><kbd>LB</kbd> Deck</span><span><kbd>RB</kbd> Study active</span><span><kbd>LT</kbd>/<kbd>RT</kbd> Prev/Next</span><span><kbd>X</kbd> Flip</span><span><kbd>Y</kbd> Speak</span><span><kbd>A</kbd> Right</span><span><kbd>B</kbd> Wrong</span>";
+        ? "<span><kbd>LB</kbd> Deck active</span><span><kbd>RB</kbd> Study</span><span><kbd>↑↓</kbd> Move section</span><span><kbd>A</kbd>/ <kbd>LS</kbd> Select</span><span><kbd>B</kbd> Study</span><span><kbd>View</kbd> Back</span>"
+        : studyCommands;
     }
   }
 
@@ -1934,9 +1927,26 @@
       element instanceof HTMLElement &&
       !element.hidden &&
       !element.disabled &&
+      !element.closest("[inert]") &&
+      !element.closest('[aria-hidden="true"]') &&
       element.getClientRects().length &&
       window.getComputedStyle(element).visibility !== "hidden"
     );
+  }
+
+  function clearControllerFocus() {
+    document.querySelectorAll(".is-controller-focused").forEach(function (item) {
+      item.classList.remove("is-controller-focused");
+    });
+  }
+
+  function activateControllerNavigation() {
+    state.controllerNavigationActive = true;
+  }
+
+  function deactivateControllerNavigation() {
+    state.controllerNavigationActive = false;
+    clearControllerFocus();
   }
 
   function getPanelElement(panel) {
@@ -1991,15 +2001,48 @@
     );
   }
 
+  function scrollTocControllerTargetIntoView(element) {
+    var panel = els.tocPanel;
+    var targets = getNavigableElements("toc");
+    var panelBounds;
+    var header;
+    var headerBounds;
+    var targetBounds;
+    var topClearance;
+    var bottomClearance;
+
+    if (!panel || !(element instanceof HTMLElement)) {
+      return;
+    }
+
+    if (targets[0] === element) {
+      panel.scrollTop = 0;
+      return;
+    }
+
+    panelBounds = panel.getBoundingClientRect();
+    header = panel.querySelector(".toc-header");
+    headerBounds = header ? header.getBoundingClientRect() : null;
+    targetBounds = element.getBoundingClientRect();
+    topClearance = Math.max(panelBounds.top + 20, headerBounds ? headerBounds.bottom + 12 : panelBounds.top + 20);
+    bottomClearance = panelBounds.bottom - 20;
+
+    if (targetBounds.top < topClearance) {
+      panel.scrollTop += targetBounds.top - topClearance;
+    } else if (targetBounds.bottom > bottomClearance) {
+      panel.scrollTop += targetBounds.bottom - bottomClearance;
+    }
+  }
+
   function focusElement(element, context) {
     if (!isVisible(element)) {
       return false;
     }
 
-    document.querySelectorAll(".is-controller-focused").forEach(function (item) {
-      item.classList.remove("is-controller-focused");
-    });
-    element.classList.add("is-controller-focused");
+    clearControllerFocus();
+    if (state.controllerNavigationActive) {
+      element.classList.add("is-controller-focused");
+    }
     element.focus({ preventScroll: true });
 
     if (element.classList.contains("section-button") && element.dataset.sectionKey) {
@@ -2008,7 +2051,9 @@
 
     updateRovingIndex(context || currentControllerContext(), element);
 
-    if (elementNeedsScrollIntoView(element)) {
+    if (context === "toc") {
+      scrollTocControllerTargetIntoView(element);
+    } else if (elementNeedsScrollIntoView(element)) {
       element.scrollIntoView({ behavior: "auto", block: "nearest", inline: "nearest" });
     }
 
@@ -2051,6 +2096,11 @@
     var navigableElements = getNavigableElements(context);
     var active = document.activeElement;
 
+    if (!state.controllerNavigationActive) {
+      clearControllerFocus();
+      return;
+    }
+
     if (!navigableElements.length) {
       return;
     }
@@ -2058,6 +2108,8 @@
     if (!(active instanceof HTMLElement) || navigableElements.indexOf(active) === -1) {
       focusElement(defaultFocusElement(context), context);
     } else {
+      clearControllerFocus();
+      active.classList.add("is-controller-focused");
       updateRovingIndex(context, active);
     }
   }
@@ -2142,6 +2194,82 @@
     playSoundEffect("cursor");
   }
 
+  function isTtsSelect(element) {
+    return element instanceof HTMLSelectElement && (element === els.speechRate || element === els.speechVoice);
+  }
+
+  function openControllerTtsSelect() {
+    var select = document.activeElement;
+    var originalIndex;
+
+    if (!isTtsSelect(select)) {
+      return false;
+    }
+
+    if (select.options.length < 2) {
+      if (els.speechStatus) els.speechStatus.textContent = "Only the system-default voice is available";
+      return true;
+    }
+
+    originalIndex = Math.max(0, select.selectedIndex);
+    state.controllerSelect = { element: select, originalIndex: originalIndex };
+    select.classList.add("is-controller-select-open");
+    select.setAttribute("aria-expanded", "true");
+    select.size = Math.min(6, select.options.length);
+    if (els.speechStatus) els.speechStatus.textContent = "Use D-pad to choose · A confirm · B cancel";
+    return true;
+  }
+
+  function moveControllerTtsSelect(direction) {
+    var controllerSelect = state.controllerSelect;
+    var select;
+    var delta;
+    var nextIndex;
+
+    if (!controllerSelect || !isTtsSelect(controllerSelect.element)) {
+      return false;
+    }
+
+    select = controllerSelect.element;
+    delta = direction === "up" || direction === "left" ? -1 : 1;
+    nextIndex = (Math.max(0, select.selectedIndex) + delta + select.options.length) % select.options.length;
+    select.selectedIndex = nextIndex;
+    return true;
+  }
+
+  function closeControllerTtsSelect(commit) {
+    var controllerSelect = state.controllerSelect;
+    var select;
+    var option;
+
+    if (!controllerSelect || !isTtsSelect(controllerSelect.element)) {
+      state.controllerSelect = null;
+      return false;
+    }
+
+    select = controllerSelect.element;
+    if (!commit) {
+      select.selectedIndex = controllerSelect.originalIndex;
+    }
+    select.removeAttribute("size");
+    select.classList.remove("is-controller-select-open");
+    select.setAttribute("aria-expanded", "false");
+    state.controllerSelect = null;
+
+    if (commit) {
+      select.dispatchEvent(new Event("change", { bubbles: true }));
+      option = select.options[Math.max(0, select.selectedIndex)];
+      if (els.speechStatus && option) {
+        els.speechStatus.textContent = (select === els.speechRate ? "Speed" : "Voice") + " set to " + option.textContent;
+      }
+      playSoundEffect("cursor");
+    } else if (els.speechStatus) {
+      els.speechStatus.textContent = "Selection cancelled";
+    }
+    select.focus({ preventScroll: true });
+    return true;
+  }
+
   function activateFocusedElement() {
     var context = currentControllerContext();
     var active = document.activeElement;
@@ -2165,10 +2293,14 @@
 
     if (closeTarget instanceof HTMLElement) {
       closeTarget.click();
+      ensureFocusedElement();
+      window.requestAnimationFrame(ensureFocusedElement);
       return true;
     }
 
     modal.hidden = true;
+    ensureFocusedElement();
+    window.requestAnimationFrame(ensureFocusedElement);
     return true;
   }
 
@@ -2203,6 +2335,10 @@
 
     var connected = status && status.connected;
     var id = status && status.id ? status.id : "";
+
+    if (!connected) {
+      deactivateControllerNavigation();
+    }
 
     els.controllerStatus.dataset.controllerState = connected ? "connected" : "disconnected";
     els.controllerStatus.title = connected && id ? id : "";
@@ -2249,15 +2385,135 @@
     return cooldownReady(gamepad.index + ":" + buttonIndex, cooldownMs || 220);
   }
 
-  function axisTriggered(gamepad, axisIndex, direction, threshold, cooldownMs) {
-    var axisValue = gamepad.axes[axisIndex] || 0;
-    var matches = direction === "negative" ? axisValue < -(threshold || 0.65) : axisValue > (threshold || 0.65);
+  function navigationInputTriggered(source, active) {
+    var now = Date.now();
+    var repeatState = state.gamepadNavigationStates[source];
 
-    if (!matches) {
+    if (!active) {
+      delete state.gamepadNavigationStates[source];
       return false;
     }
 
-    return cooldownReady(gamepad.index + ":axis:" + axisIndex + ":" + direction, cooldownMs || 220);
+    if (!repeatState) {
+      state.gamepadNavigationStates[source] = { startedAt: now, lastRepeatAt: now };
+      return true;
+    }
+
+    if (now - repeatState.startedAt < GAMEPAD_NAVIGATION_INITIAL_DELAY_MS || now - repeatState.lastRepeatAt < GAMEPAD_NAVIGATION_REPEAT_MS) {
+      return false;
+    }
+
+    repeatState.lastRepeatAt = now;
+    return true;
+  }
+
+  function axisNavigationTriggered(gamepad, axisIndex, direction, threshold) {
+    var axisValue = Number(gamepad.axes[axisIndex]) || 0;
+    var limit = threshold || 0.65;
+    var releaseLimit = Math.max(0.35, limit - 0.2);
+    var key = gamepad.index + ":axis:" + axisIndex + ":" + direction;
+    var matches = direction === "negative" ? axisValue <= -limit : axisValue >= limit;
+    var released = direction === "negative" ? axisValue > -releaseLimit : axisValue < releaseLimit;
+
+    if (matches) {
+      return navigationInputTriggered(key, true);
+    }
+
+    if (released) {
+      navigationInputTriggered(key, false);
+    }
+
+    return false;
+  }
+
+  function dpadNavigationTriggered(gamepad, buttonIndex, direction) {
+    return navigationInputTriggered(
+      gamepad.index + ":dpad:" + direction,
+      Boolean(gamepad.buttons[buttonIndex] && gamepad.buttons[buttonIndex].pressed)
+    );
+  }
+
+  function gamepadDirectionTriggered(gamepad, direction, buttonIndex, primaryAxisIndex, secondaryAxisIndex, axisDirection) {
+    var dpad = dpadNavigationTriggered(gamepad, buttonIndex, direction);
+    var primaryStick = axisNavigationTriggered(gamepad, primaryAxisIndex, axisDirection);
+    var secondaryStick = axisNavigationTriggered(gamepad, secondaryAxisIndex, axisDirection);
+
+    return dpad || primaryStick || secondaryStick;
+  }
+
+  function openControllerSettings() {
+    var opener = document.querySelector("[data-theme-settings-button]");
+
+    if (opener instanceof HTMLElement && isVisible(opener)) {
+      opener.click();
+    }
+  }
+
+  function handleControllerButton(button) {
+    var context = currentControllerContext();
+
+    activateControllerNavigation();
+    ensureFocusedElement();
+
+    if (state.controllerSelect) {
+      if (button === "up" || button === "down" || button === "left" || button === "right") moveControllerTtsSelect(button);
+      if (button === "a") closeControllerTtsSelect(true);
+      if (button === "b" || button === "back") closeControllerTtsSelect(false);
+      return;
+    }
+
+    if (context === "modal") {
+      if (button === "up" || button === "down" || button === "left" || button === "right") moveFocus(button);
+      if (button === "a") activateFocusedElement();
+      if (button === "b" || button === "back") closeControllerModal();
+      return;
+    }
+
+    if (button === "lb") { focusControllerPanel("toc"); return; }
+    if (button === "rb") { focusControllerPanel("study"); return; }
+    if (button === "start") { openControllerSettings(); return; }
+    if (button === "back") {
+      focusControllerPanel(state.activeControllerPanel === "toc" ? "study" : "toc");
+      return;
+    }
+    if (button === "up" || button === "down" || button === "left" || button === "right") {
+      moveFocus(button);
+      return;
+    }
+
+    if (state.activeControllerPanel === "toc") {
+      if (button === "a" || button === "ls" || button === "rs") activateFocusedElement();
+      if (button === "b") focusControllerPanel("study");
+      return;
+    }
+
+    if (button === "lt") { previousCard(); return; }
+    if (button === "rt") { nextCard(); return; }
+    if (button === "x") { flipCard(); return; }
+    if (button === "y") { speakFullCard(); return; }
+    if (button === "a") {
+      if (openControllerTtsSelect()) return;
+      if (!activateFocusedOption()) activateFocusedElement();
+      return;
+    }
+    if (button === "b") {
+      if (state.flipped) flipCard();
+      return;
+    }
+    if (button === "ls" || button === "rs") {
+      if (!openControllerTtsSelect()) activateFocusedElement();
+    }
+  }
+
+  function syncControllerFocusContext() {
+    var context = currentControllerContext();
+
+    if (state.lastControllerContext !== context) {
+      state.lastControllerContext = context;
+      ensureFocusedElement();
+    }
+
+    return context;
   }
 
   function pollGamepads() {
@@ -2270,40 +2526,35 @@
         continue;
       }
 
-      if (currentControllerContext() === "modal") {
-        if (isPressedWithCooldown(gamepad, 12) || axisTriggered(gamepad, 1, "negative")) moveFocus("up");
-        if (isPressedWithCooldown(gamepad, 13) || axisTriggered(gamepad, 1, "positive")) moveFocus("down");
-        if (isPressedWithCooldown(gamepad, 14) || axisTriggered(gamepad, 0, "negative")) moveFocus("left");
-        if (isPressedWithCooldown(gamepad, 15) || axisTriggered(gamepad, 0, "positive")) moveFocus("right");
-        if (isPressedWithCooldown(gamepad, 0)) activateFocusedElement();
-        if (isPressedWithCooldown(gamepad, 1)) closeControllerModal();
+      var context = syncControllerFocusContext();
+      if (context === "modal") {
+        if (gamepadDirectionTriggered(gamepad, "up", 12, 1, 3, "negative")) handleControllerButton("up");
+        if (gamepadDirectionTriggered(gamepad, "down", 13, 1, 3, "positive")) handleControllerButton("down");
+        if (gamepadDirectionTriggered(gamepad, "left", 14, 0, 2, "negative")) handleControllerButton("left");
+        if (gamepadDirectionTriggered(gamepad, "right", 15, 0, 2, "positive")) handleControllerButton("right");
+        if (isPressedWithCooldown(gamepad, 0)) handleControllerButton("a");
+        if (isPressedWithCooldown(gamepad, 1) || isPressedWithCooldown(gamepad, 8)) handleControllerButton("b");
         continue;
       }
 
-      if (isPressedWithCooldown(gamepad, 4)) focusControllerPanel("toc");
-      if (isPressedWithCooldown(gamepad, 5)) focusControllerPanel("study");
+      if (isPressedWithCooldown(gamepad, 4)) handleControllerButton("lb");
+      if (isPressedWithCooldown(gamepad, 5)) handleControllerButton("rb");
+      if (isPressedWithCooldown(gamepad, 8)) handleControllerButton("back");
+      if (isPressedWithCooldown(gamepad, 9)) handleControllerButton("start");
 
-      if (isPressedWithCooldown(gamepad, 12) || axisTriggered(gamepad, 1, "negative")) moveFocus("up");
-      if (isPressedWithCooldown(gamepad, 13) || axisTriggered(gamepad, 1, "positive")) moveFocus("down");
-      if (isPressedWithCooldown(gamepad, 14) || axisTriggered(gamepad, 0, "negative")) moveFocus("left");
-      if (isPressedWithCooldown(gamepad, 15) || axisTriggered(gamepad, 0, "positive")) moveFocus("right");
+      if (gamepadDirectionTriggered(gamepad, "up", 12, 1, 3, "negative")) handleControllerButton("up");
+      if (gamepadDirectionTriggered(gamepad, "down", 13, 1, 3, "positive")) handleControllerButton("down");
+      if (gamepadDirectionTriggered(gamepad, "left", 14, 0, 2, "negative")) handleControllerButton("left");
+      if (gamepadDirectionTriggered(gamepad, "right", 15, 0, 2, "positive")) handleControllerButton("right");
 
-      if (state.activeControllerPanel === "toc") {
-        if (isPressedWithCooldown(gamepad, 0)) activateFocusedElement();
-        if (isPressedWithCooldown(gamepad, 1)) focusControllerPanel("study");
-        continue;
-      }
-
-      if (isPressedWithCooldown(gamepad, 6)) previousCard();
-      if (isPressedWithCooldown(gamepad, 7)) nextCard();
-      if (isPressedWithCooldown(gamepad, 2)) flipCard();
-      if (isPressedWithCooldown(gamepad, 3)) speakFullCard();
-      if (isPressedWithCooldown(gamepad, 0)) markSelfGrade(true);
-      if (isPressedWithCooldown(gamepad, 1)) markSelfGrade(false);
-
-      if (isPressedWithCooldown(gamepad, 10)) {
-        activateFocusedElement();
-      }
+      if (isPressedWithCooldown(gamepad, 0)) handleControllerButton("a");
+      if (isPressedWithCooldown(gamepad, 1)) handleControllerButton("b");
+      if (isPressedWithCooldown(gamepad, 2)) handleControllerButton("x");
+      if (isPressedWithCooldown(gamepad, 3)) handleControllerButton("y");
+      if (isPressedWithCooldown(gamepad, 6)) handleControllerButton("lt");
+      if (isPressedWithCooldown(gamepad, 7)) handleControllerButton("rt");
+      if (isPressedWithCooldown(gamepad, 10)) handleControllerButton("ls");
+      if (isPressedWithCooldown(gamepad, 11)) handleControllerButton("rs");
     }
 
     window.requestAnimationFrame(pollGamepads);

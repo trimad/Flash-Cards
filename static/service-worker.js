@@ -1,4 +1,4 @@
-const CACHE_NAME = 'flash-cards-studio-v4';
+const CACHE_NAME = 'flash-cards-studio-v5';
 const CORE_ASSETS = [
   './', './index.html', './tests/', './css/flashcards.css',
   './js/flashcards.js', './js/theme-selector.js', './js/welcome-modal.js',
@@ -22,13 +22,18 @@ self.addEventListener('fetch', (event) => {
   const request = event.request;
   if (request.method !== 'GET' || new URL(request.url).origin !== self.location.origin) return;
 
-  if (request.mode === 'navigate') {
+  if (request.mode === 'navigate' || isDeckDataRequest(request)) {
     event.respondWith(networkFirst(request));
     return;
   }
 
   event.respondWith(staleWhileRevalidate(request));
 });
+
+function isDeckDataRequest(request) {
+  const pathname = new URL(request.url).pathname;
+  return pathname.includes('/assets/') && pathname.endsWith('.json');
+}
 
 async function networkFirst(request) {
   const cache = await caches.open(CACHE_NAME);

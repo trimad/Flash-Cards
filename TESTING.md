@@ -46,8 +46,9 @@ This runs:
 - theme persistence
 - global search index/results
 - local deck editor preview
-- controller panel focus, roving focus, modal controller trapping, and automatic TOC-to-Study return
-- reset-progress behavior
+- controller panel focus, roving focus, mobile deck-sheet focus, Xbox input mapping, analog-axis latch/release behavior, modal controller trapping, and automatic TOC-to-Study return
+- 4K/high-DPI card typography, answer-option fitting, and one-line quiz status labels
+- flashcard metadata/question geometry at a narrow mobile viewport
 - card animation behavior
 
 ## CI

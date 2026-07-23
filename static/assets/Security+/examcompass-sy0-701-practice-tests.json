@@ -1,5 +1,5 @@
 {
-  "1": [
+  "Practice Test 1": [
     {
       "Q": "Which of the following answers can be used to describe technical security controls? (Select 3 answers)",
       "A": [
@@ -380,7 +380,7 @@
       "questionType": "multiple_choice"
     }
   ],
-  "2": [
+  "Practice Test 2": [
     {
       "Q": "Which of the following terms describes the process of identifying differences between an organization's current security posture and its desired security posture?",
       "A": [
@@ -706,7 +706,7 @@
       "questionType": "single_choice"
     }
   ],
-  "3": [
+  "Practice Test 3": [
     {
       "Q": "The MIME specification extends the email message format beyond plain text, enabling the transfer of graphics, audio, and video files over the Internet mail system. S/MIME is an enhanced version of the MIME protocol that enables email security features by providing encryption, authentication, message integrity, and other related services.",
       "A": [
@@ -1041,7 +1041,7 @@
       "questionType": "single_choice"
     }
   ],
-  "4": [
+  "Practice Test 4": [
     {
       "Q": "Which of the following answers refers to a legacy symmetric-key block cipher encryption algorithm?",
       "A": [
@@ -1358,7 +1358,7 @@
       "questionType": "single_choice"
     }
   ],
-  "5": [
+  "Practice Test 5": [
     {
       "Q": "Which of the following answers refers to a family of cryptographic hash functions designed for various security-related applications, including digital signatures, password storage, secure communications, and data integrity verification?",
       "A": [
@@ -1700,7 +1700,7 @@
       "questionType": "single_choice"
     }
   ],
-  "6": [
+  "Practice Test 6": [
     {
       "Q": "Which of the following answers can be used to describe self-signed digital certificates? (Select 3 answers)",
       "A": [
@@ -1997,7 +1997,7 @@
       "questionType": "multiple_choice"
     }
   ],
-  "7": [
+  "Practice Test 7": [
     {
       "Q": "Exploiting known vulnerability is a common threat vector for:",
       "A": [
@@ -2329,7 +2329,7 @@
       "questionType": "single_choice"
     }
   ],
-  "8": [
+  "Practice Test 8": [
     {
       "Q": "Which of the answers listed below refers to a security vulnerability that enables inserting malicious code into input fields, such as search bars or login forms, to execute unauthorized commands on a database?",
       "A": [
@@ -2666,7 +2666,7 @@
       "questionType": "true_false"
     }
   ],
-  "9": [
+  "Practice Test 9": [
     {
       "Q": "As opposed to simple DoS attacks that usually are performed from a single system, a DDoS attack uses multiple compromised computer systems to perform the attack against its target. The intermediary systems that are used as a platform for the attack (often referred to as zombies, and collectively as a botnet) are the secondary victims of the DDoS attack.",
       "A": [
@@ -3005,7 +3005,7 @@
       "questionType": "single_choice"
     }
   ],
-  "10": [
+  "Practice Test 10": [
     {
       "Q": "Which of the following URLs is a potential indicator of a directory traversal attack?",
       "A": [
@@ -3332,7 +3332,7 @@
       "questionType": "single_choice"
     }
   ],
-  "11": [
+  "Practice Test 11": [
     {
       "Q": "Which of the answers listed below refer to the concept of data isolation? (Select 2 answers)",
       "A": [
@@ -3660,7 +3660,7 @@
       "questionType": "single_choice"
     }
   ],
-  "12": [
+  "Practice Test 12": [
     {
       "Q": "A computer system or an application that acts as an intermediary between another computer and the Internet is commonly referred to as:",
       "A": [
@@ -4001,7 +4001,7 @@
       "questionType": "single_choice"
     }
   ],
-  "13": [
+  "Practice Test 13": [
     {
       "Q": "Which of the answers listed below refers to a protocol used to set up secure connections and exchange of cryptographic keys in IPsec VPNs?",
       "A": [
@@ -4339,7 +4339,7 @@
       "questionType": "true_false"
     }
   ],
-  "14": [
+  "Practice Test 14": [
     {
       "Q": "Hardware RAID Level 0: (Select all that apply)",
       "A": [
@@ -4693,7 +4693,7 @@
       "questionType": "single_choice"
     }
   ],
-  "15": [
+  "Practice Test 15": [
     {
       "Q": "Which of the terms listed below is used to describe a foundational level of security configurations and settings required to safeguard a system?",
       "A": [
@@ -5030,7 +5030,7 @@
       "questionType": "single_choice"
     }
   ],
-  "16": [
+  "Practice Test 16": [
     {
       "Q": "Which of the following answers refers to a deprecated wireless authentication protocol developed by Cisco?",
       "A": [
@@ -5359,7 +5359,7 @@
       "questionType": "multiple_choice"
     }
   ],
-  "17": [
+  "Practice Test 17": [
     {
       "Q": "Which of the following statements describe the features of dynamic code analysis? (Select 3 answers)",
       "A": [
@@ -5697,7 +5697,7 @@
       "questionType": "true_false"
     }
   ],
-  "18": [
+  "Practice Test 18": [
     {
       "Q": "In SNMP, each node in a MIB is uniquely identified by a(n):",
       "A": [
@@ -6027,7 +6027,7 @@
       "questionType": "true_false"
     }
   ],
-  "19": [
+  "Practice Test 19": [
     {
       "Q": "Which of the following answers refers to a policy framework that allows domain owners to specify how email receivers should handle emails that fail authentication checks?",
       "A": [
@@ -6354,7 +6354,7 @@
       "questionType": "single_choice"
     }
   ],
-  "20": [
+  "Practice Test 20": [
     {
       "Q": "Which access control model allows for defining granular rules that consider user roles, time constraints, and network access restrictions?",
       "A": [
@@ -6691,7 +6691,7 @@
       "questionType": "multiple_choice"
     }
   ],
-  "21": [
+  "Practice Test 21": [
     {
       "Q": "Which of the following terms refers to the use of technology to perform individual tasks with minimal human intervention?",
       "A": [
@@ -7017,7 +7017,7 @@
       "questionType": "single_choice"
     }
   ],
-  "22": [
+  "Practice Test 22": [
     {
       "Q": "Which of the terms listed below refers to the process of creating and maintaining computer applications?",
       "A": [
@@ -7032,7 +7032,7 @@
       "questionType": "single_choice"
     },
     {
-      "Q": "Which of the following terms is used to describe all aspects of software development?",
+      "Q": "Which of the following answers refers to a governance framework covering all aspects of software development?",
       "A": [
         "SDLM"
       ],
@@ -7344,7 +7344,7 @@
       "questionType": "single_choice"
     }
   ],
-  "23": [
+  "Practice Test 23": [
     {
       "Q": "An estimate based on the historical data of how often a threat would be successful in exploiting a vulnerability is known as:",
       "A": [
@@ -7669,7 +7669,7 @@
       "questionType": "single_choice"
     }
   ],
-  "24": [
+  "Practice Test 24": [
     {
       "Q": "A detailed agreement between a client and a vendor that describes the work to be performed on a project is called:",
       "A": [
@@ -7991,6 +7991,4751 @@
         "Implicit deny policy",
         "User education",
         "Strong security controls"
+      ],
+      "questionType": "single_choice"
+    }
+  ],
+  "Acronyms 1": [
+    {
+      "Q": "A type of user identification mechanism used as a countermeasure against automated software (such as network bots) is known as:",
+      "A": [
+        "CAPTCHA"
+      ],
+      "O": [
+        "MFA",
+        "CAPTCHA",
+        "ACL",
+        "NIPS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following is the recommended replacement for DES?",
+      "A": [
+        "AES"
+      ],
+      "O": [
+        "DSA",
+        "RSA",
+        "RC4",
+        "AES"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the terms listed below refers to the process of creating and maintaining computer applications?",
+      "A": [
+        "SDLC"
+      ],
+      "O": [
+        "RAD",
+        "SDLC",
+        "OOP",
+        "SaaS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A type of firmware interface designed as a replacement for BIOS is called:",
+      "A": [
+        "UEFI"
+      ],
+      "O": [
+        "UEFI",
+        "GPT",
+        "ACPI",
+        "PXE"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a network security solution providing a single point of protection against various types of threats?",
+      "A": [
+        "UTM"
+      ],
+      "O": [
+        "IDP",
+        "AV",
+        "UTM",
+        "NGFW"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A WAP is a specific type of AP that is used to create WLANs.",
+      "A": [
+        "True"
+      ],
+      "O": [
+        "True",
+        "False"
+      ],
+      "questionType": "true_false"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a language used for creating and organizing the content of web pages?",
+      "A": [
+        "HTML"
+      ],
+      "O": [
+        "HTML",
+        "CSS",
+        "JS",
+        "HTTP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which network protocol enables retrieving contents of an Internet page from a web server?",
+      "A": [
+        "HTTP"
+      ],
+      "O": [
+        "SNMP",
+        "HTTP",
+        "SMTP",
+        "IMAP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "What is the name of a network protocol that secures web traffic via SSL/TLS encryption?",
+      "A": [
+        "HTTPS"
+      ],
+      "O": [
+        "SFTP",
+        "HTTPS",
+        "FTPS",
+        "SHTTP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "The purpose of PCI DSS is to provide protection for:",
+      "A": [
+        "Credit cardholder data"
+      ],
+      "O": [
+        "Credit cardholder data",
+        "Licensed software",
+        "User passwords",
+        "Personal health information"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which term describes the predicted loss of value to an asset based on a single security incident?",
+      "A": [
+        "SLE"
+      ],
+      "O": [
+        "SLE",
+        "ARO",
+        "ALE",
+        "SLA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following acronyms refers to a software that provides the functionality of a physical computer?",
+      "A": [
+        "VM"
+      ],
+      "O": [
+        "SDN",
+        "SaaS",
+        "VM",
+        "SoC"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "What is the common term for a group of protocols used to carry voice data over a packet-switched network?",
+      "A": [
+        "VoIP"
+      ],
+      "O": [
+        "ISDN",
+        "PBX",
+        "VoIP",
+        "PSTN"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the terms listed below refers to a formal contract between business partners outlining the rights, responsibilities, and obligations of each partner regarding the management, operation, and decision-making processes within the business?",
+      "A": [
+        "BPA"
+      ],
+      "O": [
+        "MSA",
+        "SLA",
+        "BPA",
+        "MOA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following file transfer protocols does not provide encryption?",
+      "A": [
+        "FTP"
+      ],
+      "O": [
+        "SCP",
+        "FTPS",
+        "FTP",
+        "SFTP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "The US Health Insurance Portability and Accountability Act (HIPAA) provides privacy protection for: (Select best answer)",
+      "A": [
+        "PHI"
+      ],
+      "O": [
+        "PII",
+        "ESN",
+        "PHI",
+        "PIV"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a hierarchical system for the creation, management, storage, distribution, and revocation of digital certificates?",
+      "A": [
+        "PKI"
+      ],
+      "O": [
+        "PKI",
+        "RA",
+        "PKCS",
+        "CA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following acronyms refers to any type of information pertaining to an individual that can be used to uniquely identify that person?",
+      "A": [
+        "PII"
+      ],
+      "O": [
+        "PHI",
+        "PIV",
+        "PII",
+        "PKI"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "An authentication subsystem that enables a user to access multiple, connected system components (such as separate hosts on a network) after a single login on only one of the components is referred to as:",
+      "A": [
+        "SSO"
+      ],
+      "O": [
+        "NAC",
+        "SSO",
+        "AAA",
+        "MFA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the cryptographic algorithms listed below is the least vulnerable to attacks?",
+      "A": [
+        "AES"
+      ],
+      "O": [
+        "AES",
+        "DES",
+        "RC4",
+        "3DES"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers illustrates the difference between passive and active network security breach response?",
+      "A": [
+        "IDS vs. IPS"
+      ],
+      "O": [
+        "HIPS vs. NIPS",
+        "UTM vs. Firewall",
+        "NIPS vs. UTM",
+        "IDS vs. IPS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "An SELinux kernel security feature for implementing stricter access controls and policies is known as:",
+      "A": [
+        "MAC"
+      ],
+      "O": [
+        "DAC",
+        "RBAC",
+        "MAC",
+        "ABAC"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which wireless security protocol has been deprecated in favor of newer standards due to known vulnerabilities resulting from implementation flaws?",
+      "A": [
+        "WEP"
+      ],
+      "O": [
+        "EAP",
+        "AES",
+        "WPA2",
+        "WEP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which access control model allows for defining granular rules that consider user roles, time constraints, and network access restrictions?",
+      "A": [
+        "RuBAC"
+      ],
+      "O": [
+        "ABAC",
+        "MAC",
+        "RuBAC",
+        "DAC",
+        "RBAC"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which type of control access model connects user permissions to their specific responsibilities?",
+      "A": [
+        "RBAC"
+      ],
+      "O": [
+        "DAC",
+        "RBAC",
+        "MAC",
+        "ABAC"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "The term \"CIA triad\" is used to describe the basic principles of information security.",
+      "A": [
+        "True"
+      ],
+      "O": [
+        "True",
+        "False"
+      ],
+      "questionType": "true_false"
+    },
+    {
+      "Q": "A type of document stipulating rules of behavior to be followed by users of computers, networks, and associated resources is called:",
+      "A": [
+        "AUP"
+      ],
+      "O": [
+        "SLA",
+        "EULA",
+        "AUP",
+        "BPA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "LDAP is an example of:",
+      "A": [
+        "Directory access protocol"
+      ],
+      "O": [
+        "Data encryption protocol",
+        "Address resolution protocol",
+        "Directory access protocol",
+        "File exchange protocol"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a suite of protocols used for connecting hosts on the Internet?",
+      "A": [
+        "TCP/IP"
+      ],
+      "O": [
+        "NetBIOS",
+        "IPv4",
+        "TCP/IP",
+        "IPv6"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "The SMTP protocol is used for: (Select 2 answers)",
+      "A": [
+        "Sending email messages between mail servers",
+        "Sending email messages from a client device"
+      ],
+      "O": [
+        "Sending email messages between mail servers",
+        "Name resolution services",
+        "Serving of web pages",
+        "Retrieving email messages from mail servers",
+        "Sending email messages from a client device"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a data storage device equipped with hardware-level encryption functionality?",
+      "A": [
+        "SED"
+      ],
+      "O": [
+        "HSM",
+        "TPM",
+        "EFS",
+        "SED"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A documented plan outlining the steps that should be taken in each phase of a cybersecurity incident is referred to as:",
+      "A": [
+        "IRP"
+      ],
+      "O": [
+        "DRP",
+        "BCP",
+        "IRP",
+        "ERP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the terms listed below refers to a company that provides Internet access?",
+      "A": [
+        "ISP"
+      ],
+      "O": [
+        "ISP",
+        "CSP",
+        "IdP",
+        "MSP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "As opposed to simple DoS attacks that usually are performed from a single system, a DDoS attack uses multiple compromised computer systems to perform the attack against its target. The intermediary systems that are used as platform for the attack (often referred to as zombies, and collectively as a botnet) are the secondary victims of the DDoS attack.",
+      "A": [
+        "True"
+      ],
+      "O": [
+        "True",
+        "False"
+      ],
+      "questionType": "true_false"
+    },
+    {
+      "Q": "A type of cryptographic network protocol for secure data communication, remote command-line login, remote command execution, and other secure network services between two networked computers is known as:",
+      "A": [
+        "SSH"
+      ],
+      "O": [
+        "RDP",
+        "SSH",
+        "Telnet",
+        "SCP"
+      ],
+      "questionType": "single_choice"
+    }
+  ],
+  "Acronyms 2": [
+    {
+      "Q": "Which of the following acronyms refers to software or hardware-based security solutions designed to detect and prevent unauthorized use and transmission of confidential information?",
+      "A": [
+        "DLP"
+      ],
+      "O": [
+        "IPS",
+        "DLP",
+        "IDS",
+        "DEP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A rule-based access control mechanism implemented on routers, switches, and firewalls is referred to as:",
+      "A": [
+        "ACL"
+      ],
+      "O": [
+        "ACL",
+        "CSR",
+        "MAC",
+        "AUP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which type of firmware performs initial hardware checks after the computer is powered on?",
+      "A": [
+        "BIOS"
+      ],
+      "O": [
+        "BIOS",
+        "POST",
+        "CMOS",
+        "PROM"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a software technology designed to simplify network infrastructure management?",
+      "A": [
+        "SDN"
+      ],
+      "O": [
+        "SDN",
+        "QoS",
+        "VDI",
+        "CDN"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following is an MS Windows component that enables encryption of individual files?",
+      "A": [
+        "EFS"
+      ],
+      "O": [
+        "EFS",
+        "NTFS",
+        "DFS",
+        "NFS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A system that uses public network (such as the Internet) as a means for creating private encrypted connections between remote locations is known as:",
+      "A": [
+        "VPN"
+      ],
+      "O": [
+        "WWAN",
+        "VPN",
+        "PAN",
+        "VLAN"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a security standard introduced to address the vulnerabilities found in WEP?",
+      "A": [
+        "WPA"
+      ],
+      "O": [
+        "TKIP",
+        "AES",
+        "WPA",
+        "CCMP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "The term \"KEK\" refers to a type of cryptographic key often used in key management systems to add an additional layer of security when encrypting and decrypting other cryptographic keys.",
+      "A": [
+        "True"
+      ],
+      "O": [
+        "True",
+        "False"
+      ],
+      "questionType": "true_false"
+    },
+    {
+      "Q": "POP3 is used for:",
+      "A": [
+        "Email retrieval"
+      ],
+      "O": [
+        "Name resolution",
+        "Sending email messages",
+        "File exchange",
+        "Email retrieval"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which cloud service model would provide the best solution for a web developer intending to create a web app?",
+      "A": [
+        "PaaS"
+      ],
+      "O": [
+        "XaaS",
+        "SaaS",
+        "PaaS",
+        "IaaS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a cryptographic hash function that has been widely used in the past but is now considered deprecated for security-sensitive applications due to known vulnerabilities?",
+      "A": [
+        "MD5"
+      ],
+      "O": [
+        "MD5",
+        "SHA",
+        "CRC",
+        "HMAC"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a suite of protocols and technologies providing encryption, authentication, and data integrity for network traffic?",
+      "A": [
+        "IPsec"
+      ],
+      "O": [
+        "TLS",
+        "SSH",
+        "IPsec",
+        "VPN"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A network protocol providing an alternative solution to the manual allocation of IP addresses is called:",
+      "A": [
+        "DHCP"
+      ],
+      "O": [
+        "DNS",
+        "SNMP",
+        "NAT",
+        "DHCP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following regulations protects the privacy and personal data of the EU citizens?",
+      "A": [
+        "GDPR"
+      ],
+      "O": [
+        "PHI",
+        "HIPAA",
+        "PCI DSS",
+        "GDPR"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a mechanical data storage medium type that relies on magnetic plates and moving parts for data storage and retrieval?",
+      "A": [
+        "HDD"
+      ],
+      "O": [
+        "RAM",
+        "HDD",
+        "NVMe",
+        "SSD"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following terms refers to an environmental control system?",
+      "A": [
+        "HVAC"
+      ],
+      "O": [
+        "SCADA",
+        "HIPS",
+        "TEMPEST",
+        "HVAC"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A type of network connecting computers within a small geographical area such as a building or group of buildings is referred to as:",
+      "A": [
+        "LAN"
+      ],
+      "O": [
+        "PAN",
+        "LAN",
+        "MAN",
+        "WAN"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the solutions listed below hides the internal IP addresses by modifying IP address information in IP packet headers while in transit across a traffic routing device?",
+      "A": [
+        "NAT"
+      ],
+      "O": [
+        "QoS",
+        "DHCP",
+        "NAT",
+        "DNS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a shared secret authentication method used in WPA, WPA2, and EAP?",
+      "A": [
+        "PSK"
+      ],
+      "O": [
+        "PSK",
+        "802.1X",
+        "SAE",
+        "TKIP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Copies of lost private encryption keys can be retrieved from a key escrow by RAs (i.e., individuals with access to key database and permission level allowing them to extract keys from escrow).",
+      "A": [
+        "True"
+      ],
+      "O": [
+        "True",
+        "False"
+      ],
+      "questionType": "true_false"
+    },
+    {
+      "Q": "Which type of unsolicited messaging relies on text-based communication?",
+      "A": [
+        "SPIM"
+      ],
+      "O": [
+        "VAM",
+        "SPIM",
+        "JMS",
+        "SPIT"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a secure replacement for Telnet?",
+      "A": [
+        "SSH"
+      ],
+      "O": [
+        "CHAP",
+        "FTP",
+        "SNMP",
+        "SSH"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a family of cryptographic hash functions used in a variety of security applications, including digital signatures, password storage, secure communications, and data integrity verification?",
+      "A": [
+        "SHA"
+      ],
+      "O": [
+        "RSA",
+        "IDEA",
+        "AES",
+        "SHA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "In the AAA security architecture, the process of granting or denying access to resources is known as:",
+      "A": [
+        "Authorization"
+      ],
+      "O": [
+        "Auditing",
+        "Authentication",
+        "Authorization",
+        "Accounting"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the terms listed below applies to the authentication process?",
+      "A": [
+        "MFA"
+      ],
+      "O": [
+        "MFA",
+        "MMC",
+        "MDM",
+        "MFD"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refer to NIPS? (Select 3 answers)",
+      "A": [
+        "Takes proactive measures to block or mitigate intrusion attempts",
+        "Operates in an inline mode, actively intercepting and inspecting network traffic",
+        "It can drop or reject network packets, terminate connections, or take other actions to stop the attack"
+      ],
+      "O": [
+        "Takes proactive measures to block or mitigate intrusion attempts",
+        "Generates alerts and notifies security personnel or administrators when suspicious activity is detected",
+        "Operates in an inline mode, actively intercepting and inspecting network traffic",
+        "Monitors network traffic without direct involvement in traffic routing or packet modification",
+        "Does not take direct action to block or prevent attacks",
+        "It can drop or reject network packets, terminate connections, or take other actions to stop the attack"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "Which of the terms listed below refers to threat intelligence gathered from publicly available sources?",
+      "A": [
+        "OSINT"
+      ],
+      "O": [
+        "IoC",
+        "OSINT",
+        "RFC",
+        "CVE/NVD"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a common PnP interface that allows a PC to communicate with peripherals and other devices?",
+      "A": [
+        "USB"
+      ],
+      "O": [
+        "IDE",
+        "PCIe",
+        "USB",
+        "eSATA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the solutions listed below allows to check whether a digital certificate has been revoked?",
+      "A": [
+        "CRL"
+      ],
+      "O": [
+        "OCR",
+        "CRL",
+        "CSR",
+        "OSPF"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A type of computer security solution that allows to define and enforce network access policies is called:",
+      "A": [
+        "NAC"
+      ],
+      "O": [
+        "NAT",
+        "ACL",
+        "NAC",
+        "DLP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following solutions alleviates the problem of the depleting IPv4 address space by allowing multiple hosts on the same private LAN to share a single public IP address?",
+      "A": [
+        "NAT"
+      ],
+      "O": [
+        "DNS",
+        "APIPA",
+        "NAT",
+        "DHCP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to an individual or role responsible for overseeing and ensuring compliance with data protection laws and policies within an organization?",
+      "A": [
+        "DPO"
+      ],
+      "O": [
+        "CTO",
+        "DPO",
+        "CIO",
+        "CSO"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following terms refers to an agreement that specifies performance requirements for a vendor?",
+      "A": [
+        "SLA"
+      ],
+      "O": [
+        "MSA",
+        "SLA",
+        "MOU",
+        "SOW"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A legal contract between the holder of confidential information and another person to whom that information is disclosed restricting that other person from disclosing the confidential information to any other party is referred to as:",
+      "A": [
+        "NDA"
+      ],
+      "O": [
+        "ISA",
+        "NDA",
+        "BPA",
+        "SLA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a protocol designed to secure data transmitted over WLANs?",
+      "A": [
+        "WTLS"
+      ],
+      "O": [
+        "SCP",
+        "IPsec",
+        "SSH",
+        "WTLS"
+      ],
+      "questionType": "single_choice"
+    }
+  ],
+  "Acronyms 3": [
+    {
+      "Q": "A less formal document outlining mutual goals and cooperation established between two or more parties is referred to as:",
+      "A": [
+        "MOU"
+      ],
+      "O": [
+        "MOA",
+        "SOW",
+        "MOU",
+        "MSA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a global standard development organization composed of different national standards bodies?",
+      "A": [
+        "ISO"
+      ],
+      "O": [
+        "NIST",
+        "ISO",
+        "IEEE",
+        "ANSI"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "The term \"SD-WAN\" refers to a network technology that uses software to manage and optimize network connections that extend over large geographic areas.",
+      "A": [
+        "True"
+      ],
+      "O": [
+        "True",
+        "False"
+      ],
+      "questionType": "true_false"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a dedicated programming language used in database management?",
+      "A": [
+        "SQL"
+      ],
+      "O": [
+        "PHP",
+        "C",
+        "SQL",
+        "JS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following devices fall(s) into the category of PEDs? (Select all that apply)",
+      "A": [
+        "Smartphone",
+        "Tablet"
+      ],
+      "O": [
+        "Smartphone",
+        "Tablet",
+        "Desktop",
+        "Mainframe"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "Which of the terms listed below is used to describe an average time required to repair a failed component or device?",
+      "A": [
+        "MTTR"
+      ],
+      "O": [
+        "MTTF",
+        "RPO",
+        "MTTR",
+        "MTBF"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a firewall type that improves upon first- and second-generation firewalls by offering additional features, such as more in-depth inspection of network traffic and application-level inspection?",
+      "A": [
+        "NGFW"
+      ],
+      "O": [
+        "IDS",
+        "Packet filter",
+        "NGFW",
+        "Stateful firewall"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which protocol enables secure, real-time delivery of audio and video over an IP network?",
+      "A": [
+        "SRTP"
+      ],
+      "O": [
+        "S/MIME",
+        "RTP",
+        "SIP",
+        "SRTP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a network security technology designed to monitor, detect, and mitigate unauthorized access, security threats, and suspicious activities in WLANs?",
+      "A": [
+        "WIPS"
+      ],
+      "O": [
+        "WIPS",
+        "NIDS",
+        "NIPS",
+        "WIDS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a method for creating and verifying digital signatures?",
+      "A": [
+        "DSA"
+      ],
+      "O": [
+        "DHE",
+        "AES",
+        "DSA",
+        "SHA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A type of legally binding contract that establishes the foundational terms and conditions governing future agreements between two parties is known as:",
+      "A": [
+        "MSA"
+      ],
+      "O": [
+        "MOU",
+        "SLA",
+        "MSA",
+        "SOW"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which part of IPsec provides authentication, integrity, and confidentiality?",
+      "A": [
+        "ESP"
+      ],
+      "O": [
+        "SPD",
+        "PFS",
+        "AH",
+        "ESP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a multi-protocol authentication framework frequently used in 802.11 networks and point-to-point connections?",
+      "A": [
+        "EAP"
+      ],
+      "O": [
+        "PAP",
+        "MS-CHAP",
+        "EAP",
+        "CHAP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following acronyms represents evidence that helps cybersecurity professionals detect potential security incidents?",
+      "A": [
+        "IoC"
+      ],
+      "O": [
+        "APT",
+        "IoC",
+        "ATT&CK",
+        "EDR"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "For a wireless client to be able to connect to a network, the security type (e.g., WEP, WPA, WPA2, or WPA3) and encryption type (e.g., TKIP or AES) settings on the connecting host must match the corresponding wireless security settings on a WAP.",
+      "A": [
+        "True"
+      ],
+      "O": [
+        "True",
+        "False"
+      ],
+      "questionType": "true_false"
+    },
+    {
+      "Q": "Which of the answers listed below refers to an obsolete authentication protocol that sends passwords in cleartext?",
+      "A": [
+        "PAP"
+      ],
+      "O": [
+        "PAP",
+        "CHAP",
+        "EAP",
+        "MS-CHAP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to an internal telephone exchange or switching system implemented in a business or office?",
+      "A": [
+        "PBX"
+      ],
+      "O": [
+        "POTS",
+        "VoIP",
+        "PBX",
+        "PSTN"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the acronyms listed below refers to a maximum tolerable period of time required for restoring business functions after a failure or disaster?",
+      "A": [
+        "RTO"
+      ],
+      "O": [
+        "SLA",
+        "RTO",
+        "AUP",
+        "RPO"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A computer network connecting multiple LANs over an area of a city is called:",
+      "A": [
+        "MAN"
+      ],
+      "O": [
+        "PAN",
+        "SAN",
+        "MAN",
+        "CAN"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which cryptographic protocol is designed to provide secure communications over a computer network and is the successor to SSL?",
+      "A": [
+        "TLS"
+      ],
+      "O": [
+        "WEP",
+        "CCMP",
+        "TLS",
+        "AES"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to an embedded microcontroller used for secure boot, disk encryption, and system integrity verification?",
+      "A": [
+        "TPM"
+      ],
+      "O": [
+        "TPM",
+        "SoC",
+        "UEFI",
+        "HSM"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refer to IMAP? (Select 2 answers)",
+      "A": [
+        "Offers improved functionality in comparison to POP3",
+        "Serves the same function as POP3"
+      ],
+      "O": [
+        "Offers improved functionality in comparison to POP3",
+        "Serves the same function as POP3",
+        "Enables sending email messages from client devices",
+        "Offers less functions than POP3",
+        "Enables email exchange between mail servers"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "Which cryptographic solution would be best suited for low-power devices, such as IoT devices, embedded systems, and mobile devices?",
+      "A": [
+        "ECC"
+      ],
+      "O": [
+        "ECC",
+        "DES",
+        "RSA",
+        "AES"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "The term \"ASLR\" refers to a technique used in modern OSs to enhance:",
+      "A": [
+        "System security"
+      ],
+      "O": [
+        "Data redundancy",
+        "System security",
+        "Performance",
+        "Storage capacity"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following solutions provide the AAA functionality? (Select 2 answers)",
+      "A": [
+        "TACACS+",
+        "RADIUS"
+      ],
+      "O": [
+        "CHAP",
+        "TACACS+",
+        "PAP",
+        "RADIUS",
+        "MS-CHAP"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "Which of the acronyms listed below refers to a set of rules that specify which users or system processes are granted access to objects as well as what operations are allowed on a given object?",
+      "A": [
+        "ACL"
+      ],
+      "O": [
+        "CRL",
+        "NAT",
+        "BCP",
+        "ACL"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A network admin can ping remote host by its IP address, but not by its domain name. Which of the following is the most probable source of this problem?",
+      "A": [
+        "DNS"
+      ],
+      "O": [
+        "ICMP",
+        "DNS",
+        "HTTP",
+        "DHCP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "The role of a RA in PKI is to: (Select 2 answers)",
+      "A": [
+        "Accept requests for digital certificates",
+        "Authenticate the entity making the request"
+      ],
+      "O": [
+        "Accept requests for digital certificates",
+        "Validate digital certificates",
+        "Authenticate the entity making the request",
+        "Provide backup source for cryptographic keys",
+        "Issue digital certificates"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a generic term used to identify any resource?",
+      "A": [
+        "URI"
+      ],
+      "O": [
+        "OUI",
+        "URI",
+        "OID",
+        "URL"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a framework widely used for enabling secure third-party access to user accounts?",
+      "A": [
+        "OAuth"
+      ],
+      "O": [
+        "SSO",
+        "OAuth",
+        "MFA",
+        "SAML"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "An IV is a random or pseudorandom value used in cryptography to ensure that the same plaintext input does not produce the same ciphertext output, even when the same encryption key is used. The IV is typically used with encryption algorithms in block cipher modes to enhance security by introducing randomness to the encryption process.",
+      "A": [
+        "True"
+      ],
+      "O": [
+        "True",
+        "False"
+      ],
+      "questionType": "true_false"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a security vulnerability that allows an attacker to inject malicious code into input fields, such as search bars or login forms, to execute unauthorized commands on a database?",
+      "A": [
+        "SQLi"
+      ],
+      "O": [
+        "RCE",
+        "SQLi",
+        "XSS",
+        "CSRF"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "What is the name of a mobile device deployment model in which employees select devices for work-related tasks from a company-approved device list?",
+      "A": [
+        "CYOD"
+      ],
+      "O": [
+        "VDI",
+        "CYOD",
+        "BYOD",
+        "COPE"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following terms is used to describe sophisticated and prolonged cyberattacks often carried out by well-funded and organized groups, such as nation-states?",
+      "A": [
+        "APT"
+      ],
+      "O": [
+        "MitM",
+        "APT",
+        "XSRF",
+        "DDoS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "What is STIX?",
+      "A": [
+        "Common language for describing cyber threat information"
+      ],
+      "O": [
+        "Vulnerability database",
+        "Common language for describing cyber threat information",
+        "US government initiative for real-time sharing of cyber threat indicators",
+        "Transport mechanism for cyber threat information"
+      ],
+      "questionType": "single_choice"
+    }
+  ],
+  "Acronyms 4": [
+    {
+      "Q": "Which of the answers listed below refers to a concept that provides insights into methods and tools that cybercriminals use to carry out attacks?",
+      "A": [
+        "TTP"
+      ],
+      "O": [
+        "TTP",
+        "CVE",
+        "ATT&CK",
+        "CVSS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A dedicated security solution that filters, monitors, and blocks HTTP/HTTPS traffic between a web application and the Internet is referred to as:",
+      "A": [
+        "WAF"
+      ],
+      "O": [
+        "UTM",
+        "NGFW",
+        "UEM",
+        "WAF"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following solutions provides active network security breach response on an individual computer system?",
+      "A": [
+        "HIPS"
+      ],
+      "O": [
+        "NIDS",
+        "HIDS",
+        "NIPS",
+        "HIPS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the acronyms listed below refers to a risk assessment formula defining probable financial loss due to a risk over a one-year period?",
+      "A": [
+        "ALE"
+      ],
+      "O": [
+        "ARO",
+        "SLE",
+        "ALE",
+        "SLA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A software technology designed to provide confidentiality for an entire data storage device is known as:",
+      "A": [
+        "FDE"
+      ],
+      "O": [
+        "TPM",
+        "FDE",
+        "EFS",
+        "HSM"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "High MTBF value indicates that a component or system provides low reliability and is more likely to fail.",
+      "A": [
+        "False"
+      ],
+      "O": [
+        "True",
+        "False"
+      ],
+      "questionType": "true_false"
+    },
+    {
+      "Q": "Which part of the AAA security architecture deals with the verification of the identity of a person or process?",
+      "A": [
+        "Authentication"
+      ],
+      "O": [
+        "Accounting",
+        "Authentication",
+        "Auditing",
+        "Authorization"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a routing protocol used in computer networks to determine the best path for routing data packets from one network node to another?",
+      "A": [
+        "OSPF"
+      ],
+      "O": [
+        "BGP",
+        "EIGRP",
+        "RIP",
+        "OSPF"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to an industry standard for assessing and scoring the severity of computer system security vulnerabilities?",
+      "A": [
+        "CVSS"
+      ],
+      "O": [
+        "SIEM",
+        "CVSS",
+        "OSINT",
+        "SOAR"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a hardware or software solution providing secure remote access to networks and resources?",
+      "A": [
+        "RAS"
+      ],
+      "O": [
+        "NAC",
+        "RDP",
+        "SSH",
+        "RAS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the wireless technologies listed below are deprecated and should not be used due to their known vulnerabilities? (Select 2 answers)",
+      "A": [
+        "WPS",
+        "WEP"
+      ],
+      "O": [
+        "WPS",
+        "WAP",
+        "WPA2",
+        "WAF",
+        "WEP"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "Which of the following answers refer(s) to SSDs? (Select all that apply)",
+      "A": [
+        "Relatively high device cost",
+        "Lower capacity in comparison to magnetic drives",
+        "High performance",
+        "Lack of moving parts (takes advantage of memory chips instead of magnetic platters)"
+      ],
+      "O": [
+        "Low performance",
+        "Relatively high device cost",
+        "Lower capacity in comparison to magnetic drives",
+        "High performance",
+        "Relatively low device cost",
+        "Higher capacity in comparison to magnetic drives",
+        "Lack of moving parts (takes advantage of memory chips instead of magnetic platters)"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "An SWG is a software component, or a hardware device designed to prevent unauthorized traffic from entering an internal network of an organization. An SWG implementation may include various security services, such as packet filtering, URL/content filtering, malware inspection, application controls, AUP enforcement, or DLP.",
+      "A": [
+        "True"
+      ],
+      "O": [
+        "True",
+        "False"
+      ],
+      "questionType": "true_false"
+    },
+    {
+      "Q": "A type of forensic evidence that can be used to detect unauthorized access attempts or other malicious activities is called:",
+      "A": [
+        "IoC"
+      ],
+      "O": [
+        "CVE",
+        "IoC",
+        "AIS",
+        "OSINT"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a remote access authentication protocol that periodically re-authenticates client at random intervals to prevent session hijacking?",
+      "A": [
+        "CHAP"
+      ],
+      "O": [
+        "EAP",
+        "CHAP",
+        "PAP",
+        "PEAP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A type of surveillance system comprising video cameras and monitors that enable continuous monitoring and recording of specific areas is commonly referred to as CCTV.",
+      "A": [
+        "True"
+      ],
+      "O": [
+        "True",
+        "False"
+      ],
+      "questionType": "true_false"
+    },
+    {
+      "Q": "Which of the following answers refers to an ECC-based method for creating and verifying digital signatures?",
+      "A": [
+        "ECDSA"
+      ],
+      "O": [
+        "DHE",
+        "ECDSA",
+        "HMAC",
+        "ECDHE"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the actions listed below can be taken by an IDS? (Select 2 answers)",
+      "A": [
+        "Logging",
+        "Sending an alert"
+      ],
+      "O": [
+        "Firewall reconfiguration",
+        "Closing down connection",
+        "Logging",
+        "Terminating process",
+        "Sending an alert"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "FTPS is an extension to the SSH protocol and runs by default on port number 22.",
+      "A": [
+        "False"
+      ],
+      "O": [
+        "True",
+        "False"
+      ],
+      "questionType": "true_false"
+    },
+    {
+      "Q": "Which of the following terms refers to a dedicated transport mechanism for cyber threat information?",
+      "A": [
+        "TAXII"
+      ],
+      "O": [
+        "STIX",
+        "CVE",
+        "TAXII",
+        "CVSS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a legacy symmetric-key block cipher encryption algorithm?",
+      "A": [
+        "DES"
+      ],
+      "O": [
+        "RC4",
+        "DES",
+        "RSA",
+        "DSA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A Microsoft-proprietary protocol providing a user with graphical interface for connecting to another networked host is known as:",
+      "A": [
+        "RDP"
+      ],
+      "O": [
+        "VDI",
+        "RDP",
+        "SSH",
+        "VNC"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following acronyms refers to a comprehensive strategy and set of procedures designed to ensure that an organization can continue its critical operations and functions during and after a disruptive event?",
+      "A": [
+        "BCP"
+      ],
+      "O": [
+        "DRP",
+        "CP",
+        "BCP",
+        "COOP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which type of Trojan enables unauthorized remote access to a compromised system?",
+      "A": [
+        "RAT"
+      ],
+      "O": [
+        "APT",
+        "RAT",
+        "MaaS",
+        "PUP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "The term \"AI\" refers to computer systems and algorithms that can perform tasks typically requiring human intelligence, such as problem-solving, learning, and decision-making.",
+      "A": [
+        "True"
+      ],
+      "O": [
+        "True",
+        "False"
+      ],
+      "questionType": "true_false"
+    },
+    {
+      "Q": "Which of the algorithms listed below does not fall into the category of asymmetric encryption?",
+      "A": [
+        "AES"
+      ],
+      "O": [
+        "RSA",
+        "GPG",
+        "DSA",
+        "AES",
+        "DHE",
+        "ECDHE",
+        "PGP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A type of cyberattack focused on making a website, service, or network unavailable to users by overloading it with traffic or malicious requests is called:",
+      "A": [
+        "DoS"
+      ],
+      "O": [
+        "SQLi",
+        "XSS",
+        "CSRF",
+        "DoS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "In quantitative risk assessment, this term is used for estimating the likelihood of occurrence of a future threat.",
+      "A": [
+        "ARO"
+      ],
+      "O": [
+        "ALE",
+        "SLA",
+        "ARO",
+        "SLE"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a cryptographic file generated by an entity requesting a digital certificate from a CA?",
+      "A": [
+        "CSR"
+      ],
+      "O": [
+        "OID",
+        "CSR",
+        "DN",
+        "CRL"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a broad term that encompasses various control and automation systems used in industrial settings to control and monitor physical processes and machinery?",
+      "A": [
+        "ICS"
+      ],
+      "O": [
+        "ICS",
+        "PLC",
+        "SCADA",
+        "HMI"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "ACL, FACL, DAC, MAC, and RBAC are all access control mechanisms that can be used to manage user permissions and protect the confidentiality, integrity, and availability of data.",
+      "A": [
+        "True"
+      ],
+      "O": [
+        "True",
+        "False"
+      ],
+      "questionType": "true_false"
+    },
+    {
+      "Q": "A type of access control model that grants object owners the authority to determine access permissions is referred to as:",
+      "A": [
+        "DAC"
+      ],
+      "O": [
+        "ACL",
+        "RBAC",
+        "DAC",
+        "MAC"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which wireless technology enables identification and tracking of tags attached to objects?",
+      "A": [
+        "RFID"
+      ],
+      "O": [
+        "WTLS",
+        "GPS",
+        "RFID",
+        "NFC"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a tunneling protocol that is often used in combination with IPsec to secure VPN connections?",
+      "A": [
+        "L2TP"
+      ],
+      "O": [
+        "GRE",
+        "L2TP",
+        "BGP",
+        "SSL"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a cloud computing service model in which clients, instead of buying all the hardware and software, purchase computing resources as an outsourced service from suppliers who own and maintain all the necessary equipment and software?",
+      "A": [
+        "IaaS"
+      ],
+      "O": [
+        "SaaS",
+        "DaaS",
+        "PaaS",
+        "IaaS"
+      ],
+      "questionType": "single_choice"
+    }
+  ],
+  "Acronyms 5": [
+    {
+      "Q": "Which of the following answers refers to a protocol used to set up secure connections and exchange of cryptographic keys in IPsec VPNs?",
+      "A": [
+        "IKE"
+      ],
+      "O": [
+        "SSL",
+        "IKE",
+        "ESP",
+        "DHE"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "An access control model that enforces the strictest set of access rules is known as:",
+      "A": [
+        "MAC"
+      ],
+      "O": [
+        "MAC",
+        "RBAC",
+        "DAC",
+        "ABAC"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the acronyms listed below refers to a cryptographic software tool for secure email communication and data protection?",
+      "A": [
+        "PGP"
+      ],
+      "O": [
+        "DES",
+        "PEM",
+        "EFS",
+        "PGP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "What type of action allows an attacker to exploit the XSS vulnerability?",
+      "A": [
+        "Code injection"
+      ],
+      "O": [
+        "Code injection",
+        "Banner grabbing",
+        "PIN recovery",
+        "Input validation"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A type of vulnerability where the state of a resource is verified at one point in time but may change before the resource is actually used is called:",
+      "A": [
+        "TOC/TOU"
+      ],
+      "O": [
+        "TOC",
+        "TOC/TOU",
+        "TOU",
+        "TSIG"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "The term \"SMS\" is used in reference to:",
+      "A": [
+        "Text messaging services"
+      ],
+      "O": [
+        "Text messaging services",
+        "Enhanced messaging services",
+        "Multimedia messaging services",
+        "Rich communication services"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following terms refers to a framework and knowledge base that provides understanding of TTPs used during cyberattacks?",
+      "A": [
+        "ATT&CK"
+      ],
+      "O": [
+        "CVSS",
+        "ATT&CK",
+        "TAXII",
+        "STIX"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a security solution that provides the capability for detection, analysis, response, and real-time monitoring of cyber threats at the device level?",
+      "A": [
+        "EDR"
+      ],
+      "O": [
+        "SWG",
+        "CASB",
+        "EDR",
+        "NGFW"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a system containing mappings of domain names to various types of data, such as numerical IP addresses?",
+      "A": [
+        "DNS"
+      ],
+      "O": [
+        "TCP/IP",
+        "DNS",
+        "SQL",
+        "DHCP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "The term \"OTA\" refers to the process of wirelessly transmitting data, updates, or information to electronic devices, such as smartphones, tablets, or IoT devices, typically using cellular networks, Wi-Fi, or other wireless communication methods.",
+      "A": [
+        "True"
+      ],
+      "O": [
+        "True",
+        "False"
+      ],
+      "questionType": "true_false"
+    },
+    {
+      "Q": "Which of the acronyms listed below refers to a piece of hardware and associated software/firmware designed to provide cryptographic and key management functions?",
+      "A": [
+        "HSM"
+      ],
+      "O": [
+        "EFS",
+        "HSM",
+        "SFC",
+        "TPM"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "What is a PUP? (Select 3 answers)",
+      "A": [
+        "A type of computer program not explicitly classified as malware by AV software",
+        "A type of software that may adversely affect the computer's security and performance, compromise user's privacy, or display unsolicited ads",
+        "An application downloaded and installed with the user's consent"
+      ],
+      "O": [
+        "A type of computer program not explicitly classified as malware by AV software",
+        "An application downloaded and installed without the user's consent",
+        "A type of software that may adversely affect the computer's security and performance, compromise user's privacy, or display unsolicited ads",
+        "An application downloaded and installed with the user's consent",
+        "A type of computer program explicitly classified as malware by AV applications",
+        "A type of free, utility software often bundled with a paid app"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "A measure of the likelihood that a biometric security system will incorrectly reject an access attempt by an authorized user is referred to as:",
+      "A": [
+        "FRR"
+      ],
+      "O": [
+        "FAR",
+        "CER",
+        "CRC",
+        "FRR"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following enables the automation of vulnerability scanning and compliance checking?",
+      "A": [
+        "SCAP"
+      ],
+      "O": [
+        "SAML",
+        "OVAL",
+        "SCAP",
+        "SASE"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the acronyms listed below refers to a comprehensive strategy and set of procedures designed to ensure that an organization can continue its critical operations and functions during and after a disruptive event?",
+      "A": [
+        "BCP"
+      ],
+      "O": [
+        "BIA",
+        "SLE",
+        "BCP",
+        "BPA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Given the computational limitations of IoT devices, smartcards, and mobile devices, which of the following digital signature algorithms would be the most efficient choice due to its smaller key size and lower computational requirements?",
+      "A": [
+        "ECDSA"
+      ],
+      "O": [
+        "RSA",
+        "ECDHE",
+        "DSA",
+        "ECDSA",
+        "ECC"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which type of software is used to prevent, detect, and remove malware from computer systems and networks?",
+      "A": [
+        "AV"
+      ],
+      "O": [
+        "IDS",
+        "SaaS",
+        "AV",
+        "WAF"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "An estimate based on the historical data of how often a threat would be successful in exploiting a vulnerability is known as:",
+      "A": [
+        "ARO"
+      ],
+      "O": [
+        "ALE",
+        "SLA",
+        "ARO",
+        "SLE"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a rule-based access control mechanism associated with files and/or directories?",
+      "A": [
+        "FACL"
+      ],
+      "O": [
+        "EFS",
+        "FACL",
+        "FIM",
+        "NTFS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a DNS TXT record that allows the owner of a domain to specify all the servers authorized to send mail from their domain?",
+      "A": [
+        "SPF"
+      ],
+      "O": [
+        "DKIM",
+        "SRV",
+        "CNAME",
+        "SPF"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a cryptographic method used to verify that a message or data has remained unaltered during transmission and originates from an authorized source?",
+      "A": [
+        "MAC"
+      ],
+      "O": [
+        "MAC",
+        "CBC",
+        "PEM",
+        "GCM"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a network security technology designed to monitor WLANs for unauthorized access, security threats, and suspicious activities?",
+      "A": [
+        "WIDS"
+      ],
+      "O": [
+        "UTM",
+        "WIDS",
+        "NGFW",
+        "WAF"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the acronyms listed below refers to a client-server protocol that provides centralized AAA services for remote-access users?",
+      "A": [
+        "RADIUS"
+      ],
+      "O": [
+        "OAuth",
+        "RADIUS",
+        "LDAP",
+        "OpenID"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which type of software enables centralized administration of mobile devices?",
+      "A": [
+        "MDM"
+      ],
+      "O": [
+        "MFA",
+        "MMC",
+        "MDM",
+        "MFD"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following defines a file format for storing and exchanging personal identity information, including private keys and digital certificates?",
+      "A": [
+        "P12"
+      ],
+      "O": [
+        "P10",
+        "P11",
+        "P12",
+        "P13"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a cryptographic key exchange protocol that leverages ECC for enhanced security and efficiency?",
+      "A": [
+        "ECDHE"
+      ],
+      "O": [
+        "IKE",
+        "ECDHE",
+        "DHE",
+        "ECDSA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "The term \"MTTF\" refers to a metric that represents the average amount of time a device or system is expected to operate before experiencing its first failure.",
+      "A": [
+        "True"
+      ],
+      "O": [
+        "True",
+        "False"
+      ],
+      "questionType": "true_false"
+    },
+    {
+      "Q": "In modern OSs, this feature prevents malicious code from executing in certain memory regions intended for data.",
+      "A": [
+        "DEP"
+      ],
+      "O": [
+        "DEP",
+        "ECB",
+        "DLP",
+        "CRC"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following enables the exchange of information between computer programs?",
+      "A": [
+        "API"
+      ],
+      "O": [
+        "API",
+        "UI",
+        "Device drivers",
+        "SDK"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A cloud computing service model offering remote access to applications based on monthly or annual subscription fee is called:",
+      "A": [
+        "SaaS"
+      ],
+      "O": [
+        "PaaS",
+        "SaaS",
+        "IaaS",
+        "DaaS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "RTBH is a type of DDoS attack.",
+      "A": [
+        "False"
+      ],
+      "O": [
+        "True",
+        "False"
+      ],
+      "questionType": "true_false"
+    },
+    {
+      "Q": "Which AES key length provides the highest level of security?",
+      "A": [
+        "256-bit key"
+      ],
+      "O": [
+        "128-bit key",
+        "192-bit key",
+        "256-bit key",
+        "320-bit key"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a specific type of ICS?",
+      "A": [
+        "SCADA"
+      ],
+      "O": [
+        "SoC",
+        "CVSS",
+        "SCADA",
+        "RTOS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "The MIME specification extends the email message format beyond simple text, enabling the transfer of graphics, audio, and video files over the Internet mail system. S/MIME is an enhanced version of the MIME protocol that enables email security features by providing encryption, authentication, message integrity, and other related services.",
+      "A": [
+        "True"
+      ],
+      "O": [
+        "True",
+        "False"
+      ],
+      "questionType": "true_false"
+    },
+    {
+      "Q": "Which part of the IPsec protocol suite provides authentication and integrity?",
+      "A": [
+        "AH"
+      ],
+      "O": [
+        "CRC",
+        "AH",
+        "SIEM",
+        "AES"
+      ],
+      "questionType": "single_choice"
+    }
+  ],
+  "Acronyms 6": [
+    {
+      "Q": "A network protocol used for secure file transfer over SSH is known as:",
+      "A": [
+        "SFTP"
+      ],
+      "O": [
+        "TFTP",
+        "SFTP",
+        "SCP",
+        "FTPS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a virtualization platform for delivering virtual desktops to a community of users?",
+      "A": [
+        "VDI"
+      ],
+      "O": [
+        "VDE",
+        "VNC",
+        "VDI",
+        "RDP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A solution that simplifies configuration of new wireless networks by allowing non-technical users to easily configure network security settings and add new devices to an existing network is called:",
+      "A": [
+        "WPS"
+      ],
+      "O": [
+        "WPA",
+        "WPS",
+        "WEP",
+        "WAP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a text-based command interpreter and scripting language for Unix-like operating systems?",
+      "A": [
+        "Bash"
+      ],
+      "O": [
+        "CLI",
+        "JS",
+        "Bash",
+        "cmd.exe"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A networking hardware device connecting wireless devices to a wired network is referred to as:",
+      "A": [
+        "AP"
+      ],
+      "O": [
+        "WAF",
+        "AP",
+        "RAS",
+        "NIC"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a mobile device deployment model where organizations provide and own the devices while allowing their personal use?",
+      "A": [
+        "COPE"
+      ],
+      "O": [
+        "BYOD",
+        "COPE",
+        "VDI",
+        "CYOD"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a non-cryptographic hash function often used for error-checking purposes?",
+      "A": [
+        "CRC"
+      ],
+      "O": [
+        "MD5",
+        "CRC",
+        "SHA",
+        "RIPEMD"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "What is the name of a network layer protocol that specifies the format of packets and addressing scheme in network communications?",
+      "A": [
+        "IP"
+      ],
+      "O": [
+        "UDP",
+        "IP",
+        "TCP",
+        "NetBIOS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "The term \"P2P\" refers to a centralized network architecture in which each participant in the network can act both as a client and a server, enabling direct communication and file sharing between individual users without the need for a central server or intermediary.",
+      "A": [
+        "False"
+      ],
+      "O": [
+        "True",
+        "False"
+      ],
+      "questionType": "true_false"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a set of standards and specifications that define various cryptographic techniques, including formats for public keys, private keys, digital signatures, and digital certificates?",
+      "A": [
+        "PKCS"
+      ],
+      "O": [
+        "ITIL",
+        "RFC",
+        "PKCS",
+        "ISO/IEC"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a tunneling point-to-point protocol?",
+      "A": [
+        "PPTP"
+      ],
+      "O": [
+        "EAP",
+        "PPTP",
+        "MPLS",
+        "PPP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a logical operation commonly used in the context of cybersecurity, particularly in encryption and obfuscation techniques?",
+      "A": [
+        "XOR"
+      ],
+      "O": [
+        "AND",
+        "OR",
+        "NOT",
+        "XOR"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a public-key cryptosystem used for digital signatures, secure key exchange, and encryption?",
+      "A": [
+        "RSA"
+      ],
+      "O": [
+        "DHE",
+        "RSA",
+        "AES",
+        "DSA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "An authentication mechanism that generates one-time passwords based on the current time and a secret key is known as:",
+      "A": [
+        "TOTP"
+      ],
+      "O": [
+        "OAuth",
+        "TOTP",
+        "RADIUS",
+        "HOTP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to the process of maintaining the integrity of files and data?",
+      "A": [
+        "FIM"
+      ],
+      "O": [
+        "DLP",
+        "SIEM",
+        "FIM",
+        "SHA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following provides a countermeasure against SPOF?",
+      "A": [
+        "HA"
+      ],
+      "O": [
+        "HA",
+        "DLP",
+        "VM",
+        "AAA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "In the AAA security architecture, the process of tracking accessed services and logging resource consumption is called:",
+      "A": [
+        "Accounting"
+      ],
+      "O": [
+        "Auditing",
+        "Authentication",
+        "Authorization",
+        "Accounting"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a method that enables secure conversion of user passwords into cryptographic keys?",
+      "A": [
+        "PBKDF2"
+      ],
+      "O": [
+        "PBKDF2",
+        "PFS",
+        "RIPEMD",
+        "PKCS #7"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following solutions provides passive network security breach response on an individual computer system?",
+      "A": [
+        "HIDS"
+      ],
+      "O": [
+        "HIDS",
+        "NIPS",
+        "HIPS",
+        "NIDS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a system that identifies, defines, and catalogs publicly known cybersecurity vulnerabilities?",
+      "A": [
+        "CVE"
+      ],
+      "O": [
+        "TAXII",
+        "CVE",
+        "STIX",
+        "CVSS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a deprecated (largely replaced by AES) symmetric-key block cipher encryption algorithm?",
+      "A": [
+        "IDEA"
+      ],
+      "O": [
+        "ECDSA",
+        "RSA",
+        "IDEA",
+        "DSA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A limit on the maximum amount of data that can be transmitted over a network without fragmentation is referred to as:",
+      "A": [
+        "MTU"
+      ],
+      "O": [
+        "DSU",
+        "CSU",
+        "FPS",
+        "MTU"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a standardized method employed by the U.S. federal government to authenticate the identities of employees and contractors via smart card-based credentials?",
+      "A": [
+        "PIV"
+      ],
+      "O": [
+        "PIV",
+        "MFA",
+        "SAE",
+        "PKI"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to an organized approach to managing and mitigating security incidents?",
+      "A": [
+        "IR"
+      ],
+      "O": [
+        "XDR",
+        "IR",
+        "SOAR",
+        "IRP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which type of technology enables contactless payment transactions?",
+      "A": [
+        "NFC"
+      ],
+      "O": [
+        "NFC",
+        "IR",
+        "PED",
+        "WAP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "An agreement between a service provider and users defining the nature, availability, quality, and scope of the service to be provided is known as:",
+      "A": [
+        "SLA"
+      ],
+      "O": [
+        "SOW",
+        "MSA",
+        "SLA",
+        "MOU"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a cybersecurity approach that focuses on recognizing and addressing potential threats originating from multiple sources?",
+      "A": [
+        "XDR"
+      ],
+      "O": [
+        "XDR",
+        "WAF",
+        "EDR",
+        "SWG"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following acronyms refers to a client authentication method used in WPA3?",
+      "A": [
+        "SAE"
+      ],
+      "O": [
+        "SAE",
+        "IKE",
+        "PSK",
+        "AES"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a solution used for authentication, authorization, and user identity management?",
+      "A": [
+        "IAM"
+      ],
+      "O": [
+        "ICS",
+        "AAA",
+        "CIA",
+        "IAM"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a security solution that provides control over elevated (i.e., administrative type) accounts?",
+      "A": [
+        "PAM"
+      ],
+      "O": [
+        "MFA",
+        "IAM",
+        "SSO",
+        "PAM"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A device designed to provide emergency power during an unexpected main power source outage is called:",
+      "A": [
+        "UPS"
+      ],
+      "O": [
+        "UPS",
+        "PoE",
+        "SVC",
+        "PSU"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to an authentication method that enables the signing of an outbound email message with a digital signature?",
+      "A": [
+        "DKIM"
+      ],
+      "O": [
+        "SPF",
+        "DKIM",
+        "SRV",
+        "DMARC"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "The term \"VLAN\" refers to a logical grouping of computers that allow computer hosts to function as if they were attached to the same broadcast domain regardless of their physical location.",
+      "A": [
+        "True"
+      ],
+      "O": [
+        "True",
+        "False"
+      ],
+      "questionType": "true_false"
+    },
+    {
+      "Q": "Which of the following answers refers to a method that binds a combination of private IP address and port number with a corresponding public IP address and port information?",
+      "A": [
+        "PAT"
+      ],
+      "O": [
+        "PAT",
+        "NAC",
+        "DNS",
+        "ARP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A file system format used in Windows OSs that offers improved performance, security, and file management is referred to as:",
+      "A": [
+        "NTFS"
+      ],
+      "O": [
+        "ext4",
+        "EFS",
+        "NTFS",
+        "HFS+"
+      ],
+      "questionType": "single_choice"
+    }
+  ],
+  "Acronyms 7": [
+    {
+      "Q": "What is the fastest way for checking the validity of a digital certificate?",
+      "A": [
+        "OCSP"
+      ],
+      "O": [
+        "CRL",
+        "OSPF",
+        "CSR",
+        "OCSP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the terms listed below refers to a process of intercepting network traffic data for analysis and troubleshooting purposes?",
+      "A": [
+        "PCAP"
+      ],
+      "O": [
+        "AIS",
+        "PCAP",
+        "EDR",
+        "MaaS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "In a Kerberos-protected network, this type of secure token is granted to users during their initial login to enable them access to multiple network services without the need to re-enter their login information.",
+      "A": [
+        "TGT"
+      ],
+      "O": [
+        "OTP",
+        "TGT",
+        "AS",
+        "TGS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a language primarily used for automating the assessment of security vulnerabilities and configuration issues on computer systems?",
+      "A": [
+        "OVAL"
+      ],
+      "O": [
+        "OVAL",
+        "SAML",
+        "XML",
+        "SOAP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A remote access authentication protocol used primarily in Microsoft networks that periodically re-authenticates client at random intervals to prevent session hijacking is known as:",
+      "A": [
+        "MSCHAP"
+      ],
+      "O": [
+        "PEAP",
+        "MSCHAP",
+        "LEAP",
+        "CHAP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the acronyms listed below refers to a formal and legally binding document that specifies detailed terms, obligations, and responsibilities of all parties involved?",
+      "A": [
+        "MOA"
+      ],
+      "O": [
+        "SOW",
+        "MOA",
+        "MSA",
+        "MOU"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to CSRF?",
+      "A": [
+        "A type of malicious attack where unauthorized commands are transmitted from a user's browser to a web application without their knowledge or consent, often leading to actions being taken on their behalf"
+      ],
+      "O": [
+        "A cyberattack in which an attacker intercepts and maliciously retransmits data or authentication requests to gain unauthorized access or impersonate a legitimate user or system",
+        "A type of malicious attack where unauthorized commands are transmitted from a user's browser to a web application without their knowledge or consent, often leading to actions being taken on their behalf",
+        "A security vulnerability that allows attackers to inject malicious scripts into web pages viewed by other users, potentially leading to data theft or manipulation",
+        "A type of cyberattack where malicious code is injected into a web application's input fields to manipulate the database and gain unauthorized access to data or perform malicious actions"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "ARP provides:",
+      "A": [
+        "IP-to-MAC mapping"
+      ],
+      "O": [
+        "IP-to-FQDN mapping",
+        "MAC-to-IP mapping",
+        "FQDN-to-IP mapping",
+        "IP-to-MAC mapping"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A set of procedures put in place to recover IT systems and data following a major disruption is called:",
+      "A": [
+        "DRP"
+      ],
+      "O": [
+        "DRP",
+        "BIA",
+        "SLE",
+        "BCP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a network protocol used for synchronizing clocks over a computer network?",
+      "A": [
+        "NTP"
+      ],
+      "O": [
+        "NTP",
+        "VTP",
+        "NNTP",
+        "RTP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "An integrated circuit combining components typically found in a standard computer system is referred to as:",
+      "A": [
+        "SoC"
+      ],
+      "O": [
+        "HSM",
+        "TPM",
+        "SoC",
+        "BIOS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following acronyms refers to a document that authorizes, initiates, and tracks the progress and completion of a particular job or task?",
+      "A": [
+        "WO"
+      ],
+      "O": [
+        "SOW",
+        "WO",
+        "SLA",
+        "MSA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a protocol used by routers, hosts, and network devices to generate error messages and troubleshoot problems with delivery of IP packets?",
+      "A": [
+        "ICMP"
+      ],
+      "O": [
+        "CCMP",
+        "RSTP",
+        "ICMP",
+        "SNMP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following terms refer to the characteristic features of DSL? (Select 3 answers)",
+      "A": [
+        "Copper cabling",
+        "Telephone lines",
+        "Last mile solutions"
+      ],
+      "O": [
+        "Leased lines",
+        "Copper cabling",
+        "Telephone lines",
+        "Fiber-optic cabling",
+        "Last mile solutions",
+        "WAN links"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "A type of trusted third party that issues digital certificates used for creating digital signatures and public-private key pairs is known as:",
+      "A": [
+        "CA"
+      ],
+      "O": [
+        "RA",
+        "IKE",
+        "CA",
+        "CSP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a mobile device deployment model that allows employees to use private mobile devices for accessing company's restricted data and applications?",
+      "A": [
+        "BYOD"
+      ],
+      "O": [
+        "COPE",
+        "BYOD",
+        "JBOD",
+        "CYOD"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "What is the name of a U.S. government initiative providing a set of procedures and plans that an organization can implement to ensure continued performance of its essential functions during unexpected events?",
+      "A": [
+        "COOP"
+      ],
+      "O": [
+        "SLA",
+        "COOP",
+        "RPO",
+        "BCP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a policy framework that allows domain owners to specify how email receivers should handle emails that fail authentication checks?",
+      "A": [
+        "DMARC"
+      ],
+      "O": [
+        "DKIM",
+        "SPF",
+        "PGP",
+        "DMARC"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a deprecated wireless authentication protocol developed by Cisco?",
+      "A": [
+        "LEAP"
+      ],
+      "O": [
+        "PEAP",
+        "EAP-TTLS",
+        "LEAP",
+        "EAP-TLS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A cloud-based solution that provides ongoing oversight and supervision of IT assets and services is called:",
+      "A": [
+        "MaaS"
+      ],
+      "O": [
+        "PaaS",
+        "IaaS",
+        "SaaS",
+        "MaaS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a governance framework covering all aspects of software development?",
+      "A": [
+        "SDLM"
+      ],
+      "O": [
+        "PLC",
+        "SDLC",
+        "QA",
+        "SDLM"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a markup language for exchanging authentication and authorization data?",
+      "A": [
+        "SAML"
+      ],
+      "O": [
+        "SAML",
+        "XML",
+        "SOAP",
+        "XHTML"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "What are the characteristic features of SAML? (Select 3 answers)",
+      "A": [
+        "Handles both authentication and authorization for SSO",
+        "Uses XML for data exchange",
+        "Commonly used in enterprise environments and legacy systems"
+      ],
+      "O": [
+        "Enables only the exchange of SSO authorization data",
+        "Handles both authentication and authorization for SSO",
+        "Uses XML for data exchange",
+        "Commonly used in enterprise environments and legacy systems",
+        "Enables only the exchange of SSO authentication data",
+        "Uses JSON for data exchange",
+        "Specifically designed for web and mobile applications"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "Which DNS TXT records are used for spam management? (Select 3 answers)",
+      "A": [
+        "SPF",
+        "DKIM",
+        "DMARC"
+      ],
+      "O": [
+        "SPF",
+        "DKIM",
+        "SRV",
+        "DMARC",
+        "PTR"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "Which of the following terms can be used as a synonym for an aerial drone?",
+      "A": [
+        "UAV"
+      ],
+      "O": [
+        "UGV",
+        "UAV",
+        "USV",
+        "UAP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A software development approach that aims for speedy application creation and continuous improvement through iterative development and user collaboration is referred to as:",
+      "A": [
+        "RAD"
+      ],
+      "O": [
+        "FDD",
+        "DevOps",
+        "RAD",
+        "SaaS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the protocols listed below is referred to as a connectionless, unreliable, or best-effort protocol?",
+      "A": [
+        "UDP"
+      ],
+      "O": [
+        "MPLS",
+        "TCP",
+        "SMTP",
+        "UDP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a software tool that provides a single management interface for mobile devices, PCs, printers, IoT devices and wearables?",
+      "A": [
+        "UEM"
+      ],
+      "O": [
+        "MDM",
+        "RCS",
+        "UEM",
+        "MAM"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a technology that allows USB devices to act as both hosts and peripherals, enabling them to connect to and communicate with other USB devices directly without the need for a computer or dedicated host?",
+      "A": [
+        "OTG"
+      ],
+      "O": [
+        "PnP",
+        "OTG",
+        "P2P",
+        "HCI"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A messaging service that allows users to send content such as images, videos, and audio along with text messages to mobile devices is known as:",
+      "A": [
+        "MMS"
+      ],
+      "O": [
+        "MMS",
+        "IRC",
+        "IM",
+        "SMS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "What is a common target of XSS?",
+      "A": [
+        "Dynamic web pages"
+      ],
+      "O": [
+        "Physical security",
+        "Alternate sites",
+        "Dynamic web pages",
+        "Removable storage"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a security policy enforcement software tool or service placed between cloud service users and cloud applications?",
+      "A": [
+        "CASB"
+      ],
+      "O": [
+        "UTM",
+        "CASB",
+        "NGFW",
+        "DMVPN"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a set of procedures put in place to recover IT systems and data following a major disruption?",
+      "A": [
+        "DRP"
+      ],
+      "O": [
+        "BCP",
+        "DRP",
+        "IRP",
+        "ERP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A technology that enables real-time analysis of security alerts generated by network hardware and applications is called:",
+      "A": [
+        "SIEM"
+      ],
+      "O": [
+        "LACP",
+        "DSCP",
+        "SIEM",
+        "LWAPP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following acronyms refers to a senior executive responsible for technology-related decision-making and planning?",
+      "A": [
+        "CTO"
+      ],
+      "O": [
+        "CIO",
+        "CEO",
+        "CTO",
+        "CSO"
+      ],
+      "questionType": "single_choice"
+    }
+  ],
+  "Acronyms 8": [
+    {
+      "Q": "Which of the answers listed below refers to a mobile device's built-in functionality enabling the usage of locator applications?",
+      "A": [
+        "GPS"
+      ],
+      "O": [
+        "WPS",
+        "GSM",
+        "SIM",
+        "GPS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a unique 48-bit address assigned to every network adapter?",
+      "A": [
+        "MAC"
+      ],
+      "O": [
+        "PIN",
+        "SSID",
+        "IP",
+        "MAC"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "In older, non-UEFI based PCs, the first sector of a storage drive containing information about partitions and a piece of executable code used to load the installed OS is called:",
+      "A": [
+        "MBR"
+      ],
+      "O": [
+        "MBR",
+        "GPT",
+        "PXE",
+        "GUID"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "In cloud computing, users on an on-premises network take advantage of a transit gateway to connect to:",
+      "A": [
+        "VPC"
+      ],
+      "O": [
+        "WAN",
+        "VPC",
+        "SAN",
+        "VLAN"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refer to DSA? (Select 3 answers)",
+      "A": [
+        "Asymmetric algorithm",
+        "Provides authentication, integrity, and non-repudiation",
+        "Specifically designed for creating and verifying digital signatures"
+      ],
+      "O": [
+        "Asymmetric algorithm",
+        "Used for the key exchange process",
+        "Symmetric algorithm",
+        "Provides authentication, integrity, and non-repudiation",
+        "Specifically designed for creating and verifying digital signatures",
+        "Used for encryption"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "Which of the following acronyms refer to office equipment that combines the functionality of multiple devices? (Select 2 answers)",
+      "A": [
+        "MFD",
+        "MFP"
+      ],
+      "O": [
+        "MFD",
+        "IoT",
+        "MFP",
+        "PED",
+        "MFA"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "Which of the answers listed below describe(s) the characteristics of ECDSA? (Select all that apply)",
+      "A": [
+        "Provides authentication, integrity, and non-repudiation",
+        "Based on elliptic curve cryptography",
+        "Specifically designed for creating and verifying digital signatures",
+        "More computationally efficient than other signature algorithms"
+      ],
+      "O": [
+        "Provides authentication, integrity, and non-repudiation",
+        "Based on elliptic curve cryptography",
+        "Designed for data encryption",
+        "Specifically designed for creating and verifying digital signatures",
+        "More computationally efficient than other signature algorithms",
+        "Enables the key exchange process"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a deprecated stream cipher used in some legacy applications, such as WEP?",
+      "A": [
+        "RC4"
+      ],
+      "O": [
+        "RSA",
+        "DES",
+        "SSL",
+        "RC4"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a wireless network authentication protocol that enhances security by encapsulating the authentication process within an encrypted TLS tunnel?",
+      "A": [
+        "PEAP"
+      ],
+      "O": [
+        "PEAP",
+        "EAP",
+        "LEAP",
+        "RADIUS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A type of metric used to evaluate the profitability of an investment by comparing the return generated from the investment relative to its cost is referred to as:",
+      "A": [
+        "ROI"
+      ],
+      "O": [
+        "ROA",
+        "ROI",
+        "ROS",
+        "ROC"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following facilitates the enforcement of mobile device policies and procedures?",
+      "A": [
+        "MDM"
+      ],
+      "O": [
+        "MFA",
+        "MMC",
+        "MDM",
+        "MFD"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to an identifier used for objects in a PKI, such as CAs, digital certificates, and public key algorithms?",
+      "A": [
+        "OID"
+      ],
+      "O": [
+        "OID",
+        "DN",
+        "SAN",
+        "GUID"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a solution designed to strengthen the security of session keys?",
+      "A": [
+        "PFS"
+      ],
+      "O": [
+        "ECB",
+        "PFS",
+        "EFS",
+        "PFX"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a twisted-pair copper cabling type not surrounded by any shielding that would provide protection against interference from outside sources?",
+      "A": [
+        "UTP"
+      ],
+      "O": [
+        "STP",
+        "Coax",
+        "UTP",
+        "Twinax"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following terms refers to a technology that enables real-time audio and video communication between individuals or groups?",
+      "A": [
+        "VTC"
+      ],
+      "O": [
+        "VPC",
+        "VTC",
+        "VoIP",
+        "VDI"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A dedicated data storage solution that combines multiple disk drive components into a single logical unit to increase volume size, performance, or reliability is known as:",
+      "A": [
+        "RAID"
+      ],
+      "O": [
+        "SAN",
+        "RAID",
+        "NAS",
+        "JBOD"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below can be used to describe XSRF? (Select 3 answers)",
+      "A": [
+        "Exploits the trust a website has in the user's web browser",
+        "A user is tricked by an attacker into submitting unauthorized web requests",
+        "Website executes attacker's requests"
+      ],
+      "O": [
+        "Exploits the trust a website has in the user's web browser",
+        "A user is tricked by an attacker into submitting unauthorized web requests",
+        "Website executes attacker's requests",
+        "Exploits the trust a user's web browser has in a website",
+        "A malicious script is injected into a trusted website",
+        "User's browser executes attacker's script"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "Which of the following answers can be used to describe the characteristics of an XSS attack? (Select 3 answers)",
+      "A": [
+        "Exploits the trust a user's web browser has in a website",
+        "A malicious script is injected into a trusted website",
+        "User's browser executes attacker's script"
+      ],
+      "O": [
+        "Exploits the trust a user's web browser has in a website",
+        "A malicious script is injected into a trusted website",
+        "User's browser executes attacker's script",
+        "Exploits the trust a website has in the user's web browser",
+        "A user is tricked by an attacker into submitting unauthorized web requests",
+        "Website executes attacker's requests"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to an encoding method (and a file format) for storing cryptographic objects such as X.509 certificates, CRLs, and private keys?",
+      "A": [
+        "PEM"
+      ],
+      "O": [
+        "ECB",
+        "PEM",
+        "FIM",
+        "PFS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a centralized server that is used to distribute cryptographic keys and authenticate users and services within a computer network?",
+      "A": [
+        "KDC"
+      ],
+      "O": [
+        "PKI",
+        "RAS",
+        "KDC",
+        "NAS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "An AI feature that enables it to accomplish tasks based on training data without explicit human instructions is called:",
+      "A": [
+        "ML"
+      ],
+      "O": [
+        "AGI",
+        "ML",
+        "NN",
+        "LLM"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which data packet type is specifically used to detect and prevent network loops in Ethernet networks?",
+      "A": [
+        "BPDU"
+      ],
+      "O": [
+        "MTU",
+        "Jumbo frame",
+        "BPDU",
+        "Magic packet"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a key exchange protocol that generates temporary keys for each session, providing forward secrecy to protect past and future communications?",
+      "A": [
+        "DHE"
+      ],
+      "O": [
+        "PFS",
+        "SHA",
+        "PGP",
+        "DHE"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following terms refers to a method for managing infrastructure resources through scripts and templates?",
+      "A": [
+        "IaC"
+      ],
+      "O": [
+        "IaaS",
+        "ML",
+        "IaC",
+        "SDN"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refer to the characteristic features of NIDS? (Select 3 answers)",
+      "A": [
+        "Does not take direct action to block or prevent attacks",
+        "Generates alerts and notifies security personnel or administrators when suspicious activity is detected",
+        "Monitors network traffic without direct involvement in traffic routing or packet modification"
+      ],
+      "O": [
+        "Takes proactive measures to block or mitigate intrusion attempts",
+        "Does not take direct action to block or prevent attacks",
+        "Generates alerts and notifies security personnel or administrators when suspicious activity is detected",
+        "Monitors network traffic without direct involvement in traffic routing or packet modification",
+        "Can drop or reject network packets, terminate connections, or take other actions to stop the attack",
+        "Operates in an inline mode, actively intercepting and inspecting network traffic"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a cybersecurity framework that combines network and security functions into a single cloud-based service?",
+      "A": [
+        "SASE"
+      ],
+      "O": [
+        "SASE",
+        "SIEM",
+        "SWG",
+        "SOAR"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A process used by organizations to assess and evaluate the potential impact of disruptive incidents or disasters on their critical business functions and operations is referred to as:",
+      "A": [
+        "BIA"
+      ],
+      "O": [
+        "BPA",
+        "BIA",
+        "SLE",
+        "BCP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to one of the last stages in SDLC?",
+      "A": [
+        "UAT"
+      ],
+      "O": [
+        "UCD",
+        "QA",
+        "UAT",
+        "AUT"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which cipher mode transforms a block cipher into a stream cipher enabling the encryption of individual bits or bytes of data?",
+      "A": [
+        "CFB"
+      ],
+      "O": [
+        "CFB",
+        "CBC",
+        "GCM",
+        "ECB"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Rewriting the destination IP address of incoming data packets, commonly utilized to reroute traffic to alternative locations or ports is a characteristic feature of:",
+      "A": [
+        "DNAT"
+      ],
+      "O": [
+        "IDS",
+        "DNAT",
+        "QoS",
+        "VPN"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a deprecated encryption protocol?",
+      "A": [
+        "SSL"
+      ],
+      "O": [
+        "SSH",
+        "SHA-256",
+        "S/MIME",
+        "SSL"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A collection of precompiled functions designed to be used by more than one Microsoft Windows application simultaneously to save system resources is known as:",
+      "A": [
+        "DLL"
+      ],
+      "O": [
+        "DLL",
+        "API",
+        "INI",
+        "EXE"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the terms listed below refers to a documented plan outlining the steps that should be taken in each phase of a cybersecurity incident?",
+      "A": [
+        "IRP"
+      ],
+      "O": [
+        "DRP",
+        "IRP",
+        "BCP",
+        "ERP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A block cipher mode that combines a unique counter with encryption key to generate a stream of pseudorandom data blocks which are then used for encrypting data is called:",
+      "A": [
+        "CTM"
+      ],
+      "O": [
+        "CBC",
+        "GCM",
+        "CFB",
+        "CTM"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following combines a cryptographic hash function with a secret key to provide a means of verifying both the authenticity and integrity of a message or data?",
+      "A": [
+        "HMAC"
+      ],
+      "O": [
+        "MD5",
+        "DSA",
+        "HMAC",
+        "DES"
+      ],
+      "questionType": "single_choice"
+    }
+  ],
+  "Acronyms 9": [
+    {
+      "Q": "Which of the following solutions would be best suited for a company that needs comprehensive IT services but lacks qualified IT personnel?",
+      "A": [
+        "MSP"
+      ],
+      "O": [
+        "MSA",
+        "MaaS",
+        "MSP",
+        "MSSP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the terms listed below refers to a third-party vendor offering IT security management services?",
+      "A": [
+        "MSSP"
+      ],
+      "O": [
+        "MSP",
+        "MaaS",
+        "MSA",
+        "MSSP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following acronyms refers to the broad category of hardware and software systems used for monitoring and controlling physical devices, processes, and industrial operations?",
+      "A": [
+        "OT"
+      ],
+      "O": [
+        "ICS",
+        "OT",
+        "SCADA",
+        "EDR"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a basic method for establishing a dedicated point-to-point link between two networked devices?",
+      "A": [
+        "PPP"
+      ],
+      "O": [
+        "PPTP",
+        "IGMP",
+        "PPP",
+        "MPLS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following defines the maximum acceptable amount of data loss measured by a specific point in time before a disaster or outage?",
+      "A": [
+        "RPO"
+      ],
+      "O": [
+        "RPO",
+        "MTBF",
+        "RTO",
+        "MTTR"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the terms listed below refers to a framework for managing access to digital resources?",
+      "A": [
+        "IAM"
+      ],
+      "O": [
+        "PAM",
+        "SSO",
+        "IAM",
+        "MFA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refer to SCAP? (Select 3 answers)",
+      "A": [
+        "A collection of standards developed by NIST",
+        "Provides a common language for communicating security information",
+        "Allows different security tools to share data and work together more effectively"
+      ],
+      "O": [
+        "A type of security system designed to collect logs and events from various sources",
+        "Designed to provide a centralized user interface for accessing collected data",
+        "A collection of standards developed by NIST",
+        "Provides a common language for communicating security information",
+        "Allows different security tools to share data and work together more effectively",
+        "Enables real-time threat detection, incident response, and compliance monitoring"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "A Windows feature used for centrally managing and enforcing policies and settings for users and computers in a network is referred to as:",
+      "A": [
+        "GPO"
+      ],
+      "O": [
+        "SAE",
+        "NTLM",
+        "GPO",
+        "SSO"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a protocol used for automating the issuance and management of certificates within a PKI environment?",
+      "A": [
+        "SCEP"
+      ],
+      "O": [
+        "PKCS",
+        "SCEP",
+        "CSR",
+        "OCSP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refer to the characteristic features of RSA? (Select 3 answers)",
+      "A": [
+        "Asymmetric encryption algorithm",
+        "A public key used for encryption and a private key used for decryption",
+        "Used for secure communications, digital signatures, and key exchange"
+      ],
+      "O": [
+        "Asymmetric encryption algorithm",
+        "A public key used for encryption and a private key used for decryption",
+        "Suitable for bulk data encryption",
+        "Used for secure communications, digital signatures, and key exchange",
+        "Symmetric encryption algorithm",
+        "A single key used for both encryption and decryption"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "Which of the answers listed below describe the characteristics of a non-persistent VDI? (Select 2 answers)",
+      "A": [
+        "At the end of a session, user desktop reverts to its original state",
+        "Virtual desktop is shared among multiple users"
+      ],
+      "O": [
+        "At the end of a session, user desktop reverts to its original state",
+        "Each user runs their own copy of virtual desktop",
+        "At the end of a session, user data and personal settings are saved",
+        "Virtual desktop is shared among multiple users"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to an obsolete protocol used for secure data transfer over the web?",
+      "A": [
+        "SHTTP"
+      ],
+      "O": [
+        "SMTPS",
+        "SRTP",
+        "SHTTP",
+        "S/MIME"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "In a persistent VDI: (Select 2 answers)",
+      "A": [
+        "Each user runs their own copy of virtual desktop",
+        "At the end of a session, user data and personal settings are saved"
+      ],
+      "O": [
+        "Each user runs their own copy of virtual desktop",
+        "At the end of a session, user desktop reverts to its original state",
+        "Virtual desktop is shared among multiple users",
+        "At the end of a session, user data and personal settings are saved"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "An authentication mechanism that generates one-time passwords based on a counter value and a secret key is known as:",
+      "A": [
+        "HOTP"
+      ],
+      "O": [
+        "OAuth",
+        "HOTP",
+        "RADIUS",
+        "TOTP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the acronyms listed below refers to a documented process for addressing identified issues and preventing their repetition?",
+      "A": [
+        "CAR"
+      ],
+      "O": [
+        "DRP",
+        "COOP",
+        "QA",
+        "CAR"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a software tool designed to simplify the process of creating and maintaining online content?",
+      "A": [
+        "CMS"
+      ],
+      "O": [
+        "VDI",
+        "SaaS",
+        "CMS",
+        "SDK"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which block cipher mode combines CTM for encryption with an authentication mechanism to ensure both data confidentiality and integrity?",
+      "A": [
+        "GCM"
+      ],
+      "O": [
+        "CBC",
+        "GCM",
+        "ECB",
+        "CFB"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "The term \"FPGA\" refers to a reconfigurable integrated circuit that can be programmed and customized to perform various digital functions and tasks.",
+      "A": [
+        "True"
+      ],
+      "O": [
+        "True",
+        "False"
+      ],
+      "questionType": "true_false"
+    },
+    {
+      "Q": "Which of the answers listed below refer to SIEM? (Select 3 answers)",
+      "A": [
+        "Designed to provide a centralized user interface for accessing collected data",
+        "Enables real-time threat detection, incident response, and compliance monitoring",
+        "A type of security system designed to collect logs and events from various sources"
+      ],
+      "O": [
+        "Allows different security tools to share data and work together more effectively",
+        "Designed to provide a centralized user interface for accessing collected data",
+        "A collection of standards developed by NIST",
+        "Enables real-time threat detection, incident response, and compliance monitoring",
+        "A type of security system designed to collect logs and events from various sources",
+        "Provides a common language for communicating security information"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a trusted third-party service for validating user identity in a federated identity system?",
+      "A": [
+        "IdP"
+      ],
+      "O": [
+        "RA",
+        "IdP",
+        "CA",
+        "Kerberos"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a deprecated TLS-based method for securing SMTP?",
+      "A": [
+        "SMTPS"
+      ],
+      "O": [
+        "IDPS",
+        "STARTTLS",
+        "DKIM",
+        "SMTPS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following enables running macros in Microsoft Office applications?",
+      "A": [
+        "VBA"
+      ],
+      "O": [
+        "DOM",
+        "API",
+        "DLL",
+        "VBA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a language used to structure and describe data in a format that is both human- and machine-readable?",
+      "A": [
+        "XML"
+      ],
+      "O": [
+        "HTML",
+        "XML",
+        "JSON",
+        "XHTML"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "In SNMP, each node in a MIB is uniquely identified by a(n):",
+      "A": [
+        "OID"
+      ],
+      "O": [
+        "OID",
+        "IP",
+        "OUI",
+        "MAC"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following acronyms refers to a block cipher mode that works by chaining the ciphertext blocks together, such that each ciphertext block depends on the previous block?",
+      "A": [
+        "CBC"
+      ],
+      "O": [
+        "CBC",
+        "GCM",
+        "ECB",
+        "CFB"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a dedicated protocol designed for enabling real-time text-based communication over the Internet?",
+      "A": [
+        "IRC"
+      ],
+      "O": [
+        "IRC",
+        "RTC",
+        "IM",
+        "MMS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A specialized electronic component that accelerates visual rendering is called:",
+      "A": [
+        "GPU"
+      ],
+      "O": [
+        "TPU",
+        "GPU",
+        "DSP",
+        "CPU"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a protocol that enables the exchange of messages and data between applications running on different OSs and using different programming languages?",
+      "A": [
+        "SOAP"
+      ],
+      "O": [
+        "VDE",
+        "SOAP",
+        "VDI",
+        "SMTP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a deprecated MS Windows authentication protocol replaced by Kerberos?",
+      "A": [
+        "NTLM"
+      ],
+      "O": [
+        "PPTP",
+        "WEP",
+        "NTLM",
+        "SNMPv2"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following enables delivery of various data packet types over the same network link?",
+      "A": [
+        "MPLS"
+      ],
+      "O": [
+        "LWAPP",
+        "MPLS",
+        "MLPPP",
+        "MIBS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a Windows-specific feature for handling exceptions, errors, and abnormal conditions in software?",
+      "A": [
+        "SEH"
+      ],
+      "O": [
+        "EPC",
+        "SEH",
+        "EH",
+        "EXR"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following acronyms refers to a security mechanism used in the DNS to authenticate and secure communications between DNS servers during zone transfers and other transactions?",
+      "A": [
+        "TSIG"
+      ],
+      "O": [
+        "SOA",
+        "DKIM",
+        "SPF",
+        "TSIG"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a cable rack that interconnects wiring between an MDF and workstation devices?",
+      "A": [
+        "IDF"
+      ],
+      "O": [
+        "ICS",
+        "MDI",
+        "IDF",
+        "MTU"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following technologies enables automated handling of multiple security incidents?",
+      "A": [
+        "SOAR"
+      ],
+      "O": [
+        "SOAP",
+        "SIEM",
+        "SOAR",
+        "SASE"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "What is the name of a solution that increases the efficiency of IP address space management by allowing network administrators to divide networks into subnets of different sizes?",
+      "A": [
+        "VLSM"
+      ],
+      "O": [
+        "DNAT",
+        "VLSM",
+        "MPLS",
+        "VLAN"
+      ],
+      "questionType": "single_choice"
+    }
+  ],
+  "Acronyms 10": [
+    {
+      "Q": "A detailed agreement between a client and a vendor describing the work to be performed on a project is referred to as:",
+      "A": [
+        "SOW"
+      ],
+      "O": [
+        "MSA",
+        "SLA",
+        "WO",
+        "SOW"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to an analog telephone service providing basic voice communication over copper telephone lines?",
+      "A": [
+        "POTS"
+      ],
+      "O": [
+        "PSTN",
+        "ISDN",
+        "PBX",
+        "POTS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A protocol designed to improve the security of existing WEP implementations is known as:",
+      "A": [
+        "TKIP"
+      ],
+      "O": [
+        "SRTP",
+        "TKIP",
+        "CCMP",
+        "WPA2"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the acronyms listed below refers to a technology used in cameras and surveillance systems that enables remote control of camera functions?",
+      "A": [
+        "PTZ"
+      ],
+      "O": [
+        "RDP",
+        "CCTV",
+        "PTZ",
+        "TCP/IP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following provides granular control over user access to specific network segments and resources based on their assigned roles and permissions?",
+      "A": [
+        "IAM"
+      ],
+      "O": [
+        "IAM",
+        "SSO",
+        "PAM",
+        "MFA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A security solution designed to detect anomalies in the log and event data collected from multiple network devices is called:",
+      "A": [
+        "SIEM"
+      ],
+      "O": [
+        "SNMP",
+        "PCAP",
+        "HIPS",
+        "SIEM"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a smart card used in mobile phones to identify the phone user?",
+      "A": [
+        "SIM"
+      ],
+      "O": [
+        "IMSI",
+        "SoC",
+        "IMEI",
+        "SIM"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following devices would be used for connecting a router to a T1 line?",
+      "A": [
+        "CSU"
+      ],
+      "O": [
+        "CSU",
+        "IDF",
+        "NIC",
+        "EDR"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "What are the applications of PGP? (Select 3 answers)",
+      "A": [
+        "Encrypting and decrypting data",
+        "Signing and verifying digital signatures",
+        "Managing public and private keys"
+      ],
+      "O": [
+        "Compressing data",
+        "Encrypting and decrypting data",
+        "Signing and verifying digital signatures",
+        "Managing public and private keys",
+        "Securing website traffic"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "A field in an SSL/TLS certificate that allows the certificate to be used for multiple domain names or IP addresses is referred to as:",
+      "A": [
+        "SAN"
+      ],
+      "O": [
+        "CNAME",
+        "SAN",
+        "MX",
+        "PTR"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a tunneling protocol commonly used in creating VPNs?",
+      "A": [
+        "GRE"
+      ],
+      "O": [
+        "VRRP",
+        "GRE",
+        "RTSP",
+        "BGP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a professional that oversees the management and maintenance of an information repository?",
+      "A": [
+        "DBA"
+      ],
+      "O": [
+        "CTO",
+        "PM",
+        "DBA",
+        "CIO"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the terms listed below refers to a US government initiative for real-time sharing of cyber threat indicators?",
+      "A": [
+        "AIS"
+      ],
+      "O": [
+        "NVD",
+        "AIS",
+        "TTP",
+        "CVSS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A type of OS characterized by low delay between the execution of tasks required in specific applications, such as in military missile guidance systems or in automotive braking systems, is known as:",
+      "A": [
+        "RTOS"
+      ],
+      "O": [
+        "UNIX",
+        "Windows NT",
+        "POSIX",
+        "RTOS"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following block cipher modes is the simplest/weakest and therefore not recommended for use?",
+      "A": [
+        "ECB"
+      ],
+      "O": [
+        "CBC",
+        "GCM",
+        "ECB",
+        "CTR"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which communication method supports real-time text-based messaging, multimedia sharing, group chats, and video calls?",
+      "A": [
+        "IM"
+      ],
+      "O": [
+        "SMS",
+        "MMS",
+        "IM",
+        "RTC"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which senior executive position assumes the responsibility for protecting assets, data, and people from potential threats?",
+      "A": [
+        "CSO"
+      ],
+      "O": [
+        "CEO",
+        "CIO",
+        "CSO",
+        "CTO"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which cybersecurity role is primarily responsible for hands-on implementation and oversight of security measures for specific systems and networks?",
+      "A": [
+        "ISSO"
+      ],
+      "O": [
+        "CSO",
+        "CTO",
+        "DPO",
+        "ISSO"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A company or organization that offers cloud computing services over the Internet is called:",
+      "A": [
+        "CSP"
+      ],
+      "O": [
+        "ISP",
+        "MSSP",
+        "CSP",
+        "MSP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the terms listed below refers to a global community focused around the development of engineering standards?",
+      "A": [
+        "IEEE"
+      ],
+      "O": [
+        "ANSI",
+        "NIST",
+        "CERT",
+        "IEEE"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a device designed to supply (and monitor the quality of) electric power to multiple outlets?",
+      "A": [
+        "PDU"
+      ],
+      "O": [
+        "PSU",
+        "MDF",
+        "PDU",
+        "IDF"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a global standard development organization composed of different national standards bodies?",
+      "A": [
+        "ISO"
+      ],
+      "O": [
+        "NIST",
+        "ISO",
+        "IEEE",
+        "ANSI"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following acronyms refers to the process of identifying and preparing for potential disruptions or unexpected events to ensure business continuity?",
+      "A": [
+        "CP"
+      ],
+      "O": [
+        "BIA",
+        "SLE",
+        "CP",
+        "BPA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A dedicated local network consisting of devices providing data access is referred to as:",
+      "A": [
+        "SAN"
+      ],
+      "O": [
+        "SDN",
+        "NAS",
+        "iSCSI",
+        "SAN"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which senior executive is responsible for managing an organization's IT strategy and systems?",
+      "A": [
+        "CIO"
+      ],
+      "O": [
+        "CEO",
+        "CIO",
+        "CSO",
+        "CTO"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a framework used on Unix-like OSs to manage authentication-related tasks?",
+      "A": [
+        "PAM"
+      ],
+      "O": [
+        "PAM",
+        "SSO",
+        "MFA",
+        "OAuth"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a network protocol for delivering audio and video over IP networks?",
+      "A": [
+        "RTP"
+      ],
+      "O": [
+        "RDP",
+        "VoIP",
+        "RTP",
+        "UDP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the terms listed below refers to a specialized suite of software tools used for developing applications for a specific platform?",
+      "A": [
+        "SDK"
+      ],
+      "O": [
+        "GUI",
+        "SDLC",
+        "API",
+        "SDK"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A type of software that serves as an intermediary between users and the hardware, allowing users to interact with the computer and run applications is known as:",
+      "A": [
+        "OS"
+      ],
+      "O": [
+        "ROM",
+        "BIOS",
+        "OS",
+        "RAM"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to an encryption protocol primarily used in Wi-Fi networks implementing the WPA2 security standard?",
+      "A": [
+        "CCMP"
+      ],
+      "O": [
+        "TKIP",
+        "CCMP",
+        "SSL",
+        "HMAC"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "In telecommunications, a type of main hub connecting internal networks with outside cabling is called:",
+      "A": [
+        "MDF"
+      ],
+      "O": [
+        "MDF",
+        "ICS",
+        "MDI",
+        "IDF"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the acronyms listed below refers to a protocol used in network management systems for monitoring network-attached devices?",
+      "A": [
+        "SNMP"
+      ],
+      "O": [
+        "SSH",
+        "VNC",
+        "SNMP",
+        "RDP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a routing protocol?",
+      "A": [
+        "BGP"
+      ],
+      "O": [
+        "RTP",
+        "BGP",
+        "RDP",
+        "EAP"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "A specific URI type most commonly used to identify web pages is referred to as:",
+      "A": [
+        "URL"
+      ],
+      "O": [
+        "DOI",
+        "ISBN",
+        "OUI",
+        "URL"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a solution that simplifies web browser configurations by using predefined rules or scripts to make server selection decisions for specific web traffic?",
+      "A": [
+        "PAC"
+      ],
+      "O": [
+        "PAC",
+        "DDNS",
+        "PAM",
+        "NAT"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following terms refers to a network of physical devices, vehicles, buildings, and other items embedded with sensors, software, and other technologies that connect and exchange data with other devices and systems over the Internet?",
+      "A": [
+        "IoT"
+      ],
+      "O": [
+        "SoC",
+        "PAN",
+        "IoT",
+        "WMN"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a unique 32-bit identifier embedded in older mobile phones and used by network operators to identify and authenticate the device on the cellular network?",
+      "A": [
+        "ESN"
+      ],
+      "O": [
+        "MAC",
+        "ESN",
+        "IP",
+        "OID"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following answers refers to a software-based solution that allows users to access and interact with a virtual OS from anywhere using any device with an Internet connection?",
+      "A": [
+        "VDE"
+      ],
+      "O": [
+        "VDU",
+        "VTC",
+        "VDE",
+        "VNC"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the acronyms listed below refers to a broader term used to describe an organization responsible for responding to computer-related emergencies?",
+      "A": [
+        "CERT"
+      ],
+      "O": [
+        "CIRT",
+        "CERN",
+        "CERT",
+        "CSIRT"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following acronyms refers to a discontinued research program focused on promoting innovation and development in the field of telecommunications and information technology?",
+      "A": [
+        "RACE"
+      ],
+      "O": [
+        "IETF",
+        "CERN",
+        "DARPA",
+        "RACE"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the answers listed below refers to a team of experts within an organization focused on responding to a wide variety of computer-related incidents?",
+      "A": [
+        "CIRT"
+      ],
+      "O": [
+        "CERT",
+        "CSIRT",
+        "CIRT",
+        "CERN"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "GPG is used for: (Select all that apply)",
+      "A": [
+        "Managing public and private keys",
+        "Signing and verifying digital signatures",
+        "Encrypting and decrypting data"
+      ],
+      "O": [
+        "Securing website traffic",
+        "Managing public and private keys",
+        "Signing and verifying digital signatures",
+        "Compressing data",
+        "Encrypting and decrypting data"
+      ],
+      "questionType": "multiple_choice"
+    },
+    {
+      "Q": "A software system that integrates and manages various business processes and functions across an organization is known as:",
+      "A": [
+        "ERP"
+      ],
+      "O": [
+        "BCP",
+        "CMS",
+        "ERP",
+        "BIA"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "What is RIPEMD?",
+      "A": [
+        "Family of cryptographic hash functions"
+      ],
+      "O": [
+        "Block cipher encryption mode",
+        "Digital signature algorithm",
+        "Family of cryptographic hash functions",
+        "Symmetric encryption algorithm"
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "Q": "Which of the following acronyms refers to a dedicated facility responsible for monitoring, detecting, investigating, and responding to cybersecurity incidents?",
+      "A": [
+        "SOC"
+      ],
+      "O": [
+        "NOC",
+        "C2",
+        "ISAC",
+        "SOC"
       ],
       "questionType": "single_choice"
     }
